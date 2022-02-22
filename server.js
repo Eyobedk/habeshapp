@@ -11,23 +11,22 @@ const content = {
     "title": "about ethiopia"
 }
 
-app.get('/posts', (req, res) => {
+app.get('/posts', Tokenize, (req, res) => {
     res.json(content);
 });
 
 app.post('/login', (req, res) => {
     //Auth
     var username = req.body.username;
-
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET_KEY);
     res.json({
-        accessToken: Tokenize(username)
+        accessToken: accessToken
     })
 });
 
 
-function Tokenize(user){
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET_KEY);
-    return accessToken;
+function Tokenize(req, res, next){
+    const vari = jwt.verify()
 }
 
 app.listen(3000, () => {
