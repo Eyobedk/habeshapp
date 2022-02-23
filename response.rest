@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "name":"eyobed kebede",
-    "email":"eyobedkebede@gmail.com",
+    "email":"eyobedkebedech@gmail.com",
     "password":"password123"
 }
 
@@ -14,6 +14,6 @@ Content-Type: application/json
 
 {
     "name":"eyobed kebede",
-    "email":"eyobedkebede@gmail.com",
+    "email":"eyobedkebedech@gmail.com",
     "password":"password123"
 }
