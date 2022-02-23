@@ -1,12 +1,19 @@
-POST http://localhost:3000/login
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "username":"pomi"
+    "name":"eyobed kebede",
+    "email":"eyobedkebede@gmail.com",
+    "password":"password123"
 }
 
 ###
 
-GET http://localhost:3000/posts
-Authorization: Bearer 
-eyJhbGciOiJIUzI1NiJ9.cG9taQ.mg8PsY_CIxIQDqhZ0QktdykeqR_N0HjjH4pB4OoM2II
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "name":"eyobed kebede",
+    "email":"eyobedkebede@gmail.com",
+    "password":"password123"
+}
