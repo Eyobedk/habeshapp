@@ -23,3 +23,12 @@ Content-Type: application/json
 GET http://localhost:3000/
 Authorization: access-token-header
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZXlvYmVkIGtlYmVkZSIsImlhdCI6MTY0NTYyMjY2MH0.Bj_Mob787iYOXZ5FSJD4E5ABh9nUfo50w7KLcG0LzTo
+
+###
+
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "token": 
+}
