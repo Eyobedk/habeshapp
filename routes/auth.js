@@ -1,13 +1,15 @@
 const joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {
-    validateSchema
-} = require('../models/validation');
+const {validateSchema} = require('../models/validation');
 const router = require('express').Router();
 require('dotenv').config();
+
+
 var data = {};
 var refereshTokens = [];
+
+
 exports.register = async (req, res) => {
 
     const {
@@ -42,26 +44,42 @@ exports.login = async (req, res) => {
     const compared = await bcrypt.compare(req.body.password, data.password)
     if (!compared) return res.send("invalid password");
     //ELSE LOGIN  BUT NOW WE USE JWT
-    const token = jwt.sign({
+    const accessToken = jwt.sign({
         name: data.name
     }, process.env.ACCESS_TOKEN_SECRET_KEY, {
-        expiresIn: '30s'
+        expiresIn: '40s'
     });
+    
     const refreshToken = jwt.sign({
         name: data.name
     }, process.env.REFRESH_TOKEN_SECRET_KEY);
+
     refereshTokens.push(refreshToken);
-    res.header('access-token-header', token).send(token);
+
+    res.header('access-token-header', accessToken).json({
+        accessToken: accessToken,
+        refreshToken: refreshToken
+    });
     //res.send('Login');
 }
 
 
-router.post('/token', (req, res) => {
-    const refereshToken = rew.body.token;
-    if(refereshToken == null) return res.status(401).send();
-    if(!(refereshTokens.includes(refereshToken)) ) return res.status(403).send();
-    jwt.verify(refereshToken, process.env.REFRESH_TOKEN_SECRET_KEY,(err,user)=>{
-        if(err) return res.status(403).send();
-        
+exports.tokenize = (req, res) => {
+    const refereshToken = req.body.token;
+    console.log("refToken"+refereshToken);
+
+    if (refereshToken == null) return res.status(401).send();
+    if (!(refereshTokens.includes(refereshToken))) return res.status(403).send();
+
+    jwt.verify(refereshToken, process.env.REFRESH_TOKEN_SECRET_KEY, (err, user) => {
+        if (err) return res.status(403).send();
+
+        const accessToken = jwt.sign({name: user.name}, process.env.ACCESS_TOKEN_SECRET_KEY);
+        res.json({accessToken:accessToken})
     });
-})
+}
+
+exports.deleter = (req, res)=>{
+    refereshTokens = refereshTokens.filter(token =>token !== req.body.token);
+    res.sendStatus(200);
+}
