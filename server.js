@@ -12,6 +12,7 @@ app.post('/login', login);
 app.get('/',publishRoute);
 app.post('/token',tokenize)
 app.delete('/logout',deleter)
+app.get('/forgot-password')
 
 app.listen(3000, () => {
     console.log('listening on port 3000')
