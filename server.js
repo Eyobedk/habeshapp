@@ -1,8 +1,5 @@
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose')
-const {register,login,tokenize,deleter} = require('./routes/auth');
-const publishRoute = require('./routes/publish');
 require('dotenv').config();
 const dbURI = 'mongodb+srv://eyobed:eyobed%40403@cluster0.2zibg.mongodb.net/test';
 
@@ -10,10 +7,7 @@ app = express();
 app.set('view engine', 'ejs')
 app.use(express.static('public'));
 app.use(express.json());
-app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:3000'
-}))
+
 
 
 mongoose.connect(dbURI, {
@@ -28,12 +22,6 @@ mongoose.connect(dbURI, {
 
 
 
-app.post('/register', register);
-app.post('/login', login);
 
-app.get('/homepage', publishRoute);
+app.get('/', (req, res)=>{res.render('home')});
 app.get('/smoothies', (req, res) => res.render('smoothies'));
-
-app.post('/token', tokenize)
-app.delete('/logout', deleter)
-app.get('/forgot-password', )
