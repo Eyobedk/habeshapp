@@ -1,8 +1,7 @@
-POST http://localhost:3000/register
+POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "name":"eyobed kebede",
     "email":"eyobedkebede@gmail.com",
     "password":"password123"
 }

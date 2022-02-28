@@ -3,6 +3,8 @@ module.exports.signup_Get = (req,res)=>{
 }
 
 module.exports.signup_Post = (req,res)=>{
+    const {email, password} = req.body;
+    console.log(email +'\n'+ password)
     res.send('signup post');
 }
 
