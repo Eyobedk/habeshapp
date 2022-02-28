@@ -1,7 +1,9 @@
 const joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {validateSchema} = require('../models/validation');
+const {
+    validateSchema
+} = require('../models/validation');
 const router = require('express').Router();
 require('dotenv').config();
 
@@ -29,6 +31,7 @@ exports.register = async (req, res) => {
     data.email = req.body.email;
     data.password = hashed;
     res.json(data);
+    
 }
 
 exports.login = async (req, res) => {
@@ -36,7 +39,7 @@ exports.login = async (req, res) => {
         error
     } = validateSchema(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-
+    console.log("red")
     //PERFORM CHECK EMAIL_EXISTS,
     if (!(Object.keys(data).find(key => data[key] === req.body.email))) return res.status(400).send("email does not exists")
 
@@ -49,24 +52,32 @@ exports.login = async (req, res) => {
     }, process.env.ACCESS_TOKEN_SECRET_KEY, {
         expiresIn: '40s'
     });
-    
+
     const refreshToken = jwt.sign({
         name: data.name
     }, process.env.REFRESH_TOKEN_SECRET_KEY);
 
     refereshTokens.push(refreshToken);
 
-    res.header('access-token-header', accessToken).json({
-        accessToken: accessToken,
-        refreshToken: refreshToken
+    res.cookie("access_token", accessToken, {
+        httpOnly: true,
+        maxAge: 300000
     });
-   // res.render('index');
+    res.cookie("access_token", refreshToken, {
+        httpOnly: true,
+        maxAge: 3.154e10
+    });
+    // res.header('access-token-header', accessToken).json({
+    //     accessToken: accessToken,
+    //     refreshToken: refreshToken
+    // });
+    // res.render('index');
 }
 
 
 exports.tokenize = (req, res) => {
     const refereshToken = req.body.token;
-    console.log("refToken"+refereshToken);
+    console.log("refToken" + refereshToken);
 
     if (refereshToken == null) return res.status(401).send();
     if (!(refereshTokens.includes(refereshToken))) return res.status(403).send();
@@ -74,12 +85,16 @@ exports.tokenize = (req, res) => {
     jwt.verify(refereshToken, process.env.REFRESH_TOKEN_SECRET_KEY, (err, user) => {
         if (err) return res.status(403).send();
 
-        const accessToken = jwt.sign({name: user.name}, process.env.ACCESS_TOKEN_SECRET_KEY);
-        res.json({accessToken:accessToken})
+        const accessToken = jwt.sign({
+            name: user.name
+        }, process.env.ACCESS_TOKEN_SECRET_KEY);
+        res.json({
+            accessToken: accessToken
+        })
     });
 }
 
-exports.deleter = (req, res)=>{
-    refereshTokens = refereshTokens.filter(token =>token !== req.body.token);
+exports.deleter = (req, res) => {
+    refereshTokens = refereshTokens.filter(token => token !== req.body.token);
     res.sendStatus(200);
 }
