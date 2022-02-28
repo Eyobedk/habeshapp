@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose')
 require('dotenv').config();
-const dbURI = 'mongodb+srv://eyobed:eyobed%40403@cluster0.2zibg.mongodb.net/test';
+const dbURI = 'mongodb+srv://eyobed:eyobed%40403@cluster0.2zibg.mongodb.net/habeshapp';
 const authRoutes = require('./routes/auth');
 
 app = express();
