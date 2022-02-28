@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
         accessToken: accessToken,
         refreshToken: refreshToken
     });
-    //res.send('Login');
+   // res.render('index');
 }
 
 

@@ -3,8 +3,9 @@ const cors = require('cors');
 const {register,login,tokenize,deleter} = require('./routes/auth');
 const publishRoute = require('./routes/publish');
 require('dotenv').config();
-
 app = express();
+
+app.set('view engine','ejs')
 app.use(express.json());
 app.use(cors({
     credentials: true,
