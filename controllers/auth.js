@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const {createToken}= require('../utils/TokenHandler');
-const {validateSchema} = require('../models/validate');
+//const {validateSchema} = require('../models/validate');
 const handleErrors = require('../utils/ErrorHandler')
+
 
 module.exports.signup_Get = (req, res) => {
     res.render('signup');
@@ -12,8 +13,7 @@ module.exports.signup_Post = async (req, res) => {
         email,
         password
     } = req.body;
-    
-    console.log(password)
+
     try {
         const user = await User.create({
             email,
@@ -28,7 +28,7 @@ module.exports.signup_Post = async (req, res) => {
         res.status(201).json({user:user._id});
     }
      catch (err) {
-        const errors = handleErrors.handleErrors(err)
+        const errors = handleErrors.handleErrors(err)//IYREBAM
         res.status(400).json({errors});
     }
 }
