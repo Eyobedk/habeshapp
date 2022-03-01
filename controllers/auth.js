@@ -48,15 +48,20 @@ module.exports.login_Post = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-      const user = await User.login(email, password);
+     const user = await User.login(email, password);
       const token = createToken(user._id);
         res.cookie('jwt', token, {
             httpOnly: true,
             maxAge: 2.592e+8
         }).json({user:user._id});
-        res.render('smoothies');
+     // res.render('smoothies');
         
     } catch (err) {
       //res.status(400).json({});
     }
+}
+
+exports.logout = (req, res)=>{
+    res.cookie('jwt','',{maxAge:1})
+    res.render('login')
 }

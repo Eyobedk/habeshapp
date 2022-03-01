@@ -4,6 +4,7 @@ require('dotenv').config();
 const dbURI = 'mongodb+srv://eyobed:eyobed%40403@cluster0.2zibg.mongodb.net/habeshapp';
 const authRoutes = require('./routes/auth');
 const cookieParser = require('cookie-parser'); 
+const {requireAuth} = require('./middleware/auth');
 
 app = express();
 app.set('view engine', 'ejs')
@@ -25,9 +26,7 @@ await mongoose.connect(dbURI, {
 
 
 
-
-//app.get('/', (req, res)=>{res.render('home')});
-//app.get('/smoothies', (req, res) => res.render('smoothies'));
+app.get('/smoothies', requireAuth,(req, res)=>{res.render('smoothies')})
 app.use(authRoutes)
 }
 main();
