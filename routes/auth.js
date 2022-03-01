@@ -12,7 +12,7 @@ router.get('/set-cookie', (req, res) => {
     res.send('<h1>cookie set</h1>')
 })
 router.get('/get-cookie', (req, res) => {
-    const coookies = req.cookies;
+    const coookies = (req.cookies);
     console.log(coookies)
     res.send(coookies.newUser)
 })
