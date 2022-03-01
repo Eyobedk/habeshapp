@@ -3,12 +3,13 @@ const mongoose = require('mongoose')
 require('dotenv').config();
 const dbURI = 'mongodb+srv://eyobed:eyobed%40403@cluster0.2zibg.mongodb.net/habeshapp';
 const authRoutes = require('./routes/auth');
+const cookieParser = require('cookie-parser'); 
 
 app = express();
 app.set('view engine', 'ejs')
 app.use(express.static('public'));
 app.use(express.json());
-
+app.use(cookieParser())
 
 
 mongoose.connect(dbURI, {
