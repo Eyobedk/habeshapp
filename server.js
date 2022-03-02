@@ -5,6 +5,7 @@ const dbURI = 'mongodb+srv://eyobed:eyobed%40403@cluster0.2zibg.mongodb.net/habe
 const authRoutes = require('./routes/auth');
 const cookieParser = require('cookie-parser'); 
 const {requireAuth} = require('./middleware/auth');
+const {checkUser} = require('./middleware/checkUser');
 
 app = express();
 app.set('view engine', 'ejs')
@@ -25,8 +26,8 @@ await mongoose.connect(dbURI, {
     .catch((err) => console.log(err));
 
 
-
-app.get('/smoothies', requireAuth,(req, res)=>{res.render('smoothies')})
+app.use('*',checkUser)
+app.get('/smoothies', requireAuth,(req, res)=>{res.render('smoothies',{user:res.locals.user})})
 app.use(authRoutes)
 }
 main();
