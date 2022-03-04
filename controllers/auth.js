@@ -61,18 +61,22 @@ module.exports.login_Post = async (req, res,next) => {
 
     try {
         const user = await User.login(email, password);
-        const token = createToken(user._id);
-       // res.render('smoothies');
-        res.cookie('jwt', token, {
-            httpOnly: true,
-            maxAge: 20000
-        }).json({
-            user: user._id
-        });
+        if(!user){res.send('enter the correct password and email')}
+        else{
+            res.redirect('smoothies');
+
+        }
+       // const token = createToken(user._id);
+        //res.cookie('jwt', token, {
+            //httpOnly: true,
+          //  maxAge: 20000
+        //}).json({
+          //  user: user._id
+        //});
+       // res.redirect(302, 'http://localhost:3080');
         console.log('logged');
-        //res.redirect('smoothies');
         next();
-        
+        //res.render('smoothies')
 
     } catch (err) {
         //res.status(400).json({});
