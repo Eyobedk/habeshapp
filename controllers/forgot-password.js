@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 require('dotenv').config();
 const mon = require('mongoose');
-const { default: mongoose } = require('mongoose');
+
 //const user={};
 async function finder(email) {
     const user = await User.findOne({
@@ -38,26 +38,36 @@ module.exports.forgot_password = async (req, res, next) => {
     }
 }
 
-module.exports.validateLink = async (req, res, next) => {
+module.exports.validateAndSendLink = async (req, res, next) => {
     const {
         id,
         token
     } = req.params;
 
-    const secret = process.env.ACCESS_TOKEN_SECRET_KEY +
-    console.log('id and token'+id, token);
     const user = await findbyId(id)
+    const secret = process.env.ACCESS_TOKEN_SECRET_KEY +user.password;
+    console.log('id and token'+id, token);
+    //const user = await findbyId(id)
     // CHECK WETHER THE ID FROM THE URL MATCHES WITH THE DATABASE ID USING SQUEEZLIE
-    console.log('zi user'+ typeof(user._id) + 'id from url' + typeof((id).toString()))
+    //console.log('zi user'+ typeof(user._id) + 'id from url' + typeof((id).toString()))
 
-    if (id !== user._id) {
-        "use strict";
-        res.send('incorrect id')
-    }else{
+    // if (id !== user._id) {
+    //     "use strict";
+    //     res.send('incorrect id')
+    // }else{
     jwt.verify(token, secret, (err, verified) => {
         if (err) {
+            console.log(err)
             res.send('incorrect token')
         }
         res.render('reset-password');
     })
-}}
+}
+
+module.exports.setNewPassword =(req,res)=>{
+    const {password1, password2} = req.body;
+
+    if(password1 !== password2){
+        res.send("enter the correct password");
+    }else{res.send('wait')}
+}

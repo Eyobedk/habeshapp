@@ -39,6 +39,7 @@ module.exports.signup_Post = async (req, res) => {
         res.status(201).json({
             user: user._id
         });
+        res.redirect('login');
     } catch (err) {
         const errors = handleErrors.handleErrors(err) //IYREBAM
         res.status(400).json({
@@ -52,7 +53,7 @@ module.exports.login_Get = (req, res) => {
     res.render('login');
 }
 
-module.exports.login_Post = async (req, res) => {
+module.exports.login_Post = async (req, res,next) => {
     const {
         email,
         password
@@ -61,13 +62,17 @@ module.exports.login_Post = async (req, res) => {
     try {
         const user = await User.login(email, password);
         const token = createToken(user._id);
+       // res.render('smoothies');
         res.cookie('jwt', token, {
             httpOnly: true,
             maxAge: 20000
         }).json({
             user: user._id
         });
-        // res.render('smoothies');
+        console.log('logged');
+        //res.redirect('smoothies');
+        next();
+        
 
     } catch (err) {
         //res.status(400).json({});
