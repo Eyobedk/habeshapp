@@ -63,7 +63,7 @@ module.exports.login_Post = async (req, res,next) => {
         const user = await User.login(email, password);
         if(!user){res.send('enter the correct password and email')}
         else{
-            res.redirect('smoothies');
+            res.redner('forgot-password')
 
         }
        // const token = createToken(user._id);
