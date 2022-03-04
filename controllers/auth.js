@@ -30,7 +30,7 @@ module.exports.signup_Post = async (req, res) => {
         const token = createToken(user._id);
         res.cookie('jwt', token, {
             httpOnly: true,
-            maxAge: 2.592e+8
+            maxAge: 20000
         }).json({
             user: user._id
         });;
@@ -61,7 +61,7 @@ module.exports.login_Post = async (req, res) => {
         const token = createToken(user._id);
         res.cookie('jwt', token, {
             httpOnly: true,
-            maxAge: 2.592e+8
+            maxAge: 20000
         }).json({
             user: user._id
         });
