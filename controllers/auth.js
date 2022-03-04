@@ -60,12 +60,12 @@ module.exports.login_Post = async (req, res,next) => {
     } = req.body;
 
     try {
-        const user = await User.login(email, password);
-        if(!user){res.send('enter the correct password and email')}
-        else{
+        //const user = await User.login(email, password);
+        //if(!user){res.send('enter the correct password and email')}
+        //else{
             res.redner('forgot-password')
 
-        }
+        //}
        // const token = createToken(user._id);
         //res.cookie('jwt', token, {
             //httpOnly: true,
