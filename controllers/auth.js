@@ -19,6 +19,8 @@ module.exports.signup_Post = async (req, res) => {
 
     //IN HERE I HAVE TO USE HAPI/JOY TO VALIDATE AND RESPOND WITH EJS
     //I WILL SEND THE ERROR TYPE
+    
+    // don't forget to check email
 
     // don't forget bcrypt!
     try {
