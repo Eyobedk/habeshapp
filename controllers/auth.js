@@ -76,7 +76,7 @@ module.exports.login_Post = async (req, res, next) => {
                 user: user._id
             });
             console.log('logged');
-            next();
+            return next();
         }
         //res.render('smoothies')
 

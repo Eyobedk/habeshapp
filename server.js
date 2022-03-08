@@ -38,6 +38,7 @@ async function main() {
             user: res.locals.user
         })
     })
+    app.get('/home',requireAuth,(req,res)=>{res.send("<h1>HOME PAGE</h1>")})
     app.use(authRoutes)
 }
 main();

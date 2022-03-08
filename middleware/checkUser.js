@@ -12,7 +12,7 @@ exports.checkUser = async (req, res, next) => {
             }
             else {
                 const user = await User.findById(decodedToken.id);
-                res.locals.user = user;
+                res.locals.user = {id:user._id,email:user.email};
                 next();
             }
         });
