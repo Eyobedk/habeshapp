@@ -19,7 +19,7 @@ module.exports.signup_Post = async (req, res) => {
 
     //IN HERE I HAVE TO USE HAPI/JOY TO VALIDATE AND RESPOND WITH EJS
     //I WILL SEND THE ERROR TYPE
-    
+
     // don't forget to check email
 
     // don't forget bcrypt!
@@ -32,7 +32,7 @@ module.exports.signup_Post = async (req, res) => {
         const token = createToken(user._id);
         res.cookie('jwt', token, {
             httpOnly: true,
-            maxAge: 20000
+            maxAge: 1.08e+7
         }).json({
             user: user._id
         });;
@@ -53,29 +53,31 @@ module.exports.login_Get = (req, res) => {
     res.render('login');
 }
 
-module.exports.login_Post = async (req, res,next) => {
+module.exports.login_Post = async (req, res, next) => {
     const {
         email,
         password
     } = req.body;
 
     try {
-        //const user = await User.login(email, password);
-        //if(!user){res.send('enter the correct password and email')}
-        //else{
-            res.redner('forgot-password')
+        const user = await User.login(email, password);
+        if (!user) {
+            res.send('enter the correct password and email')
+        } else {
+            // res.render('forgot-password')
 
-        //}
-       // const token = createToken(user._id);
-        //res.cookie('jwt', token, {
-            //httpOnly: true,
-          //  maxAge: 20000
-        //}).json({
-          //  user: user._id
-        //});
-       // res.redirect(302, 'http://localhost:3080');
-        console.log('logged');
-        next();
+            //  }
+            const token = createToken(user._id);
+            res.cookie('jwt', token, {
+                httpOnly: true,
+                maxAge: 1.08e+7
+            });
+            res.redirect(302, '/smoothies').json({
+                user: user._id
+            });
+            console.log('logged');
+            next();
+        }
         //res.render('smoothies')
 
     } catch (err) {
@@ -87,6 +89,5 @@ exports.logout = (req, res) => {
     res.cookie('jwt', '', {
         maxAge: 1
     })
-    res.render('login')
+    res.redirect(302,'/login')
 }
-
