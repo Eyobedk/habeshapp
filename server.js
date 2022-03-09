@@ -1,6 +1,4 @@
 const express = require('express');
-const hbs = require('nodemailer-express-handlebars');
-const path = require('path')
 const mongoose = require('mongoose')
 require('dotenv').config();
 
@@ -30,13 +28,13 @@ async function main() {
         .catch((err) => console.log(err));
 
 
-    app.use('*', checkUser)
-    app.get('/smoothies', requireAuth, (req, res) => {
-        res.render('smoothies', {
-            user: res.locals.user
+app.use('*', checkUser)
+app.get('/smoothies', requireAuth, (req, res) => {
+    res.render('smoothies', {
+    user: res.locals.user
         })
     })
-    app.get('/home',requireAuth,(req,res)=>{res.send("<h1>HOME PAGE</h1>")})
-    app.use(authRoutes)
+app.get('/home',requireAuth,(req,res)=>{res.send("<h1>HOME PAGE</h1>")})
+app.use(authRoutes)
 }
 main();
