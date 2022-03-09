@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const {
-    createToken,createRefToken
+    createToken,
+    createRefToken
 } = require('../utils/TokenHandler');
 const handleErrors = require('../utils/ErrorHandler')
 
@@ -28,23 +29,21 @@ module.exports.signup_Post = async (req, res) => {
             email,
             password
         });
-
-        const token = createToken(user._id);
-        res.cookie('jwt', token, {
-            httpOnly: true,
-            maxAge: 40000
-        }).json({
-            user: user._id
-        });;
-        res.status(201).json({
-            user: user._id
-        });
+        if (!user) return res.send('email exists')
+        // const token = createToken(user._id);
+        // res.cookie('jwt', token, {
+        //     httpOnly: true,
+        //     maxAge: 40000
+        // }).json({
+        //     user: user._id
+        // });;
+        // res.status(201).json({
+        //     user: user._id
+        // });
         res.redirect('login');
     } catch (err) {
-        const errors = handleErrors.handleErrors(err) //IYREBAM
-        res.status(400).json({
-            errors
-        });
+        res.send('email exists')
+        //console.log('good error ', err)
     }
 }
 
@@ -69,6 +68,11 @@ module.exports.login_Post = async (req, res, next) => {
             //  }
             const token = createToken(user._id);
             const refToken = createRefToken(user._id);
+            console.log(refToken)
+            await User.findByIdAndUpdate({_id:user._id}, {refreshToken:refToken}, (err,result)=>{console.log("err:"+err);console.log('result:'+result)}) 
+
+            //THE ABOVE CODE IS MAKING THE PROBLEM
+          // console.log("store:    " + JSON.stringify(reftok))
             res.cookie('jwt', token, {
                 httpOnly: true,
                 maxAge: 40000
@@ -77,7 +81,7 @@ module.exports.login_Post = async (req, res, next) => {
                 user: user._id
             });
             console.log('logged');
-            return next();
+            next();
         }
         //res.render('smoothies')
 
@@ -90,5 +94,5 @@ exports.logout = (req, res) => {
     res.cookie('jwt', '', {
         maxAge: 1
     })
-    res.redirect(302,'/login')
+    res.redirect(302, '/login')
 }

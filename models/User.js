@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6,
   },
-  refreshToken: {
-    type: String,
-    required: false,
+  refreshToken:{
+    required:false,
+    type:String,
     unique:true
   }
 });
