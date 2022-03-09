@@ -11,7 +11,6 @@ const {checkUser} = require('./middleware/checkUser');
 
 app = express();
 app.set('view engine', 'ejs')
-app.set('view engine','handlebars')
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -20,7 +19,7 @@ app.use(express.urlencoded({
 app.use(cookieParser())
 
 async function main() {
-    await mongoose.connect(process.env.dbURI, {
+    await mongoose.connect(process.env.dbURL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
