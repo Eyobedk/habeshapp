@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const {
-    createToken
+    createToken,createRefToken
 } = require('../utils/TokenHandler');
 const handleErrors = require('../utils/ErrorHandler')
 
@@ -32,7 +32,7 @@ module.exports.signup_Post = async (req, res) => {
         const token = createToken(user._id);
         res.cookie('jwt', token, {
             httpOnly: true,
-            maxAge: 1.08e+7
+            maxAge: 40000
         }).json({
             user: user._id
         });;
@@ -68,9 +68,10 @@ module.exports.login_Post = async (req, res, next) => {
 
             //  }
             const token = createToken(user._id);
+            const refToken = createRefToken(user._id);
             res.cookie('jwt', token, {
                 httpOnly: true,
-                maxAge: 1.08e+7
+                maxAge: 40000
             });
             res.redirect(302, '/smoothies').json({
                 user: user._id
