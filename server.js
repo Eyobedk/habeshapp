@@ -34,7 +34,14 @@ app.get('/smoothies', requireAuth, (req, res) => {
     user: res.locals.user
         })
     })
+app.get('/gooAc',(req,res)=>{
+    console.log('from google params: '+req.params)
+    console.log('from google body: '+req.body)
+    res.send("recived")
+})
 app.get('/home',requireAuth,(req,res)=>{res.send("<h1>HOME PAGE</h1>")})
+app.get('/',(req,res)=>{
+    res.sendFile('./public/html/google.html',{root:"./"})})
 app.use(authRoutes)
 }
 main();
