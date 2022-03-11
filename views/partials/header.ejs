@@ -8,7 +8,7 @@
 <body>
   <nav>
     <%if(user) {%>
-    <% console.log("The ejs"+user)%>
+    <% console.log("The ejs"+JSON.stringify(user))%>
       <li>Welcome, <%= user.email %></li>
       <li><a href="/logout">Log out</a></li>
       <% } else { %>

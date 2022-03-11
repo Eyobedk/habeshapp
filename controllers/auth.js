@@ -68,24 +68,28 @@ module.exports.login_Post = async (req, res, next) => {
             //  }
             const token = createToken(user._id);
             const refToken = createRefToken(user._id);
-            console.log(refToken)
-            await User.findByIdAndUpdate({_id:user._id}, {refreshToken:refToken}, (err,result)=>{console.log("err:"+err);console.log('result:'+result)}) 
-
-            //THE ABOVE CODE IS MAKING THE PROBLEM
-          // console.log("store:    " + JSON.stringify(reftok))
-            res.cookie('jwt', token, {
-                httpOnly: true,
-                maxAge: 40000
-            });
-            res.redirect(302, '/smoothies').json({
-                user: user._id
-            });
-            console.log('logged');
-            next();
+            "use strict";
+            new Promise((resolve, reject) => {
+                User.findByIdAndUpdate({
+                    _id: user._id
+                }, {
+                    refreshToken: refToken
+                }, (err, result) => {
+                    reject(err)
+                    console.log("err:" + err);
+                    console.log('result:' + result)
+                })
+                "use strict";
+                resolve(res.cookie('jwt', token, {
+                        httpOnly: true,
+                        maxAge: 40000
+                    }));
+                    res.redirect(302, '/smoothies')
+                
+            })
         }
-        //res.render('smoothies')
-
     } catch (err) {
+        console.log(err)
         //res.status(400).json({});
     }
 }
