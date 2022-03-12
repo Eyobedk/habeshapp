@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars')
 const path = require('path');
+require('dotenv').config()
 
 const transporter = nodemailer.createTransport({
     service:"gmail",
@@ -10,31 +10,15 @@ const transporter = nodemailer.createTransport({
         secure:false,
         requireTLS:true,
         user:"leinternet0@outlook.com",
-        pass:"eyobed@403"
+        pass:process.env.EMAIL_PASS
     }
 })
-
-// const handlebarOptions = {
-//     viewEngine: {
-//         partialsDir: path.resolve('../views/'),
-//         defaultLayout: false,
-//     },
-//     viewPath: path.resolve('../views/'),
-// };
-
-// // use a template file with nodemailer
-// transporter.use('compile', hbs(handlebarOptions))
-
 
 const options = {
     from:"leinternet0@gmail.com",
     to:"eyobedkebede05@gmail.com",
   //  template: 'email', 
     subject:"testing message",
-    // context:{
-    //     name: "Eyobed", // replace {{name}} with Adebola
-    //     company: 'Habeshapp' // replace {{company}} with My Company
-    // }
 }
 
 // trigger the sending of the E-mail
