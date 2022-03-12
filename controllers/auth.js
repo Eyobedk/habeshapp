@@ -53,44 +53,33 @@ module.exports.login_Get = (req, res) => {
 }
 
 module.exports.login_Post = async (req, res, next) => {
-    const {
-        email,
-        password
-    } = req.body;
+  const {email,password} = req.body;
+  try {
+    const user = await User.login(email, password);
+    if (!user) {
+        res.status(403).send('enter the correct password and email')
+    } else {
+        const token = createToken(user._id);
+        const refToken = createRefToken(user._id);
+        console.log(refToken)
+        "use strict";
 
-    try {
-        const user = await User.login(email, password);
-        if (!user) {
-            res.send('enter the correct password and email')
-        } else {
-            // res.render('forgot-password')
+        new Promise((resolve, reject) => {
+        User.findByIdAndUpdate({ _id: user._id}, {refreshToken: refToken },
+        (err, result) => {reject(err)
+        console.log("err:" + err);
+        console.log('result:' + result)
+        })
 
-            //  }
-            const token = createToken(user._id);
-            const refToken = createRefToken(user._id);
-            "use strict";
-            new Promise((resolve, reject) => {
-                User.findByIdAndUpdate({
-                    _id: user._id
-                }, {
-                    refreshToken: refToken
-                }, (err, result) => {
-                    reject(err)
-                    console.log("err:" + err);
-                    console.log('result:' + result)
-                })
-                "use strict";
-                resolve(res.cookie('jwt', token, {
-                        httpOnly: true,
-                        maxAge: 40000
-                    }));
-                    res.redirect(302, '/smoothies')
-                
-            })
-        }
+        "use strict";
+        resolve(res.cookie('jwt', token, {
+            httpOnly: true,
+            maxAge: 40000
+        }));
+        res.redirect(302, '/smoothies')})
+    }
     } catch (err) {
         console.log(err)
-        //res.status(400).json({});
     }
 }
 
