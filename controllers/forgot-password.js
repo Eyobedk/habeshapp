@@ -1,19 +1,6 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const {finder, findById} = require('../db/find')
 require('dotenv').config();
-const mon = require('mongoose');
-
-//const user={};
-async function finder(email) {
-    const user = await User.findOne({
-        email
-    });
-    return user
-}
-async function findbyId(id) {
-    const user = await User.findById(id);
-    return user
-}
 
 module.exports.forgot_password = async (req, res, next) => {
     const {
@@ -44,7 +31,7 @@ module.exports.validateAndSendLink = async (req, res, next) => {
         token
     } = req.params;
 
-    const user = await findbyId(id)
+    const user = await findById(id)
     const secret = process.env.ACCESS_TOKEN_SECRET_KEY +user.password;
     console.log('id and token'+id, token);
     //const user = await findbyId(id)

@@ -4,7 +4,6 @@ require('dotenv').config();
 
 module.exports = function(req, res, next){
     const token = req.header('access-token-header');
-    //console.log(token)
     if(!token) return res.status(403).send('access denied');
 
     try{

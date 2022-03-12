@@ -6,6 +6,6 @@ module.exports.refreshToken = (id) =>{
     return jwt.sign({
         id
     }, process.env.REFRESH_TOKEN_SECRET_KEY, {
-        expiresIn: '1y'
+        expiresIn: 1.08e+7
     })
 }

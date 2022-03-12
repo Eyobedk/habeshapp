@@ -1,10 +1,5 @@
 const User = require("../models/User");
-const {
-    createToken,
-    createRefToken
-} = require('../utils/TokenHandler');
-const handleErrors = require('../utils/ErrorHandler')
-
+const { createToken,createRefToken } = require('../utils/TokenHandler');
 
 module.exports.signup_Get = (req, res) => {
     res.render('signup');
