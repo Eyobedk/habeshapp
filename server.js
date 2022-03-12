@@ -10,26 +10,17 @@ const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
 
-
-// function verifyCallBack(accToken, refoken, profile, done) {
-//     console.log('google profile', profile)
-//     console.log('access Token', accToken)
-//     console.log('ref Token', refoken)
-//     done(null, profile)
-// }
-
 app = express();
 app.set('view engine', 'ejs')
+
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
-
 app.use('*', checkUser)
-app.use(passport.initialize()) // set passport session
-
-app.use(authRoutes)//Authorization Routes
-app.use(G_OAuth)// Google Authorization Routes
+app.use(passport.initialize())      // set passport session
+app.use(authRoutes)     //Authorization Routes
+app.use(G_OAuth)        // Google Authorization Routes
 
 
 async function main() {
@@ -45,19 +36,8 @@ async function main() {
 }
 main();
 
-// const setwhenDone = {
-//     failureRedirect: '/failure',
-//     successRedirect: '/home',
-//     session: false}
-
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
 
-// app.get("/auth/google", passport.authenticate('google',{scope:['email']}))
-// app.get('/google/callback', passport.authenticate('google', setwhenDone), 
-//       (req, res) => { console.log('google called us back');
-//       res.send("here")});
-
-// app.get('/failure', (req, res) => { res.send("failed to login") })
 app.get('/home', (req, res) => { res.send("<h1>HOME PAGE</h1>") })
 app.get('/', (req, res) => { res.sendFile('./public/html/google.html', { root: "./" })})
