@@ -10,7 +10,7 @@ const authRoutes = require('./routes/auth');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
-
+const {checkGoogleLoggedIn} = require('./middleware/CheckLoggedwGoogle');
 app = express();
 app.set('view engine', 'ejs')
 
@@ -43,17 +43,8 @@ async function main() {
         .catch((err) => console.log(err));
 }
 main();
-function checkGoogleLoggedIn(req,res,next)
-{
-    console.log("The current user is :"+req.user);
-    const authenicatedUser = req.isAuthenticated() && req.user;
-    if(!authenicatedUser){
-        return res.status(403).json({error:'You must log in!'})
-    }
-    next()
-}
+
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
-
-app.get('/home', requireAuth && checkGoogleLoggedIn,(req, res) => { res.send("<h1>HOME PAGE</h1>") })
+app.get('/home', checkGoogleLoggedIn,(req, res) => { res.send("<h1>HOME PAGE</h1>") })
 app.get('/',(req, res) => { res.sendFile('./public/html/google.html', { root: "./" })})
