@@ -24,7 +24,7 @@ passport.use(new Strategy({
 
 passport.serializeUser((user,done)=>{
     console.log("GEDAY"+user._json.email);
-    done(null,user._json.email); // store this email in the session so i can query it letter
+    done(null,user._json.email);
 });
 passport.deserializeUser((user,done)=>{
     done(null,user);
@@ -36,6 +36,7 @@ Router.get('/google/callback', passport.authenticate('google', setwhenDone),
     res.send("here")});
 
 Router.get('/failure', (req, res) => { res.send("failed to login") })
+Router.get('/auth/logout', (req, res) => { req.logOut();res.redirect(302,'/') })
 
 
 module.exports = Router
