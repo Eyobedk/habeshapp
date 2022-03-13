@@ -15,22 +15,6 @@ app = express();
 app.set('view engine', 'ejs')
 
 
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({extended: false}))
-
-app.use(cookieParser())
-app.use('*', checkUser)
-app.use(cookieSession({name:'session',
-    keys:[process.env.SESSION_SECRET_KEY_ONE,
-    process.env.SESSION_SECRET_KEY_TWO ],
-    maxAge:24 * 60 * 60 * 1000}));
-app.use(passport.initialize()) 
-app.use(passport.session())
-app.use(authRoutes) 
-app.use(G_OAuth) 
-
-
 async function main() {
     await mongoose.connect(process.env.dbURL, {
             useNewUrlParser: true,
@@ -43,6 +27,23 @@ async function main() {
         .catch((err) => console.log(err));
 }
 main();
+
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}))
+
+app.use(cookieParser())
+app.use('*', checkUser)
+app.use(cookieSession({name:'session',
+    keys:[process.env.SESSION_SECRET_KEY_ONE,
+    process.env.SESSION_SECRET_KEY_TWO ],
+    maxAge:24 * 60 * 60 * 1000}));
+app.use(passport.initialize()) 
+app.use(passport.session())
+
+app.use(authRoutes) 
+app.use(G_OAuth) 
+
 
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
