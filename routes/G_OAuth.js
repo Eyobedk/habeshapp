@@ -10,14 +10,6 @@ function verifyCallBack(accToken, refoken, profile, done) {
     done(null, profile)
 }
 
-
-passport.serializeUser((user,done)=>{
-    done(null,user);
-});
-passport.deserializeUser((obj,done)=>{
-    done(null,obj);
-});
-
 const setwhenDone = {
     failureRedirect: '/failure',
     successRedirect: '/home',
@@ -29,6 +21,14 @@ passport.use(new Strategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET
 }, verifyCallBack))
+
+passport.serializeUser((user,done)=>{
+    console.log("GEDAY"+user._json.email);
+    done(null,user._json.email); // store this email in the session so i can query it letter
+});
+passport.deserializeUser((user,done)=>{
+    done(null,user);
+});
 
 Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 

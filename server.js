@@ -18,9 +18,13 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
-app.use(cookieSession({name:'session',keys:[process.env.SESSION_SECRET_KEY_ONE,process.env.SESSION_SECRET_KEY_TWO ],maxAge:24 * 60 * 60 * 1000}))
+
 app.use(cookieParser())
 app.use('*', checkUser)
+app.use(cookieSession({name:'session',
+    keys:[process.env.SESSION_SECRET_KEY_ONE,
+    process.env.SESSION_SECRET_KEY_TWO ],
+    maxAge:24 * 60 * 60 * 1000}));
 app.use(passport.initialize()) 
 app.use(passport.session())
 app.use(authRoutes) 
@@ -39,9 +43,17 @@ async function main() {
         .catch((err) => console.log(err));
 }
 main();
-
+function checkGoogleLoggedIn(req,res,next)
+{
+    console.log("The current user is :"+req.user);
+    const authenicatedUser = req.isAuthenticated() && req.user;
+    if(!authenicatedUser){
+        return res.status(403).json({error:'You must log in!'})
+    }
+    next()
+}
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
 
-app.get('/home', (req, res) => { res.send("<h1>HOME PAGE</h1>") })
-app.get('/', (req, res) => { res.sendFile('./public/html/google.html', { root: "./" })})
+app.get('/home', requireAuth && checkGoogleLoggedIn,(req, res) => { res.send("<h1>HOME PAGE</h1>") })
+app.get('/',(req, res) => { res.sendFile('./public/html/google.html', { root: "./" })})
