@@ -3,9 +3,10 @@ const User = require('../models/User');
 require('dotenv').config();
 
 exports.checkUser = async (req, res, next) => {
-    const token = req.cookies.jwt;
-    if (token) {
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
+    try{
+    //const token = req.cookies.jwt;
+    if (req.cookies.jwt) {
+        jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
             if (err) {
                 res.locals.user = null;
                 next();
@@ -21,4 +22,5 @@ exports.checkUser = async (req, res, next) => {
         res.locals.user = null;
         next();
     }
+    }catch(e){console.log(e)}
 }

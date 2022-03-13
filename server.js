@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const {Strategy} = require('passport-google-oauth20');
 require('dotenv').config();
 
@@ -13,14 +14,17 @@ const {checkUser} = require('./middleware/checkUser');
 app = express();
 app.set('view engine', 'ejs')
 
+
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
+app.use(cookieSession({name:'session',keys:[process.env.SESSION_SECRET_KEY_ONE,process.env.SESSION_SECRET_KEY_TWO ],maxAge:24 * 60 * 60 * 1000}))
 app.use(cookieParser())
 app.use('*', checkUser)
-app.use(passport.initialize())      // set passport session
-app.use(authRoutes)     //Authorization Routes
-app.use(G_OAuth)        // Google Authorization Routes
+app.use(passport.initialize()) 
+app.use(passport.session())
+app.use(authRoutes) 
+app.use(G_OAuth) 
 
 
 async function main() {

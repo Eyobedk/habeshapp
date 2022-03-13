@@ -1,5 +1,6 @@
 const passport = require('passport');
 const Router = require('express').Router();
+
 const {Strategy} = require('passport-google-oauth20');
 
 function verifyCallBack(accToken, refoken, profile, done) {
@@ -9,10 +10,18 @@ function verifyCallBack(accToken, refoken, profile, done) {
     done(null, profile)
 }
 
+
+passport.serializeUser((user,done)=>{
+    done(null,user);
+});
+passport.deserializeUser((obj,done)=>{
+    done(null,obj);
+});
+
 const setwhenDone = {
     failureRedirect: '/failure',
     successRedirect: '/home',
-    session: false
+    session: true
 }
 
 passport.use(new Strategy({
