@@ -35,14 +35,13 @@ app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use('*', checkUser)
 app.use(cookieSession({name:'session',
-    keys:[process.env.SESSION_SECRET_KEY_ONE,
-    process.env.SESSION_SECRET_KEY_TWO ],
+    keys:[process.env.SESSION_SECRET_KEY_ONE,process.env.SESSION_SECRET_KEY_TWO ],
     maxAge:24 * 60 * 60 * 1000}));
-app.use(passport.initialize()) 
+app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(authRoutes) 
-app.use(G_OAuth) 
+app.use(authRoutes)
+app.use(G_OAuth)
 
 
 app.get('/smoothies', requireAuth, (req, res) => {
