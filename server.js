@@ -43,8 +43,8 @@ app.use(passport.session())
 app.use(authRoutes)
 app.use(G_OAuth)
 
-
+//checkGoogleLoggedIn
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
-app.get('/home', checkGoogleLoggedIn,(req, res) => { res.send("<h1>HOME PAGE</h1>") })
+//app.get('/home', requireAuth,(req, res) => { res.send("<h1>HOME PAGE</h1>") })
 app.get('/',(req, res) => { res.sendFile('./public/html/google.html', { root: "./" })})
