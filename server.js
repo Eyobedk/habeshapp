@@ -10,7 +10,7 @@ const authRoutes = require('./routes/auth');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
-const {checkGoogleLoggedIn} = require('./middleware/CheckLoggedwGoogle');
+//const {checkGoogleLoggedIn} = require('./middleware/CheckLoggedwGoogle');
 app = express();
 app.set('view engine', 'ejs')
 
@@ -43,8 +43,6 @@ app.use(passport.session())
 app.use(authRoutes)
 app.use(G_OAuth)
 
-//checkGoogleLoggedIn
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
-//app.get('/home', requireAuth,(req, res) => { res.send("<h1>HOME PAGE</h1>") })
 app.get('/',(req, res) => { res.sendFile('./public/html/google.html', { root: "./" })})
