@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const {finder, findById} = require('../db/find')
+const {Mailer} = require('../utils/Mail');
 require('dotenv').config();
 
 module.exports.forgot_password = async (req, res, next) => {
@@ -17,7 +18,8 @@ module.exports.forgot_password = async (req, res, next) => {
             expiresIn: '15m'
         });
         const link = `http://localhost:3000/reset-password/${user._id}/${token}`
-        console.log(link)
+        //console.log(link)
+        Mailer(link);
         res.send('password reset link sent to email')
     } else {
         res.send("user does not exist")

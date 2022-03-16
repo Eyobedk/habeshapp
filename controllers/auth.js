@@ -59,19 +59,17 @@ module.exports.login_Post = async (req, res, next) => {
         console.log(refToken)
         "use strict";
 
-        new Promise((resolve, reject) => {
+        const userResult = new Promise((resolve, reject) => {
         User.findByIdAndUpdate({ _id: user._id}, {refreshToken: refToken },
-        (err, result) => {reject(err)
-        console.log("err:" + err);
-        console.log('result:' + result)
+            (err, result) => {resolve(result);
+            //console.log("err:" + err);
+            //console.log('result:' + result)
+            reject(err)
+            })
         })
-
         "use strict";
-        resolve(res.cookie('jwt', token, {
-            httpOnly: true,
-            maxAge: 40000
-        }));
-        res.redirect(302, '/smoothies')})
+        userResult.then(()=>{res.cookie('jwt', token, {httpOnly: true,maxAge: 40000});
+        res.redirect(302, '/smoothies')}).catch((err)=>{console.log(err)})
     }
     } catch (err) {
         console.log(err)
