@@ -1,19 +1,19 @@
 const nodeMailer = require('nodemailer');
-
+require('dotenv').config()
 let transporter = nodeMailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
       secure: false,
       requireTLS: true,
       auth: {
-          user: 'eyobedkebede10@gmail.com', 
-          pass: 'eyobed@403', 
+          user: process.env.EMAIL, 
+          pass: Pprocess.env.EMAIL_PASS, 
       },
   });
 exports.Mailer = async(resetpassLink)=>{
   let mailOptions = {
-    from: 'eyobedkebede10@gmail.com',
-    to: 'leinternet0@gmail.com',
+    from: process.env.EMAIL,
+    to:  process.env.EMAIL2,
     subject: 'Sending Email using Node.js',
     text: resetpassLink
   };
