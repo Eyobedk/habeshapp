@@ -50,7 +50,7 @@ module.exports.validateAndSendLink = async (req, res, next) => {
             console.log(err)
             res.send('incorrect token')
         }
-        res.render('reset-password');
+        res.render('passwords/reset-password');
     })
 }
 
@@ -61,8 +61,8 @@ module.exports.setNewPassword =(req,res)=>{
     if(result == 1 || result == -1)
     {
         const pass ="please Enter the same passwords";
-        return res.render('reset-password',{pass});
+        return res.render('passwords/reset-password',{pass});
     }
-    res.redirect(302, 'Login')
+    res.redirect(302, 'Login');
 }
 

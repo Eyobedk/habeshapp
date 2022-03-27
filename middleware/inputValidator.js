@@ -11,11 +11,11 @@ exports.validateInput = (req, res)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         const alert = errors.array();
-        return res.render('signup',{alert});
+        return res.render('login&signup/signup',{alert});
     }
     else if(result == 1 || result == -1)
     {
         const pass ="please Enter the same passwords";
-        return res.render('signup',{pass});
+        return res.render('login&signup/signup',{pass});
     }
 }

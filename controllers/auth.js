@@ -3,7 +3,7 @@ const { createToken,createRefToken } = require('../utils/TokenHandler');
 
 
 module.exports.signup_Get = (req, res) => {
-    res.render('signup');
+    res.render('login&signup/signup');
 }
 
 module.exports.signup_Post = async (req, res) => {
@@ -42,7 +42,7 @@ module.exports.signup_Post = async (req, res) => {
 
 
 module.exports.login_Get = (req, res) => {
-    res.render('Login');
+    res.render('login&signup/Login');
 }
 
 module.exports.login_Post = async (req, res, next) => {
