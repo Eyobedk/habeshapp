@@ -29,7 +29,6 @@ passport.serializeUser((user,done)=>{
 passport.deserializeUser((user,done)=>{
     done(null,user);
 });
-
 Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 
     (req, res) => { console.log('google called us back');

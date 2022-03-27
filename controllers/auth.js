@@ -1,15 +1,12 @@
 const User = require("../models/User");
 const { createToken,createRefToken } = require('../utils/TokenHandler');
 
+
 module.exports.signup_Get = (req, res) => {
     res.render('signup');
 }
 
 module.exports.signup_Post = async (req, res) => {
-    const {
-        email,
-        password
-    } = req.body;
 
     //"Do not forget to decompose this codes according to their functionality"
 
@@ -19,12 +16,12 @@ module.exports.signup_Post = async (req, res) => {
     // don't forget to check email
 
     // don't forget bcrypt!
-    try {
-        const user = await User.create({
-            email,
-            password
-        });
-        if (!user) return res.send('email exists')
+    // try {
+    //     const user = await User.create({
+    //         email,
+    //         password
+    //     });
+    //     if (!user) return res.send('email exists')
         // const token = createToken(user._id);
         // res.cookie('jwt', token, {
         //     httpOnly: true,
@@ -35,11 +32,12 @@ module.exports.signup_Post = async (req, res) => {
         // res.status(201).json({
         //     user: user._id
         // });
-        res.redirect('Login');
-    } catch (err) {
-        res.send('email exists')
+    //     res.redirect('Login');
+    // } catch (err) {
+    //     res.send('email exists')
         //console.log('good error ', err)
-    }
+    //}
+    res.send("<h1> HOME PAGE </h1>")
 }
 
 

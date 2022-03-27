@@ -1,15 +1,4 @@
 const mysql = require('mysql2');
-<<<<<<< HEAD
-
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'matt',
-    password: 'password',
-    database: 'my_database'
-});
-
-connection.connect()
-=======
 require('dotenv').config();
 
 const pool = mysql.createPool({
@@ -46,4 +35,3 @@ pool.getConnection((err,conn)=>{
 
 pool.query = util.promisify(pool.query)
 module.exports = pool
->>>>>>> 67441bbbcc304ecda6fde331636185e13b1be905

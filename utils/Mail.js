@@ -7,7 +7,7 @@ let transporter = nodeMailer.createTransport({
       requireTLS: true,
       auth: {
           user: process.env.EMAIL, 
-          pass: Pprocess.env.EMAIL_PASS, 
+          pass: process.env.EMAIL_PASS, 
       },
   });
 exports.Mailer = async(resetpassLink)=>{

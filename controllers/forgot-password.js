@@ -7,7 +7,8 @@ module.exports.forgot_password = async (req, res, next) => {
     const {
         email
     } = req.body;
-    const user = await finder(email)
+    console.log(email);
+    const user = await finder(email);
         
     if (user) {
         const secret = process.env.ACCESS_TOKEN_SECRET_KEY + user.password;
@@ -55,8 +56,13 @@ module.exports.validateAndSendLink = async (req, res, next) => {
 
 module.exports.setNewPassword =(req,res)=>{
     const {password1, password2} = req.body;
-
-    if(password1 !== password2){
-        res.send("enter the correct password");
-    }else{res.send('wait')}
+    var result = password1.localeCompare(password2);
+    console.log(result)
+    if(result == 1 || result == -1)
+    {
+        const pass ="please Enter the same passwords";
+        return res.render('reset-password',{pass});
+    }
+    res.redirect(302, 'Login')
 }
+
