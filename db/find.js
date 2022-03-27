@@ -1,12 +1,12 @@
 const User = require('../models/User');
 
-
-
-exports.finder = async(email) =>{
-    const user = await User.findOne({
-        email
-    });
-    return user
+exports.finder = (email) =>{
+    return new Promise((resolve, reject)=>{
+        const user = User.findOne({
+            email
+        }).catch(err,reject(err))
+        resolve(user);
+    })
 }
 
 exports.findById = async(id) =>{

@@ -10,22 +10,16 @@ const authRoutes = require('./routes/auth');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
+<<<<<<< HEAD
+=======
+const {connPool}= require('./db/database');
+//const {checkGoogleLoggedIn} = require('./middleware/CheckLoggedwGoogle');
+>>>>>>> 67441bbbcc304ecda6fde331636185e13b1be905
 app = express();
 app.set('view engine', 'ejs')
 
 
-async function main() {
-    await mongoose.connect(process.env.dbURL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
-        .then(() => {
-            app.listen(3000);
-            console.log('listening on port 3000...');
-        })
-        .catch((err) => console.log(err));
-}
-main();
+//here initiate the database
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -39,7 +33,7 @@ app.use(cookieSession({name:'session',
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(authRoutes)
+app.use(authRoutes) 
 app.use(G_OAuth)
 
 app.get('/smoothies', requireAuth, (req, res) => {
