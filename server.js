@@ -10,7 +10,6 @@ const authRoutes = require('./routes/auth');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
-//const {checkGoogleLoggedIn} = require('./middleware/CheckLoggedwGoogle');
 app = express();
 app.set('view engine', 'ejs')
 

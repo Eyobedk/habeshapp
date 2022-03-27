@@ -1,41 +1,70 @@
-<%- include('partials/loginheader'); -%>
-  <h2>Login</h2>
-<form action="" method="post">
+<!doctype html>
+<html lang="en">
 
-  <label for="email">Email</label>
-  <input type="email" name="email" required />
-  <div class="email error"></div>
-  <label for="password">Password</label>
-  <input type="password" name="password" required />
-  <div class="password error"></div>
-  <button type="submit">login</button>
-</form>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HABESHAPP">
+  <title>Signin page</title>
 
-<%- include('partials/footer'); -%>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
-<!-- <script>
-  const form = document.querySelector('form');
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
 
-    const email = form.email.value;
-    const password = form.password.value;
-    try {
-      const res = await fetch('/login', {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          password
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await res.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
+  <!-- Bootstrap core CSS -->
+  <link href="boot/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
     }
-  });
-</script> -->
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="css/signin.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+  <main class="form-signin">
+    <form action="" method="post">
+      <img class="mb-4" src="Logo.png" alt="" width="100">
+      <h1 class="text-center">Habeshapp</h1><br><br><br>
+      <h1 class="h3 mb-3 fw-normal">sign in</h1>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit" style="Background-color: #ffce19;"><a href="">Sign in </a></button><br>
+      <a class="text-center" href="" style="color: #faad07;">Forgot Password ?</a>
+      <div id="nbsp"></div>
+      <a class="text-center" href="" style="color: #faad07;">Signup</a><br>
+      <br><button type="button" class="login-with-google-btn"><a href="">
+        Sign in with Google</a>
+      </button>
+    </form>
+
+
+  </main>
+
+
+
+</body>
+
+</html>

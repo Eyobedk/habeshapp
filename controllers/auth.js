@@ -35,7 +35,7 @@ module.exports.signup_Post = async (req, res) => {
         // res.status(201).json({
         //     user: user._id
         // });
-        res.redirect('login');
+        res.redirect('Login');
     } catch (err) {
         res.send('email exists')
         //console.log('good error ', err)
@@ -44,7 +44,7 @@ module.exports.signup_Post = async (req, res) => {
 
 
 module.exports.login_Get = (req, res) => {
-    res.render('login');
+    res.render('Login');
 }
 
 module.exports.login_Post = async (req, res, next) => {
@@ -80,5 +80,5 @@ exports.logout = (req, res) => {
     res.cookie('jwt', '', {
         maxAge: 1
     })
-    res.redirect(302, '/login')
+    res.redirect(302, '/Login')
 }
