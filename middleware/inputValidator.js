@@ -1,6 +1,6 @@
 const {check, validationResult} = require('express-validator')
 
-exports.validateInput = (req, res)=>{
+exports.validateInput = (req, res, next)=>{
     [check('email',"Enter a valid Email Address").isEmail().normalizeEmail(),
     check('name',"Enter the required field").notEmpty() ];
 
@@ -18,4 +18,5 @@ exports.validateInput = (req, res)=>{
         const pass ="please Enter the same passwords";
         return res.render('login&signup/signup',{pass});
     }
+    next();
 }

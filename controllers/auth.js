@@ -7,21 +7,16 @@ module.exports.signup_Get = (req, res) => {
 }
 
 module.exports.signup_Post = async (req, res) => {
-
-    //"Do not forget to decompose this codes according to their functionality"
-
-    //IN HERE I HAVE TO USE HAPI/JOY TO VALIDATE AND RESPOND WITH EJS
-    //I WILL SEND THE ERROR TYPE
-
     // don't forget to check email
+    const {name, email, password1} = req.body;
+    console.log(name, password1,email);
 
+    const user = new User(name, password1,email);
+
+    const savedUser = await user.save()
+    console.log(savedUser)
     // don't forget bcrypt!
-    // try {
-    //     const user = await User.create({
-    //         email,
-    //         password
-    //     });
-    //     if (!user) return res.send('email exists')
+    
         // const token = createToken(user._id);
         // res.cookie('jwt', token, {
         //     httpOnly: true,
@@ -29,14 +24,7 @@ module.exports.signup_Post = async (req, res) => {
         // }).json({
         //     user: user._id
         // });;
-        // res.status(201).json({
-        //     user: user._id
-        // });
-    //     res.redirect('Login');
-    // } catch (err) {
-    //     res.send('email exists')
-        //console.log('good error ', err)
-    //}
+        
     res.send("<h1> HOME PAGE </h1>")
 }
 

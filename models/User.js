@@ -1,36 +1,32 @@
-const mongoose = require('mongoose');
+const db = require('../db/database')
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 6,
-  },
-  refreshToken:{
-    required:false,
-    type:String,
-    unique:true
+class User {
+  constructor(name, password,email)
+  {
+    this.name = name;
+    this.password = password;    
+    this.email = email;    
   }
-});
 
-userSchema.statics.login = async function(email, password) {
-  const user = await this.findOne({ email });
-  if (user) {
-    //IN HERE COMPARE THE HASHED PASSWORD WITH THE CURRENT ONE
-    if(user.password == password)
-      return user;
-    }
-    throw Error('incorrect password or email');
-  //throw Error('incorrect email');
-};
+  async save()
+  {
+    const d = new Date();
+    const year = d.getFullYear();
+    const day = d.getDay();
+    const month = d.getMonth() + 1;
+    const date = `${year}-${month}-${day}`;
+    console.log(date)
+    "use strict";
 
+    let sql = `INSERT INTO user(name,password,email,date) VALUES(${this.name},${this.password},${this.email},${date});`;
 
-const User = mongoose.model('habeshacoll', userSchema);
+    const [register,_] = await db.execute(sql)
+    return register;
+  }
+  static findEmail(){
+
+  }
+}
+
 
 module.exports = User;
