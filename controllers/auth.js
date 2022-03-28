@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const { createToken,createRefToken } = require('../utils/TokenHandler');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 module.exports.signup_Get = (req, res) => {
@@ -7,23 +9,27 @@ module.exports.signup_Get = (req, res) => {
 }
 
 module.exports.signup_Post = async (req, res) => {
-    // don't forget to check email
     const {name, email, password1} = req.body;
-    console.log(name, password1,email);
 
-    const user = new User(name, password1,email);
+    const checkExists = await User.findEmail(email);
+    let pass = "This account is already registered";
+    if(!(checkExists.length == 0)) return res.render('login&signup/signup',{pass});
 
-    const savedUser = await user.save()
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(password1, salt);
+    const user = new User(name, hash,email);
+
+    const savedUser = await user.save();
     console.log(savedUser)
-    // don't forget bcrypt!
-    
-        // const token = createToken(user._id);
-        // res.cookie('jwt', token, {
-        //     httpOnly: true,
-        //     maxAge: 40000
-        // }).json({
-        //     user: user._id
-        // });;
+    //stoped here trying to get the id back from the save query
+
+    // const token = createToken(savedUser.user_id);
+    // res.cookie('jwt', token, {
+    //         httpOnly: true,
+    //         maxAge: 40000
+    // }).json({
+    //         user: user._id
+    //     });;
         
     res.send("<h1> HOME PAGE </h1>")
 }

@@ -1,9 +1,9 @@
 const db = require('../db/database')
 
 class User {
-  constructor(name, password,email)
+  constructor(username, password,email)
   {
-    this.name = name;
+    this.username = username;
     this.password = password;    
     this.email = email;    
   }
@@ -12,19 +12,22 @@ class User {
   {
     const d = new Date();
     const year = d.getFullYear();
-    const day = d.getDay();
+    const day = d.getDate();
     const month = d.getMonth() + 1;
     const date = `${year}-${month}-${day}`;
-    console.log(date)
-    "use strict";
+    console.log(this.username,this.password,this.email,date)
 
-    let sql = `INSERT INTO user(name,password,email,date) VALUES(${this.name},${this.password},${this.email},${date});`;
-
-    const [register,_] = await db.execute(sql)
-    return register;
+    let sql = `INSERT INTO user(name,password,email,currentdate) OUTPUT INSERTED.user_id
+    VALUES ('${this.username}','${this.password}','${this.email}','${date}');`;
+    const [result,_] = await db.execute(sql)
+    console.log("output"+result);
+    return result;
   }
-  static findEmail(){
-
+  static async findEmail(email){
+    const sql = `SELECT * FROM user WHERE email='${email}';`;
+    const [result, _] = await db.execute(sql);
+    console.log(result);
+    return result;
   }
 }
 
