@@ -12,8 +12,8 @@ exports.checkUser = async (req, res, next) => {
                 next();
             }
             else {
-                const user = await User.findById(decodedToken.id);
-                res.locals.user = {id:user._id,email:user.email};
+                const user = await User.findByID(decodedToken.id)
+                res.locals.user = {id:user["user_id"],email:user["email"]};
                 next();
             }
         });

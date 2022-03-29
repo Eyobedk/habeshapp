@@ -42,6 +42,18 @@
       <img class="mb-4" src="images/Logo.png" alt="" width="100">
       <h1 class="text-center">Habeshapp</h1><br>
       <h1 class="h3 mb-3 fw-normal">sign in</h1>
+
+      <% if(typeof Ierror === 'string') { %>
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+            <use xlink:href="#exclamation-triangle-fill" />
+          </svg>
+          <div>
+            <%= Ierror %>
+          </div>
+        </div>
+          <% } %>
+
       <div class="form-floating">
         <input type="name" class="form-control" id="floatingInput" name="name" placeholder="Enter your user name" required/>
         <label for="floatingInput">User name</label>

@@ -20,3 +20,14 @@ exports.validateInput = (req, res, next)=>{
     }
     next();
 }
+
+exports.validateLoginInput = (req, res, next)=>{
+    [check('name',"Enter a proper name").notEmpty().isAlpha() ];
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        const Ierror = "Enter a proper name";
+        console.log(Ierror)
+        return res.render('login&signup/Login',{Ierror});
+    }
+    next();
+}
