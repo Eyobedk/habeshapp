@@ -8,7 +8,7 @@ class User {
     this.email = email;    
   }
 
-  async save()
+  save()
   {
     const d = new Date();
     const year = d.getFullYear();
@@ -16,12 +16,12 @@ class User {
     const month = d.getMonth() + 1;
     const date = `${year}-${month}-${day}`;
     console.log(this.username,this.password,this.email,date)
-
-    let sql = `INSERT INTO user(name,password,email,currentdate) OUTPUT INSERTED.user_id
+//stoped here trying to get the id back from the bellow query
+    let sql = `INSERT INTO user(name,password,email,currentdate) 
     VALUES ('${this.username}','${this.password}','${this.email}','${date}');`;
-    const [result,_] = await db.execute(sql)
-    console.log("output"+result);
-    return result;
+    return new Promise((resolve, reject)=>{
+      resolve(db.execute(sql));
+    }) 
   }
   static async findEmail(email){
     const sql = `SELECT * FROM user WHERE email='${email}';`;
