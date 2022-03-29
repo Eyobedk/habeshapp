@@ -1,4 +1,5 @@
 const db = require('../db/database')
+const bcrypt = require('bcrypt');
 
 class User {
   constructor(username, password, email) {
@@ -24,22 +25,38 @@ class User {
   static async findEmail(email) {
     const sql = `SELECT * FROM user WHERE email='${email}';`;
     const [result, _] = await db.execute(sql);
-    console.log("from find email " + result[0]["user_id"]);
+    console.log("me result"+result)
+    if((result) === undefined) return undefined;
+   // console.log("from find email " + result[0]["user_id"]);
+   else{
     return result;
-  }
+  }}
+  
   static async findByID(id) {
     const sql = `SELECT * FROM user WHERE user_id='${id}';`;
     const [result, _] = await db.execute(sql);
     return result[0];
   }
 
-  static async login(name, password) {
-    const sql = `SELECT * FROM user WHERE name='${name}' AND password= ${password};`;
+  static async login(email, password) {
+  //   console.log(password)
+  //   const getpassword = `SELECT password FROM user WHERE email= '${email}';`;
+  //   const [passwResult, _] = await db.execute(getpassword);
+  //   let EncryptedPass = JSON.stringify(passwResult[0]["password"]);
+  //   console.log("password result "+ JSON.stringify(passwResult[0]["password"]))
+  // //!
+  //   bcrypt.compare(password, EncryptedPass).then(function(result) {
+  //       console.log("v"+result);
+  //   });
+    
+    const sql = `SELECT * FROM user WHERE email='${email}' AND password= '${password}';`;
     try {
       const [result, _] = await db.execute(sql);
+      console.log("result "+result[0])
+      if(result[0]===undefined) {console.log("undefined");return false;}
       return JSON.stringify(result[0]["user_id"]);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 }

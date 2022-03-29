@@ -54,9 +54,20 @@
         </div>
           <% } %>
 
+          <% if(typeof Ierrors === 'string') { %>
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                <use xlink:href="#exclamation-triangle-fill" />
+              </svg>
+              <div>
+                <%= Ierrors %>
+              </div>
+            </div>
+              <% } %>
+
       <div class="form-floating">
-        <input type="name" class="form-control" id="floatingInput" name="name" placeholder="Enter your user name" required/>
-        <label for="floatingInput">User name</label>
+        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Enter your email" required/>
+        <label for="floatingInput">Email </label>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required/>

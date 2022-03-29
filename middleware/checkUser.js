@@ -4,7 +4,8 @@ require('dotenv').config();
 
 exports.checkUser = async (req, res, next) => {
     try{
-    //const token = req.cookies.jwt;
+    const token = req.cookies.jwt;
+    console.log(token)
     if (req.cookies.jwt) {
         jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
             if (err) {
@@ -12,7 +13,13 @@ exports.checkUser = async (req, res, next) => {
                 next();
             }
             else {
-                const user = await User.findByID(decodedToken.id)
+                const c = JSON.stringify(decodedToken["id"]);
+                let id = c.replace(/\"/g,'')
+                let onlyId = id.replace(/\\/g, '')
+                
+                const user = await User.findByID(onlyId)
+                console.log("user"+user)
+                console.log("dt2"+JSON.stringify(user))
                 res.locals.user = {id:user["user_id"],email:user["email"]};
                 next();
             }

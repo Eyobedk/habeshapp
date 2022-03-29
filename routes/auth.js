@@ -10,7 +10,7 @@ const router = Router();
 router.get('/signup', signup_Get)
 router.post('/signup', urlencodedParser,validateInput,signup_Post)
 router.get('/login', login_Get)
-router.post('/login',validateLoginInput,login_Post)
+router.post('/login',validateLoginInput,login_Post)//
 router.get('/logout', logout)
 
 

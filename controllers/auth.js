@@ -10,16 +10,19 @@ module.exports.signup_Get = (req, res) => {
 
 module.exports.signup_Post = async (req, res) => {
     const {name, email, password1} = req.body;
+    let pass = "Email already exists";
     const checkExists = await User.findEmail(email);
-    if(!(checkExists.length == 0)) return res.render('login&signup/signup',{pass});
+    if(!(JSON.stringify(checkExists[0]) === undefined)) { res.render('login&signup/signup',{pass});return}
 
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(password1, salt);
-    const user = new User(name, hash,email);
+    // const salt = bcrypt.genSaltSync(saltRounds);
+    // const hash = bcrypt.hashSync(password1, salt);
+    const user = new User(name, password1,email);
 
-    await user.save().then(async ()=>{
+    user.save().then(async ()=>{
         const getID = await User.findEmail(email);
+        console.log("THE ID"+getID[0]["user_id"]);
         const token = createToken(JSON.stringify(getID[0]["user_id"]));
+        console.log("here"+token)
         res.cookie('jwt', token, {
                 httpOnly: true,
                 maxAge: 40000
@@ -34,15 +37,20 @@ module.exports.login_Get = (req, res) => {
 }
 
 module.exports.login_Post = async (req, res, next) => {
-    const {name,password} = req.body;
-    const userID = await User.login(name, password);
-    if (!userID) {
-        res.status(403).send('enter the correct password and email');
-    }
-    const token = createToken(userID);
-    //console.log(refToken)
-    "use strict";
+    const {email,password} = req.body;
 
+
+    const userID = await User.login(email, password);
+    if (!userID) {
+        let Ierrors = 'enter the correct password and email';
+        res.render("login&signup/Login", {Ierrors});
+        return
+    }
+    console.log()
+    console.log("here id"+JSON.stringify(userID));
+    const token = createToken(JSON.stringify(userID));
+    "use strict";
+    console.log("token"+ token);
     res.cookie('jwt', token, {httpOnly: true,maxAge: 40000});
     res.redirect(302, '/smoothies');
 }
@@ -51,5 +59,5 @@ exports.logout = (req, res) => {
     res.cookie('jwt', '', {
         maxAge: 1
     })
-    res.redirect(302, '/Login')
+    res.redirect(302, '/Login');
 }

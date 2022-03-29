@@ -22,11 +22,13 @@ exports.validateInput = (req, res, next)=>{
 }
 
 exports.validateLoginInput = (req, res, next)=>{
-    [check('name',"Enter a proper name").notEmpty().isAlpha() ];
-    const errors = validationResult(req);
-    if(!errors.isEmpty()) {
-        const Ierror = "Enter a proper name";
-        console.log(Ierror)
+    [check('email',"Enter a proper info").isEmail().normalizeEmail()];
+    const listOferrors = validationResult(req);
+    let errors = JSON.stringify(listOferrors["errors"]);
+    console.log("err"+errors.length == 0)
+    if(errors.length ==0) {
+        const Ierror = "Enter a proper email";
+        console.log(Ierror);
         return res.render('login&signup/Login',{Ierror});
     }
     next();

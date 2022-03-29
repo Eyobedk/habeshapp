@@ -12,7 +12,7 @@ function verifyCallBack(accToken, refoken, profile, done) {
 
 const setwhenDone = {
     failureRedirect: '/failure',
-    successRedirect: '/home',
+    successRedirect: '/smoothies',
     session: true
 }
 
@@ -22,13 +22,14 @@ passport.use(new Strategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET
 }, verifyCallBack))
 
+
 passport.serializeUser((user,done)=>{
     console.log("GEDAY"+user._json.email);
-    done(null,user._json.email);
-});
-passport.deserializeUser((user,done)=>{
-    done(null,user);
-});
+    done(null,user._json.email);});
+
+passport.deserializeUser((user,done)=>{ done(null,user) });
+
+
 Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 
     (req, res) => { console.log('google called us back');
