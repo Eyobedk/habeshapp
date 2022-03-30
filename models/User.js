@@ -59,6 +59,23 @@ class User {
       console.log(err);
     }
   }
+
+  static async saveFromGoogle(email) {
+    const result = await this.findEmail(email);
+    if(result) {return;};
+
+    const d = new Date();
+    const year = d.getFullYear();
+    const day = d.getDate();
+    const month = d.getMonth() + 1;
+    const date = `${year}-${month}-${day}`;
+
+    let sql = `INSERT INTO user(email,currentdate) 
+    VALUES ('${email}','${date}');`;
+    return new Promise((resolve, reject) => {
+      resolve(db.execute(sql));
+    })
+  }
 }
 
 

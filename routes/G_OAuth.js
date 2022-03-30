@@ -1,12 +1,13 @@
 const passport = require('passport');
 const Router = require('express').Router();
-
+const User = require("../models/User");
 const {Strategy} = require('passport-google-oauth20');
+const {seter} = require('../middleware/checkUser')
 
-function verifyCallBack(accToken, refoken, profile, done) {
-    console.log('google profile', profile)
-    console.log('access Token', accToken)
-    console.log('ref Token', refoken)
+
+var useremail;
+async function verifyCallBack(accToken, refoken, profile, done) {
+    await User.saveFromGoogle(profile._json.email);
     done(null, profile)
 }
 
@@ -24,6 +25,7 @@ passport.use(new Strategy({
 
 
 passport.serializeUser((user,done)=>{
+    useremail = user._json.email;
     console.log("GEDAY"+user._json.email);
     done(null,user._json.email);});
 
@@ -32,11 +34,11 @@ passport.deserializeUser((user,done)=>{ done(null,user) });
 
 Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 
-    (req, res) => { console.log('google called us back');
-    res.send("here")});
+    (req, res) => {console.log("the user"+ useremail)
+        res.locals.user = {email:useremail}});
 
 Router.get('/failure', (req, res) => { res.send("failed to login") })
 Router.get('/auth/logout', (req, res) => { req.logOut();res.redirect(302,'/') })
 
 
-module.exports = Router
+module.exports = Router,useremail;

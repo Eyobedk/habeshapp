@@ -1,11 +1,14 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 require('dotenv').config();
+const useremail = require('../routes/G_OAuth')
 
 exports.checkUser = async (req, res, next) => {
     try{
     const token = req.cookies.jwt;
+    console.log("in here")
     console.log(token)
+    console.log(req.cookies.session)
     if (req.cookies.jwt) {
         jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
             if (err) {
@@ -24,7 +27,7 @@ exports.checkUser = async (req, res, next) => {
                 next();
             }
         });
-    }
+     }
     else {
         res.locals.user = null;
         next();
