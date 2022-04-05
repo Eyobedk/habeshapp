@@ -32,6 +32,8 @@ app.use(passport.session());
 app.use(authRoutes) 
 app.use(G_OAuth)
 
+app.get('/admin-login', (req, res)=>{res.render("login&signup/Admin-login")})
+app.get('/admin-forgot', (req, res)=>{res.render("passwords/admin-forgot")})
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
 app.get('/',(req, res) => { res.send("<h1> HOME PAGE </h1>")})
