@@ -34,6 +34,9 @@ app.use(G_OAuth)
 
 app.get('/admin-login', (req, res)=>{res.render("login&signup/Admin-login")})
 app.get('/admin-forgot', (req, res)=>{res.render("passwords/admin-forgot")})
+app.get('/admin-reset', (req, res)=>{res.render("passwords/admin-reset")})
+app.get('/admin-register', (req, res)=>{res.render("login&signup/admin-register")})
+
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
 app.get('/',(req, res) => { res.send("<h1> HOME PAGE </h1>")})
