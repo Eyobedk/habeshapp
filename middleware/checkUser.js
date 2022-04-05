@@ -6,7 +6,7 @@ const useremail = require('../routes/G_OAuth')
 exports.checkUser = async (req, res, next) => {
     try{
     const token = req.cookies.jwt;
-    console.log("in here")
+    console.log("check user: in here");
     console.log(token)
     console.log(req.cookies.session)
     if (req.cookies.jwt) {

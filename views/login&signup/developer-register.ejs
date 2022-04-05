@@ -19,7 +19,7 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Register</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<form method="POST" class="my-login-validation" action="/pay" novalidate="">
 								<div class="form-group">
 									<label for="name">Name</label>
 									<input id="name" type="text" class="form-control" name="name" required autofocus>
@@ -36,7 +36,7 @@
 								</div>
 								<div class="form-group">
 									<label for="name">Domain Address</label>
-									<input id="clg" type="text" class="form-control" name="clg_name" required autofocus>
+									<input id="clg" type="text" class="form-control" name="clg_name" name="domain" required autofocus>
 									<div class="invalid-feedback">
 										What's your website address
 									</div>
@@ -70,12 +70,12 @@
 
                                 <div class="form-group m-0" >
 									<button type="submit" class="btn btn-primary btn-block"  style="background-color: rgb(40, 255, 11) !important;border-color: rgb(40, 255, 11)  !important;">
-										Go To payment
+										Pay & Register
 									</button>
 								</div>
 
 								<div class="mt-4 text-center">
-									Already have an account? <a href="/Admin-Login">Login</a>
+									Already have an account? <a href="/developer-Login">Login</a>
 								</div>
 							</form>
 						</div>

@@ -10,6 +10,8 @@ const authRoutes = require('./routes/auth');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
+const {registerDeveloper,handleSuccess} = require('./controllers/dev_auth.js')
+
 
 app = express();
 app.set('view engine', 'ejs')
@@ -31,11 +33,7 @@ app.use(passport.session());
 
 app.use(authRoutes) 
 app.use(G_OAuth)
-
-app.get('/admin-login', (req, res)=>{res.render("login&signup/Admin-login")})
-app.get('/admin-forgot', (req, res)=>{res.render("passwords/admin-forgot")})
-app.get('/admin-reset', (req, res)=>{res.render("passwords/admin-reset")})
-app.get('/admin-register', (req, res)=>{res.render("login&signup/admin-register")})
+app.get('/success', handleSuccess);
 
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })

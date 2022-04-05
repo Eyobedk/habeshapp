@@ -8,14 +8,8 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/login
-Content-Type: application/json
+POST http://localhost:3000/create-order
 
-{
-    "name":"eyobed kebede",
-    "email":"eyobedkebede@gmail.com",
-    "password":"password123"
-}
 
 ###
 
