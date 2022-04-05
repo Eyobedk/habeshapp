@@ -24,6 +24,7 @@ router.post('/reset-password',setNewPassword)
 
 router.get('/developer-register', (req, res)=>{res.render("login&signup/developer-register")})
 router.post('/pay', registerDeveloper);
+router.get('/success', handleSuccess);
 router.get('/cancel', (req, res) => res.send('Cancelled'));
 
 

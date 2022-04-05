@@ -1,19 +1,29 @@
+
 const paypal = require('paypal-rest-sdk');
+const Developer = require('../models/Developer');
+const { createToken } = require('../utils/TokenHandler');
+
 require('dotenv').config();
-  paypal.configure({
-    'mode': 'sandbox',
-    'client_id': process.env.PAYPAL_CLIENT_ID,
-    'client_secret': process.env.PAYPAL_CLIENT_SECRET
-  });
+paypal.configure({
+  'mode': 'sandbox',
+  'client_id': process.env.PAYPAL_CLIENT_ID,
+  'client_secret': process.env.PAYPAL_CLIENT_SECRET
+});
+var theName;
+var thePhone;
+var theDomain;
+var theEmail;
+var thePass;
 
 exports.registerDeveloper = (req, res) => {
+  let { name, phone, domain, email, password } = req.body;
 
-  let {name, phone,domain,email,password} = req.body;
-  console.log("name" + name);
-  console.log("phone" + phone);
-  console.log("domain" + domain);
-  console.log("email" + email);
-  console.log("password" + password);
+  theName = name;
+  thePhone = phone;
+  theDomain = domain;
+  theEmail = email;
+  thePass = password;
+
 
   const create_payment_json = {
     "intent": "sale",
@@ -44,13 +54,13 @@ exports.registerDeveloper = (req, res) => {
 
   paypal.payment.create(create_payment_json, function (error, payment) {
     if (error) {
-        throw error;
+      throw error;
     } else {
-        for(let i = 0;i < payment.links.length;i++){
-          if(payment.links[i].rel === 'approval_url'){
-            res.redirect(payment.links[i].href);
-          }
+      for (let i = 0; i < payment.links.length; i++) {
+        if (payment.links[i].rel === 'approval_url') {
+          res.redirect(payment.links[i].href);
         }
+      }
     }
   });
 
@@ -63,20 +73,31 @@ exports.handleSuccess = (req, res) => {
   const execute_payment_json = {
     "payer_id": payerId,
     "transactions": [{
-        "amount": {
-            "currency": "USD",
-            "total": "8.00"
-        }
+      "amount": {
+        "currency": "USD",
+        "total": "8.00"
+      }
     }]
   };
 
   paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
     if (error) {
-        console.log("error form payment.execute: "+error.response);
-        throw error;
+      console.log("error form payment.execute: " + error.response);
+      throw error;
     } else {
-        console.log(JSON.stringify(payment));
-        res.send('Success');
+      console.log(JSON.stringify(payment));
+
+      const dev = new Developer(theName, thePhone, theDomain, theEmail, thePass, payerId);
+      dev.save().then(async ()=>{
+        const getID = await Developer.findEmail(theEmail);
+        const token = createToken(JSON.stringify(getID[0]["dev_id"]));
+        res.cookie('adminToken', token, {
+            httpOnly: true,
+            maxAge: 40000
+          }).send("<h1> DEVELOPER PANNEL </h1>");
+      })
     }
   });
+
+
 }

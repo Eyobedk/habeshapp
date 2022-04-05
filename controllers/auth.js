@@ -46,7 +46,6 @@ module.exports.login_Post = async (req, res, next) => {
         res.render("login&signup/Login", {Ierrors});
         return
     }
-    console.log()
     console.log("here id"+JSON.stringify(userID));
     const token = createToken(JSON.stringify(userID));
     "use strict";

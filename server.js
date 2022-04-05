@@ -33,7 +33,7 @@ app.use(passport.session());
 
 app.use(authRoutes) 
 app.use(G_OAuth)
-app.get('/success', handleSuccess);
+
 
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
