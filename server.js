@@ -5,13 +5,14 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const {Strategy} = require('passport-google-oauth20');
 require('dotenv').config();
+const bodyparser = require('body-parser');
 
 const authRoutes = require('./routes/auth');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
 const {registerDeveloper,handleSuccess} = require('./controllers/dev_auth.js')
-
+const urlencodedParser = bodyparser.urlencoded({extended: false})
 
 app = express();
 app.set('view engine', 'ejs')
@@ -31,6 +32,7 @@ app.use(cookieSession({name:'session',
 app.use(passport.initialize())
 app.use(passport.session());
 
+app.use(urlencodedParser);
 app.use(authRoutes) 
 app.use(G_OAuth)
 

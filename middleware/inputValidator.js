@@ -34,13 +34,15 @@ exports.validateLoginInput = (req, res, next)=>{
     next();
 }
 
-exports.ValidateAdminRegister = (req, res, next)=>{
-    [check('email',"Enter a valid Email Address").isEmail().normalizeEmail(),
-    check('name',"Enter the required field").notEmpty(),
-    check('phone',"Enter a valid phone number").isNumeric(),
-    check('domain',"Enter a valid url number").isURL() ];
+exports.ValidateDeveloperRegister = (req, res, next)=>{
+    [
+        //check('email',"Enter a valid Email Address").isEmail().normalizeEmail(),
+   // check('name',"Enter the required field").notEmpty(),
+   // check('phone',"Enter a valid phone number").isNumeric(),
+    check('password',"Enter a password upto 8 character").isLength({ min: 8 }) ];
 
     const errors = validationResult(req);
+    console.log("the errors:" + JSON.stringify(errors))
     if(!errors.isEmpty()) {
         const alert = errors.array();
         return res.render('login&signup/developer-register',{alert});

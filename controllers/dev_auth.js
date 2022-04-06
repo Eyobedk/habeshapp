@@ -1,7 +1,8 @@
-
 const paypal = require('paypal-rest-sdk');
 const Developer = require('../models/Developer');
-const { createToken } = require('../utils/TokenHandler');
+const {
+  createToken
+} = require('../utils/TokenHandler');
 
 require('dotenv').config();
 paypal.configure({
@@ -16,7 +17,13 @@ var theEmail;
 var thePass;
 
 exports.registerDeveloper = (req, res) => {
-  let { name, phone, domain, email, password } = req.body;
+  let {
+    name,
+    phone,
+    domain,
+    email,
+    password
+  } = req.body;
 
   theName = name;
   thePhone = phone;
@@ -24,6 +31,7 @@ exports.registerDeveloper = (req, res) => {
   theEmail = email;
   thePass = password;
 
+  
 
   const create_payment_json = {
     "intent": "sale",
@@ -88,16 +96,41 @@ exports.handleSuccess = (req, res) => {
       console.log(JSON.stringify(payment));
 
       const dev = new Developer(theName, thePhone, theDomain, theEmail, thePass, payerId);
-      dev.save().then(async ()=>{
-        const getID = await Developer.findEmail(theEmail);
-        const token = createToken(JSON.stringify(getID[0]["dev_id"]));
-        res.cookie('adminToken', token, {
-            httpOnly: true,
-            maxAge: 40000
-          }).send("<h1> DEVELOPER PANNEL </h1>");
+      dev.save().then(() => {
+        res.redirect(302, '/developer-Login')
       })
     }
   });
+}
+
+module.exports.Login_Dev = async (req, res, next) => {
+  const {
+    email,
+    password
+  } = req.body;
 
 
+  const devID = await Developer.login(email, password);
+  if (!devID) {
+    let outErrors = 'enter the correct password and email';
+    res.render("login&signup/developer-Login", {
+      outErrors
+    });
+    return
+  }
+  console.log("here id" + JSON.stringify(devID));
+  const token = createToken(JSON.stringify(devID));
+  "use strict";
+  console.log("dev token" + token);
+  res.cookie('devToken', token, {
+    httpOnly: true,
+    maxAge: 40000
+  }).send("<h1> DEVELOPER PANNEL </h1>");
+}
+
+exports.dev_logout = (req, res) => {
+  res.cookie('devToken', '', {
+    maxAge: 1
+  })
+  res.redirect(302, '/Login');
 }

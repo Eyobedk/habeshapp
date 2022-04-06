@@ -56,12 +56,12 @@ class Developer {
     //       console.log("v"+result);
     //   });
 
-    const sql = `SELECT * FROM user WHERE email='${email}' AND password= '${password}';`;
+    const sql = `SELECT * FROM developer WHERE dev_email='${email}' AND dev_password= '${password}';`;
     try {
       const [result, _] = await db.execute(sql);
       console.log("result " + result[0])
       if (result[0] === undefined) { console.log("undefined"); return false; }
-      return JSON.stringify(result[0]["user_id"]);
+      return JSON.stringify(result[0]["dev_id"]);
     } catch (err) {
       console.log(err);
     }

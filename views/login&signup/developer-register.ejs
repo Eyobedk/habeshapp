@@ -37,7 +37,7 @@
 
 									<% }) %>
 										<% } %>
-											<form method="POST" class="my-login-validation" action="/pay" novalidate="">
+											<form method="post" class="my-login-validation" action="/pay">
 												<div class="form-group">
 													<label for="name">Name</label>
 													<input id="name" type="text" class="form-control" name="name"
@@ -70,14 +70,11 @@
 														Your email is invalid
 													</div>
 												</div>
-
-												<div class="form-group">
-													<label for="password">Password</label>
-													<input id="password" type="password" class="form-control" name="password" required>
-													<div class="invalid-feedback">
-														Password is required
-													</div>
-												</div>
+												<div class="form-floating">
+													<input type="password" class="form-control" id="floatingPassword" name="password"
+													  placeholder="Password">
+													<label for="floatingPassword">Password</label>
+												  </div>
 
 												<div class="form-group">
 													<div class="custom-checkbox custom-control">

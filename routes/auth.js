@@ -1,16 +1,17 @@
-const bodyparser = require('body-parser');
+
 const {Router} = require("express");
 
-const {validateInput,validateLoginInput}= require('../middleware/inputValidator');
+const {validateInput,validateLoginInput,ValidateDeveloperRegister}= require('../middleware/inputValidator');
 const {signup_Get,signup_Post,login_Get,login_Post,logout} = require('../controllers/auth');
+const {Login_Dev} = require('../controllers/dev_auth');
 const {forgot_password,validateAndSendLink,setNewPassword} = require('../controllers/forgot-password');
-const {registerDeveloper,handleSuccess} = require('../controllers/dev_auth.js')
-const urlencodedParser = bodyparser.urlencoded({extended: false})
+const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
+
 
 
 const router = Router();
 router.get('/signup', signup_Get)
-router.post('/signup', urlencodedParser,validateInput,signup_Post)
+router.post('/signup',validateInput,signup_Post)
 router.get('/login', login_Get)
 router.post('/login',validateLoginInput,login_Post)//
 router.get('/logout', logout)
@@ -22,13 +23,15 @@ router.get('/reset-password/:id/:token',validateAndSendLink)
 router.post('/reset-password',setNewPassword)
 
 
-router.get('/developer-register', (req, res)=>{res.render("login&signup/developer-register")})
-router.post('/pay', registerDeveloper);
+router.get('/developer-register',(req, res)=>{res.render("login&signup/developer-register")})
+router.post('/pay',ValidateDeveloperRegister,registerDeveloper);
 router.get('/success', handleSuccess);
 router.get('/cancel', (req, res) => res.send('Cancelled'));
 
 
 router.get('/developer-login', (req, res)=>{res.render("login&signup/developer-login")})
+router.post('/developer-login', Login_Dev)
+router.post('/dev-logout', dev_logout)
 router.get('/developer-forgot', (req, res)=>{res.render("passwords/developer-forgot")})
 router.get('/developer-reset', (req, res)=>{res.render("passwords/developer-reset")})
 
