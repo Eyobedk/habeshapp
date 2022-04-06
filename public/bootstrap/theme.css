@@ -70,9 +70,9 @@ a:active {
 
 /* Layout Base - Page Header */
 .page-header {
-	background: #34495e;
+	background: rgba(255,206,25,1);
 	border-bottom: none;
-	border-left: 1px solid #3a3a3a;
+	border-left: 1px solid  rgba(255,206,25,1);
 	box-shadow: 1px 3px 0 1px #cccccc;
 	height: 50px;
 	margin: -40px -40px 40px -40px;
@@ -2454,7 +2454,7 @@ ul.nav-main li .nav-children .nav-children .nav-children li a {
 
 .page-header h2 {
 	color: #FFF;
-	border-bottom: 4px solid #cccccc;
+	border-bottom: 4px solid rgba(255,206,25,1);
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;

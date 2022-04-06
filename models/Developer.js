@@ -40,7 +40,7 @@ class Developer {
   }
 
   static async findByID(id) {
-    const sql = `SELECT * FROM user WHERE dev_id='${id}';`;
+    const sql = `SELECT * FROM developer WHERE dev_id='${id}';`;
     const [result, _] = await db.execute(sql);
     return result[0];
   }

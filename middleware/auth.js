@@ -22,4 +22,22 @@ const requireAuth =(req, res, next) => {
     }
 }
 
-module.exports ={ requireAuth};
+const requireAuthforDev =(req, res, next) => {
+    const token = req.cookies.devToken;
+    if(token){
+         jwt.verify(token, process.env.DEVELOPER_ACCESS_TOKEN_SECRET_KEY,(err,decodedToken)=>{
+                if (err) {
+                    console.log("dev token error: "+err.message);
+                    res.redirect('/developer-Login')
+                } else {
+                console.log("The new DecodedToken:" + JSON.stringify(decodedToken));
+                
+                next();
+            }
+        })
+            
+    }else {
+        res.redirect('/developer-Login')
+    }
+}
+module.exports ={ requireAuth, requireAuthforDev};

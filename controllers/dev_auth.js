@@ -1,7 +1,7 @@
 const paypal = require('paypal-rest-sdk');
 const Developer = require('../models/Developer');
 const {
-  createToken
+  createToken,createTokenforDev
 } = require('../utils/TokenHandler');
 
 require('dotenv').config();
@@ -118,14 +118,15 @@ module.exports.Login_Dev = async (req, res, next) => {
     });
     return
   }
-  console.log("here id" + JSON.stringify(devID));
-  const token = createToken(JSON.stringify(devID));
+  res.locals.email = {email:email};
+  console.log("what"+JSON.stringify( res.locals.email))
+  const token = createTokenforDev(JSON.stringify(devID));
   "use strict";
   console.log("dev token" + token);
   res.cookie('devToken', token, {
     httpOnly: true,
-    maxAge: 40000
-  }).send("<h1> DEVELOPER PANNEL </h1>");
+    maxAge: 600000 
+  }).render('pannel',{email:res.locals.email});
 }
 
 exports.dev_logout = (req, res) => {

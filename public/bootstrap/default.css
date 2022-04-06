@@ -314,7 +314,7 @@ p.drop-caps.colored.secundary:first-child:first-letter {
 }
 /* Page Header */
 .page-header h2 {
-	border-bottom-color: #0088cc;
+	border-bottom-color: rgb(206, 161, 0);
 }
 
 .page-header .sidebar-right-toggle:hover {
