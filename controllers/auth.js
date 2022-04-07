@@ -26,10 +26,10 @@ module.exports.signup_Post = async (req, res) => {
         res.cookie('jwt', token, {
                 httpOnly: true,
                 maxAge: 40000
-        });
-    });
-    res.send("<h1> HOME PAGE </h1>")
-}
+        }).redirect(302, '/smoothies')
+    });}
+    // res.send("<h1> HOME PAGE </h1>")
+    
 
 
 module.exports.login_Get = (req, res) => {

@@ -16,7 +16,7 @@ var theDomain;
 var theEmail;
 var thePass;
 
-exports.registerDeveloper = (req, res) => {
+exports.registerDeveloper = async (req, res) => {
   let {
     name,
     phone,
@@ -31,7 +31,9 @@ exports.registerDeveloper = (req, res) => {
   theEmail = email;
   thePass = password;
 
-  
+  let pass = "Email already exists";
+  const checkExists = await Developer.findEmail(email);
+  if(!(JSON.stringify(checkExists[0]) === undefined)) { res.render('login&signup/developer-register',{pass});return}
 
   const create_payment_json = {
     "intent": "sale",

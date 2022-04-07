@@ -20,6 +20,16 @@
 					<div class="brand">
 						<img src="images/Logo.png" alt="bootstrap 4 login page">
 					</div>
+					<% if(typeof pass === 'string') { %>
+						<div class="alert alert-warning d-flex align-items-center" role="alert">
+						  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+							<use xlink:href="#exclamation-triangle-fill" />
+						  </svg>
+						  <div>
+							<%= pass %>
+						  </div>
+						</div>
+						  <% } %>
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Register</h4>
