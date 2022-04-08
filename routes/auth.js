@@ -10,6 +10,8 @@ const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev
 
 
 const router = Router();
+
+//User
 router.get('/signup', signup_Get)
 router.post('/signup',validateInput,signup_Post)
 router.get('/login', login_Get)
@@ -22,9 +24,9 @@ router.post('/forgot-password',forgot_password)
 router.get('/reset-password/:id/:token',validateAndSendLink)
 router.post('/reset-password',setNewPassword)
 
-
+//Developer
 router.get('/developer-register',(req, res)=>{res.render("login&signup/developer-register")})
-router.post('/pay',ValidateDeveloperRegister,registerDeveloper);
+router.post('/pay',registerDeveloper);
 router.get('/success', handleSuccess);
 router.get('/cancel', (req, res) => res.send('Cancelled'));
 

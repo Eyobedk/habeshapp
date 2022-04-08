@@ -1,8 +1,6 @@
 const paypal = require('paypal-rest-sdk');
 const Developer = require('../models/Developer');
-const {
-  createToken,createTokenforDev
-} = require('../utils/TokenHandler');
+const {createTokenforDev} = require('../utils/TokenHandler');
 
 require('dotenv').config();
 paypal.configure({
@@ -98,8 +96,18 @@ exports.handleSuccess = (req, res) => {
       console.log(JSON.stringify(payment));
 
       const dev = new Developer(theName, thePhone, theDomain, theEmail, thePass, payerId);
-      dev.save().then(() => {
-        res.redirect(302, '/developer-Login')
+      dev.save().then(async () => {
+
+        const getID = await Developer.findEmail(theEmail);
+        console.log("THE Developer ID"+getID[0]["dev_id"]);
+        const token = createTokenforDev(JSON.stringify(getID[0]["dev_id"]));
+        console.log("here dev "+ token)
+        res.cookie('devToken', token, {
+                httpOnly: true,
+                maxAge: 600000
+        }).redirect(302, '/pannel')
+
+        // res.redirect(302, '/developer-Login')
       })
     }
   });
@@ -112,7 +120,7 @@ module.exports.Login_Dev = async (req, res, next) => {
   } = req.body;
 
 
-  const devID = await Developer.login(email, password);
+  const devID = await Developer.login(email, password);//returns developer id
   if (!devID) {
     let outErrors = 'enter the correct password and email';
     res.render("login&signup/developer-Login", {
@@ -120,15 +128,15 @@ module.exports.Login_Dev = async (req, res, next) => {
     });
     return
   }
-  res.locals.email = {email:email};
-  console.log("what"+JSON.stringify( res.locals.email))
+ // res.locals.email = {email:email};
+//  console.log("what"+JSON.stringify( res.locals.email))
   const token = createTokenforDev(JSON.stringify(devID));
   "use strict";
   console.log("dev token" + token);
   res.cookie('devToken', token, {
     httpOnly: true,
     maxAge: 600000 
-  }).render('pannel',{email:res.locals.email});
+  }).redirect(302, '/pannel');
 }
 
 exports.dev_logout = (req, res) => {
