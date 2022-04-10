@@ -16,7 +16,7 @@ const urlencodedParser = bodyparser.urlencoded({extended: false})
 
 app = express();
 app.set('view engine', 'ejs')
-
+app.set("views", "./views")
 
 //here initiate the database
 
@@ -40,6 +40,8 @@ app.use(G_OAuth)
 app.get('/smoothies', requireAuth, (req, res) => {
         res.render('smoothies', { user: res.locals.user }) })
 app.get('/',(req, res) => { res.send("<h1> HOME PAGE </h1>")})
-app.get('/pannel',(req, res) => { res.render("pannel",{email:res.locals.email})});
+app.get('/pannel',(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
+app.get('/publish-page',(req, res) => { res.render("developer/publish")});
+app.get('/status',(req, res) => { res.render("developer/status")});
 //,{email:res.locals.dev}
 app.listen(3000,()=>console.log("at 3000"));

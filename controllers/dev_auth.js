@@ -135,7 +135,7 @@ module.exports.Login_Dev = async (req, res, next) => {
   console.log("dev token" + token);
   res.cookie('devToken', token, {
     httpOnly: true,
-    maxAge: 600000 
+    maxAge: 6000000 
   }).redirect(302, '/pannel');
 }
 

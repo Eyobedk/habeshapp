@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Publish App</title>
+    <meta name="keywords" content="HTML5 Admin Template" />
+    <meta name="description" content="JSOFT Admin - Responsive HTML5 Template">
+    <meta name="author" content="JSOFT.net">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light"
+        rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+    <!-- My css -->
+    <link rel="stylesheet" href="css/pannel.css">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="bootstrap/theme.css" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="bootstrap/default.css" />
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/my-login.css">
+</head>
+
+
+
+
+<body>
+
+
+    <section class="body" >
+
+        <!-- start: header -->
+        <header class="header">
+            <div class="logo-container">
+                <a class="logo" style="text-decoration: none;">
+                    <img src="images/Logo.png" height="35" alt="JSOFT Admin" />
+                    <strong style="margin-left:20px;padding-top:100px !important;font-size: medium;">HABESHAPP</strong>
+
+                </a>
+                <div class="header-right">
+
+                    <div id="userbox" class="userbox">
+                        <a href="#" data-toggle="dropdown">
+                            <%if(dev) {%>
+                            <% console.log("The ejs"+JSON.stringify(dev))%>
+                            <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@JSOFT.com">
+                                <span class="name"><%= dev.email %></span>
+                                <span class="role">Developer</span>
+                            </div>
+                            <% } else { %><div style="display: none;"></div><% } %>
+
+                            <i class="fa custom-caret"></i>
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <ul class="list-unstyled">
+                                <li class="divider"></li>
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- start: search & user box -->
+
+            <!-- end: search & user box -->
+        </header>
+        <!-- end: header -->
+
+        <div class="inner-wrapper">
+            <!-- start: sidebar -->
+            <!--  -->
+            <!-- end: sidebar -->
+
+            <section role="main" class="content-body">
+                <header class="page-header">
+                    <h2>Dashboard</h2>
+
+                 </header>
+                    <form action="/register" class="login g-3" style="margin-left: 60px;margin-right: 60px;font-size: 17px !important;margin-top: 80px;"
+                        method="post">
+                        <section class="row"
+                            style="color: rgb(39, 39, 39);font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label">App Name</label>
+                                <input type="name" style="font-size: medium;" class="form-control" id="inputEmail4" name="name">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="inputState" class="form-label">Catagory</label>
+                                <select id="inputState" name="choosen" class="form-select" style="padding: 0rem 2rem 0rem 0.75rem;;height: 2.5rem;font-size: 15px;">
+                                    <option selected>Choose...</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Bussiness">Bussiness</option>
+                                    <option value="Game">Game</option>
+                                    <option value="Sports">Sports</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label" style="margin-top: 19px;">Email</label>
+                                <input type="email" style="font-size: medium;" name="email" class="form-control" id="inputPassword4">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputAddress" class="form-label" style="margin-top: 19px;">Password</label>
+                                <input type="password" style="font-size: medium;"  name="password" class="form-control" id="inputAddress">
+                            </div>
+
+                            <div class=" col-md-6 mb-3">
+                                <label for="formFileSm" class="form-label" style="margin-top: 19px; font-size: 15px !important;">Upload the Apk</label>
+                                <input name="apk"class="form-control" style="width: 100% !important;font-size: medium;" id="formFileSm" type="file">
+                              </div>
+
+                              <div class=" col-md-6 mb-3">
+                                <label for="formFileSm" class="form-label" style="margin-top: 19px; font-size: medium;">Upload image for background</label>
+                                <input name="backImage"class="form-control" style="width: 100% !important;font-size: medium;" id="formFileSm" type="file">
+                              </div>
+
+                            <div class="col-md-6 mb-3" style="margin-top: 19px;">
+                                <label for="formFileMultiple" class="form-label">Upload 3 screenshots of the App</label>
+                                <input class="form-control" name="screenshots" style="padding-left: 0px;font-size: medium;" type="file"
+                                    id="formFileMultiple" multiple>
+                            </div>
+
+                            <div class="col-md-6 form-floating" style="margin-top: 19px;">
+                                <!-- <label for="floatingTextarea2">Description About the App</label> -->
+                                <textarea class="" style="height: 100%;width: 100%;color: black;" name="desc" placeholder="Description About the App"
+                                    id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+
+                        </section>
+                        <center>
+                            <button type="submit" class="btn btn-primary btn-block"
+                                style="color: white; align-items: center;font-weight: bold; margin-top: 60px !important; width: 40% !important; letter-spacing: 0.1rem;font-size: 17px; background-color: rgb(3, 224, 3);border-color: rgb(3, 224, 3) !important;">
+                                Publish
+                            </button>
+        </div>
+        </center>
+        </form>
+
+    </section>
+    </div>
+
+    </section>
+
+    <!-- Vendor -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.browser.mobile.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/theme.js"></script>
+
+    <script src="js/theme.init.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
