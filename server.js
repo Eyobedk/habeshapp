@@ -44,5 +44,8 @@ app.get('/pannel',(req, res) => { res.render("developer/pannel",{email:res.local
 app.get('/publish-page',(req, res) => { res.render("developer/publish")});
 app.get('/status',(req, res) => { res.render("developer/status")});
 app.get('/apps',(req, res) => { res.render("developer/apps")});
+app.get('/update',(req, res) => { res.render("developer/update")});
+app.get('/appsUpdate',(req, res) => { res.render("developer/appls/appsUpdate")});
+app.get('/deleteApps',(req, res) => { res.render("developer/appls/deleteApps")});
 //,{email:res.locals.dev}
 app.listen(3000,()=>console.log("at 3000"));

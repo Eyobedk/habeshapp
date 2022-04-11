@@ -24,13 +24,18 @@
 	<link rel="stylesheet" href="bootstrap/bootstrap.css" />
 	<!-- My css -->
 	<link rel="stylesheet" href="css/pannel.css">
+	<link rel="stylesheet" href="css/app.css">
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="bootstrap/theme.css" />
 
+
+
 	<!-- Skin CSS -->
 	<link rel="stylesheet" href="bootstrap/default.css" />
-
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 
 <body>
@@ -87,117 +92,111 @@
 					<h2>Dashboard</h2>
 
 				</header>
-				<div style="margin-top: 40px;padding-left: 40px;padding-right: 40px;">
-					<div class="row row-cols-1 row-cols-md-2 g-4">
-						<div class="col ">
-							<div class="card h-100">
-								<a href="publish-page" style="text-decoration: none;color: rgb(54, 54, 54);">
-									<center>
-										<img src="images/publish.png"
-											style="height: 90px;width: 90px; align-items: center !important;"
-											class="card-img-top" alt="...">
+				
+				
 
-										<div class="card-body">
-											<h5 class="card-title" style="font-weight: bold;">Publish App</h5>
-											<p class="card-text"
-												style="padding-left: 80px !important;padding-right: 80px !important;">
-												This is where you can publish your built android app on the platform.
-												This card has supporting text below as a natural lead-in to additional
-												content. </p>
-										</div>
-										<div class="card-footer">
-											<small class="text-muted">Last updated 3 mins ago</small>
-										</div>
-									</center>
-								</a>
-							</div>
-						</div>
-						<div class="col">
-							<div class="card h-100">
-								<a href="apps" style="text-decoration: none;color: rgb(54, 54, 54);">
-									<center>
-										<img src="images/status.png"
-											style="height: 90px;width: 90px; align-items: center !important;"
-											class="card-img-top" alt="...">
 
-										<div class="card-body">
-											<h5 class="card-title" ><b>View Apps Status</b></h5>
-											<p class="card-text"
-												style="padding-left: 80px !important;padding-right: 80px !important;">
-												This card has supporting text below as a natural lead-in to additional
-												content.
-												This card has supporting text below as a natural lead-in to additional
-												content.</p>
-										</div>
-										<div class="card-footer">
-											<small class="text-muted">Last updated 3 mins ago</small>
-										</div>
-									</center>
-								</a>
-							</div>
-						</div>
-
-					</div>
+				<center>
+				<div class="container-fluid">
+					<div class="row">
+					<div class="col-md-3 col-sm-4">
+					<div class="wrimagecard wrimagecard-topimage">
+						  <a href="update" style="text-decoration: none;">
+						  <div class="wrimagecard-topimage_header" style="background-color:rgba(187, 120, 36, 0.1) ">
+							<center><i class="fa fa-area-chart" style="color:#BB7824"></i></center>
+						  </div>
+						  <div class="wrimagecard-topimage_title">
+							<h4>Ride
+							<!-- <div class="pull-right badge">18</div></h4> -->
+						  </div>
+						</a>
+					  </div>
+					  </div>
+					<div class="col-md-3 col-sm-4">
+					  <div class="wrimagecard wrimagecard-topimage">
+						  <a href="update" style="text-decoration: none;">
+						  <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
+							<center><i class = "fa fa-cubes" style="color:#16A085"></i></center>
+						  </div>
+						  <div class="wrimagecard-topimage_title">
+							<h4>Ride Familiy
+							<div class="pull-right badge" id="WrControls"></div></h4>
+						  </div>
+						</a>
+					  </div>
 				</div>
-
-				<div style="margin-top: 100px;padding-left: 40px;padding-right: 40px;">
-					<div class="row row-cols-1 row-cols-md-2 g-4">
-						<div class="col">
-							<div class="card h-100">
-								<a href="appsUpdate" style="text-decoration: none;color: rgb(54, 54, 54);">
-									<center>
-										<img src="images/update.png"
-											style="height: 90px;width: 90px; align-items: center !important;"
-											class="card-img-top" alt="...">
-
-										<div class="card-body">
-											<h5 class="card-title"><b>Update App</b></h5>
-											<p class="card-text"
-												style="padding-left: 80px !important;padding-right: 80px !important;">
-												This card has supporting text below as a natural lead-in to additional
-												content.
-												This card has supporting text below as a natural lead-in to additional
-												content.
-											</p>
-										</div>
-										<div class="card-footer">
-											<small class="text-muted">Last updated 3 mins ago</small>
-										</div>
-									</center>
-								</a>
-							</div>
-						</div>
-
-						<div class="col">
-							<div class="card h-100">
-								<a href="deleteApps" style="text-decoration: none;color: rgb(54, 54, 54);">
-									<center>
-										<img src="images/delete.png"
-											style="height: 90px;width: 90px; align-items: center !important;"
-											class="card-img-top" alt="...">
-
-										<div class="card-body">
-											<h5 class="card-title"><b>Delete App</b></h5>
-											<p class="card-text"
-												style="padding-left: 80px !important;padding-right: 80px !important;">
-												This card has supporting text below as a natural lead-in to additional
-												content.
-												This card has supporting text below as a natural lead-in to additional
-												content.
-											</p>
-										</div>
-										<div class="card-footer">
-											<small class="text-muted">Last updated 3 mins ago</small>
-										</div>
-									</center>
-								</a>
-							</div>
-						</div>
+				<div class="col-md-3 col-sm-4">
+					  <div class="wrimagecard wrimagecard-topimage">
+						  <a href="update" style="text-decoration: none;">
+						  <div class="wrimagecard-topimage_header" style="background-color:  rgba(213, 15, 37, 0.1)">
+							<center><i class="fa fa-pencil-square-o" style="color:#d50f25"> </i></center>
+						  </div>
+						  <div class="wrimagecard-topimage_title" >
+							<h4>Ride Trucks
+							<div class="pull-right badge" id="WrForms"></div>
+							</h4>
+						  </div>
+						  
+						</a>
+					  </div>
 					</div>
-
-
+					<!-- <div class="col-md-3 col-sm-4">
+					  <div class="wrimagecard wrimagecard-topimage">
+						  <a href="#">
+						  <div class="wrimagecard-topimage_header" style="background-color:  rgba(51, 105, 232, 0.1)">
+							 <center><i class="fa fa-table" style="color:#3369e8"> </i></center>
+						  </div>
+						  <div class="wrimagecard-topimage_title">
+							<h4>Grid System
+							<div class="pull-right badge" id="WrGridSystem"></div></h4>
+						  </div>
+						  
+						</a>
+					  </div>
+					</div>
+					<div class="col-md-3 col-sm-4">
+					  <div class="wrimagecard wrimagecard-topimage">
+						  <a href="#">
+						  <div class="wrimagecard-topimage_header" style="background-color:  rgba(250, 188, 9, 0.1)">
+							 <center><i class="fa fa-info-circle" style="color:#fabc09"> </i></center>
+						  </div>
+						  <div class="wrimagecard-topimage_title">
+							<h4>Information
+							<div class="pull-right badge" id="WrInformation"></div></h4>
+						  </div>
+						 
+						</a>
+					  </div>
+					</div>
+					<div class="col-md-3 col-sm-4">
+					  <div class="wrimagecard wrimagecard-topimage">
+						  <a href="#">
+							<div class="wrimagecard-topimage_header" style="background-color: rgba(121, 90, 71, 0.1)">
+						   <center><i class="fa fa-bars" style="color:#795a47"> </i></center> 
+						  </div>
+						  <div class="wrimagecard-topimage_title">
+							<h4>Navigation
+							<div class="pull-right badge" id="WrNavigation"></div></h4>
+						  </div>
+						  
+						</a>
+					  </div>
+					</div>
+					<div class="col-md-3 col-sm-4">
+					  <div class="wrimagecard wrimagecard-topimage">
+						  <a href="#">
+						 <div class="wrimagecard-topimage_header" style="background-color: rgba(130, 93, 9, 0.1)">
+							<center><i class="fa fa-magic" style="color:#825d09"></i></center>
+						  </div>
+						  <div class="wrimagecard-topimage_title">
+							<h4>Themes & Icons
+							<div class="pull-right badge" id="WrThemesIcons"></div></h4>
+						  </div>
+						</a>
+					  </div>
+					</div> -->
 				</div>
-
+			</center>
 
 				<!-- ststus: page -->
 				<!-- <div class="row">
