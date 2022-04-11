@@ -43,5 +43,6 @@ app.get('/',(req, res) => { res.send("<h1> HOME PAGE </h1>")})
 app.get('/pannel',(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
 app.get('/publish-page',(req, res) => { res.render("developer/publish")});
 app.get('/status',(req, res) => { res.render("developer/status")});
+app.get('/apps',(req, res) => { res.render("developer/apps")});
 //,{email:res.locals.dev}
 app.listen(3000,()=>console.log("at 3000"));
