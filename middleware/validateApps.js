@@ -29,7 +29,7 @@ exports.validateApp = (req, res, next) => {
         screenshots
     } = req.body;
      
-    console.log("ico"+icon)
+
     if (!validateEmail(email)) {
         let theError = 'please a valid email address';
         res.render('developer/publish', {
