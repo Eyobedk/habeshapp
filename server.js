@@ -32,7 +32,7 @@ app.use(passport.initialize())
 app.use(passport.session());
 app.use(urlencodedParser);
 
-app.use(authRoutes)
+app.use(authRoutes)// + user
 app.use(G_OAuth)
 app.use(developeRoutes)
 

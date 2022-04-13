@@ -33,7 +33,7 @@ exports.checkUser = async (req, res, next) => {
         jwt.verify(req.cookies.devToken, process.env.DEVELOPER_ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
             if (err) {
                 res.locals.dev = null;
-                next();
+                res.redirect(302,'developer-Login');
             }
             else {
                 const c = JSON.stringify(decodedToken["id"]);
@@ -53,7 +53,7 @@ exports.checkUser = async (req, res, next) => {
      }
     else {
         res.locals.user = null;
-        next();
+        res.redirect(302,'developer-Login');
     }
     }catch(e){console.log(e)}
 }
