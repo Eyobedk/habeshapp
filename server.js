@@ -6,7 +6,7 @@ const cookieSession = require('cookie-session');
 require('dotenv').config();
 const bodyparser = require('body-parser');
 
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/user');
 const developeRoutes = require('./routes/developer');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
