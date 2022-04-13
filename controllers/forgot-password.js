@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {finder, findById} = require('../db/find')
+const User = require('../models/User')
 const {Mailer} = require('../utils/Mail');
 require('dotenv').config();
 
@@ -8,7 +8,7 @@ module.exports.forgot_password = async (req, res, next) => {
         email
     } = req.body;
     console.log(email);
-    const user = await finder(email);
+    const user = await User.findEmail(email);
         
     if (user) {
         const secret = process.env.ACCESS_TOKEN_SECRET_KEY + user.password;
