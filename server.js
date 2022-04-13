@@ -30,11 +30,12 @@ app.use(cookieSession({name:'session',
     maxAge:24 * 60 * 60 * 1000}));
 app.use(passport.initialize())
 app.use(passport.session());
-
 app.use(urlencodedParser);
+
 app.use(authRoutes)
-app.use(developeRoutes)
 app.use(G_OAuth)
+app.use(developeRoutes)
+
 
 
 app.get('/smoothies', requireAuth, (req, res) => {
