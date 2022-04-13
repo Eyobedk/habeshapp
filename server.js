@@ -3,16 +3,14 @@ const passport = require('passport');
 
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
-const {Strategy} = require('passport-google-oauth20');
 require('dotenv').config();
 const bodyparser = require('body-parser');
 
 const authRoutes = require('./routes/auth');
+const developeRoutes = require('./routes/developer');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser} = require('./middleware/checkUser');
-const {validateApp} = require('./middleware/validateApps');
-const {registerDeveloper,handleSuccess} = require('./controllers/dev_auth.js')
 const urlencodedParser = bodyparser.urlencoded({extended: false})
 
 app = express();
@@ -35,6 +33,7 @@ app.use(passport.session());
 
 app.use(urlencodedParser);
 app.use(authRoutes)
+app.use(developeRoutes)
 app.use(G_OAuth)
 
 
@@ -43,16 +42,5 @@ app.get('/smoothies', requireAuth, (req, res) => {
 
 
 app.get('/',(req, res) => { res.send("<h1> HOME PAGE </h1>")})
-app.get('/pannel',(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
-app.get('/publish',(req, res) => { res.render("developer/publish")});
-app.post('/publish',validateApp,(req, res)=>{res.send("<h1> Apps page </h1>")});
-app.get('/status',(req, res) => { res.render("developer/status")});
-
-
-
-app.get('/apps',(req, res) => { res.render("developer/apps")});
-app.get('/update',(req, res) => { res.render("developer/update")});
-app.get('/appsUpdate',(req, res) => { res.render("developer/appls/appsUpdate")});
-app.get('/deleteApps',(req, res) => { res.render("developer/appls/deleteApps")});
 
 app.listen(3000,()=>console.log("at 3000"));
