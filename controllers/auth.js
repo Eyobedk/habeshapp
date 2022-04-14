@@ -14,7 +14,6 @@ module.exports.signup_Post = async (req, res) => {
     const checkExists = await User.findEmail(email);
     if(!(JSON.stringify(checkExists[0]) === undefined)) { res.render('login&signup/signup',{pass});return}
 
-    //const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(password1, 10);
     const user = new User(name, hash,email);
 
@@ -29,7 +28,6 @@ module.exports.signup_Post = async (req, res) => {
         }).redirect(302, '/Login')
     });
 }
-    // res.send("<h1> HOME PAGE </h1>")
     
 
 
@@ -39,12 +37,25 @@ module.exports.login_Get = (req, res) => {
 
 module.exports.login_Post = async (req, res, next) => {
     const {email,password} = req.body;
+    const user = await User.findEmail(email);
+    console.log("the password"+user[0].password)
+    if(!user)
+    {
+        let Ierrors = 'enter the correct password and email';
+        res.render("login&signup/Login", {Ierrors});
+        return
+    }
+    await bcrypt.compare(password, user[0].password).then(function(result) {
+        // result == true
+        console.log("the result"+result)
+        if(!result)
+        {
+            const Ierror = "Enter the correct email and password";
+            return res.render('login&signup/Login',{Ierror});
+        }
+    });
 
-
-    const userID = await User.login(email, password);
-    
-    console.log("here id"+JSON.stringify(userID));
-    const token = createToken(JSON.stringify(userID));
+    const token = createToken(JSON.stringify(user[0].user_id));
     "use strict";
     console.log("token"+ token);
     res.cookie('jwt', token, {httpOnly: true,maxAge: 40000});

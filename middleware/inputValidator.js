@@ -50,26 +50,6 @@ exports.validateInput = (req, res, next)=>{
 }
 
 exports.validateLoginInput = async (req, res, next)=>{
-    const {email,password} = req.body;
-    const user = await User.findEmail(email);
-    console.log("the password"+user[0].password)
-    if(!user)
-    {
-        let Ierrors = 'enter the correct password and email';
-        res.render("login&signup/Login", {Ierrors});
-        return
-    }
-    await bcrypt.compare(password, user[0].password).then(function(result) {
-        // result == true
-        console.log("the result"+result)
-        if(!result)
-        {
-            const Ierror = "Enter the correct email and password";
-            return res.render('login&signup/Login',{Ierror});
-        }
-    });
-        
-   
     [check('email',"Enter a proper info").isEmail().normalizeEmail()];
     const listOferrors = validationResult(req);
     let errors = JSON.stringify(listOferrors["errors"]);
@@ -83,11 +63,8 @@ exports.validateLoginInput = async (req, res, next)=>{
 }
 
 exports.ValidateDeveloperRegister = (req, res, next)=>{
-    [
-    check('password',"Enter a password upto 8 character").isLength({ min: 8 }) ];
-
     const errors = validationResult(req);
-    console.log("the errors:" + JSON.stringify(errors))
+    [check('password',"Enter a password upto 8 character").isLength({ min: 8 }) ];
     if(!errors.isEmpty()) {
         const alert = errors.array();
         return res.render('login&signup/developer-register',{alert});

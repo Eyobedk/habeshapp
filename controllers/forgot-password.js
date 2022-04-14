@@ -9,9 +9,16 @@ module.exports.forgot_password = async (req, res, next) => {
     } = req.body;
     console.log(email);
     const user = await User.findEmail(email);
+    console.log("me"+JSON.stringify(user[0]))
+    if(!(user[0].password))
+    {
+        let message = "You have to be registered using the platform signup feature inorder to recive forgot password email"
+        res.render('passwords/forgot-password',{notfound:message});
+        return
+    }
     console.log(user)
     console.log("the domain id "+ user[0].user_id)
-    if(!(user[0].password))
+    if(!(user[0]))
     {
         let message = "You have to be registered using the platform signup feature inorder to recive forgot password email"
         res.render('passwords/forgot-password',{notfound:message});
@@ -50,10 +57,11 @@ module.exports.validateAndSendLink = async (req, res, next) => {
     jwt.verify(token, secret, (err, verified) => {
         if (err) {
             console.log(err)
-            res.render('incorrect token')
+            res.send('incorrect token')
         }
         res.render('passwords/reset-password');
-    })
+    });
+    next();
 }
 
 module.exports.setNewPassword =(req,res)=>{
