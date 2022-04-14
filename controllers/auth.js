@@ -14,9 +14,9 @@ module.exports.signup_Post = async (req, res) => {
     const checkExists = await User.findEmail(email);
     if(!(JSON.stringify(checkExists[0]) === undefined)) { res.render('login&signup/signup',{pass});return}
 
-    // const salt = bcrypt.genSaltSync(saltRounds);
-    // const hash = bcrypt.hashSync(password1, salt);
-    const user = new User(name, password1,email);
+    //const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(password1, 10);
+    const user = new User(name, hash,email);
 
     user.save().then(async ()=>{
         const getID = await User.findEmail(email);
@@ -26,8 +26,9 @@ module.exports.signup_Post = async (req, res) => {
         res.cookie('jwt', token, {
                 httpOnly: true,
                 maxAge: 40000
-        }).redirect(302, '/smoothies')
-    });}
+        }).redirect(302, '/Login')
+    });
+}
     // res.send("<h1> HOME PAGE </h1>")
     
 
@@ -41,11 +42,7 @@ module.exports.login_Post = async (req, res, next) => {
 
 
     const userID = await User.login(email, password);
-    if (!userID) {
-        let Ierrors = 'enter the correct password and email';
-        res.render("login&signup/Login", {Ierrors});
-        return
-    }
+    
     console.log("here id"+JSON.stringify(userID));
     const token = createToken(JSON.stringify(userID));
     "use strict";

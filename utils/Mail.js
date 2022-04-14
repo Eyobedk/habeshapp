@@ -10,10 +10,10 @@ let transporter = nodeMailer.createTransport({
           pass: process.env.EMAIL_PASS, 
       },
   });
-exports.Mailer = async(resetpassLink)=>{
+exports.Mailer = async(email, resetpassLink)=>{
   let mailOptions = {
     from: process.env.EMAIL,
-    to:  process.env.EMAIL2,
+    to:  email,
     subject: 'Sending Email using Node.js',
     text: resetpassLink
   };
@@ -21,5 +21,5 @@ exports.Mailer = async(resetpassLink)=>{
   await transporter.sendMail(mailOptions)
   .then((info)=>{
     console.log(info)
-  }).catch(err, console.log("The send email error:" + err))
+  }).catch((err)=>{ console.log("The send email error:" + err)})
 }

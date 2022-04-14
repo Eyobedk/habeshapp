@@ -12,7 +12,7 @@ function validateScreenshots(images) {
         }
     }
 }
-const validateEmail = (email) => {
+exports.validateEmail = (email) => {
     return String(email)
         .toLowerCase()
         .match(

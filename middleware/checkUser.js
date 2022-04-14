@@ -20,7 +20,7 @@ exports.checkUser = async (req, res, next) => {
                 const c = JSON.stringify(decodedToken["id"]);
                 let id = c.replace(/\"/g,'')
                 let onlyId = id.replace(/\\/g, '')
-                
+                console.log(c+"the c")
                 const user = await User.findByID(onlyId)
                 console.log("user"+user)
                 console.log("dt2"+JSON.stringify(user))
@@ -33,7 +33,8 @@ exports.checkUser = async (req, res, next) => {
         jwt.verify(req.cookies.devToken, process.env.DEVELOPER_ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
             if (err) {
                 res.locals.dev = null;
-                res.redirect(302,'developer-Login');
+               // res.redirect(302,'/developer-Login');
+               next();
             }
             else {
                 const c = JSON.stringify(decodedToken["id"]);
@@ -53,7 +54,8 @@ exports.checkUser = async (req, res, next) => {
      }
     else {
         res.locals.user = null;
-        res.redirect(302,'developer-Login');
+       // res.redirect(302,'/developer-Login');
+       next();
     }
     }catch(e){console.log(e)}
 }

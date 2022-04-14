@@ -9,18 +9,26 @@ module.exports.forgot_password = async (req, res, next) => {
     } = req.body;
     console.log(email);
     const user = await User.findEmail(email);
-        
+    console.log(user)
+    console.log("the domain id "+ user[0].user_id)
+    if(!(user[0].password))
+    {
+        let message = "You have to be registered using the platform signup feature inorder to recive forgot password email"
+        res.render('passwords/forgot-password',{notfound:message});
+        return
+    }
+
     if (user) {
         const secret = process.env.ACCESS_TOKEN_SECRET_KEY + user.password;
-        let id = user._id;
+        let id = user[0].user_id;
         const token = jwt.sign({
             id
         }, secret, {
             expiresIn: '15m'
         });
-        const link = `http://localhost:3000/reset-password/${user._id}/${token}`
+        const link = `http://localhost:3000/reset-password/${id}/${token}`
         //console.log(link)
-        Mailer(link);
+        Mailer(email, link);
         res.send('password reset link sent to email')
     } else {
         res.send("user does not exist")
@@ -34,21 +42,15 @@ module.exports.validateAndSendLink = async (req, res, next) => {
         token
     } = req.params;
 
-    const user = await findById(id)
+    const user = await User.findByID(id);
+    console.log("the user"+user.password)
+    
     const secret = process.env.ACCESS_TOKEN_SECRET_KEY +user.password;
     console.log('id and token'+id, token);
-    //const user = await findbyId(id)
-    // CHECK WETHER THE ID FROM THE URL MATCHES WITH THE DATABASE ID USING SQUEEZLIE
-    //console.log('zi user'+ typeof(user._id) + 'id from url' + typeof((id).toString()))
-
-    // if (id !== user._id) {
-    //     "use strict";
-    //     res.send('incorrect id')
-    // }else{
     jwt.verify(token, secret, (err, verified) => {
         if (err) {
             console.log(err)
-            res.send('incorrect token')
+            res.render('incorrect token')
         }
         res.render('passwords/reset-password');
     })

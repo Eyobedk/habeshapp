@@ -39,15 +39,7 @@ class User {
   }
 
   static async login(email, password) {
-  //   console.log(password)
-  //   const getpassword = `SELECT password FROM user WHERE email= '${email}';`;
-  //   const [passwResult, _] = await db.execute(getpassword);
-  //   let EncryptedPass = JSON.stringify(passwResult[0]["password"]);
-  //   console.log("password result "+ JSON.stringify(passwResult[0]["password"]))
-  // //!
-  //   bcrypt.compare(password, EncryptedPass).then(function(result) {
-  //       console.log("v"+result);
-  //   });
+  
     
     const sql = `SELECT * FROM user WHERE email='${email}' AND password= '${password}';`;
     try {
