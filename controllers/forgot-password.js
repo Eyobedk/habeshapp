@@ -34,11 +34,10 @@ module.exports.forgot_password = async (req, res, next) => {
             expiresIn: '15m'
         });
         const link = `http://localhost:3000/reset-password/${id}/${token}`
-        //console.log(link)
         Mailer(email, link);
         res.render('passwords/forgot-password',{alert:"password reset link sent to email"})
     } else {
-        res.send("user does not exist")
+        res.send("user does not exist");
         next();
     }
 }
@@ -51,6 +50,7 @@ module.exports.validateAndSendLink = async (req, res, next) => {
 
     const user = await User.findByID(id);
     console.log("the user"+user.password)
+    console.log("the url:"+req.url)
     
     const secret = process.env.ACCESS_TOKEN_SECRET_KEY;
     console.log('id and token'+id, token);
