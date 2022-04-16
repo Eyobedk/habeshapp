@@ -14,15 +14,10 @@ class Developer {
 
 
   save() {
-    console.log(this.name);
-    console.log(this.phone);
-    console.log(this.domain);
-    console.log(this.email);
-    console.log(this.password);
-    console.log(this.payment_ID);
+    const hash = bcrypt.hashSync(this.password, 12);
     try {
       let sql = `INSERT INTO developer(dev_name,dev_phone,dev_email,dev_password,dev_domain,dev_ban_status,payement_ID) 
-    VALUES ('${this.name}',${this.phone},'${this.email}','${this.password}','${this.domain}',0,'${this.payment_ID}');`;
+    VALUES ('${this.name}',${this.phone},'${this.email}','${hash}','${this.domain}',0,'${this.payment_ID}');`;
       return new Promise((resolve, reject) => {
         resolve(db.execute(sql));
       })
@@ -46,15 +41,7 @@ class Developer {
   }
 
   static async login(email, password) {
-    //   console.log(password)
-    //   const getpassword = `SELECT password FROM user WHERE email= '${email}';`;
-    //   const [passwResult, _] = await db.execute(getpassword);
-    //   let EncryptedPass = JSON.stringify(passwResult[0]["password"]);
-    //   console.log("password result "+ JSON.stringify(passwResult[0]["password"]))
-    // //!
-    //   bcrypt.compare(password, EncryptedPass).then(function(result) {
-    //       console.log("v"+result);
-    //   });
+
 
     const sql = `SELECT * FROM developer WHERE dev_email='${email}' AND dev_password= '${password}';`;
     try {
@@ -67,22 +54,6 @@ class Developer {
     }
   }
 
-  static async saveFromGoogle(email) {
-    const result = await this.findEmail(email);
-    if (result) { return; };
-
-    const d = new Date();
-    const year = d.getFullYear();
-    const day = d.getDate();
-    const month = d.getMonth() + 1;
-    const date = `${year}-${month}-${day}`;
-
-    let sql = `INSERT INTO user(email,currentdate) 
-    VALUES ('${email}','${date}');`;
-    return new Promise((resolve, reject) => {
-      resolve(db.execute(sql));
-    })
-  }
 }
 
 

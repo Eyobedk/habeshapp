@@ -18,8 +18,18 @@
 					</div>
 					<div class="card fat">
 						<div class="card-body">
+							<% if(typeof Ierror != 'undefined') { %>
+								<div class="alert alert-warning d-flex align-items-center" role="alert">
+								  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+									<use xlink:href="#exclamation-triangle-fill" />
+								  </svg>
+								  <div>
+									<%= Ierror %>
+								  </div>
+								</div>
+								  <% } %>
 							<h4 class="card-title">Forgot Password</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<form method="POST" action="" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="email">E-Mail Address</label>
 									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>

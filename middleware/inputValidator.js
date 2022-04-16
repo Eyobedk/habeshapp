@@ -61,13 +61,3 @@ exports.validateLoginInput = async (req, res, next)=>{
     }
     next();
 }
-
-exports.ValidateDeveloperRegister = (req, res, next)=>{
-    const errors = validationResult(req);
-    [check('password',"Enter a password upto 8 character").isLength({ min: 8 }) ];
-    if(!errors.isEmpty()) {
-        const alert = errors.array();
-        return res.render('login&signup/developer-register',{alert});
-    }
-    next();
-}
