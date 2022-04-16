@@ -68,6 +68,22 @@ class User {
       resolve(db.execute(sql));
     })
   }
+  static async updatePassword(id, password)
+  {
+    const hash = bcrypt.hashSync(password, 10);
+    console.log("the id "+ id +"the password"+password)
+    const sql = `UPDATE habeshapp.user SET password = '${hash}' WHERE user_id = ${id};`;
+    await db.execute(sql).then((result)=>{
+      console.log("password result"+JSON.stringify(result));
+    }).catch((err)=>{
+      console.log("The Error");
+      console.log(err.code);
+      console.log(err.sql);
+      console.log(err.sqlMessage);
+    })
+    
+    
+  }
 }
 
 

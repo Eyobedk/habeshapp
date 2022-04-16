@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User')
 const {Mailer} = require('../utils/Mail');
 require('dotenv').config();
+var userId;
 
 module.exports.forgot_password = async (req, res, next) => {
     const {
@@ -26,13 +27,14 @@ module.exports.forgot_password = async (req, res, next) => {
     }
 
     if (user) {
-        const secret = process.env.ACCESS_TOKEN_SECRET_KEY;
+        const secret = process.env.FORGOT_PASSWORD_SECRET_KEY;
         let id = user[0].user_id;
         const token = jwt.sign({
             id
         }, secret, {
             expiresIn: '15m'
         });
+        userId = id
         const link = `http://localhost:3000/reset-password/${id}/${token}`
         Mailer(email, link);
         res.render('passwords/forgot-password',{alert:"password reset link sent to email"})
@@ -52,27 +54,33 @@ module.exports.validateAndSendLink = async (req, res, next) => {
     console.log("the user"+user.password)
     console.log("the url:"+req.url)
     
-    const secret = process.env.ACCESS_TOKEN_SECRET_KEY;
+    const secret = process.env.FORGOT_PASSWORD_SECRET_KEY;
     console.log('id and token'+id, token);
     jwt.verify(token, secret, (err, verified) => {
         if (err) {
-            console.log(err)
-            res.send('incorrect token')
+            console.log(err);
+            res.render('passwords/forgot-password',{alert:"please send varification link again"})
         }
     });
+    //userId = id;
+    
     res.render('passwords/reset-password');
     next();
 }
 
-module.exports.setNewPassword =(req,res)=>{
+module.exports.setNewPassword =async (req,res)=>{
     const {password1, password2} = req.body;
+    
+    console.log("the url"+req.url)
     var result = password1.localeCompare(password2);
-    console.log(result)
+    console.log(userId)
     if(result == 1 || result == -1)
     {
         const pass ="please Enter the same passwords";
         return res.render('passwords/reset-password',{pass});
     }
-    res.redirect(302, 'Login');
+    await User.updatePassword(userId,password1).then(()=>{
+        res.redirect(302, 'Login');
+    });
 }
 
