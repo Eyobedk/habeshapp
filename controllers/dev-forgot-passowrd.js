@@ -1,8 +1,11 @@
 const {findEmail} = require('../models/Developer')
 const jwt = require('jsonwebtoken')
+const Developer = require('../models/Developer')
 const {Mailer}= require('../utils/Mail')
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 
+var DevID;
 exports.varifydevEmail = async (req,res)=>{
     const {email} = req.body;
     const Dev = await findEmail(email);
@@ -23,6 +26,30 @@ exports.varifydevEmail = async (req,res)=>{
 
 exports.validateResetTokes = (req, res)=>{
     const {id, token}= req.params;
+    DevID = id;
     console.log("the id:"+id)
     console.log("the token:"+token)
+    const secret = process.env.DEVELOPER_FORGOT_PASSWORD_SECRET_KEY;
+    jwt.verify(token,secret,(err,verified)=>{
+        if(err)
+        {
+            console.log(err);
+            res.render('passwords/developer-forgot',{Ierror:"please send varification link again"})
+        }
+    })
+    res.render('passwords/developer-reset');
+}
+
+exports.setDeveloperPassword = async (req, res)=>{
+    const {password} = req.body;
+    console.log(password)
+    const hash = bcrypt.hashSync(password, 12);
+    console.log(hash)
+    if(password.length < 7){
+        res.render('passwords/developer-reset',{Ierror:"please enter password greater than 8"})
+    }
+    
+    await Developer.updatePassword(DevID,hash).then(()=>{
+        res.redirect(302, 'developer-Login');
+    }).catch((err)=>{console.log(err)})
 }

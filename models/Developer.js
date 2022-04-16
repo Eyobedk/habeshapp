@@ -53,7 +53,13 @@ class Developer {
       console.log(err);
     }
   }
-
+  static async updatePassword(id,passowrd)
+  {
+    const sql = `UPDATE habeshapp.developer SET dev_password ='${passowrd}' WHERE dev_id = ${id};`;
+    await db.execute(sql).then((result)=>{
+      console.log("developer result"+JSON.stringify(result))
+    }).catch((err)=>{console.log(err)});
+  }
 }
 
 

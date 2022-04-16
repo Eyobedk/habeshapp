@@ -33,7 +33,7 @@ module.exports.forgot_password = async (req, res, next) => {
             expiresIn: '15m'
         });
         userId = id
-        const link = `http://localhost:3000/reset-password/${id}/${token}`
+        const link = `http://localhost:3000/reset-password/${id}/${token}`;
         Mailer(email, link);
         res.render('passwords/forgot-password',{alert:"password reset link sent to email"})
     } else {
