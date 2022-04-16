@@ -29,9 +29,7 @@ module.exports.forgot_password = async (req, res, next) => {
     if (user) {
         const secret = process.env.FORGOT_PASSWORD_SECRET_KEY;
         let id = user[0].user_id;
-        const token = jwt.sign({
-            id
-        }, secret, {
+        const token = jwt.sign({id}, secret, {
             expiresIn: '15m'
         });
         userId = id

@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 exports.protect =(req, res,next)=>{

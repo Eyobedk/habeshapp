@@ -6,7 +6,7 @@ const {validateApp} = require('../middleware/validateApps');
 const {validateDev} = require('../middleware/validateDeveloper');
 const {protect} = require('../middleware/protectRoute');
 const {Login_Dev} = require('../controllers/dev_auth');
-const {varifydevEmail} = require('../controllers/dev-forgot-passowrd');
+const {varifydevEmail,validateResetTokes} = require('../controllers/dev-forgot-passowrd');
 
 const router = Router();
 
@@ -24,6 +24,7 @@ router.get('/dev-logout', dev_logout)
 
 router.get('/developer-forgot', (req, res)=>{res.render("passwords/developer-forgot")})
 router.post('/developer-forgot',varifydevEmail)
+router.get('/developer-reset/:id/:token',validateResetTokes)
 router.get('/developer-reset', (req, res)=>{res.render("passwords/developer-reset")})
 
 
