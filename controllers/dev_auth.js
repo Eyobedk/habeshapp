@@ -123,6 +123,7 @@ exports.handleSuccess = (req, res) => {
 
 module.exports.Login_Dev = async (req, res, next) => {
   const {email,password} = req.body;
+  console.log(email)
   const dev = await Developer.findEmail(email); //returns developer id
   console.log(dev[0])
   if (!dev) {
@@ -132,6 +133,7 @@ module.exports.Login_Dev = async (req, res, next) => {
     });
     return
   }
+  console.log("wow"+dev[0])
   await bcrypt.compare(password, dev[0].dev_password).then(function (result) {
     // result == true
     console.log("the devloper result" + result)
@@ -145,10 +147,10 @@ module.exports.Login_Dev = async (req, res, next) => {
   });
 
   const token = createTokenforDev(JSON.stringify(dev[0].dev_id));
-  // res.cookie('devToken', token, {
-  //   httpOnly: true,
-  //   maxAge: 6000000
-  // }).redirect(302, '/pannel');
+  res.cookie('devToken', token, {
+    httpOnly: true,
+    maxAge: 6000000
+  }).redirect(302, '/pannel');
 }
 
 exports.dev_logout = (req, res) => {
