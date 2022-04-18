@@ -1,11 +1,14 @@
 
 const {Router} = require("express");
 
+const multer = require('multer');
+const {upload,uploadIcon} = require('../utils/fileUpload');
 const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
 const {validateApp} = require('../middleware/validateApps');
 const {validateDev} = require('../middleware/validateDeveloper');
 const {protect} = require('../middleware/protectRoute');
 const {Login_Dev} = require('../controllers/dev_auth');
+const {publishApp} = require('../controllers/publishApp');
 const {varifydevEmail,validateResetTokes,setDeveloperPassword} = require('../controllers/dev-forgot-passowrd');
 
 const router = Router();
@@ -31,10 +34,16 @@ router.post('/developer-reset', setDeveloperPassword)
 //normal dev routes
 router.get('/pannel',protect,(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
 router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
-router.post('/publish',protect,publishApp);
-router.post('/publish',protect,validateApp,(req, res)=>{res.send("<h1> Apps page </h1>")});
-router.get('/status',protect,(req, res) => { res.render("developer/status")});
 
+const uploadfiles = upload.fields([{name:'apk',maxCount: 1}, {name:'icon',maxCount:1},{name:'backImage',maxCount:1},
+{name:'screenshots',maxCount:3}]);
+router.post('/publish',uploadfiles,
+    (req,res)=>{//validateApp
+        console.log(req.files)
+    res.status(200).send("done")
+});
+
+router.get('/status',protect,(req, res) => { res.render("developer/status")});
 router.get('/apps',protect,(req, res) => { res.render("developer/apps")});
 router.get('/update',protect,(req, res) => { res.render("developer/update")});
 router.get('/appsUpdate',protect,(req, res) => { res.render("developer/appls/appsUpdate")});

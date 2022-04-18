@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 require('dotenv').config();
 const bodyparser = require('body-parser');
+const path = require('path')
 
 const authRoutes = require('./routes/user');
 const developeRoutes = require('./routes/developer');
@@ -22,6 +23,7 @@ app.set("views", "./views")
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
+app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 
 app.use(cookieParser());
 app.use('*', checkUser);
