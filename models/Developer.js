@@ -27,7 +27,7 @@ class Developer {
   static async findEmail(email) {
     const sql = `SELECT * FROM developer WHERE dev_email='${email}';`;
     const [result, _] = await db.execute(sql);
-    console.log("me result" + result)
+    console.log("me result" + result[0])
     if ((result) === undefined) return undefined;
     else {
       return result;
