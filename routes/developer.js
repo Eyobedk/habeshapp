@@ -2,8 +2,8 @@
 const {Router} = require("express");
 
 const multer = require('multer');
-// const upload = require('../utils/fileUpload');
-const upload = multer({ dest: 'uploads/' })
+const upload = require('../utils/fileUpload');
+// const upload = multer({ dest: 'uploaded/' })
 const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
 const {validateApp} = require('../middleware/validateApps');
 const {validateDev} = require('../middleware/validateDeveloper');
@@ -36,11 +36,12 @@ router.post('/developer-reset', setDeveloperPassword)
 router.get('/pannel',protect,(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
 router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
 
-// const uploadfiles = upload.fields([{name:'apk',maxCount: 1}, {name:'icon',maxCount:1},{name:'backImage',maxCount:1},
-// {name:'screenshots',maxCount:3}]);uploadfiles
-router.post('/publish',upload.single('apk'),
+const uploadfiles = upload.fields([{name:'apk',maxCount: 1}, {name:'icon',maxCount:1},{name:'backImage',maxCount:1},
+{name:'screenshots',maxCount:3}]);
+router.post('/publish',uploadfiles,
     (req,res)=>{//validateApp
-        console.log("req.files"+req.files)
+        const {name} = req.body;
+        console.log("req.files"+name)
     res.status(200).send("done")
 });
 
