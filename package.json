@@ -1,0 +1,47 @@
+{
+  "name": "habseshapp",
+  "version": "1.0.0",
+  "description": "habeshapp android app distribution platform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eyobedk/habseshapp.git"
+  },
+  "author": "eyobed kebede",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eyobedk/habseshapp/issues"
+  },
+  "homepage": "https://github.com/Eyobedk/habseshapp#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1",
+    "@hapi/joi": "^17.1.1",
+    "@paypal/checkout-server-sdk": "^1.0.3",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.2",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.3",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "express-validator": "^6.14.0",
+    "hapi": "^18.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.4",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.2",
+    "nodemailer-express-handlebars": "^5.0.0",
+    "passport": "^0.5.2",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-google-oidc": "^0.1.0",
+    "paypal-rest-sdk": "^1.8.1"
+  }
+}
