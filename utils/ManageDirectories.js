@@ -1,7 +1,6 @@
 const fs = require('fs');
 
-exports.
-createDirectories = (req, res,next) => {
+exports.createDirectories = (req, res,next) => {
     const {name,
         email,icon,
         apk,
