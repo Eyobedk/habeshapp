@@ -3,7 +3,7 @@ const {Router} = require("express");
 
 const multer = require('multer');
 const upload = require('../utils/fileUpload');
-const {createDirectories} = require('../utils/ManageDirectories');
+const {createDirectories} = require('../middleware/manage');
 const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
 const {validateApp} = require('../middleware/validateApps');
 const {validateDev} = require('../middleware/validateDeveloper');
