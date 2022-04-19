@@ -4,24 +4,24 @@ const fs = require('fs');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      
+      console.log(file.fieldname)
         console.log(file.originalname+"is the name")
         console.log("reqesuest object")
         const {name} = req.body;
         const folder = `uploaded/${name}`;
-        try {
-          if (!fs.existsSync(folder)) {
-            fs.mkdir(folder,(err,path)=>{
-              if(err){console.log("there is an error")}
-              console.log("the path"+path)
-            });
+        // try {
+        //   if (!fs.existsSync(folder)) {
+        //     fs.mkdir(folder,(err,path)=>{
+        //       if(err){console.log("there is an error")}
+        //       console.log("the path"+path)
+        //     });
             cb(null, folder)
-          } else {
-            console.log('already uploaded')
-          }
-        } catch (err) {
-          console.log(err)
-        }
+        //   } else {
+        //     console.log('already uploaded')
+        //   }
+        // } catch (err) {
+        //   console.log(err)
+        // }
         
       
     },

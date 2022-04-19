@@ -3,7 +3,7 @@ const {Router} = require("express");
 
 const multer = require('multer');
 const upload = require('../utils/fileUpload');
-// const upload = multer({ dest: 'uploaded/' })
+const {createDirectories} = require('../utils/ManageDirectories');
 const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
 const {validateApp} = require('../middleware/validateApps');
 const {validateDev} = require('../middleware/validateDeveloper');
@@ -35,15 +35,17 @@ router.post('/developer-reset', setDeveloperPassword)
 //normal dev routes
 router.get('/pannel',protect,(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
 router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
-
-const uploadfiles = upload.fields([{name:'apk',maxCount: 1}, {name:'icon',maxCount:1},{name:'backImage',maxCount:1},
-{name:'screenshots',maxCount:3}]);
-router.post('/publish',uploadfiles,
-    (req,res)=>{//validateApp
-        const {name} = req.body;
-        console.log("req.files"+name)
-    res.status(200).send("done")
-});
+router.post('/publish',createDirectories,(req, res)=>{res.send("done")});
+// const uploadfiles = upload.fields([{name:'apk',maxCount: 1}, {name:'icon',maxCount:1},{name:'backImage',maxCount:1},
+// {name:'screenshots',maxCount:3}]);uploadfiles
+//router.post('/publish',createDirectories);
+ //   (req,res)=>{//validateApp
+    //     const {name} = req.body;
+    //     console.log("req.files"+name)
+    // res.status(200).send("done")
+    // console.log(req.body);
+    // res.send("publish")}
+    //);
 
 router.get('/status',protect,(req, res) => { res.render("developer/status")});
 router.get('/apps',protect,(req, res) => { res.render("developer/apps")});

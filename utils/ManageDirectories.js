@@ -1,12 +1,22 @@
 const fs = require('fs');
 
-exports.createDirectories = (req, res,next) => {
-    const {name} = req.body;
-    const appDirectory = `uploaded/${name}`;
+exports.
+createDirectories = (req, res,next) => {
+    const {name,
+        email,icon,
+        apk,
+        backImage,
+        screenshots
+    } = req.body;
+
+    console.log(name)
+    console.log(email)
+    console.log(apk)
+    const appDirectory = `/uploaded/${name}/`;
     const Screenshots = `${appDirectory}/screenshots`;
     const Background = `${appDirectory}/backImage`;
     const Icon = `${appDirectory}/Icon`;
-
+    console.log(appDirectory+"app directory")
     if (!fs.existsSync(appDirectory)) {
         fs.mkdir(appDirectory, (err, path) => {
             if (err) {
@@ -33,11 +43,12 @@ exports.createDirectories = (req, res,next) => {
             console.log("the Icon path" + path)
         });
         
-        res.send('done creating folders')
     } else {
         console.log("the directory exists")
-        return
-        
-    }
+       // return
+        }
+   
+    console.log("here ")
+    console.log(req.body.name)
     next();
 }
