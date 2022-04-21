@@ -3,7 +3,8 @@ const {Router} = require("express");
 
 const multer = require('multer');
 const upload = require('../utils/fileUpload');
-const {createDirectories} = require('../middleware/manage');
+const {fileuploader} = require('../utils/expressfileupload');
+// const {createDirectories} = require('../middleware/manage');
 const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
 const {validateApp} = require('../middleware/validateApps');
 const {validateDev} = require('../middleware/validateDeveloper');
@@ -32,10 +33,10 @@ router.get('/developer-reset/:id/:token',validateResetTokes)
 router.post('/developer-reset', setDeveloperPassword)
 
 
-//normal dev routes
+//normal dev routescreateDirectories
 router.get('/pannel',protect,(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
 router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
-router.post('/publish',createDirectories,(req, res)=>{res.send("done")});
+router.post('/publish',fileuploader);
 // const uploadfiles = upload.fields([{name:'apk',maxCount: 1}, {name:'icon',maxCount:1},{name:'backImage',maxCount:1},
 // {name:'screenshots',maxCount:3}]);uploadfiles
 //router.post('/publish',createDirectories);
