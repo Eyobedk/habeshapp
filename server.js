@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload')
 
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
