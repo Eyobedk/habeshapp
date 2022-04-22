@@ -1,18 +1,22 @@
 var path = require('path')
-var count = 0;
 
-function validateScreenshots(images) {
-    console.log(images.length)
-    for (let i = 0;
-        (i <= images.length) - 1; i++) {
-        var screenExtension = path.extname(images[i]);
+function validateScreenshots(images,res) {
+    let theError = 'please Enter 3 screenshots file with a png extention';
+    if(images.length != 3){
+        res.render('developer/publish', {
+            Ierror: theError
+        })
+    }
+    for (let i = 0;i <= images.length - 1; i++) {
+        var screenExtension = path.extname(images[i].name);
         if (screenExtension != '.png') {
-            count++;
-            return count
+            res.render('developer/publish', {
+                Ierror: theError
+            })
         }
     }
 }
-exports.validateEmail = (email) => {
+function validateEmail(email) {
     return String(email)
         .toLowerCase()
         .match(
@@ -22,26 +26,24 @@ exports.validateEmail = (email) => {
 
 
 exports.validateApp = (req, res, next) => {
-    const {
-        email,icon,
-        apk,
-        backImage,
-        screenshots
-    } = req.body;
-     
+    const {email} = req.body;
+    const theApk = req.files.apk;
+    const theIcon = req.files.icon;
+    const BackgImage = req.files.backImage;
+    const screenshots = req.files.screenshots;
+    
+    const appExtension = path.extname(theApk.name);
+    const backIExtension = path.extname(BackgImage.name);
+    const IconExtension = path.extname(theIcon.name);
 
     if (!validateEmail(email)) {
         let theError = 'please a valid email address';
         res.render('developer/publish', {
             Ierror: theError
         })
+        return
     }
-    const appExtension = path.extname(apk);
-    const backIExtension = path.extname(backImage);
-    const IconExtension = path.extname(icon);
-    console.log(screenshots)
-
-    //const screenExtension = path.extname(JSON.stringify(screenshots) );
+    
 
     if(IconExtension != '.ico')
     {
@@ -69,20 +71,8 @@ exports.validateApp = (req, res, next) => {
     }
 
 
-    if (validateScreenshots(screenshots) > 0) {
-        let theError = 'please Enter the screenshots file with a png extention';
-        res.render('developer/publish', {
-            Ierror: theError
-        })
-        return
-    }
+    validateScreenshots(screenshots,res);
 
-    if (!(screenshots.length == 3)) {
-        let theError = 'please upload only the specified image amount';
-        res.render('developer/publish', {
-            Ierror: theError
-        })
-        return;
-    }
+
     next();
 }
