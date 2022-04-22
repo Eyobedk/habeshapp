@@ -1,9 +1,7 @@
 "use strict";
 const fs = require('fs');
 const Apps = require('../models/App')
-const {
-  HandleError
-} = require('../helpers/handleUploadExceptions')
+const { HandleError} = require('../helpers/handleUploadExceptions')
 
 
 
@@ -71,6 +69,10 @@ exports.fileUploader = async (req, res) => {
   const filesaver = [{apkFile,iconFile,backImage,screenshot}]
   const paths = saver(filesaver, name);
   const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath, paths.screenShootsPath, paths.backIpath, res.locals.dev.id);
-  theApps.save();
-  res.send("FILE SAVED");
+  await theApps.save().then(() => {
+    res.send("FILE SAVED");
+  }).catch((err) => {
+    console.log(err)
+  });
+  
 }

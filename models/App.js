@@ -1,6 +1,4 @@
 const db = require('../db/database')
-const bcrypt = require('bcrypt');
-
 
 class Apps {
     constructor(appName, catagory, description, appLocation,
@@ -18,30 +16,22 @@ class Apps {
 
 
      save() {
-        console.log("here")
-        console.log(this.appName);
-        console.log(this.catagory);
-        console.log(this.description);
-        console.log(this.appLocation);
-        console.log(this.icon);
-        console.log(this.screenshots);
-        console.log(this.backgroundImage);
-        console.log(this.dev_id)
-        console.log("to here")
+        const d = new Date();
+        const year = d.getFullYear();
+        const day = d.getDate();
+        const month = d.getMonth() + 1;
+        const date = `${year}-${month}-${day}`;
 
-
-
-
-        // try {
-        //     let sql = `INSERT INTO apps(appName,catagory,description,appLocation,icon,screenshots,backgroundImage,publishedDate,dev_id) 
-        //      VALUES ('${this.appName}','${this.catagory}','${this.description}','${this.appLocation}','${this.icon}',
-        //     '${this.screenshots}','${this.backgroundImage}','${publishedDate}''${this.dev_id});`;
-        //     return new Promise((resolve, reject) => {
-        //         resolve(db.execute(sql));
-        //     })
-        // } catch (err) {
-        //     console.log(err)
-        // };
+        try {
+            let sql = `INSERT INTO apps(appName,catagory,description,appLocation,icon,screenshotOne,screenshotTwo,screenshotThree,backgroundImage,publishedDate,dev_id) 
+             VALUES ('${this.appName}','${this.catagory}','${this.description}','${this.appLocation}','${this.icon}',
+            '${this.screenshots[0]}','${this.screenshots[1]}','${this.screenshots[2]}','${this.backgroundImage}','${date}',${this.dev_id});`;
+            return new Promise((resolve, reject) => {
+                resolve(db.execute(sql));
+            })
+        } catch (err) {
+            console.log(err)
+        };
     }
 
 }
