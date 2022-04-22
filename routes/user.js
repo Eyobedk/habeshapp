@@ -2,8 +2,8 @@
 const {Router} = require("express");
 
 const {validateInput,validateLoginInput}= require('../middleware/inputValidator');
-const {signup_Get,signup_Post,login_Get,login_Post,logout} = require('../controllers/auth');
-const {forgot_password,validateAndSendLink,setNewPassword} = require('../controllers/forgot-password');
+const {signup_Get,signup_Post,login_Get,login_Post,logout} = require('../controllers/UsersAuth');
+const {forgot_password,validateAndSendLink,setNewPassword} = require('../controllers/User-forgot-password');
 
 
 
