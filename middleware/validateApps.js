@@ -16,17 +16,10 @@ function validateScreenshots(images,res) {
         }
     }
 }
-function validateEmail(email) {
-    return String(email)
-        .toLowerCase()
-        .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-};
 
 
 exports.validateApp = (req, res, next) => {
-    const {email} = req.body;
+    const {choosen} = req.body;
     const theApk = req.files.apk;
     const theIcon = req.files.icon;
     const BackgImage = req.files.backImage;
@@ -36,15 +29,14 @@ exports.validateApp = (req, res, next) => {
     const backIExtension = path.extname(BackgImage.name);
     const IconExtension = path.extname(theIcon.name);
 
-    if (!validateEmail(email)) {
-        let theError = 'please a valid email address';
+    if(choosen =='Choose...'){
+        let theError = 'please a the app catagory type';
         res.render('developer/publish', {
             Ierror: theError
         })
         return
     }
     
-
     if(IconExtension != '.ico')
     {
         let theError = 'please Enter the apk icon correctly(.ico file)';

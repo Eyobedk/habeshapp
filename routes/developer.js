@@ -1,6 +1,6 @@
 "use strict";
 const {Router} = require("express");
-const {fileUploader} = require('../utils/expressfileupload');
+const {fileUploader} = require('../controllers/PublishApp');
 const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
 const {validateApp} = require('../middleware/validateApps');
 const {validDevInput} = require('../middleware/validateDeveloper');
