@@ -68,11 +68,29 @@ exports.fileUploader = async (req, res) => {
 
   const filesaver = [{apkFile,iconFile,backImage,screenshot}]
   const paths = saver(filesaver, name);
-  const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath, paths.screenShootsPath, paths.backIpath, res.locals.dev.id);
-  await theApps.save().then(() => {
-    res.send("FILE SAVED");
-  }).catch((err) => {
-    console.log(err)
-  });
+  res.render('developer/publish',{done:"done"})
+  // const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath, paths.screenShootsPath, paths.backIpath, res.locals.dev.id);
+  // await theApps.save().then(() => {
+  //   res.render('developer/publish',{done:"done"})
+  // }).catch((err) => {
+  //   console.log(err)
+  // });
   
+}
+
+exports.ListPublishedApp = async(req,res)=>{
+  console.log(res.locals.dev.id)
+  const ListofApps = await Apps.ListApps(res.locals.dev.id).catch((err)=>{console.log(err)});
+  if(ListofApps)
+  {
+    console.log("list of apps")
+    console.log(ListofApps);
+  }
+  let ToSend = [];
+  ListofApps.forEach((file)=>{
+    ToSend.push([file.appName, file.icon,file.appid])
+  })
+  console.log("air"+ToSend)
+  
+  res.render("developer/appls/appsUpdate", {ToSend})
 }

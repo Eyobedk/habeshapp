@@ -97,12 +97,12 @@
 
             <section role="main" class="content-body">
                 <header class="page-header">
-                    <h2>Dashboard</h2>
+                    <h2><a href="/pannel">Dashboard</a></h2>
 
                 </header>
                 <form  action='/publish' 
                 encType="multipart/form-data"
-                    style="margin-left: 60px;margin-right: 60px;font-size: 17px !important;margin-top: 80px;"
+                    style="margin-left: 60px;margin-right: 60px;font-size: 17px !important;margin-top: 30px;"
                     method="post"">
                     <section class="row"
                         style="color: rgb(39, 39, 39);font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
@@ -117,6 +117,13 @@
                         </div>
                         <% } %>
 
+                        <% 
+                        if(typeof done !='undefined'){ %>
+                            <div class="alert alert-success" role="alert">
+                                <strong>Succefully Published!</strong> You can now find your app at our platform
+                            </div>
+                        <% } %>
+                        
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">App Name</label>
                             <input type="name" style="font-size: medium;" class="form-control" id="inputEmail4"

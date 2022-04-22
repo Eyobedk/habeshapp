@@ -33,6 +33,24 @@ class Apps {
             console.log(err)
         };
     }
+    static async find(name)
+    {
+        const sql = `SELECT * FROM apps WHERE appName='${name}';`;
+        const [result, _] = await db.execute(sql);
+        return result[0];
+    }
+    static async ListApps(id)
+    {
+        const sql = `SELECT * FROM apps WHERE dev_id=${id}`;
+        const [result, _] = await db.execute(sql);
+        return result
+    }
+    static async getAppsPath(appid,id)
+    {
+        const sql = `SELECT * FROM apps WHERE dev_id=${id} AND appid=${appid}`;
+        const [result, _] = await db.execute(sql);
+        return result
+    }
 
 }
 

@@ -1,4 +1,5 @@
 var path = require('path')
+const Apps = require('../models/App')
 
 function validateScreenshots(images,res) {
     let theError = 'please Enter 3 screenshots file with a png extention';
@@ -18,8 +19,8 @@ function validateScreenshots(images,res) {
 }
 
 
-exports.validateApp = (req, res, next) => {
-    const {choosen} = req.body;
+exports.validateApp = async (req, res, next) => {
+    const {name,choosen} = req.body;
     const theApk = req.files.apk;
     const theIcon = req.files.icon;
     const BackgImage = req.files.backImage;
@@ -29,6 +30,15 @@ exports.validateApp = (req, res, next) => {
     const backIExtension = path.extname(BackgImage.name);
     const IconExtension = path.extname(theIcon.name);
 
+    // const App = await Apps.find(name);
+    // if(App)
+    // {
+    //     let theError = 'This App is already published';
+    //     res.render('developer/publish', {
+    //         Ierror: theError
+    //     })
+    //     return
+    // }
     if(choosen =='Choose...'){
         let theError = 'please a the app catagory type';
         res.render('developer/publish', {
