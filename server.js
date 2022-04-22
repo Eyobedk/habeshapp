@@ -12,7 +12,7 @@ const authRoutes = require('./routes/user');
 const developeRoutes = require('./routes/developer');
 const G_OAuth = require('./routes/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
-const {checkUser} = require('./middleware/checkUser');
+const {checkUser} = require('./middleware/checkStatus');
 const urlencodedParser = bodyparser.urlencoded({extended: false})
 
 app = express();

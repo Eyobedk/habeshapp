@@ -2,7 +2,6 @@ const passport = require('passport');
 const Router = require('express').Router();
 const User = require("../models/User");
 const {Strategy} = require('passport-google-oauth20');
-const {seter} = require('../middleware/checkUser')
 
 
 var useremail;

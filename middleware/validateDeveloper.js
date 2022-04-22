@@ -2,7 +2,7 @@ const {
     validateEmail
 } = require('./validateApps')
 
-exports.validateDev = (req, res,next) => {
+exports.validDevInput = (req, res,next) => {
     const {name,phone,domain,email,password} = req.body;
 
     function ValidURL(str) {

@@ -3,7 +3,7 @@ const {validateEmail} = require('./validateApps')
 const User = require('../models/User');
 const bcrypt =require('bcrypt');
 
-exports.validateInput = (req, res, next)=>{
+exports.validateSignupInput = (req, res, next)=>{
     const {name,email,password1,password2} = req.body;
     var result = password1.localeCompare(password2);
     const errors = validationResult(req);
