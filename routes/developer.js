@@ -35,7 +35,7 @@ router.post('/developer-reset', setDeveloperPassword)
 //normal dev routes
 router.get('/pannel',protect,(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
 router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
-router.post('/publish',validateApp,fileUploader);
+router.post('/publish',validateApp,fileUploader);//
 
 router.get('/update',protect,(req, res) => { res.render("developer/update")});
 router.get('/appsUpdate',protect,(req, res) => { res.render("developer/appls/appsUpdate")});
