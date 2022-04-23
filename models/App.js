@@ -51,6 +51,13 @@ class Apps {
         const [result, _] = await db.execute(sql);
         return result
     }
+    static async updateApp(appid, publishedOn,appUrl)
+    {
+        try{
+        let sql = `INSERT INTO previousversions(appid, published_on,file_location) VALUES(${appid}, '${publishedOn}', '${appUrl}');`
+        await db.execute(sql);
+        }catch(err){console.log(err)}
+    }
 
 }
 
