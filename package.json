@@ -43,6 +43,7 @@
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
     "passport-google-oidc": "^0.1.0",
-    "paypal-rest-sdk": "^1.8.1"
+    "paypal-rest-sdk": "^1.8.1",
+    "shelljs": "^0.8.5"
   }
 }
