@@ -36,7 +36,8 @@ exports.MoveApk = (ApkInfo) => {
     
     fsPromises.rename(ApkInfo[0].appLocation, movedApkPath, function (err) {
         if (err) throw err
-        console.log(movedApkPath+"moved")
+        console.log("moved")
+        //return movedApkPath
      })
 
     return movedApkPath
