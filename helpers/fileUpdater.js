@@ -3,9 +3,10 @@ const {
 } = require('assert');
 const fs = require('fs');
 const fsPromises = require('fs/promises');
+const { resolve } = require('path');
 const path = require('path');
 
-exports.MoveApk = (ApkInfo) => {
+exports.createDirectories = (ApkInfo) => {
     const che = ApkInfo[0].publishedDate;
     var month = che.getUTCMonth() + 1;
     var day = che.getUTCDate();
@@ -33,15 +34,19 @@ exports.MoveApk = (ApkInfo) => {
             return
         }
     })
-    
-    fsPromises.rename(ApkInfo[0].appLocation, movedApkPath, function (err) {
-        if (err) throw err
-        console.log("moved")
-        //return movedApkPath
-     })
 
-    return movedApkPath
+    return [ApkInfo[0].appLocation, movedApkPath]
 }
+
+
+exports.MoveApk = (currentLocation, newApkPath)=>
+{
+  return fsPromises.rename(currentLocation, newApkPath, function (err) {
+    if (err) throw err
+    //return movedApkPath
+    })
+}
+
 
 exports.deleteImages = (folder)=>{
 
