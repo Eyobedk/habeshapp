@@ -2,6 +2,7 @@ const fs = require('fs');
 const Apps = require('../models/App')
 const fsPromises = require("fs/promises");
 const {
+  createDirectories,
   MoveApk,
   deleteImages
 } = require('../helpers/fileUpdater')
@@ -77,32 +78,39 @@ const updateSaver = (files, name) => {
 exports.updateApps = async (req, res) => {
 
   const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id))
-  const che = Paths[0].publishedDate;
-  var month = che.getUTCMonth() + 1;
-  var day = che.getUTCDate();
-  var year = che.getUTCFullYear();
-  const newdate = day + '_' + month + '_' + year;
-  let updatedPath = `updates/${Paths[0].appName}`;
-  let updatedAppPath = updatedPath + `/${newdate}`;
-  let movedApkPath = updatedAppPath + `/${Paths[0].appName}` + `.apk`;
-  let tempvar;
   const directory = `uploads/${Paths[0].appName}/`;
   try {
     console.log("nigit")
-  //  const movedAppPatth = MoveApk(Paths)
-     console.log(await Promise.resolve(MoveApk(Paths))) //THIS WORKS FINE
-   // console.log("alem")
-  //  console.log();
-    // if (movedAppPath) {
- //     // const deleteI = deleteImages(directory)
-   //   console.log(deleteImages(directory))
-    // }
+    //  const movedAppPatth = MoveApk(Paths)
+    const ReturnedFolders = createDirectories(Paths);
+    console.log(ReturnedFolders[0])
+    console.log(ReturnedFolders[1])
 
+
+    Promise.allSettled([await Promise.resolve(MoveApk(ReturnedFolders[0], ReturnedFolders[1])).catch((err) => {
+      console.log(err)
+    })]).then(async Result => {
+      if (Result[0].status == 'fulfilled') {
+        await Promise.resolve(deleteImages(directory)).catch((err) => {
+          console.log(err)
+        });
+      }
+    })
+    //  console.log(await Promise.resolve(MoveApk(Paths))) //THIS WORKS FINE
+    // console.log("alem")
+    //  console.log();
+    // if (movedAppPath) {
+    //     // const deleteI = deleteImages(directory)
+    //   console.log(deleteImages(directory))
+    // }
+    // then(()=>{
+    //       deleteImages(directory);
+    //     })
     //const moved = await MoveApk(Paths,,);
     // .then((result)=>{
     //   console.log(result)
     // })
-  //  console.log(movedAppPatth);
+    //  console.log(movedAppPatth);
 
   } catch (err) {
     console.log("from here" + err)
