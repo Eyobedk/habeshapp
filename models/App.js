@@ -54,9 +54,15 @@ class Apps {
     static async updateApp(appid, publishedOn,appUrl)
     {
         try{
-        let sql = `INSERT INTO previousversions(appid, published_on,file_location) VALUES(${appid}, '${publishedOn}', '${appUrl}');`
-        await db.execute(sql);
-        }catch(err){console.log(err)}
+            
+            let sql = `INSERT INTO previousversions(appid, published_on,file_location) VALUES(${appid},'${publishedOn}', '${appUrl}');`
+            return new Promise((resolve, reject) => {
+                resolve(db.execute(sql));
+            })
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 
 }
