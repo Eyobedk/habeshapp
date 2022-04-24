@@ -11,7 +11,8 @@ exports.createDirectories = (ApkInfo) => {
     var month = che.getUTCMonth() + 1;
     var day = che.getUTCDate();
     var year = che.getUTCFullYear();
-    const newdate = day + '_' + month + '_' + year;
+    const newdate = `${day}-${month}-${year}`;
+    console.log(newdate)
     let updatedPath = `updates/${ApkInfo[0].appName}`;
     let updatedAppPath = updatedPath + `/${newdate}`;
     let movedApkPath = updatedAppPath + `/${ApkInfo[0].appName}` + `.apk`;
