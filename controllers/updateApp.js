@@ -1,75 +1,10 @@
 const fs = require('fs');
-const Apps = require('../models/App')
-const fsPromises = require("fs/promises");
 const {
   createDirectories,
   MoveApk,
   deleteImages
 } = require('../helpers/fileUpdater')
-const path = require('path');
-var events = require('events');
-var eventEmitter = new events.EventEmitter();
-
-const updateSaver = (files, name) => {
-  let HomePath = `updates/${name}`;
-  let apkPath = HomePath + `/${files[0]['apkFile'].name}`;
-  let IconPath = HomePath + `/${files[0]['iconFile'].name}`;
-  let backIpath = HomePath + `/${files[0]['backImage'].name}`;
-  let screenShootsPath = [];
-
-  for (const file in files[0]) {
-    if (file == 'apkFile') {
-      fs.mkdir(HomePath, (err) => {
-        HandleError();
-      });
-      files[0][file].mv(HomePath + `/${files[0][file].name}`, (err) => {
-        HandleError();
-      })
-    }
-    if (file == 'iconFile') {
-
-      fs.mkdir(HomePath + `/Icon`, (err) => {
-        HandleError();
-      });
-      files[0][file].mv(HomePath + `/Icon` + `/${files[0][file].name}`, (err) => {
-        HandleError();
-      })
-    }
-    if (file == 'backImage') {
-
-      fs.mkdir(HomePath + `/backImage`, (err) => {
-        HandleError();;
-      });
-      files[0][file].mv(HomePath + `/backImage` + `/${files[0][file].name}`, (err) => {
-        HandleError();
-      })
-    }
-    if (file == 'screenshot') {
-
-      fs.mkdir(HomePath + `/screenshot`, (err) => {
-        HandleError();;
-      });
-      for (let index = 0; index < files[0][file].length; index++) {
-        files[0][file][index].mv(HomePath + `/screenshot` + `/${files[0][file][index].name}`, (err) => {
-          HandleError();
-        })
-        screenShootsPath.push(HomePath + `/screenshot/${files[0][file][index].name}`)
-      }
-    }
-  }
-
-  const filesPath = {
-    HomePath,
-    apkPath,
-    IconPath,
-    backIpath,
-    screenShootsPath
-  }
-  return filesPath
-}
-
-
-
+const Apps = require('../models/App')
 
 
 
@@ -77,11 +12,25 @@ const updateSaver = (files, name) => {
 
 exports.updateApps = async (req, res) => {
 
-  const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id))
+  const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id));
+  date = new Date(Paths[0].publishedDate);
+  year = date.getFullYear();
+  month = date.getMonth()+1;
+  dt = date.getDate();
+
+  if (dt < 10) {
+    dt = '0' + dt;
+  }
+  if (month < 10) {
+    month = '0' + month;
+  }
+  const theDate = year+'-' + month + '-'+dt;
+
+
   const directory = `uploads/${Paths[0].appName}/`;
   try {
     console.log("nigit")
-    //  const movedAppPatth = MoveApk(Paths)
+    console.log(Paths[0].publishedDate)
     const ReturnedFolders = createDirectories(Paths);
     console.log(ReturnedFolders[0])
     console.log(ReturnedFolders[1])
@@ -95,22 +44,13 @@ exports.updateApps = async (req, res) => {
           console.log(err)
         });
       }
+    }).finally(async ()=>{await Apps.updateApp(Paths[0].appid, theDate,ReturnedFolders[1])}
+    ).then(DbResult => {
+      console.log(DbResult)
+    }).catch(err => {
+      console.log(err)
     })
-    //  console.log(await Promise.resolve(MoveApk(Paths))) //THIS WORKS FINE
-    // console.log("alem")
-    //  console.log();
-    // if (movedAppPath) {
-    //     // const deleteI = deleteImages(directory)
-    //   console.log(deleteImages(directory))
-    // }
-    // then(()=>{
-    //       deleteImages(directory);
-    //     })
-    //const moved = await MoveApk(Paths,,);
-    // .then((result)=>{
-    //   console.log(result)
-    // })
-    //  console.log(movedAppPatth);
+
 
   } catch (err) {
     console.log("from here" + err)
