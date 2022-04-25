@@ -47,6 +47,7 @@ const newFileSaver = async(files, name) => {
 
 
 exports.updateApps = async (req, res) => {
+  const description = req.body.desc;
   const newApkFILE = req.files.apk;
   const newBackImage = req.files.backImage;
   const newScreenshots = req.files.screenshots;
@@ -55,6 +56,9 @@ exports.updateApps = async (req, res) => {
     newBackImage,
     newScreenshots,
   }]
+  let newupdatedAppPath;
+  let newscreenShootsPath;
+  let newBackgroundImagesPath;
 
 
   const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id));
@@ -107,13 +111,14 @@ exports.updateApps = async (req, res) => {
       Promise.allSettled([
         await Promise.resolve(MoveApk(ReturnedFolders[0], ReturnedFolders[1]).catch((err) => { console.log(err)} )),
         await Promise.resolve(deleteImages(directory)).catch((err) => { console.log(err) }),
-        await Apps.updateApp(Paths[0].appid, theDate, ReturnedFolders[1]).catch(err =>{console.log(err)}),
-        await Promise.resolve(newFileSaver(newFilesArray, Paths[0].appName)).then(async newFilesPath =>{
-        await Apps.UpdateTheAppTable(newFilesPath.newApkPath, newFilesPath.screenShootsPath, newFilesPath.newBackIpath, Paths[0].appid)
-          .catch(err => {
+        await Promise.resolve(Apps.updateApp(Paths[0].appid, theDate, ReturnedFolders[1]).catch(err =>{console.log(err)})),
+        await Promise.resolve(newFileSaver(newFilesArray, Paths[0].appName)).then(newFilesPath =>{
+            newupdatedAppPath = newFilesPath.newApkPath;
+            newscreenShootsPath = newFilesPath.screenShootsPath;
+            newBackgroundImagesPath = newFilesPath.newBackIpath }),
+        await Apps.UpdateTheAppTable(newupdatedAppPath, description,newscreenShootsPath,newBackgroundImagesPath, Paths[0].appid).catch(err => {
             console.log(err)
-          })}
-        )
+          })
 
       ]).then(async result =>{
         for(let funct = 0; funct< result.length; funct++)
