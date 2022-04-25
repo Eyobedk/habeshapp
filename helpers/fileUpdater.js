@@ -53,7 +53,8 @@ exports.MoveApk = (currentLocation, newApkPath)=>
 exports.deleteImages = (folder)=>{
 
   fs.readdir(folder, (err, files) => {
-    let flag = true;
+    // let flag = true;
+    // let IconFlag = true;
     if (err) throw err;
     console.log(files)
     console.log("readdir")
@@ -73,9 +74,13 @@ exports.deleteImages = (folder)=>{
               if (err) throw err;
             });
           }
-          flag = false;
+          // flag = false;
         }
-        if (flag) {
+        // if(String(insideApp) == 'Icon')
+        // {
+        //     IconFlag = false;
+        // }
+        if ((String(insideApp) == 'backImage')) {
           fs.unlink(path.join(`${folder}/${insideApp}/`, String(Insidefiles)), err => {
             console.log("unlinking")
             if (err) throw err;
