@@ -8,7 +8,7 @@ const {
 const Apps = require('../models/App')
 
 
-const newFileSaver = (files, name) => {
+const newFileSaver = async(files, name) => {
   let HomePath = `uploads/${name}`;
   let newApkPath = HomePath + `/${files[0]['newApkFILE'].name}`;
   let newBackIpath = HomePath + `/${files[0]['newBackImage'].name}`;
@@ -105,8 +105,29 @@ exports.updateApps = async (req, res) => {
                                                                                                // NEW PROCESS
 
       Promise.allSettled([
-        await MoveApk(ReturnedFolders[0], ReturnedFolders[1]).catch((err) => { console.log(err)} ),
-      ])
+        await Promise.resolve(MoveApk(ReturnedFolders[0], ReturnedFolders[1]).catch((err) => { console.log(err)} )),
+        await Promise.resolve(deleteImages(directory)).catch((err) => { console.log(err) }),
+        await Apps.updateApp(Paths[0].appid, theDate, ReturnedFolders[1]).catch(err =>{console.log(err)}),
+        await Promise.resolve(newFileSaver(newFilesArray, Paths[0].appName)).then(async newFilesPath =>{
+        await Apps.UpdateTheAppTable(newFilesPath.newApkPath, newFilesPath.screenShootsPath, newFilesPath.newBackIpath, Paths[0].appid)
+          .catch(err => {
+            console.log(err)
+          })}
+        )
+
+      ]).then(async result =>{
+        for(let funct = 0; funct< result.length; funct++)
+        {
+          if(result[funct].status == 'fulfilled')
+          {
+            console.log('fullfiled   value:=' + result[funct].value)
+          }
+          else if(result[funct].status == 'rejected')
+          {
+            console.log('Rejected  value:=' + result[funct].reason)
+          }
+        }
+      })
 
 
       // .then(newFileSaver(newFilesArray, Paths[0].appName))
