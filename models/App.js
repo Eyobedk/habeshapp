@@ -54,8 +54,24 @@ class Apps {
     static async updateApp(appid, publishedOn,appUrl)
     {
         try{
+            console.log("updateApp")
             
             let sql = `INSERT INTO previousversions(appid, published_on,file_location) VALUES(${appid},'${publishedOn}', '${appUrl}');`
+            return new Promise((resolve, reject) => {
+                resolve(db.execute(sql));
+            })
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+    static async UpdateTheAppTable(ApkLocation, screenshotsArray,newbackgroundImage,ApkID)
+    {
+        try{
+            
+            let sql = `UPDATE apps
+            SET appLocation = '${ApkLocation}', screenshotOne = '${screenshotsArray[0]}', screenshotTwo = '${screenshotsArray[1]}',
+            screenshotThree = '${screenshotsArray[2]}',backgroundImage = '${newbackgroundImage}' WHERE appid = ${ApkID};`
             return new Promise((resolve, reject) => {
                 resolve(db.execute(sql));
             })
