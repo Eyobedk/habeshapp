@@ -6,7 +6,7 @@ const {validateApp} = require('../middleware/validateApps');
 const {validDevInput} = require('../middleware/validateDeveloper');
 const {protect} = require('../middleware/protectRoute');
 const {Login_Dev} = require('../controllers/dev_auth');
-const {updateApps} =require('../controllers/updateApp')
+const {updateApps,StoreUpdated} =require('../controllers/updateApp')
 const {varifydevEmail,validateResetTokes,setDeveloperPassword} = require('../controllers/dev-forgot-passowrd');
 
 const router = Router();
