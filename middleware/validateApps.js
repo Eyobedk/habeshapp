@@ -18,9 +18,22 @@ function validateScreenshots(images,res) {
     }
 }
 
+function ValidURL(str) {
+    var regex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+    if (!regex.test(str)) {
+        let theError = "please enter a proper domain name with https protcol";
+        res.render('developer/publish', {
+            Ierror: theError
+        })
+        return
+    }
+    return
+}
+
+
 
 exports.validateApp = async (req, res, next) => {
-    const {name,choosen} = req.body;
+    const {domain,choosen} = req.body;
     const theApk = req.files.apk;
     const theIcon = req.files.icon;
     const BackgImage = req.files.backImage;
@@ -39,6 +52,8 @@ exports.validateApp = async (req, res, next) => {
     //     })
     //     return
     // }
+
+    ValidURL(domain);
     if(choosen =='Choose...'){
         let theError = 'please a the app catagory type';
         res.render('developer/publish', {
