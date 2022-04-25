@@ -42,10 +42,11 @@ exports.createDirectories = (ApkInfo) => {
 
 exports.MoveApk = (currentLocation, newApkPath)=>
 {
-  return fsPromises.rename(currentLocation, newApkPath, function (err) {
+  console.log("move apk")
+  return Promise.resolve(fsPromises.rename(currentLocation, newApkPath, function (err) {
     if (err) throw err
     //return movedApkPath
-    })
+    }))
 }
 
 
@@ -56,7 +57,9 @@ exports.deleteImages = (folder)=>{
     if (err) throw err;
     console.log(files)
     console.log("readdir")
+    
     for (const insideApp of files) {
+      console.log("for loop 1")
       fs.readdir(folder + insideApp, (err, Insidefiles) => {
 
         if (err) {
