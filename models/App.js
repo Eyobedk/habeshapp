@@ -65,12 +65,12 @@ class Apps {
             console.log(err)
         }
     }
-    static async UpdateTheAppTable(ApkLocation, screenshotsArray,newbackgroundImage,ApkID)
+    static async UpdateTheAppTable(ApkLocation, description, screenshotsArray,newbackgroundImage,ApkID)
     {
         try{
             
             let sql = `UPDATE apps
-            SET appLocation = '${ApkLocation}', screenshotOne = '${screenshotsArray[0]}', screenshotTwo = '${screenshotsArray[1]}',
+            SET description = '${description}', appLocation = '${ApkLocation}', screenshotOne = '${screenshotsArray[0]}', screenshotTwo = '${screenshotsArray[1]}',
             screenshotThree = '${screenshotsArray[2]}',backgroundImage = '${newbackgroundImage}' WHERE appid = ${ApkID};`
             return new Promise((resolve, reject) => {
                 resolve(db.execute(sql));
