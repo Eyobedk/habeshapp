@@ -68,7 +68,6 @@ exports.fileUploader = async (req, res) => {
 
   const filesaver = [{apkFile,iconFile,backImage,screenshot}]
   const paths = saver(filesaver, name);
- // res.render('developer/publish',{done:"done"})
   const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath, paths.screenShootsPath, paths.backIpath, res.locals.dev.id);
   await theApps.save().then(() => {
     res.render('developer/publish',{done:"done"})

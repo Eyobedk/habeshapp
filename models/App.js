@@ -80,6 +80,13 @@ class Apps {
             console.log(err)
         }
     }
+    
+    static async deleteApps(appid, devid)
+    {
+        const sql = `DELETE FROM apps where appid = ${appid} AND dev_id =${devid};`
+        const delResult = await db.execute(sql);
+        return delResult
+    }
 
 }
 
