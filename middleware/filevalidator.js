@@ -6,22 +6,25 @@ const fs = require('fs');
 function validateScreenshots(images,res) {
     let theError = 'please Enter 3 screenshots file with a png extention';
     if(images.length != 3){
-        res.render('developer/publish', {
+        res.render('developer/update', {
             Ierror: theError
         })
+        return
     }
     for (let i = 0;i <= images.length - 1; i++) {
         var screenExtension = path.extname(images[i].name);
         if (screenExtension != '.png') {
-            res.render('developer/publish', {
+            res.render('developer/update', {
                 Ierror: theError
             })
+            return
         }
     }
+    return
 }
 
 
-exports.validatestatus = async (req, res)=>{
+exports.validatestatus = async (req, res,next)=>{
     const theApk = req.files.apk;
     const BackgImage = req.files.backImage;
     const screenshots = req.files.screenshots;
@@ -43,12 +46,14 @@ exports.validatestatus = async (req, res)=>{
     }
     const theDate = year + '-' + month + '-' + dt;
 
+    console.log(`updates/${Paths[0].appName}/${theDate}`)
     if(fs.existsSync(`updates/${Paths[0].appName}/${theDate}`))
     {
         let theError = 'You already have made an update today please try updating your app on another day';
         res.render('developer/update', {
             Ierror: theError
         })
+        return
     }
 
     if (appExtension != '.apk') {
@@ -59,8 +64,8 @@ exports.validatestatus = async (req, res)=>{
         return
     }
 
-    if (backIExtension != '.png' && backIExtension != '.jpg' && backIExtension != '.jpeg') {
-        let theError = "please Enter the background image file";
+    if (backIExtension != '.png' || backIExtension != '.PNG') {
+        let theError = "please Enter the background image file with .png image type";
         res.render('developer/update', {
             Ierror: theError
         })
@@ -68,4 +73,5 @@ exports.validatestatus = async (req, res)=>{
     }
 
     validateScreenshots(screenshots,res);
+    next();
 }
