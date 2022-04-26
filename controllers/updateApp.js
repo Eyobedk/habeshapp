@@ -84,29 +84,7 @@ exports.updateApps = async (req, res) => {
     console.log(ReturnedFolders[0])
     console.log(ReturnedFolders[1])
 
-
-    //Jumps these executions and continue
-
-    // Promise.allSettled([await MoveApk(ReturnedFolders[0], ReturnedFolders[1])
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    // ]).
-    // then(async Result => {
-    //   console.log("inside delete then")
-    //   if (Result[0].status == 'fulfilled') {
-    //     await Promise.resolve(deleteImages(directory)).catch((err) => {
-    //       console.log(err)
-    //     });
-    //   }
-    // }).finally(async () => {
-    //   console.log("inside finally theb")
-    //     await Apps.updateApp(Paths[0].appid, theDate, ReturnedFolders[1])
-    //      .catch(err =>{console.log(err)})
-    //   })
-    //   console.log("here we are")
-
-                                                                                               // NEW PROCESS
+     // NEW PROCESS
 
       Promise.allSettled([
         await Promise.resolve(MoveApk(ReturnedFolders[0], ReturnedFolders[1]).catch((err) => { console.log(err)} )),
@@ -121,6 +99,7 @@ exports.updateApps = async (req, res) => {
           })
 
       ]).then(async result =>{
+        res.render('developer/update',{done:"done"})
         for(let funct = 0; funct< result.length; funct++)
         {
           if(result[funct].status == 'fulfilled')
@@ -134,42 +113,12 @@ exports.updateApps = async (req, res) => {
         }
       })
 
-
-      // .then(newFileSaver(newFilesArray, Paths[0].appName))
-      // .then(async (newFilesPath) => {
-      //     await Apps.UpdateTheAppTable(newFilesPath.newApkPath, newFilesPath.screenShootsPath, newFilesPath.newBackIpath, Paths[0].appid)
-      //     .catch(err => {
-      //       console.log(err)
-      //     })
-      // }).catch(err => { console.log(err)})
-
-
   } catch (err) {
     if (err) {
       console.log("from here" + err)
       return
     }
 
-  } finally {
-    
-    //console.log(newFilesArray, Paths[0].appName)
-    // const newFilesPath = newFileSaver(newFilesArray, Paths[0].appName);
-    // new Promise((resolve, reject) => {
-    //   resolve(Apps.UpdateTheAppTable(newFilesPath.newApkPath, newFilesPath.screenShootsPath, newFilesPath.newBackIpath, Paths[0].appid).then(()=>{
-    //     res.send("update completed");
-    //   }).catch(err =>{
-    //     reject(err)
-    //   })
-    //   );
-    // })
-  }
-  res.send("done")
-}
-
-
-exports.StoreUpdated = (req, res) => {
-
-
-  console.log('the store')
-  res.send("stored")
+  } 
+  //res.send("done")
 }
