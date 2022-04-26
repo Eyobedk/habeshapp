@@ -33,7 +33,7 @@ function ValidURL(str) {
 
 
 exports.validateApp = async (req, res, next) => {
-    const {domain,choosen} = req.body;
+    const {name,domain,choosen} = req.body;
     const theApk = req.files.apk;
     const theIcon = req.files.icon;
     const BackgImage = req.files.backImage;
@@ -43,15 +43,15 @@ exports.validateApp = async (req, res, next) => {
     const backIExtension = path.extname(BackgImage.name);
     const IconExtension = path.extname(theIcon.name);
 
-    // const App = await Apps.find(name);
-    // if(App)
-    // {
-    //     let theError = 'This App is already published';
-    //     res.render('developer/publish', {
-    //         Ierror: theError
-    //     })
-    //     return
-    // }
+    const App = await Apps.find(name);
+    if(App)
+    {
+        let theError = 'This App is already published';
+        res.render('developer/publish', {
+            Ierror: theError
+        })
+        return
+    }
 
     ValidURL(domain);
     if(choosen =='Choose...'){
