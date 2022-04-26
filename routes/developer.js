@@ -1,11 +1,13 @@
 "use strict";
 const {Router} = require("express");
-const {fileUploader,ListPublishedApp} = require('../controllers/PublishApp');
+const {fileUploader,ListPublishedApp,ListPublishedAppTobeDeleted} = require('../controllers/PublishApp');
 const {registerDeveloper,handleSuccess,dev_logout} = require('../controllers/dev_auth.js')
 const {validateApp} = require('../middleware/validateApps');
 const {validDevInput} = require('../middleware/validateDeveloper');
 const {protect} = require('../middleware/protectRoute');
 const {Login_Dev} = require('../controllers/dev_auth');
+const {validatestatus} = require('../middleware/filevalidator')
+const {deleteAppsRoute} = require('../controllers/deleteApps')
 const {updateApps,StoreUpdated} =require('../controllers/updateApp')
 const {varifydevEmail,validateResetTokes,setDeveloperPassword} = require('../controllers/dev-forgot-passowrd');
 
@@ -38,11 +40,11 @@ router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
 router.post('/publish',validateApp,fileUploader);//
 
 router.get('/update/:id',protect,(req, res) => {res.render("developer/update")});
-router.post('/update/:id',protect,updateApps);
+router.post('/update/:id',protect,validatestatus,updateApps);
+router.get('/delete/:id',protect,deleteAppsRoute);
 
 router.get('/appsUpdate',protect,ListPublishedApp);
-//router.post('/appsUpdate',protect,ListPublishedApp);
-router.get('/deleteApps',protect,(req, res) => { res.render("developer/appls/deleteApps")});
+router.get('/deleteApps',protect,ListPublishedAppTobeDeleted);
 
 router.get('/status',protect,(req, res) => { res.render("developer/status")});
 router.get('/apps',protect,(req, res) => { res.render("developer/apps")});
