@@ -94,3 +94,21 @@ exports.ListPublishedApp = async(req,res)=>{
   
   res.render("developer/appls/appsUpdate", {ToSend})
 }
+
+
+exports.ListPublishedAppTobeDeleted = async(req,res)=>{
+  console.log(res.locals.dev.id)
+  const ListofApps = await Apps.ListApps(res.locals.dev.id).catch((err)=>{console.log(err)});
+  if(ListofApps)
+  {
+    console.log("list of apps")
+    console.log(ListofApps);
+  }
+  let ToSend = [];
+  ListofApps.forEach((file)=>{
+    ToSend.push([file.appName, file.icon,file.appid])
+  })
+  console.log("air"+ToSend)
+  
+  res.render("developer/appls/deleteApps", {ToSend})
+}
