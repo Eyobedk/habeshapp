@@ -25,14 +25,14 @@
         rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="/bootstrap/bootstrap.css" />
     <!-- My css -->
-    <link rel="stylesheet" href="css/pannel.css">
+    <link rel="stylesheet" href="/css/pannel.css">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="bootstrap/theme.css" />
+    <link rel="stylesheet" href="/bootstrap/theme.css" />
 
     <!-- Skin CSS -->
-    <link rel="stylesheet" href="bootstrap/default.css" />
+    <link rel="stylesheet" href="/bootstrap/default.css" />
 
 
 </head>
@@ -44,7 +44,7 @@
         <header class="header">
             <div class="logo-container">
                 <a class="logo" style="text-decoration: none;">
-                    <img src="images/Logo.png" height="35" alt="JSOFT Admin" />
+                    <img src="/images/Logo.png" height="35" alt="JSOFT Admin" />
                     <strong style="margin-left:20px;padding-top:100px !important;font-size: medium;">HABESHAPP</strong>
 
                 </a>
@@ -91,8 +91,10 @@
                     <h2><a href="/pannel" style="text-decoration: none;color: white;">Dashboard</a></h2>
 
                 </header>
-
-
+           
+                <% if(statusInfo != 'undefined') {
+                    
+                    %>
                 <div class="row">
                     <div class="col-md-6 col-lg-12 col-xl-6">
                         <div class="row">
@@ -109,7 +111,7 @@
                                                 <div class="summary">
                                                     <h4 class="title">Views</h4>
                                                     <div class="info">
-                                                        <strong class="amount">1281</strong>
+                                                        <strong class="amount"><%= statusInfo[0][3].view %></strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,6 +119,7 @@
                                     </div>
                                 </section>
                             </div>
+                            <% } %>
                             <div class="col-md-12 col-lg-6 col-xl-6">
                                 <section class="panel panel-featured-left panel-featured-secondary">
                                     <div class="panel-body">
@@ -130,7 +133,7 @@
                                                 <div class="summary">
                                                     <h4 class="title">Total Rate</h4>
                                                     <div class="info">
-                                                        <strong class="amount">14,890.30</strong>
+                                                        <strong class="amount"><%= statusInfo[0][2].rate %></strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,7 +154,7 @@
                                                 <div class="summary">
                                                     <h4 class="title">Downloads</h4>
                                                     <div class="info">
-                                                        <strong class="amount">38</strong>
+                                                        <strong class="amount"><%= statusInfo[0][0].downloads %></strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -172,7 +175,7 @@
                                                 <div class="summary">
                                                     <h4 class="title">Reports</h4>
                                                     <div class="info">
-                                                        <strong class="amount">3765</strong>
+                                                        <strong class="amount"><%= statusInfo[0][1].reports %></strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,12 +194,12 @@
     </section>
 
     <!-- Vendor -->
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.browser.mobile.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.browser.mobile.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/theme.js"></script>
 
-    <script src="js/theme.init.js"></script>
+    <script src="/js/theme.init.js"></script>
 </body>
 
 </html>
