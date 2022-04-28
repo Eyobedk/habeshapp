@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const fileUpload = require('express-fileupload')
 
+const {LoadApps} = require('./controllers/users/AppHomepage');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 require('dotenv').config();
@@ -43,11 +44,6 @@ app.use(G_OAuth)
 app.use(developeRoutes)
 
 
-
-app.get('/smoothies', requireAuth, (req, res) => {
-        res.render('smoothies', { user: res.locals.user }) })
-
-
-app.get('/',(req, res) => { res.send("<h1> HOME PAGE </h1>")})
+app.get('/home',LoadApps)
 
 app.listen(3000,()=>console.log("at 3000"));
