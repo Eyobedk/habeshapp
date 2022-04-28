@@ -23,6 +23,7 @@ app.set("views", "./views")
 
 app.use(fileUpload())
 app.use(express.static('public'));
+app.use(express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
  app.use('/uploads',express.static(path.join(__dirname,'uploads')))

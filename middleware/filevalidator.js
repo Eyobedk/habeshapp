@@ -64,13 +64,13 @@ exports.validatestatus = async (req, res,next)=>{
         return
     }
 
-    if (backIExtension != '.png' || backIExtension != '.PNG') {
-        let theError = "please Enter the background image file with .png image type";
-        res.render('developer/update', {
-            Ierror: theError
-        })
-        return
-    }
+    // if (backIExtension != '.png') {
+    //     let theError = "please Enter the background image file with .png image type";
+    //     res.render('developer/update', {
+    //         Ierror: theError
+    //     })
+    //     return
+    // }
 
     validateScreenshots(screenshots,res);
     next();

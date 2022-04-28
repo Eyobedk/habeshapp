@@ -67,11 +67,16 @@ class Apps {
     }
     static async UpdateTheAppTable(ApkLocation, description, screenshotsArray,newbackgroundImage,ApkID)
     {
+        const d = new Date();
+        const year = d.getFullYear();
+        const day = d.getDate();
+        const month = d.getMonth() + 1;
+        const updatedDate = `${year}-${month}-${day}`;
         try{
             
             let sql = `UPDATE apps
             SET description = '${description}', appLocation = '${ApkLocation}', screenshotOne = '${screenshotsArray[0]}', screenshotTwo = '${screenshotsArray[1]}',
-            screenshotThree = '${screenshotsArray[2]}',backgroundImage = '${newbackgroundImage}' WHERE appid = ${ApkID};`
+            screenshotThree = '${screenshotsArray[2]}',backgroundImage = '${newbackgroundImage}',publishedDate = '${updatedDate}' WHERE appid = ${ApkID};`
             return new Promise((resolve, reject) => {
                 resolve(db.execute(sql));
             })

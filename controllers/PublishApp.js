@@ -2,14 +2,25 @@
 const fs = require('fs');
 const Apps = require('../models/App')
 const { HandleError} = require('../helpers/handleUploadExceptions')
+const path = require('path')
 
 
 
 const saver = (files, name) => {
   let HomePath = `uploads/${name}`;
-  let apkPath = HomePath + `/${files[0]['apkFile'].name}`;
-  let IconPath = HomePath + `/${files[0]['iconFile'].name}`;
-  let backIpath = HomePath + `/${files[0]['backImage'].name}`;
+  const appExtension = path.extname(files[0]['apkFile'].name);
+  const backIExtension = path.extname(files[0]['backImage'].name);
+  const IconExtension = path.extname(files[0]['iconFile'].name);
+
+  const apkMD5 = files[0]['apkFile'].md5 + appExtension;
+  const iconMD5 = files[0]['iconFile'].md5 +IconExtension ;
+  const backIMD5 = files[0]['backImage'].md5 + backIExtension;
+
+  let apkPath = HomePath + `/${apkMD5}`;
+  let IconPath = HomePath + `/${iconMD5}`;
+  let backIpath = HomePath + `/${backIMD5}`;
+
+
   let screenShootsPath = [];
 
   for (const file in files[0]) {
@@ -17,7 +28,8 @@ const saver = (files, name) => {
       fs.mkdir(HomePath, (err) => {
         HandleError();
       });
-      files[0][file].mv(HomePath + `/${files[0][file].name}`, (err) => {
+      
+      files[0][file].mv(HomePath + `/${apkMD5}`, (err) => {
         HandleError();
       })
     }
@@ -26,7 +38,8 @@ const saver = (files, name) => {
       fs.mkdir(HomePath + `/Icon`, (err) => {
         HandleError();
       });
-      files[0][file].mv(HomePath + `/Icon` + `/${files[0][file].name}`, (err) => {
+      const x = files[0][file].md5
+      files[0][file].mv(HomePath + `/Icon` + `/${iconMD5}`, (err) => {
         HandleError();
       })
     }
@@ -35,7 +48,8 @@ const saver = (files, name) => {
       fs.mkdir(HomePath + `/backImage`, (err) => {
         HandleError();;
       });
-      files[0][file].mv(HomePath + `/backImage` + `/${files[0][file].name}`, (err) => {
+      const x = files[0][file].md5
+      files[0][file].mv(HomePath + `/backImage` + `/${backIMD5}`, (err) => {
         HandleError();
       })
     }
@@ -45,10 +59,12 @@ const saver = (files, name) => {
         HandleError();;
       });
       for (let index = 0; index < files[0][file].length; index++) {
-        files[0][file][index].mv(HomePath + `/screenshot` + `/${files[0][file][index].name}`, (err) => {
+        const screenshExt = path.extname(files[0][file][index].name);
+        const x = files[0][file][index].md5 + screenshExt;
+        files[0][file][index].mv(HomePath + `/screenshot` + `/${x}`, (err) => {
           HandleError();
         })
-        screenShootsPath.push(HomePath + `/screenshot/${files[0][file][index].name}`)
+        screenShootsPath.push(HomePath + `/screenshot/${x}`)
       }
     }
    }
