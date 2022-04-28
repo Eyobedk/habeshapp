@@ -92,6 +92,12 @@ class Apps {
         const delResult = await db.execute(sql);
         return delResult
     }
+    static async LoadNewApps()
+    {
+        const sql = `SELECT * FROM apps ORDER BY publishedDate ASC`;
+        const [orderedResult, _] = await db.execute(sql);
+        return orderedResult;
+    }
 
 }
 
