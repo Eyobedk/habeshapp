@@ -1,15 +1,71 @@
-<%- include('partials/header'); -%>
-
-<header>
-  <div class="smoothie">
-    <img src="/smoothie.png" alt="">
-  </div>
-  <div class="headings">
-    <h2>Smoothie Recipes</h2>
-    <h3>By Ninjas For Ninjas</h3>
-    <a href="/smoothies" class="btn">View Recipes</a>
-  </div>
-</header>
 
 
-<%- include('partials/footer'); -%>
+<!doctype html>
+<html class="fixed">
+
+<head>
+
+  <!-- Basic -->
+  <meta charset="UTF-8">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+  <!-- My css -->
+  <link rel="stylesheet" href="css/pannel.css">
+</head>
+
+<body>
+  <section class="body" style="margin-top: 40px;margin-left: 50px;">
+
+    <!-- start: header -->
+
+    <!-- end: header -->
+
+    <div class="inner-wrapper">
+      <!-- start: sidebar -->
+      <!--  -->
+      <!-- end: sidebar -->
+
+      <section role="main" class="content-body">
+
+        <h2>New Apps </h2>
+        <center>
+          <div  style="margin-top: 40px;" class="container-fluid">
+            <div class="row">
+
+              <%
+			        	if(typeof ListApps != 'undefined') { %>
+              <% ListApps.forEach((app)=>{ %>
+              <div class="col-md-3 col-sm-4">
+                <div class="wrimagecard wrimagecard-topimage">
+                  <a href="info/<%= app[2] %> " style="text-decoration: none;">
+                    <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
+                      <center><img style="opacity: 50;" src=<%= app[1]%> ></img></center>
+                    </div>
+                    <div class="wrimagecard-topimage_title">
+                      <center>
+                        <h4><b> <%= app[0] %> </b><br>
+                          Rate: <%= app[3] %>
+                      </center>
+                      <div class="pull-right badge" id="WrControls"></div>
+                      </h4>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <% }) %>
+              <% } %>
+
+        </center>
+
+      </section>
+    </div>
+
+  </section>
+</body>
+
+</html>
