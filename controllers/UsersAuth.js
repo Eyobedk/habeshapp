@@ -19,9 +19,7 @@ module.exports.signup_Post = async (req, res) => {
 
     user.save().then(async ()=>{
         const getID = await User.findEmail(email);
-        console.log("THE ID"+getID[0]["user_id"]);
         const token = createToken(JSON.stringify(getID[0]["user_id"]));
-        console.log("here"+token)
         res.cookie('jwt', token, {
                 httpOnly: true,
                 maxAge: 40000
@@ -38,7 +36,7 @@ module.exports.login_Get = (req, res) => {
 module.exports.login_Post = async (req, res, next) => {
     const {email,password} = req.body;
     const user = await User.findEmail(email);
-    console.log("the password"+user[0].password)
+    let passwordResult;
     if(!user)
     {
         let Ierrors = 'enter the correct password and email';
@@ -46,20 +44,21 @@ module.exports.login_Post = async (req, res, next) => {
         return
     }
     await bcrypt.compare(password, user[0].password).then(function(result) {
-        // result == true
-        console.log("the result"+result)
-        if(!result)
-        {
-            const Ierror = "Enter the correct email and password";
-            return res.render('login&signup/Login',{Ierror});
-        }
-    });
+        passwordResult = result;
+        
+    }).then(()=>{
+    if(!passwordResult)
+    {
+        const Ierror = "Enter the correct email and password";
+        return res.render('login&signup/Login',{Ierror});
+    }else{
 
     const token = createToken(JSON.stringify(user[0].user_id));
     "use strict";
-    console.log("token"+ token);
     res.cookie('jwt', token, {httpOnly: true,maxAge: 40000});
-    res.redirect(302, '/smoothies');
+    res.redirect(302, '/home');
+    }
+})
 }
 
 exports.logout = (req, res) => {
