@@ -8,8 +8,10 @@ const {protect} = require('../middleware/protectRoute');
 const {Login_Dev} = require('../controllers/dev_auth');
 const {validatestatus} = require('../middleware/filevalidator')
 const {deleteAppsRoute} = require('../controllers/deleteApps')
-const {updateApps,StoreUpdated} =require('../controllers/updateApp')
+const {ListStatApps,getStatus} = require('../controllers/status')
+const {updateApps} =require('../controllers/updateApp')
 const {varifydevEmail,validateResetTokes,setDeveloperPassword} = require('../controllers/dev-forgot-passowrd');
+const { ListApps } = require("../models/App");
 
 const router = Router();
 
@@ -46,7 +48,8 @@ router.get('/delete/:id',protect,deleteAppsRoute);
 router.get('/appsUpdate',protect,ListPublishedApp);
 router.get('/deleteApps',protect,ListPublishedAppTobeDeleted);
 
-router.get('/status',protect,(req, res) => { res.render("developer/status")});
+router.get('/status',protect,ListStatApps);
+router.get('/status/:id',protect,getStatus);
 router.get('/apps',protect,(req, res) => { res.render("developer/apps")});
 
 
