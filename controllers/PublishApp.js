@@ -17,7 +17,7 @@ const saver = (files, name) => {
   const backIMD5 = files[0]['backImage'].md5 + backIExtension;
 
   let apkPath = HomePath + `/${apkMD5}`;
-  let IconPath = HomePath + `/${iconMD5}`;
+  let IconPath = HomePath + `/Icon/${iconMD5}`;
   let backIpath = HomePath + `/${backIMD5}`;
 
 
@@ -38,7 +38,7 @@ const saver = (files, name) => {
       fs.mkdir(HomePath + `/Icon`, (err) => {
         HandleError();
       });
-      const x = files[0][file].md5
+      
       files[0][file].mv(HomePath + `/Icon` + `/${iconMD5}`, (err) => {
         HandleError();
       })
@@ -48,7 +48,7 @@ const saver = (files, name) => {
       fs.mkdir(HomePath + `/backImage`, (err) => {
         HandleError();;
       });
-      const x = files[0][file].md5
+      
       files[0][file].mv(HomePath + `/backImage` + `/${backIMD5}`, (err) => {
         HandleError();
       })
@@ -121,7 +121,7 @@ exports.ListPublishedAppTobeDeleted = async(req,res)=>{
   }
   let ToSend = [];
   ListofApps.forEach((file)=>{
-    ToSend.push([file.appName, file.icon,file.appid])
+    ToSend.push([file.appName, '/' +file.icon,file.appid])
   })
   console.log("air"+ToSend)
   
