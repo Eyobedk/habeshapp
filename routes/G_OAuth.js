@@ -12,7 +12,7 @@ async function verifyCallBack(accToken, refoken, profile, done) {
 
 const setwhenDone = {
     failureRedirect: '/failure',
-    successRedirect: '/smoothies',
+    successRedirect: '/home',
     session: true
 }
 
