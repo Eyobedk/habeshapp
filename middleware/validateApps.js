@@ -33,7 +33,7 @@ function ValidURL(str) {
 
 
 exports.validateApp = async (req, res, next) => {
-    const {name,domain,choosen} = req.body;
+    const {name,domain,choosen,funcOne,funcTwo,funcThree,funcFour} = req.body;
     const theApk = req.files.apk;
     const theIcon = req.files.icon;
     const BackgImage = req.files.backImage;
@@ -42,6 +42,15 @@ exports.validateApp = async (req, res, next) => {
     const appExtension = path.extname(theApk.name);
     const backIExtension = path.extname(BackgImage.name);
     const IconExtension = path.extname(theIcon.name);
+
+    if(funcOne.length == 0 || funcTwo.length == 0 || funcThree.length == 0 || funcFour.length == 0)
+    {
+        let theError = 'Enter a text for features list';
+        res.render('developer/publish', {
+            Ierror: theError
+        })
+        return
+    }
 
     const App = await Apps.find(name);
     if(App)
