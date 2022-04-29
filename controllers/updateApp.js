@@ -47,6 +47,7 @@ const newFileSaver = async(files, name) => {
 
 
 exports.updateApps = async (req, res) => {
+  const {funcOne,funcTwo,funcThree,funcFour} = req.body;
   const description = req.body.desc;
   const newApkFILE = req.files.apk;
   const newBackImage = req.files.backImage;
@@ -62,6 +63,8 @@ exports.updateApps = async (req, res) => {
 
 
   const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id));
+  console.log("aha")
+  console.log(Paths)
   date = new Date(Paths[0].publishedDate);
   year = date.getFullYear();
   month = date.getMonth() + 1;
@@ -74,6 +77,7 @@ exports.updateApps = async (req, res) => {
     month = '0' + month;
   }
   const theDate = year + '-' + month + '-' + dt;
+  console.log(theDate)
 
 
   const directory = `uploads/${Paths[0].appName}/`;
@@ -94,7 +98,7 @@ exports.updateApps = async (req, res) => {
             newupdatedAppPath = newFilesPath.newApkPath;
             newscreenShootsPath = newFilesPath.screenShootsPath;
             newBackgroundImagesPath = newFilesPath.newBackIpath }),
-        await Apps.UpdateTheAppTable(newupdatedAppPath, description,newscreenShootsPath,newBackgroundImagesPath, Paths[0].appid).catch(err => {
+        await Apps.UpdateTheAppTable(newupdatedAppPath, description,newscreenShootsPath,newBackgroundImagesPath, Paths[0].appid,funcOne,funcTwo,funcThree,funcFour).catch(err => {
             console.log(err)
           })
 
