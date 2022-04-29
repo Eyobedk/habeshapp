@@ -75,7 +75,7 @@ const saver = (files, name) => {
 
 
 exports.fileUploader = async (req, res) => {
-  let {name,choosen,desc} = req.body;
+  let {name,choosen,desc,funcOne,funcTwo,funcThree,funcFour} = req.body;
   let apkFile = req.files.apk;
   let iconFile = req.files.icon;
   let backImage = req.files.backImage;
@@ -84,7 +84,8 @@ exports.fileUploader = async (req, res) => {
 
   const filesaver = [{apkFile,iconFile,backImage,screenshot}]
   const paths = saver(filesaver, name);
-  const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath, paths.screenShootsPath, paths.backIpath, res.locals.dev.id);
+  const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath,
+     paths.screenShootsPath, paths.backIpath, res.locals.dev.id,funcOne,funcTwo,funcThree,funcFour);
   await theApps.save().then(() => {
     res.render('developer/publish',{done:"done"})
   }).catch((err) => {
