@@ -5,14 +5,16 @@ const fs = require('fs');
 
 function validateScreenshots(images,res) {
     let theError = 'please Enter 3 screenshots file with a png extention';
+    let theError2 = 'please Enter 3 screenshots file with a png extention';
     if(images.length != 3){
         res.render('developer/update', {
-            Ierror: theError
+            Ierror: theError2
         })
         return
     }
     for (let i = 0;i <= images.length - 1; i++) {
         var screenExtension = path.extname(images[i].name);
+        console.log(screenExtension)
         if (screenExtension != '.png') {
             res.render('developer/update', {
                 Ierror: theError
@@ -25,9 +27,13 @@ function validateScreenshots(images,res) {
 
 
 exports.validatestatus = async (req, res,next)=>{
+    const {funcOne,funcTwo,funcThree,funcFour} = req.body;
     const theApk = req.files.apk;
     const BackgImage = req.files.backImage;
     const screenshots = req.files.screenshots;
+    console.log(screenshots)
+    
+    
 
     const appExtension = path.extname(theApk.name);
     const backIExtension = path.extname(BackgImage.name);
@@ -41,11 +47,9 @@ exports.validatestatus = async (req, res,next)=>{
     if (dt < 10) {
       dt = '0' + dt;
     }
-    if (month < 10) {
-      month = '0' + month;
-    }
-    const theDate = year + '-' + month + '-' + dt;
-
+    const dateforFolders = dt - 1;
+    const theDate = dateforFolders + '-' + month + '-' + year;
+    
     console.log(`updates/${Paths[0].appName}/${theDate}`)
     if(fs.existsSync(`updates/${Paths[0].appName}/${theDate}`))
     {
@@ -64,13 +68,21 @@ exports.validatestatus = async (req, res,next)=>{
         return
     }
 
-    // if (backIExtension != '.png') {
-    //     let theError = "please Enter the background image file with .png image type";
-    //     res.render('developer/update', {
-    //         Ierror: theError
-    //     })
-    //     return
-    // }
+    if (backIExtension != '.png' || backIExtension != '.jpg' || backIExtension != '.jpeg') {
+        let theError = "please Enter the background image file with .png image type";
+        res.render('developer/update', {
+            Ierror: theError
+        })
+        return
+    }
+    if(funcOne.length == 0 || funcTwo.length == 0 || funcThree.length == 0 || funcFour.length == 0)
+    {
+        let theError = 'Enter a text for features list';
+        res.render('developer/update', {
+                    Ierror: theError
+                })
+        return
+    }
 
     validateScreenshots(screenshots,res);
     next();
