@@ -6,7 +6,7 @@ module.exports.createToken = (id) =>{
     return jwt.sign({
         id
     }, process.env.ACCESS_TOKEN_SECRET_KEY, {
-        expiresIn: 600000
+        expiresIn: 6000000
     })
 }
 

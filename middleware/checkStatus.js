@@ -23,38 +23,43 @@ exports.checkUser = async (req, res, next) => {
                     const user = await User.findByID(onlyId)
                     console.log("user" + user)
                     console.log("dt2" + JSON.stringify(user))
-                    res.locals.user = {
-                        id: user["user_id"],
-                        email: user["email"]
-                    };
-                    next();
-                }
-            });
-        } else if (req.cookies.devToken) {
-            jwt.verify(req.cookies.devToken, process.env.DEVELOPER_ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
-                if (err) {
-                    res.locals.dev = null;
-                   
-                    next();
-                } else {
-                    const c = JSON.stringify(decodedToken["id"]);
-                    console.log("the decoded token " + c);
-                    let id = c.replace(/\"/g, '')
-                    console.log("the decoded token id:" + id);
-                    let onlyId = id.replace(/\\/g, '')
-                    console.log("the decoded onlyId " + onlyId);
-
-                    const developer = await Developer.findByID(onlyId)
-                    console.log("developer::" + developer)
-                    console.log("dt2 developer" + JSON.stringify(developer))
-                    res.locals.dev = {
-                        id: developer["dev_id"],
-                        email: developer["dev_email"]
-                    };
+                    res.locals.userId = user["user_id"];
+                    res.locals.userEmail = user["email"];
+                    
+                    // res.locals.user = {
+                    //     id: user["user_id"],
+                    //     email: user["email"]
+                    // };
                     next();
                 }
             });
         }
+        // } else if (req.cookies.devToken) {
+        //     jwt.verify(req.cookies.devToken, process.env.DEVELOPER_ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
+        //         if (err) {
+        //             res.locals.dev = null;
+                   
+        //             next();
+        //         } else {
+        //             const c = JSON.stringify(decodedToken["id"]);
+        //             console.log("the decoded token " + c);
+        //             let id = c.replace(/\"/g, '')
+        //             console.log("the decoded token id:" + id);
+        //             let onlyId = id.replace(/\\/g, '')
+        //             console.log("the decoded onlyId " + onlyId);
+
+        //             const developer = await Developer.findByID(onlyId)
+        //             console.log("developer::" + developer)
+        //             console.log("dt2 developer" + JSON.stringify(developer))
+        //             res.locals.dev = {
+        //                 id: developer["dev_id"],
+        //                 email: developer["dev_email"]
+        //             };
+        //             console.log("the dev id"+ res.locals.dev.id)
+        //             next();
+        //         }
+        //     });
+        // }
         else {
          res.locals.user = null;
           next();
@@ -62,4 +67,38 @@ exports.checkUser = async (req, res, next) => {
     } catch (e) {
         console.log(e)
     }
+}
+
+exports.checkDeveloper = async (req, res,next)=>{
+    try{
+    if (req.cookies.devToken) {
+        jwt.verify(req.cookies.devToken, process.env.DEVELOPER_ACCESS_TOKEN_SECRET_KEY, async (err, decodedToken) => {
+            if (err) {
+                res.locals.dev = null;
+               
+                next();
+            } else {
+                const c = JSON.stringify(decodedToken["id"]);
+                console.log("the decoded token " + c);
+                let id = c.replace(/\"/g, '')
+                console.log("the decoded token id:" + id);
+                let onlyId = id.replace(/\\/g, '')
+                console.log("the decoded onlyId " + onlyId);
+
+                const developer = await Developer.findByID(onlyId)
+                console.log("developer::" + developer)
+                console.log("dt2 developer" + JSON.stringify(developer))
+                res.locals.dev = {
+                    id: developer["dev_id"],
+                    email: developer["dev_email"]
+                };
+                console.log("the dev id"+ res.locals.dev.id)
+                next();
+            }
+        });
+    }else {
+        res.locals.dev = null;
+         next();
+       }
+    }catch(err){console.log(err)}
 }

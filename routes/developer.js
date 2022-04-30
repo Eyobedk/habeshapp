@@ -38,16 +38,21 @@ router.post('/developer-reset', setDeveloperPassword)
 
 //normal dev routes
 router.get('/pannel',protect,(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
-router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
-router.post('/publish',validateApp,fileUploader);//
 
+//publish
+router.get('/publish',protect,(req, res) => { res.render("developer/publish")});
+router.post('/publish',protect,validateApp,fileUploader);//
+
+//update
 router.get('/update/:id',protect,(req, res) => {res.render("developer/update")});
 router.post('/update/:id',protect,validatestatus,updateApps);
+router.get('/appsUpdate',protect,ListPublishedApp);
+
+//delete
+router.get('/deleteApps',protect,ListPublishedAppTobeDeleted);
 router.get('/delete/:id',protect,deleteAppsRoute);
 
-router.get('/appsUpdate',protect,ListPublishedApp);
-router.get('/deleteApps',protect,ListPublishedAppTobeDeleted);
-
+//status and apps
 router.get('/status',protect,ListStatApps);
 router.get('/status/:id',protect,getStatus);
 router.get('/apps',protect,(req, res) => { res.render("developer/apps")});

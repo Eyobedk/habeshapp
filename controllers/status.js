@@ -4,7 +4,6 @@ const Apps = require('../models/App')
 
 exports.ListStatApps = async (req, res)=>
 {
-    console.log(res.locals.dev.id)
     const ListofApps = await Apps.ListApps(res.locals.dev.id).catch((err)=>{console.log(err)});
     if(ListofApps)
     {

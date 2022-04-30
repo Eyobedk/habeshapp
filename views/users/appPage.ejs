@@ -9,38 +9,42 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/user.css">
+<link rel="icon" href="/favicon.ico">
 <title>App page</title>
 </head>
 <body>
 
+<% if(typeof AppInfos != 'undefined'){ %>
 
+  
+  <% } %>
 <div class="container" style="margin-top: 70px;">
   <div class="row">
     <div class="col-md-6" style="     margin-right: 30px;">
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active"> <img class="d-block w-100" src="icon.webp" alt="First slide"> </div>
+          <div class="carousel-item active"> <img class="d-block w-100" src="<%=  AppInfos[0][7].Icon%>" alt="First slide"> </div>
         </div>
         <div class="" role="button" data-slide="prev"> <span class="" aria-hidden="true"></span> <span class="sr-only">Previous</span> </div> <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
     </div>
     <div class="col-md-6">
       <div class="row">
-        <h1>Ride</h1>
+        <h1><%= AppInfos[0][0].appname%></h1>
       </div>
       <div class="row" style="margin-top: 2px;">
-        <h5 style="color: blue;"><i class="fa" aria-hidden="true"></i> publisher</h5>
+        <h6 style="color: blue; text-decoration: none;"><i class="fa" aria-hidden="true"></i><a style="text-decoration: none;" href="developer_page/<%= AppInfos[0][1].dev_id %>"> publisher</a></h6>
 
       </div>
       <div class="row">
         <h3 class="text-warning"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i></h3>
         &nbsp; &nbsp;
-        <h4>3.5 star rating</h4>
+        <h4><%= AppInfos[0][2].Rate %> Star Rating</h4>
       </div>
       <div class="row">
-        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature one</strong> 20% Instant Discount on SBI Credit Cards</p>
-        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature two</strong> 5% Unlimited Cashback on Flipkart Axis Bank Credit Card </p>
-        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature three</strong> Extra 5% off* with Axis Bank Buzz Credit Card</p>
-        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature four</strong>20% Instant Discount on pay with <i class="fa fa-google-wallet" aria-hidden="true"></i> google wallet </p>
+        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature one</strong> <%=  AppInfos[0][3].func1 %></p>
+        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature two</strong> <%=  AppInfos[0][4].func2 %> </p>
+        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature three</strong> <%=  AppInfos[0][5].func3 %></p>
+        <p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>App feature four</strong> <%=  AppInfos[0][6].func4 %> <i class="fa fa-google-wallet" aria-hidden="true"></i> google wallet </p>
       </div>
    
       <div class="row mt-4">
@@ -61,21 +65,21 @@
    <div class="row mt-5">
    	<div class="col-md-3">
    		<div class="card">
-   			<img class="card-img-top img-fluid" src="./screenshots/screen-1.webp">
+   			<img class="card-img-top img-fluid" src="<%= AppInfos[0][8].screenshot1%>">
    		</div>
    	</div>
    	
    	
    	<div class="col-md-3">
       <div class="card">
-        <img class="card-img-top img-fluid" src="./screenshots/screen-2.webp">
+        <img class="card-img-top img-fluid" src="<%= AppInfos[0][9].screenshot2%>">
       </div>
     </div>
    	
    	
     <div class="col-md-3">
       <div class="card">
-        <img class="card-img-top img-fluid" src="./screenshots/screen-4.webp">
+        <img class="card-img-top img-fluid" src="<%= AppInfos[0][10].screenshot3%>">
       </div>
     </div>
    

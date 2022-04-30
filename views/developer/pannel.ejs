@@ -48,7 +48,8 @@
 
 					<div id="userbox" class="userbox">
 						<a href="#" data-toggle="dropdown">
-							<%if(typeof dev!='undefined') {%>
+							<%if(typeof dev.id!='undefined') {%>
+							<% console.log("The ejs+JSON.stringify(dev)")%>
 							<% console.log("The ejs"+JSON.stringify(dev))%>
 							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@JSOFT.com">
 								<span class="name"><%= dev.email %></span>

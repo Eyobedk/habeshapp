@@ -13,9 +13,10 @@
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+  <link rel="stylesheet" href="/bootstrap/bootstrap.css" />
   <!-- My css -->
-  <link rel="stylesheet" href="css/pannel.css">
+  <link rel="stylesheet" href="/css/pannel.css">
+  <link rel="icon" href="/favicon.ico">
 </head>
 
 <body>
@@ -42,7 +43,7 @@
               <% ListApps.forEach((app)=>{ %>
               <div class="col-md-3 col-sm-4">
                 <div class="wrimagecard wrimagecard-topimage">
-                  <a href="info/<%= app[2] %> " style="text-decoration: none;">
+                  <a href="/info?app=<%= app[2] %> " style="text-decoration: none;">
                     <div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
                       <center><img style="opacity: 50;" src=<%= app[1]%> ></img></center>
                     </div>
