@@ -55,13 +55,15 @@ module.exports.login_Post = async (req, res, next) => {
 
     const token = createToken(JSON.stringify(user[0].user_id));
     "use strict";
-    res.cookie('jwt', token, {httpOnly: true,maxAge: 40000});
+   // res.locals.userId = user[0].user_id;
+    res.cookie('jwt', token, {httpOnly: true,maxAge: 6000000});
     res.redirect(302, '/home');
     }
 })
 }
 
 exports.logout = (req, res) => {
+    res.locals.userId = null;
     res.cookie('jwt', '', {
         maxAge: 1
     })
