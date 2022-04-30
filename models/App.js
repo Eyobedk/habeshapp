@@ -51,6 +51,12 @@ class Apps {
         const [result, _] = await db.execute(sql);
         return result
     }
+    static async ListAppsForUsers(id)
+    {
+        const sql = `SELECT * FROM apps WHERE appid=${id}`;
+        const [result, _] = await db.execute(sql);
+        return result
+    }
     static async getAppsPath(appid,id)
     {
         const sql = `SELECT * FROM apps WHERE dev_id=${id} AND appid=${appid}`;
@@ -70,13 +76,6 @@ class Apps {
         catch (err) {
             console.log(err)
         }
-    }
-    static async checkUpdated(appid, published_on)
-    {
-        console.log(published_on)
-        let sql = `SELECT * FROM previousversions WHERE appid = ${appid} AND published_on = ${published_on}`
-        const [result, _] = await db.execute(sql);
-        return result
     }
     static async UpdateTheAppTable(ApkLocation, description, screenshotsArray,newbackgroundImage,ApkID,funcOne,funcTwo,funcThree,funcFour)
     {
