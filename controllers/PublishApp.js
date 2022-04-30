@@ -95,7 +95,6 @@ exports.fileUploader = async (req, res) => {
 }
 
 exports.ListPublishedApp = async(req,res)=>{
-  console.log(res.locals.dev.id)
   const ListofApps = await Apps.ListApps(res.locals.dev.id).catch((err)=>{console.log(err)});
   if(ListofApps)
   {
@@ -113,7 +112,6 @@ exports.ListPublishedApp = async(req,res)=>{
 
 
 exports.ListPublishedAppTobeDeleted = async(req,res)=>{
-  console.log(res.locals.dev.id)
   const ListofApps = await Apps.ListApps(res.locals.dev.id).catch((err)=>{console.log(err)});
   if(ListofApps)
   {
