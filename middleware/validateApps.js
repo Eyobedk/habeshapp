@@ -3,6 +3,7 @@ const Apps = require('../models/App')
 
 function validateScreenshots(images,res) {
     let theError = 'please Enter valid 3 screenshots';
+    let flag;
     if(images.length != 3){
         res.render('developer/publish', {
             Ierror: theError
@@ -11,22 +12,19 @@ function validateScreenshots(images,res) {
     for (let i = 0;i <= images.length - 1; i++) {
         var screenExtension = path.extname(images[i].name);
         console.log(screenExtension)
-        if (screenExtension != '.png') {
-            res.render('developer/publish', {
-                Ierror: theError
-            })
+        if (screenExtension == '.png') {
+            flag = 1;
         }
-        if (screenExtension != '.jpeg') {
-            res.render('developer/publish', {
-                Ierror: theError
-            })
+        else if (screenExtension == '.webp') {
+            flag = 2
         }
-        if (screenExtension != '.jpg') {
-            res.render('developer/publish', {
-                Ierror: theError
-            })
+        if(flag == 1 ){
+            continue;
         }
-        if (screenExtension != '.webp') {
+        if(flag == 2 ){
+            continue;
+        }
+        else{
             res.render('developer/publish', {
                 Ierror: theError
             })
@@ -87,7 +85,7 @@ exports.validateApp = async (req, res, next) => {
         return
     }
     
-    if(IconExtension != '.ico')
+    if(IconExtension == '.png')
     {
         let theError = 'please Enter the apk icon correctly(.ico file)';
         res.render('developer/publish', {
@@ -95,14 +93,7 @@ exports.validateApp = async (req, res, next) => {
         })
         return
     }
-    if(IconExtension != '.png')
-    {
-        let theError = 'please Enter the apk icon correctly(.ico or .png file)';
-        res.render('developer/publish', {
-            Ierror: theError
-        })
-        return
-    }
+    
     if (appExtension != '.apk') {
         let theError = 'please Enter the apk file correctly';
         res.render('developer/publish', {
@@ -111,35 +102,15 @@ exports.validateApp = async (req, res, next) => {
         return
     }
 
-
-    if (backIExtension != '.png') {
+    console.log(backIExtension)
+    if (backIExtension != ".png") {
         let theError = "please Enter the background image file";
         res.render('developer/publish', {
             Ierror: theError
         })
         return
     }
-    if (backIExtension != '.jpg') {
-        let theError = "please Enter the background image file";
-        res.render('developer/publish', {
-            Ierror: theError
-        })
-        return
-    }
-    if (backIExtension != '.jpeg') {
-        let theError = "please Enter the background image file";
-        res.render('developer/publish', {
-            Ierror: theError
-        })
-        return
-    }
-    if (backIExtension != '.webp') {
-        let theError = "please Enter the background image file";
-        res.render('developer/publish', {
-            Ierror: theError
-        })
-        return
-    }
+    
 
 
     validateScreenshots(screenshots,res);
