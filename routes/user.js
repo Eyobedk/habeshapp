@@ -3,7 +3,7 @@ const {Router} = require("express");
 
 const {validateSignupInput,validateLoginInput}= require('../middleware/inputValidator');
 const {signup_Get,signup_Post,login_Get,login_Post,logout} = require('../controllers/UsersAuth');
-const {AppInfo} = require('../controllers/users/AppInfo')
+const {AppInfo,AddComment} = require('../controllers/users/AppInfo')
 const {forgot_password,validateAndSendLink,setNewPassword} = require('../controllers/User-forgot-password');
 const {requireAuth} = require('../middleware/auth');
 
@@ -26,6 +26,8 @@ router.post('/reset-password',setNewPassword)
 
 
 router.get('/info', requireAuth,AppInfo)
+router.get('/info/:appid', requireAuth,AppInfo)
+router.post('/info/:appid', requireAuth,AddComment)
 
 
 module.exports = router;
