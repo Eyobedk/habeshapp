@@ -60,10 +60,8 @@ exports.validateLoginInput = async (req, res, next)=>{
     [check('email',"Enter a proper info").isEmail().normalizeEmail()];
     const listOferrors = validationResult(req);
     let errors = JSON.stringify(listOferrors["errors"]);
-    console.log("err"+errors.length == 0)
     if(errors.length ==0) {
         const Ierror = "Enter a proper email";
-        console.log(Ierror);
         return res.render('login&signup/Login',{Ierror});
     }
     next();
