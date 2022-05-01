@@ -12,7 +12,6 @@ const requireAuth =(req, res, next) => {
                     console.log(err.message);
                     res.redirect('/Login')
                 } else {
-                console.log("The new DecodedToken:" + JSON.stringify(decodedToken));
                 next();
             }
         })
@@ -29,9 +28,7 @@ const requireAuthforDev =(req, res, next) => {
                 if (err) {
                     console.log("dev token error: "+err.message);
                     res.redirect('/developer-Login')
-                } else {
-                console.log("The new DecodedToken:" + JSON.stringify(decodedToken));
-                
+                } else {                
                 next();
             }
         })
