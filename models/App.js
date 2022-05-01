@@ -65,9 +65,7 @@ class Apps {
     }
     static async updateApp(appid, publishedOn,appUrl)
     {
-        try{
-            console.log(publishedOn)
-            
+        try{            
             let sql = `INSERT INTO previousversions(appid, published_on,file_location) VALUES(${appid},'${publishedOn}', '${appUrl}');`
             return new Promise((resolve, reject) => {
                 resolve(db.execute(sql));
@@ -84,7 +82,6 @@ class Apps {
         const day = d.getDate();
         const month = d.getMonth() + 1;
         const updatedDate = `${year}-${month}-${day}`;
-        console.log(updatedDate)
         try{
             
             let sql = `UPDATE apps
