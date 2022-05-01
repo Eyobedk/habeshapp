@@ -16,7 +16,36 @@
         flex: 0 0 50%;
         max-width: 50%;
     }
-    
+    .rating-css {
+        cursor: pointer;
+        height: 30px;
+        font-size: 0;
+        margin-bottom: 15px;
+    }
+
+    .rating-css input {
+        display: none;
+    }
+
+    .rating-css input + label {
+        display: inline-block;
+        width: 30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 24px;
+        color: #FFC107;
+        text-shadow: 1px 1px 0 #000;
+        cursor: pointer;
+    }
+
+    .rating-css input + label.fa-heart {
+        color: #ee2351;
+    }
+
+    .rating-css input:checked + label ~ label {
+        color: rgb(219, 219, 219);
+    }
+
     .carousel-control-prev {
         position: absolute;
         top: 0;
@@ -35,7 +64,17 @@
         opacity: .5;
     }
     
-    
+    .rating-css.hover-effect input:checked + label ~ label {
+        opacity: 0.5;
+    }
+
+    .rating-css.hover-effect:hover input + label ~ label {
+        opacity: 1;
+    }
+
+    .rating-css.hover-effect:hover input:hover + label ~ label {
+        opacity: 0.5;
+    }
     
     @media (min-width: 992px)
     {
@@ -49,8 +88,8 @@
         .col-md-3 {
             -webkit-box-flex: 0;
             -ms-flex: 0 0 25%;
-            flex: 0 0 30%;
-            max-width: 30%;
+            flex: 0 0 33%;
+            max-width: 33%;
         }
         .container {
             max-width: 895px;
@@ -73,7 +112,7 @@
             max-width: 45%;
         }
         .container {
-            max-width: 876px;
+            max-width: 900px;
         }
         .col-md-3 {
             position: relative;

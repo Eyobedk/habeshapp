@@ -11,7 +11,6 @@ function validateScreenshots(images,res) {
     }
     for (let i = 0;i <= images.length - 1; i++) {
         var screenExtension = path.extname(images[i].name);
-        console.log(screenExtension)
         if (screenExtension == '.png') {
             flag = 1;
         }
@@ -102,7 +101,6 @@ exports.validateApp = async (req, res, next) => {
         return
     }
 
-    console.log(backIExtension)
     if (backIExtension != ".png") {
         let theError = "please Enter the background image file";
         res.render('developer/publish', {

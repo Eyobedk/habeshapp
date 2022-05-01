@@ -25,7 +25,6 @@ passport.use(new Strategy({
 
 passport.serializeUser((user,done)=>{
     useremail = user._json.email;
-    console.log("GEDAY"+user._json.email);
     done(null,user._json.email);});
 
 passport.deserializeUser((user,done)=>{ done(null,user) });
@@ -33,7 +32,7 @@ passport.deserializeUser((user,done)=>{ done(null,user) });
 
 Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 
-    (req, res) => {console.log("the user"+ useremail)
+    (req, res) => {
         res.locals.user = {email:useremail}});
 
 Router.get('/failure', (req, res) => { res.send("failed to login") })
