@@ -14,7 +14,6 @@ function validateScreenshots(images,res) {
     }
     for (let i = 0;i <= images.length - 1; i++) {
         var screenExtension = path.extname(images[i].name);
-        console.log(screenExtension)
         if (screenExtension != '.png') {
             res.render('developer/update', {
                 Ierror: theError
@@ -31,7 +30,6 @@ exports.validatestatus = async (req, res,next)=>{
     const theApk = req.files.apk;
     const BackgImage = req.files.backImage;
     const screenshots = req.files.screenshots;
-    console.log(screenshots)
     
     
 
@@ -50,7 +48,6 @@ exports.validatestatus = async (req, res,next)=>{
     const dateforFolders = dt - 1;
     const theDate = dateforFolders + '-' + month + '-' + year;
     
-    console.log(`updates/${Paths[0].appName}/${theDate}`)
     if(fs.existsSync(`updates/${Paths[0].appName}/${theDate}`))
     {
         let theError = 'You already have made an update today please try updating your app on another day';
