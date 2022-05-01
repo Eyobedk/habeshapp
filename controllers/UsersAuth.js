@@ -55,7 +55,6 @@ module.exports.login_Post = async (req, res, next) => {
 
     const token = createToken(JSON.stringify(user[0].user_id));
     "use strict";
-   // res.locals.userId = user[0].user_id;
     res.cookie('jwt', token, {httpOnly: true,maxAge: 6000000});
     res.redirect(302, '/home');
     }
