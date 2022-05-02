@@ -71,11 +71,8 @@ class User {
   static async updatePassword(id, password)
   {
     const hash = bcrypt.hashSync(password, 10);
-    console.log("the id "+ id +"the password"+password)
     const sql = `UPDATE habeshapp.user SET password = '${hash}' WHERE user_id = ${id};`;
-    await db.execute(sql).then((result)=>{
-      console.log("password result"+JSON.stringify(result));
-    }).catch((err)=>{
+    await db.execute(sql).catch((err)=>{
       console.log("The Error");
       console.log(err.code);
       console.log(err.sql);
