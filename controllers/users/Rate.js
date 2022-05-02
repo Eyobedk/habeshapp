@@ -2,6 +2,14 @@ const db = require('../../db/database')
 
 
 
+exports.updateMyRate = async (appid)=>
+{
+    console.log("checking update my rate")
+    let sql = `SELECT * FROM rate WHERE Tappid=${appid}`;
+    const [result, _] = await db.execute(sql);
+    return result;
+}
+
 exports.checkRateStatus = async(appId, userId)=>
 {
     let sql = `SELECT * FROM alreadyrated WHERE theappid = ${appId} AND userId = ${userId}`;
@@ -17,7 +25,8 @@ exports.checkAppRated = async (appId)=>
 }
 
 exports.insertRate = async (appId)=>{
-    let sql = `INSERT INTO rate(Tappid) VALUES(${appId})`;
+    console.log("insertRates")
+    let sql = `INSERT INTO rate(Tappid,oneStar, twoStar, threeStar, fourStar, fiveStar) VALUES(${appId},'${0}','${0}','${0}','${0}','${0}')`;
     return new Promise((resolve, reject)=>{
         resolve(db.execute(sql));
     })
@@ -30,6 +39,12 @@ exports.addUserId = (appid, userId)=>
     return new Promise((resolve, reject)=>{
         resolve(db.execute(sql));
     })
+}
+
+exports.SetRate = async (rate, appid)=>
+{
+    let sql = `UPDATE apps SET appRate = ${rate} WHERE appid = ${appid}`;
+    await db.execute(sql).then((result)=>{console.log(result)})
 }
 
 
