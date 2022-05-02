@@ -39,11 +39,13 @@
       <div class="row">
         <form action="" id="myForm" method="post" >
         <div class="rating-css">
+        
+           <% var rated = AppInfos[0][11].rate; %>
         <input type="radio" value="1" id="rating1-1" name="rating1" onClick="validateRadio();">
         <label for="rating1-1" class="fa fa-star"></label>
         <input type="radio" value="2" id="rating1-2" name="rating1" onClick="validateRadio();">
         <label for="rating1-2" class="fa fa-star"></label>
-        <input type="radio" value="3" id="rating1-3" name="rating1" onClick="validateRadio();" checked>
+        <input type="radio" value="3" id="rating1-3" name="rating1" onClick="validateRadio();">
         <label for="rating1-3" class="fa fa-star"></label>
         <input type="radio" value="4" id="rating1-4" name="rating1" onClick="validateRadio();">
         <label for="rating1-4" class="fa fa-star"></label>
@@ -188,7 +190,17 @@
 
 
 
+<script type="text/javascript">
+  var getRate = <%= rated%>;
+  const yesBtn = document.getElementById(`rating1-${getRate}`);
 
+  // ✅ Set radio button to checked
+  yesBtn.checked = true;
+
+  // ✅ Set radio button to unchecked
+  // yesBtn.checked = false;
+
+</script>
 
 
 
