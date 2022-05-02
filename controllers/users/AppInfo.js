@@ -81,7 +81,7 @@ exports.AppInfo = async (req, res) => {
     })
 }
 
-exports.AddComment = async (req, res) => {
+exports.AddRate = async (req, res) => {
     await checkAppRated(req.params.appid).then(async appResult => {
         if (appResult.length == 0) {
             await insertRate(req.params.appid).then(async () => {
