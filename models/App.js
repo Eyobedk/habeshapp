@@ -109,6 +109,10 @@ class Apps {
         const [orderedResult, _] = await db.execute(sql);
         return orderedResult;
     }
+    static async LoadAllCommnets()
+    {
+        
+    }
 
 }
 
