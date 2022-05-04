@@ -111,7 +111,10 @@ class Apps {
     }
     static async LoadAllCommnets()
     {
-        
+        const sql = `SELECT user.name, comments.commentOne,comments.commentTwo FROM user, 
+        comments WHERE user.user_id = comments.user_id ORDER BY comments.published_date ASC; `;
+        const [orderedComments, _] = await db.execute(sql);
+        return orderedComments;
     }
 
 }
