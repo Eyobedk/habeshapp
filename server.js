@@ -12,7 +12,7 @@ const path = require('path')
 const authRoutes = require('./routes/user');
 // const developeRoutes = require('./routes/developer');
 const G_OAuth = require('./routes/G_OAuth');
-// const {requireAuth} = require('./middleware/auth');
+const {requireAuth} = require('./middleware/auth');
 const {checkUser,checkDeveloper} = require('./middleware/checkStatus');
 const urlencodedParser = bodyparser.urlencoded({extended: false})
 
@@ -62,7 +62,7 @@ app.use(G_OAuth)
 // devapp.use(developeRoutes)
 
 
-app.get('/home',LoadApps)
+app.get('/home',requireAuth,LoadApps)
 
 // devapp.listen(4000, console.log("dev at 4000"))
 app.listen(3000,()=>console.log("at 3000"));

@@ -16,7 +16,7 @@
 
 <% if(typeof AppInfos != 'undefined'){ %>
 
-  <% } %>
+ 
 <div class="container" style="margin-top: 70px;">
   <div class="row">
     <div class="col-md-6" style="     margin-right: 30px;">
@@ -28,24 +28,24 @@
     </div>
     <div class="col-md-6">
       <div class="row">
-        <h1><%= AppInfos[0][0].appname%></h1>
+        <h1><%= AppInfos[0][0].appname%></h1> <%= AppInfos[0][2]['Rate'] %>
       </div>
       <div class="row" style="margin-top: 2px;">
         <h6 style="color: blue; text-decoration: none;"><i class="fa" aria-hidden="true"></i><a style="text-decoration: none;" href="developer_page/<%= AppInfos[0][1].dev_id %>"> publisher</a></h6>
 
       </div>
-    
-
+      
       <div class="row">
         <form action="" id="myForm" method="post" >
         <div class="rating-css">
         
-           <% var rated = AppInfos[0][11].rate; %>
+           
+           <% var rated = AppInfos[0][2]['Rate'] %>
         <input type="radio" value="1" id="rating1-1" name="rating1" onClick="validateRadio();">
         <label for="rating1-1" class="fa fa-star"></label>
         <input type="radio" value="2" id="rating1-2" name="rating1" onClick="validateRadio();">
         <label for="rating1-2" class="fa fa-star"></label>
-        <input type="radio" value="3" id="rating1-3" name="rating1" onClick="validateRadio();">
+        <input type="radio" value="3" id="rating1-3" name="rating1" onClick="validateRadio();" >
         <label for="rating1-3" class="fa fa-star"></label>
         <input type="radio" value="4" id="rating1-4" name="rating1" onClick="validateRadio();">
         <label for="rating1-4" class="fa fa-star"></label>
@@ -104,6 +104,7 @@
    
    
 </div>
+<% } %>
 
 <form action="" method="post">
   <input type="submit" name="report" class="btn btn-primary" value="REPORT!">
@@ -113,17 +114,10 @@
 	<div class="row">
 		<h2>Ratings & Reviews</h2>
 	</div>
-	
-	<div class="row mt-5 mb-5">
-		<div class="media">
-  
-  <div class="media-body">
-    <h5 class="mt-0">Addis Sentayehu</h5> 
-      <!-- <span class="text-warning"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span></h5> -->
-   This app is grat but it is slow when connected to network however it have solved our problems with its services<hr>
-  </div>
-</div>
-	</div>
+
+
+
+
 	
 	<div class="row mt-5 mb-5">
 		<div class="media">
@@ -191,14 +185,14 @@
 
 
 <script type="text/javascript">
-  var getRate = <%= rated%>;
-  const yesBtn = document.getElementById(`rating1-${getRate}`);
+  var getRate = <%= rated %>;
+  console.log(getRate)
+  
+  
+    const yesBtn = document.getElementById(`rating1-${getRate}`);
+    yesBtn.checked = true;
+  
 
-  // ✅ Set radio button to checked
-  yesBtn.checked = true;
-
-  // ✅ Set radio button to unchecked
-  // yesBtn.checked = false;
 
 </script>
 
