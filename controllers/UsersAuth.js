@@ -36,15 +36,19 @@ module.exports.login_Get = (req, res) => {
 module.exports.login_Post = async (req, res, next) => {
     const {email,password} = req.body;
     const user = await User.findEmail(email);
+    console.log(password);
+
     let passwordResult;
-    if(!user)
+    if(user.length == 0)
     {
-        let Ierrors = 'enter the correct password and email';
+        let Ierrors = 'Enter the correct password and email';
         res.render("login&signup/Login", {Ierrors});
         return
     }
     await bcrypt.compare(password, user[0].password).then(function(result) {
         passwordResult = result;
+        console.log("result")
+        console.log(result)
         
     }).then(()=>{
     if(!passwordResult)
