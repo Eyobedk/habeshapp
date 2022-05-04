@@ -61,6 +61,9 @@ async function performRate(theStarts)
 const ApkInfo = [];
 exports.AppInfo = async (req, res) => {
     const appIds = req.params.appid;
+    let sortedcomment;
+    console.log("req.user")
+    console.log(req.user)
 
     await Apps.ListAppsForUsers(appIds).then((result) => {
         ApkInfo.push([
@@ -70,14 +73,16 @@ exports.AppInfo = async (req, res) => {
             { func4: result[0].funcFour }, { Icon: '/' + result[0].icon },
             { screenshot1: '/' + result[0].screenshotOne },
             { screenshot2: '/' + result[0].screenshotTwo },
-            {  screenshot3: '/' + result[0].screenshotThree  },
-            {rate : result[0].appRate}
+            {  screenshot3: '/' + result[0].screenshotThree  }
         ])
     }).catch(err => {
         console.log(err)
-    })
+    }).then(async ()=>{ sortedcomment = await Apps.LoadAllCommnets()})
+    // console.log(sortedcomment)
+    // console.log(ApkInfo)
     res.render('users/appPage', {
-        AppInfos: ApkInfo
+        AppInfos: ApkInfo,
+        comments: sortedcomment
     })
 }
 
@@ -96,6 +101,7 @@ exports.AddRate = async (req, res) => {
                 )
             })
         } else {
+            console.log(req.params.appid + res.locals.userId)
             await checkRateStatus(req.params.appid, res.locals.userId).then(async StatResult => { //check user rated the app  ?
                 if (StatResult.length == 0) {
                     await insertRate(req.params.appid).then(async () => {
