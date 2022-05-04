@@ -5,22 +5,36 @@ const fs = require('fs');
 
 
 exports.deleteAppsRoute = async (req, res) => {
-    await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id)).then((theApp)=>{
-        rimraf.sync(`uploads/${theApp[0].appName}`);
-        if(fs.existsSync(`updates/${theApp[0].appName}`))
+    await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id)).then( async (theApp)=>{
+
+        let oldPublishedDate = theApp[0].publishedDate;
+        let deleteDate = oldPublishedDate.setDate(oldPublishedDate.getDate() + 7)
+        let today =new Date();
+
+        if(new Date(deleteDate).getTime() < today.getTime())
         {
-            rimraf.sync(`updates/${theApp[0].appName}`);
+            rimraf.sync(`uploads/${theApp[0].appName}`);
+            if(fs.existsSync(`updates/${theApp[0].appName}`))
+            {
+                rimraf.sync(`updates/${theApp[0].appName}`);
+                const result = await Promise.resolve(Apps.deleteApps(req.params.id, res.locals.dev.id)).catch(err =>{console.log(err)});
+                const deleteMessage = "Your publushed App is removed from the platform"
+                if(result[0].affectedRows)
+                {
+                    res.render("developer/appls/deleteApps", {deleteMessage:deleteMessage})
+                }
+            }else{
+                res.render("developer/appls/deleteApps")
+             }
+        }else{
+            let oneWeeklimit = "not enghough date"
+            res.render("developer/appls/deleteApps", {oneWeeklimit:oneWeeklimit})
         }
+
     })
-    const result = await Promise.resolve(Apps.deleteApps(req.params.id, res.locals.dev.id)).catch(err =>{console.log(err)});
-    const deleteMessage = "Your publushed App is removed from the platform"
     
-    if(result[0].affectedRows)
-    {
-         res.render("developer/appls/deleteApps", {deleteMessage:deleteMessage})
-    }
-    else{
-        res.render("developer/appls/deleteApps")
-    }
+    
+
+    
 }
    
