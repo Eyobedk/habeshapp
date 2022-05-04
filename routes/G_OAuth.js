@@ -6,6 +6,7 @@ const {Strategy} = require('passport-google-oauth20');
 
 var useremail;
 async function verifyCallBack(accToken, refoken, profile, done) {
+    console.log(JSON.stringify(profile.id))
     await User.saveFromGoogle(profile._json.email);
     done(null, profile)
 }
