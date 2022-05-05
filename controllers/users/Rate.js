@@ -12,8 +12,8 @@ exports.updateMyRate = async (appid)=>
 
 exports.checkRateStatus = async(appId, userId)=>
 {
-    let sql = `SELECT * FROM alreadyrated WHERE theappid = ${appId} AND userId = ${userId}`;
-    const [result, _] = await db.execute(sql);
+    let sql = `SELECT * FROM alreadyrated WHERE theappid = ${appId} AND Tuser_id = ${userId}`;
+    const [result, _] = await db.execute(sql).catch((err)=>{ console.log(err)});
     return result;
 }
 
@@ -35,7 +35,7 @@ exports.insertRate = async (appId)=>{
 exports.addUserId = (appid, userId)=>
 {
     console.log("add user id")
-    let sql = `INSERT INTO alreadyrated(theappid, userId) VALUES(${appid}, ${userId})`;
+    let sql = `INSERT INTO alreadyrated(theappid, Tuser_id) VALUES(${appid}, ${userId})`;
     return new Promise((resolve, reject)=>{
         resolve(db.execute(sql));
     })
