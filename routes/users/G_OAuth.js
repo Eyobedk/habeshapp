@@ -5,15 +5,20 @@ const {Strategy} = require('passport-google-oauth20');
 
 
 var useremail;
+var user_id;
 async function verifyCallBack(accToken, refoken, profile, done) {
-    console.log(JSON.stringify(profile.id))
-    await User.saveFromGoogle(profile._json.email);
+    
+    await User.saveFromGoogle(profile._json.email).then(async result =>{
+        await User.findEmail(profile._json.email).then(userInfo=>{
+        user_id = userInfo[0].user_id;
+        })
+    });
     done(null, profile)
 }
 
 const setwhenDone = {
     failureRedirect: '/failure',
-    successRedirect: '/home',
+    // successRedirect: '/home',
     session: true
 }
 
@@ -25,16 +30,22 @@ passport.use(new Strategy({
 
 
 passport.serializeUser((user,done)=>{
-    useremail = user._json.email;
-    done(null,user._json.email);});
+    //useremail = user._json.email;     user._json.email
+   // console.log(user_id)
+    done(null,user_id);});
 
 passport.deserializeUser((user,done)=>{ done(null,user) });
 
 
 Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 
-    (req, res) => {
-        res.locals.user = {email:useremail}});
+    function(req, res) {
+    // Successful authentication, redirect home.
+    //res.locals.userId = null;
+   // res.locals.userId = user_id;
+    res.redirect(`/home`);
+    });
+        // res.locals.userId =  user_id});
 
 Router.get('/failure', (req, res) => { res.send("failed to login") })
 Router.get('/auth/logout', (req, res) => { req.logOut();res.redirect(302,'/') })

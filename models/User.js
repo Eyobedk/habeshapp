@@ -25,12 +25,9 @@ class User {
   static async findEmail(email) {
     const sql = `SELECT * FROM user WHERE email='${email}';`;
     const [result, _] = await db.execute(sql);
-    console.log("me result"+result)
-    if((result) === undefined) return undefined;
-   // console.log("from find email " + result[0]["user_id"]);
-   else{
     return result;
-  }}
+  }
+//}
   
   static async findByID(id) {
     const sql = `SELECT * FROM user WHERE user_id='${id}';`;
@@ -54,7 +51,7 @@ class User {
 
   static async saveFromGoogle(email) {
     const result = await this.findEmail(email);
-    if(result) {return;};
+    if(result.length > 0) {return;};
 
     const d = new Date();
     const year = d.getFullYear();

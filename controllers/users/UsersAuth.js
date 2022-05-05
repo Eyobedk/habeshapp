@@ -67,7 +67,13 @@ module.exports.login_Post = async (req, res, next) => {
 
 exports.logout = (req, res) => {
     res.locals.userId = null;
-    res.cookie('jwt', '', {
+    res.cookie('session','', {
+        maxAge: 1
+    })
+    res.cookie('session.sig','', {
+        maxAge: 1
+    })
+    res.cookie('jwt','', {
         maxAge: 1
     })
     res.redirect(302, '/Login');

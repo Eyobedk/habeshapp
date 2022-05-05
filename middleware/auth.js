@@ -5,11 +5,10 @@ const requireAuth =(req, res, next) => {
     const token = req.cookies.jwt;
     const authenicatedUser = req.isAuthenticated() && req.user;
     if (authenicatedUser) {
-        console.log("res.user")
-       // res.locals.user
-        console.log(req.user)
+        res.locals.userId = req.user;
         next();//Google-authenticated
-    }else if(token)
+    }
+    else if(token)
     { jwt.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY,(err,decodedToken)=>{
                 if (err) {
                     console.log(err.message);
