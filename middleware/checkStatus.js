@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Developer = require('../models/Developer')
 require('dotenv').config();
-const useremail = require('../routes/G_OAuth')
+const useremail = require('../routes/users/G_OAuth')
 
 exports.checkUser = async (req, res, next) => {
     try {

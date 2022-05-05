@@ -9,9 +9,9 @@ require('dotenv').config();
 const bodyparser = require('body-parser');
 const path = require('path')
 
-const authRoutes = require('./routes/user');
+const authRoutes = require('./routes/users/user');
 // const developeRoutes = require('./routes/developer');
-const G_OAuth = require('./routes/G_OAuth');
+const G_OAuth = require('./routes/users/G_OAuth');
 const {requireAuth} = require('./middleware/auth');
 const {checkUser,checkDeveloper} = require('./middleware/checkStatus');
 const urlencodedParser = bodyparser.urlencoded({extended: false})
