@@ -73,7 +73,8 @@ exports.AppInfo = async (req, res) => {
             { func4: result[0].funcFour }, { Icon: '/' + result[0].icon },
             { screenshot1: '/' + result[0].screenshotOne },
             { screenshot2: '/' + result[0].screenshotTwo },
-            {  screenshot3: '/' + result[0].screenshotThree  }
+            {  screenshot3: '/' + result[0].screenshotThreem},
+            { app_id: result[0].appid}
         ])
     }).catch(err => {
         console.log(err)
