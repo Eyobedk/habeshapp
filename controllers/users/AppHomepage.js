@@ -9,8 +9,6 @@ exports.LoadApps = async (req, res) => {
             ListApps.push([file.appName, file.icon, file.appid,file.appRate])
         })
     });
-    console.log("res.locals.user")
-    console.log(ListApps)
     res.render('home', {
         ListApps: ListApps
     })
