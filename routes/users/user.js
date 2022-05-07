@@ -7,6 +7,8 @@ const {AppInfo,AddRate} = require('../../controllers/users/AppInfo')
 const {AddComment} = require('../../middleware/users/comment')
 const {forgot_password,validateAndSendLink,setNewPassword} = require('../../controllers/users/User-forgot-password');
 const {requireAuth} = require('../../middleware/auth');
+const { LoadAllCommnets } = require("../../models/App");
+const {HandleLoadAllCommnets } = require("../../controllers/users/comment")
 
 
 
@@ -29,6 +31,7 @@ router.post('/reset-password',setNewPassword)
 router.get('/info', requireAuth,AppInfo)
 router.get('/info/:appid', requireAuth,AppInfo)
 router.post('/info/:appid', requireAuth,AddComment,AddRate)
+router.get('/comments/:id', requireAuth, HandleLoadAllCommnets)
 
 
 module.exports = router;
