@@ -117,6 +117,25 @@ class Apps {
         return orderedComments;
     }
 
+    static async Download(app_id)
+    {
+        const sql = `SELECT appLocation FROM apps where appid = ${app_id}`;
+        const result = await db.execute(sql);
+        return result[0][0].appLocation
+    }
+    static async checkAppisReported(app_id, user_id)
+    {
+        const sql = `SELECT * FROM ratedlist where ratedapp_id = ${app_id} AND user_id = ${user_id}`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
+    }
+    static async GetRateandDownload(app_id)
+    {
+        const sql = `SELECT downloads,appRate FROM apps where appid = ${app_id}`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
+    }
+
 }
 
 
