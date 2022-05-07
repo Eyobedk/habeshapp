@@ -73,18 +73,16 @@ exports.AppInfo = async (req, res) => {
             { func4: result[0].funcFour }, { Icon: '/' + result[0].icon },
             { screenshot1: '/' + result[0].screenshotOne },
             { screenshot2: '/' + result[0].screenshotTwo },
-            {  screenshot3: '/' + result[0].screenshotThreem},
+            {  screenshot3: '/' + result[0].screenshotThree},
             { app_id: result[0].appid}
         ])
     }).catch(err => {
         console.log(err)
-    }).then(async ()=>{ sortedcomment = await Apps.LoadAllCommnets()})
-    // console.log(sortedcomment)
-    // console.log(ApkInfo)
+    }).then(()=>{
     res.render('users/appPage', {
         AppInfos: ApkInfo,
         comments: sortedcomment
-    })
+    })})
 }
 
 exports.AddRate = async (req, res) => {
