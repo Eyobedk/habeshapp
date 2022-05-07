@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 <head>
 
@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/user.css">
 <link rel="icon" href="/favicon.ico">
-<title>App page</title>
+<script src="/js/script.js"></script>
+<title>Habesha App</title>
 </head>
 <body>
 
@@ -112,47 +113,18 @@
 
 <div class="container mt-5 mb-5">
 	<div class="row">
-		<h2>Ratings & Reviews</h2>
-	</div>
-
-
-
-
-	
-	<div class="row mt-5 mb-5">
-		<div class="media">
-  
-  <div class="media-body">
-    <h5 class="mt-0">Kirbuel Fikadu</h5> 
-      <!-- <span class="text-warning"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span></h5> -->
-   This app is grat but it is slow when connected to network however it have solved our problems with its services<hr>
+	  	<h2>Ratings & Reviews</h2>
+	  </div>
   </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" 
+         role="status" id="loading">
+        <span class="sr-only">Loading...</span>
+    </div>
 </div>
-	</div>
-  
-  
-  <div class="row mt-5 mb-5">
-		<div class="media">
-  
-  <div class="media-body">
-    <h5 class="mt-0">Abel FikreYohanis</h5>
-      <!-- <span class="text-warning"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span></h5> -->
-   This app is grat but it is slow when connected to network however it have solved our problems with its services <hr>
-  </div>
-</div>
-	</div>
-  
-  
-  <div class="row mt-5 mb-5">
-		<div class="media">
-  
-  <div class="media-body">
-    <h5 class="mt-0">eyobedkebede10@gmail.com</h5> 
-      <!-- <span class="text-warning"><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-half-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span></h5> -->
-   This app is grat but it is slow when connected to network however it have solved our problems with its services<hr>
-  </div>
-</div>
-	</div>
+<div id="commenets"></div>
+
 	
 	<div class="row mb-5" style="margin-bottom: 1rem!important;">
 		<h2> Add commnets</h2>
@@ -186,10 +158,6 @@
 
 <script type="text/javascript">
   var getRate = <%= rated %>;
-  var getId = <%= id %>;
-  console.log(getId);
-  
-  
     const yesBtn = document.getElementById(`rating1-${getRate}`);
     yesBtn.checked = true;
     
