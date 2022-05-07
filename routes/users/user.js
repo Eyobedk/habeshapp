@@ -3,12 +3,13 @@ const {Router} = require("express");
 
 const {validateSignupInput,validateLoginInput}= require('../../middleware/users/inputValidator');
 const {signup_Get,signup_Post,login_Get,login_Post,logout} = require('../../controllers/users/UsersAuth');
-const {AppInfo,AddRate} = require('../../controllers/users/AppInfo')
+const {AppInfo,AddRate,Referesh} = require('../../controllers/users/AppInfo')
 const {AddComment} = require('../../middleware/users/comment')
 const {forgot_password,validateAndSendLink,setNewPassword} = require('../../controllers/users/User-forgot-password');
 const {requireAuth} = require('../../middleware/auth');
-const { LoadAllCommnets } = require("../../models/App");
+const {DownloadApp} = require('../../controllers/users/Downloader')
 const {HandleLoadAllCommnets } = require("../../controllers/users/comment")
+const {ReportApp } = require("../../controllers/users/Reports")
 
 
 
@@ -30,8 +31,9 @@ router.post('/reset-password',setNewPassword)
 
 router.get('/info', requireAuth,AppInfo)
 router.get('/info/:appid', requireAuth,AppInfo)
-router.post('/info/:appid', requireAuth,AddComment,AddRate)
+router.post('/info/:appid', requireAuth,ReportApp,AddComment,AddRate)
 router.get('/comments/:id', requireAuth, HandleLoadAllCommnets)
+router.get('/download/:id', requireAuth, DownloadApp)
 
 
 module.exports = router;

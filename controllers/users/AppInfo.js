@@ -62,8 +62,6 @@ const ApkInfo = [];
 exports.AppInfo = async (req, res) => {
     const appIds = req.params.appid;
     let sortedcomment;
-    console.log("req.user")
-    console.log(req.user)
 
     await Apps.ListAppsForUsers(appIds).then((result) => {
         ApkInfo.push([
@@ -85,7 +83,8 @@ exports.AppInfo = async (req, res) => {
     })})
 }
 
-exports.AddRate = async (req, res) => {
+exports.AddRate = async (req, res,next) => {
+    // if(req.body.rating1){
     await checkAppRated(req.params.appid).then(async appResult => {
         if (appResult.length == 0) {
             await insertRate(req.params.appid).then(async () => {
@@ -119,5 +118,8 @@ exports.AddRate = async (req, res) => {
             })
         }
     })
+    
+    // }
     res.redirect('back');
+    next();
 }

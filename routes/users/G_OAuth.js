@@ -30,8 +30,6 @@ passport.use(new Strategy({
 
 
 passport.serializeUser((user,done)=>{
-    //useremail = user._json.email;     user._json.email
-   // console.log(user_id)
     done(null,user_id);});
 
 passport.deserializeUser((user,done)=>{ done(null,user) });
@@ -40,12 +38,8 @@ passport.deserializeUser((user,done)=>{ done(null,user) });
 Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 
     function(req, res) {
-    // Successful authentication, redirect home.
-    //res.locals.userId = null;
-   // res.locals.userId = user_id;
     res.redirect(`/home`);
     });
-        // res.locals.userId =  user_id});
 
 Router.get('/failure', (req, res) => { res.send("failed to login") })
 Router.get('/auth/logout', (req, res) => { req.logOut();res.redirect(302,'/') })
