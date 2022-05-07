@@ -109,10 +109,10 @@ class Apps {
         const [orderedResult, _] = await db.execute(sql);
         return orderedResult;
     }
-    static async LoadAllCommnets()
+    static async LoadAllCommnets(appid)
     {
         const sql = `SELECT user.name, comments.commentOne,comments.commentTwo FROM user, 
-        comments WHERE user.user_id = comments.user_id ORDER BY comments.published_date ASC; `;
+        comments WHERE user.user_id = comments.user_id AND Tappid = ${appid} ORDER BY comments.published_date ASC; `;
         const [orderedComments, _] = await db.execute(sql);
         return orderedComments;
     }
