@@ -44,7 +44,7 @@ exports.addUserId = (appid, userId)=>
 exports.SetRate = async (rate, appid)=>
 {
     let sql = `UPDATE apps SET appRate = ${rate} WHERE appid = ${appid}`;
-    await db.execute(sql).then((result)=>{console.log(result)})
+    await db.execute(sql).then((result)=>{console.log(result)}).catch((err)=>{console.log(err)})
 }
 
 
