@@ -30,11 +30,9 @@ async function AddTheSecondCommnet(userId, comment2, appId){
 
 exports.AddComment = async (req, res, next)=>{
     const comment = req.body.comment;
-    if(comment)
+    if( typeof comment != 'undefined')
     {
-        console.log(req.params.appid +  res.locals.userId)
         const amountOfRates = await countLimit(req.params.appid,  res.locals.userId);
-        console.log(amountOfRates)
         if( amountOfRates == 0)
         {
             await AddTheFirstCommnet(res.locals.userId, comment, req.params.appid);
@@ -44,14 +42,5 @@ exports.AddComment = async (req, res, next)=>{
             await AddTheSecondCommnet(res.locals.userId, comment, req.params.appid);
         }
     }
-    // if(req.body.report){
-
-    //     const RatedList = await Apps.checkAppisReported(req.params.appid, res.locals.userId);
-    //     if(RatedList.length == 0)
-    //     {
-    //         const RatesandDownloads = await Apps.GetRateandDownload(req.params.appid);
-    //         console.log(RatesandDownloads[0][0])
-    //     }else{}
-    // }
  next();
 }
