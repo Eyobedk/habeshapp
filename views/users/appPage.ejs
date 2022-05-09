@@ -29,7 +29,7 @@
     </div>
     <div class="col-md-6">
       <div class="row">
-        <h1><%= AppInfos[0][0].appname%></h1> <%= AppInfos[0][2]['Rate'] %>
+        <h1><%= AppInfos[0][0].appname%></h1> <% console.log(AppInfos[0][2]['Rate']) %>
       </div>
       <div class="row" style="margin-top: 2px;">
         <h6 style="color: blue; text-decoration: none;"><i class="fa" aria-hidden="true"></i><a style="text-decoration: none;" href="developer_page/<%= AppInfos[0][1].dev_id %>"> publisher</a></h6>
@@ -107,9 +107,106 @@
 </div>
 <% } %>
 
+
 <form action="" method="post">
-  <input type="submit" name="report" class="btn btn-primary" value="REPORT!">
+  <input type="submit" name="report" style="width:165px" class="btn btn-primary" value="REPORT!">
 </form>
+
+
+
+
+
+
+
+
+<!-- <div class="modal fade" id="myModal" style="margin-left: 17px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <!-- <div class="modal-header" style="padding-bottom: 0px;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+       -->
+      <!-- Modal body -->
+      <!-- <div class="modal-body mb-0 pb-0 mt-0" style="padding-left: 2rem;padding-top: 0rem;">
+      <div class="container "> -->
+          <!-- custom radio button -->
+          <!-- <div class="holder">
+              <div class="row mb-1" style="margin-left: -37px !important;">
+              <div class="col">
+              <h2>Report Title</h2>
+              </div>
+          </div>
+              <form action="" method="post">
+                <div class="customRadio customCheckbox m-0 p-0">
+              <div class="row mb-0">
+              <div class="row justify-content-start">
+                  <div class="col-12">
+                  <div class="row"> -->
+<!--                       
+                      <input type="radio" name="textEditor" id="dreamweaver" value="Sexual">
+                      <label for="dreamweaver"> Sexual content</label>
+                  </div>
+
+                  <div class="row">
+                      <input type="radio" name="textEditor" id="sublime" value="Spam" checked>
+                      <label for="sublime">
+                        Spam or misleading</label>
+                  </div>
+                  <div class="row">
+                      <input type="radio" name="textEditor" id="oks" value="Hateful">
+                      <label for="oks">Hateful or abusive content</label>
+                  </div> -->
+                  <!-- <div class="row">
+                      <input type="radio" name="textEditor" id="dang" value="Harmful">
+                      <label for="dang">
+                       Harmful or dangerous acts</label>
+                  </div>                  
+                  </div>
+              </div>
+              </div>
+            </div> -->
+              
+              <!-- </form> -->
+          <!-- </div>  
+          </div>
+      </div> -->
+      
+      <!-- Modal footer -->
+      <!-- <center>
+        <div class="modal-footer pt-0 mt-0 pb-5 pr-6 m-1 " style="max-width: 200px !important;">
+        <div class="col-2">
+          
+        </div>
+         <div class="col-6 justify-content-start">
+         
+         </div>
+         <div class="col-2 justify-content-end ">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-outline-light modal_footer"  data-dismiss="modal">Cancel</button> -->
+         <!-- </div>
+         <div style="max-width:100px"></div>
+         <div class="col-2 justify-content-start m-0 p-0">
+            <button type="submit" class="btn btn-successs box-shadow--16dp" style="color:white">OK</button> 
+            
+       </div>   -->
+      <!-- </div> 
+    </center> -->
+  <!-- </form>
+    </div>
+  </div>
+</div> --> 
+
+
+
+
+
+
+
+
+
+
 
 <div class="container mt-5 mb-5">
 	<div class="row">
