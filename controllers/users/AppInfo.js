@@ -19,8 +19,6 @@ var total = 0;
 
 
 async function handleRating(req) {
-    console.log("handleRating")
-    console.log(req.body.rating1)
     if (req.body.rating1 == 1) {
         await Rate1star(req.params.appid)
     }
@@ -47,7 +45,6 @@ async function performRate(theStarts)
         '4':theStarts[0].fourStar,
         '5':theStarts[0].fiveStar
     };
-    console.log(keyvalue)
     
     for(const key in keyvalue)
     {
@@ -84,7 +81,8 @@ exports.AppInfo = async (req, res) => {
 }
 
 exports.AddRate = async (req, res,next) => {
-    // if(req.body.rating1){
+    const checkRated = req.body.rating1;
+     if(typeof checkRated != 'undefined'){
     await checkAppRated(req.params.appid).then(async appResult => {
         if (appResult.length == 0) {
             await insertRate(req.params.appid).then(async () => {
@@ -99,7 +97,6 @@ exports.AddRate = async (req, res,next) => {
                 )
             })
         } else {
-            console.log(req.params.appid + res.locals.userId)
             await checkRateStatus(req.params.appid, res.locals.userId).then(async StatResult => { //check user rated the app  ?
                 if (StatResult.length == 0) {
                     await insertRate(req.params.appid).then(async () => {
@@ -118,6 +115,7 @@ exports.AddRate = async (req, res,next) => {
             })
         }
     })
+}
     
     // }
     res.redirect('back');
