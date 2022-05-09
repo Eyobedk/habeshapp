@@ -1,0 +1,6 @@
+
+
+
+exports.contViews = (req, res)=>{
+    
+}
