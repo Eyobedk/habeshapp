@@ -10,6 +10,7 @@ const {requireAuth} = require('../../middleware/auth');
 const {DownloadApp} = require('../../controllers/users/Downloader')
 const {HandleLoadAllCommnets } = require("../../controllers/users/comment")
 const {ReportApp } = require("../../controllers/users/Reports")
+const {contViews } = require("../../controllers/developer/contViews")
 
 
 
@@ -30,7 +31,7 @@ router.post('/reset-password',setNewPassword)
 
 
 router.get('/info', requireAuth,AppInfo)
-router.get('/info/:appid', requireAuth,AppInfo)
+router.get('/info/:appid', requireAuth,contViews,AppInfo)
 router.post('/info/:appid', requireAuth,ReportApp,AddComment,AddRate)
 router.get('/comments/:id', requireAuth, HandleLoadAllCommnets)
 router.get('/download/:id', requireAuth, DownloadApp)
