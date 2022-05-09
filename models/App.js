@@ -125,16 +125,57 @@ class Apps {
     }
     static async checkAppisReported(app_id, user_id)
     {
-        const sql = `SELECT * FROM ratedlist where ratedapp_id = ${app_id} AND user_id = ${user_id}`;
+        const sql = `SELECT * FROM alreadyreported where reported_appid = ${app_id} AND reporter_id = ${user_id}`;
         const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
         return result;
     }
-    static async GetRateandDownload(app_id)
+    static async GetReportandDownload(app_id)
     {
-        const sql = `SELECT downloads,appRate FROM apps where appid = ${app_id}`;
+        const sql = `SELECT downloads,appReports,dev_id FROM apps where appid = ${app_id}`;
         const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
         return result;
     }
+    static async ReportApp(appId)
+    {
+        const sql = `UPDATE apps SET appReports = appReports + 1 WHERE appid = ${appId}`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+    static async InserttoReporteds(reporter_id, appId)
+    {
+        const sql = `INSERT INTO alreadyreported(reporter_id, reported_appid) VALUES(${reporter_id}, ${appId})`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+    static async AddtoblackListAppsTable(appId, reported_dev_id)
+    {
+        const sql = `INSERT INTO blacklistedapps(reportedappid, thedeveloperid) VALUES(${appId}, ${reported_dev_id})`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+    static async GetAlreadyVistedId(viewer_id, viewedapp_id)
+    {
+        const sql = `SELECT * FROM viewerstable WHERE theviwer_id = ${viewer_id} AND theviwed_app_id = ${viewedapp_id}`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
+    }
+    static async UpdateAlreadyVistedId(viewer_id, viewedapp_id)
+    {
+        const sql = `INSERT INTO viewerstable(theviwer_id, theviwed_app_id) VALUES(${viewer_id}, ${viewedapp_id})`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
+    }
+    static async updateViewCount(appId)
+    {
+        const sql = `UPDATE apps SET views = views + 1 WHERE appid = ${appId}`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+
 
 }
 
