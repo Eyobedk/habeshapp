@@ -12,7 +12,7 @@ exports.validDevInput = (req, res,next) => {
         var regex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
         if (!regex.test(str)) {
             let inputError = "please enter a proper domain name with https protcol";
-            res.render('login&signup/developer-register', {
+            res.render('developer/Auth/developer-register', {
                 Ierror: inputError
             })
             return
@@ -22,21 +22,21 @@ exports.validDevInput = (req, res,next) => {
 
     if (name.length < 3) {
         let inputError = "please enter a valid name";
-        res.render('login&signup/developer-register', {
+        res.render('developer/Auth/developer-register', {
             Ierror: inputError
         })
         return
     }
     if (password.length < 8) {
         let inputError = "please use a password that have more than 8 characters";
-        res.render('login&signup/developer-register', {
+        res.render('developer/Auth/developer-register', {
             Ierror: inputError
         })
         return
     }
     if (typeof phone == 'number') {
         let inputError = "please enter a valid phone";
-        res.render('login&signup/developer-register', {
+        res.render('developer/Auth/developer-register', {
             Ierror: inputError
         })
         return
@@ -46,7 +46,7 @@ exports.validDevInput = (req, res,next) => {
 
     if (!validateEmail(email)) {
         let inputError = "please enter a valid Email Address";
-        res.render('login&signup/developer-register', {
+        res.render('developer/Auth/developer-register', {
             Ierror: inputError
         })
         return

@@ -35,7 +35,7 @@ exports.registerDeveloper = async (req, res) => {
   let pass = "Email already exists";
   const checkExists = await Developer.findEmail(email);
   if (!(JSON.stringify(checkExists[0]) === undefined)) {
-    res.render('login&signup/developer-register', {
+    res.render('developer/Auth/developer-register', {
       pass
     });
     return
@@ -128,7 +128,7 @@ module.exports.Login_Dev = async (req, res, next) => {
   console.log(dev[0])
   if (!dev) {
     let outErrors = 'enter the correct password and email';
-    res.render("developer/developer-Login", {
+    res.render("developer/Auth/developer-Login", {
       outErrors
     });
     return
@@ -139,7 +139,7 @@ module.exports.Login_Dev = async (req, res, next) => {
     console.log("the devloper result" + result)
     if (!result) {
       const Ierror = "Enter the correct email and password";
-      res.render('login&signup/developer-Login', {
+      res.render('developer/Auth/developer-Login', {
         Ierror
       });
       return
@@ -157,5 +157,5 @@ exports.dev_logout = (req, res) => {
   res.cookie('devToken', '', {
     maxAge: 1
   })
-  res.redirect(302, '/developer-Login');
+  res.redirect(302, 'developer/Auth/developer-Login');
 }

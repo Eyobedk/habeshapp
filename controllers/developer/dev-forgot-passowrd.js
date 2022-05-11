@@ -12,7 +12,7 @@ exports.varifydevEmail = async (req,res)=>{
    // console.log("dev"+Dev[0]);
     if (typeof Dev[0] ==="undefined"){
         let TheError = "You must be registered inorder to reset password";
-        res.render('passwords/developer-reset',{Ierror:TheError});
+        res.render('developer/Auth/developer-reset',{Ierror:TheError});
         return
     }
     const id = Dev[0].dev_id;
@@ -21,7 +21,7 @@ exports.varifydevEmail = async (req,res)=>{
 
     const link = `http://localhost:3000/developer-reset/${id}/${token}`;
     Mailer(email,link);
-    res.render('passwords/developer-reset',{Iok:"We have sent reset password link to your Email"});
+    res.render('developer/Auth/developer-reset',{Iok:"We have sent reset password link to your Email"});
 }
 
 exports.validateResetTokes = (req, res)=>{
@@ -34,10 +34,10 @@ exports.validateResetTokes = (req, res)=>{
         if(err)
         {
             console.log(err);
-            res.render('passwords/developer-forgot',{Ierror:"please send varification link again"})
+            res.render('developer/Auth/developer-forgot',{Ierror:"please send varification link again"})
         }
     })
-    res.render('passwords/developer-reset');
+    res.render('developer/Auth/developer-reset');
 }
 
 exports.setDeveloperPassword = async (req, res)=>{
@@ -46,7 +46,7 @@ exports.setDeveloperPassword = async (req, res)=>{
     const hash = bcrypt.hashSync(password, 12);
     console.log(hash)
     if(password.length < 7){
-        res.render('passwords/developer-reset',{Ierror:"please enter password greater than 8"})
+        res.render('developer/Auth/developer-reset',{Ierror:"please enter password greater than 8"})
     }
     
     await Developer.updatePassword(DevID,hash).then(()=>{

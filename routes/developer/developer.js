@@ -17,20 +17,20 @@ const router = Router();
 
 
 //Developer Register routes
-router.get('/developer-register',(req, res)=>{res.render("login&signup/developer-register")})
+router.get('/developer-register',(req, res)=>{res.render("developer/Auth/developer-register")})
 router.post('/pay',validDevInput,registerDeveloper);
 router.get('/success', handleSuccess);
 router.get('/cancel', (req, res) => res.send('Cancelled'));
 
 
 //Developer Login routes
-router.get('/developer-login', (req, res)=>{res.render("login&signup/developer-login")})
+router.get('/developer-login', (req, res)=>{res.render("developer/Auth/developer-Login")})
 router.post('/developer-login', Login_Dev)
 router.get('/dev-logout', dev_logout)
 
 
 //Developer Passwords routes
-router.get('/developer-forgot', (req, res)=>{res.render("passwords/developer-forgot")})
+router.get('/developer-forgot', (req, res)=>{res.render("developer/Auth/developer-forgot")})
 router.post('/developer-forgot',varifydevEmail)
 router.get('/developer-reset/:id/:token',validateResetTokes)
 router.post('/developer-reset', setDeveloperPassword)
