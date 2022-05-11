@@ -9,7 +9,7 @@ exports.LoadApps = async (req, res) => {
             ListApps.push([file.appName, file.icon, file.appid,file.appRate])
         })
     });
-    res.render('home', {
+    res.render('users/home', {
         ListApps: ListApps
     })
 }
