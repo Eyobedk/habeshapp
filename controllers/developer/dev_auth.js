@@ -128,7 +128,7 @@ module.exports.Login_Dev = async (req, res, next) => {
   console.log(dev[0])
   if (!dev) {
     let outErrors = 'enter the correct password and email';
-    res.render("login&signup/developer-Login", {
+    res.render("developer/developer-Login", {
       outErrors
     });
     return
