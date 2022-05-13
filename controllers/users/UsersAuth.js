@@ -5,14 +5,14 @@ const saltRounds = 10;
 let pass = "This account is already registered";
 
 module.exports.signup_Get = (req, res) => {
-    res.render('login&signup/signup');
+    res.render('users/signup');
 }
 
 module.exports.signup_Post = async (req, res) => {
     const {name, email, password1} = req.body;
     let pass = "Email already exists";
     const checkExists = await User.findEmail(email);
-    if(!(JSON.stringify(checkExists[0]) === undefined)) { res.render('login&signup/signup',{pass});return}
+    if(!(JSON.stringify(checkExists[0]) === undefined)) { res.render('users/signup',{pass});return}
 
     const hash = bcrypt.hashSync(password1, 10);
     const user = new User(name, hash,email);
@@ -30,7 +30,7 @@ module.exports.signup_Post = async (req, res) => {
 
 
 module.exports.login_Get = (req, res) => {
-    res.render('login&signup/Login');
+    res.render('users/Login');
 }
 
 module.exports.login_Post = async (req, res, next) => {
@@ -42,7 +42,7 @@ module.exports.login_Post = async (req, res, next) => {
     if(user.length == 0)
     {
         let Ierrors = 'Enter the correct password and email';
-        res.render("login&signup/Login", {Ierrors});
+        res.render("users/Login", {Ierrors});
         return
     }
     await bcrypt.compare(password, user[0].password).then(function(result) {
@@ -54,7 +54,7 @@ module.exports.login_Post = async (req, res, next) => {
     if(!passwordResult)
     {
         const Ierror = "Enter the correct email and password";
-        return res.render('login&signup/Login',{Ierror});
+        return res.render('users/Login',{Ierror});
     }else{
 
     const token = createToken(JSON.stringify(user[0].user_id));
