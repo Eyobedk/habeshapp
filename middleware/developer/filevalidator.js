@@ -28,13 +28,11 @@ function validateScreenshots(images,res) {
 exports.validatestatus = async (req, res,next)=>{
     const {funcOne,funcTwo,funcThree,funcFour} = req.body;
     const theApk = req.files.apk;
-    const BackgImage = req.files.backImage;
     const screenshots = req.files.screenshots;
     
     
 
     const appExtension = path.extname(theApk.name);
-    const backIExtension = path.extname(BackgImage.name);
 
     const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id));
     date = new Date(Paths[0].publishedDate);
@@ -65,13 +63,7 @@ exports.validatestatus = async (req, res,next)=>{
         return
     }
 
-    if (backIExtension != '.png' || backIExtension != '.jpg' || backIExtension != '.jpeg') {
-        let theError = "please Enter the background image file with .png image type";
-        res.render('developer/update', {
-            Ierror: theError
-        })
-        return
-    }
+    
     if(funcOne.length == 0 || funcTwo.length == 0 || funcThree.length == 0 || funcFour.length == 0)
     {
         let theError = 'Enter a text for features list';
