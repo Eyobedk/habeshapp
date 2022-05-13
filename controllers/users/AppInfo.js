@@ -60,7 +60,7 @@ exports.AppInfo = async (req, res) => {
     const appIds = req.params.appid;
     let sortedcomment;
 
-    await Apps.ListAppsForUsers(appIds).then((result) => {
+    await Apps.ListAppsForUsers(appIds).then((result) => {console.log(result);
         ApkInfo.push([
             { appname: result[0].appName }, { dev_id: result[0].dev_id }, 
             { Rate: result[0].appRate }, { func1: result[0].funcOne },
@@ -69,11 +69,13 @@ exports.AppInfo = async (req, res) => {
             { screenshot1: '/' + result[0].screenshotOne },
             { screenshot2: '/' + result[0].screenshotTwo },
             {  screenshot3: '/' + result[0].screenshotThree},
-            { app_id: result[0].appid}
+            { app_id: result[0].appid},
+            {descriptions: result[0].description}
         ])
     }).catch(err => {
         console.log(err)
     }).then(()=>{
+        
     res.render('users/appPage', {
         AppInfos: ApkInfo,
         comments: sortedcomment
