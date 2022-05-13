@@ -80,12 +80,7 @@ exports.deleteImages = (folder)=>{
         // {
         //     IconFlag = false;
         // }
-        if ((String(insideApp) == 'backImage')) {
-          fs.unlink(path.join(`${folder}/${insideApp}/`, String(Insidefiles)), err => {
-            console.log("unlinking")
-            if (err) throw err;
-          });
-        }
+        
       })
     }
   });
