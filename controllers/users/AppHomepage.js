@@ -6,9 +6,10 @@ exports.LoadApps = async (req, res) => {
     let ListApps = [];
     await Apps.LoadNewApps().then((ListofNewApps)=>{
         ListofNewApps.forEach((file) => {
-            ListApps.push([file.appName, file.icon, file.appid,file.appRate])
+            ListApps.push([file.appName, file.icon, file.appid,file.appRate,file.views])
         })
     });
+    console.log(ListApps)
     res.render('users/home', {
         ListApps: ListApps
     })
