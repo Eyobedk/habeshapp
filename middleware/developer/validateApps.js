@@ -1,5 +1,8 @@
 var path = require('path')
+
 const Apps = require('../../models/App')
+var IconFlag=0;
+
 
 function validateScreenshots(images,res) {
     let theError = 'please Enter valid 3 screenshots';
@@ -49,11 +52,9 @@ exports.validateApp = async (req, res, next) => {
     const {name,domain,choosen,funcOne,funcTwo,funcThree,funcFour} = req.body;
     const theApk = req.files.apk;
     const theIcon = req.files.icon;
-    const BackgImage = req.files.backImage;
     const screenshots = req.files.screenshots;
     
     const appExtension = path.extname(theApk.name);
-    const backIExtension = path.extname(BackgImage.name);
     const IconExtension = path.extname(theIcon.name);
 
     if(funcOne.length == 0 || funcTwo.length == 0 || funcThree.length == 0 || funcFour.length == 0)
@@ -86,6 +87,14 @@ exports.validateApp = async (req, res, next) => {
     
     if(IconExtension == '.png')
     {
+        IconFlag = 1;
+    }
+    else if(IconExtension == '.webp')
+    {
+        IconFlag = 2;
+    }
+    if(IconFlag == 0)
+    {
         let theError = 'please Enter the apk icon correctly(.ico file)';
         res.render('developer/publish', {
             Ierror: theError
@@ -101,13 +110,7 @@ exports.validateApp = async (req, res, next) => {
         return
     }
 
-    if (backIExtension != ".png") {
-        let theError = "please Enter the background image file";
-        res.render('developer/publish', {
-            Ierror: theError
-        })
-        return
-    }
+
     
 
 
