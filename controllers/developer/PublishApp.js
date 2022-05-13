@@ -9,16 +9,13 @@ const path = require('path')
 const saver = (files, name) => {
   let HomePath = `uploads/${name}`;
   const appExtension = path.extname(files[0]['apkFile'].name);
-  const backIExtension = path.extname(files[0]['backImage'].name);
   const IconExtension = path.extname(files[0]['iconFile'].name);
 
   const apkMD5 = files[0]['apkFile'].md5 + appExtension;
   const iconMD5 = files[0]['iconFile'].md5 +IconExtension ;
-  const backIMD5 = files[0]['backImage'].md5 + backIExtension;
 
   let apkPath = HomePath + `/${apkMD5}`;
   let IconPath = HomePath + `/Icon/${iconMD5}`;
-  let backIpath = HomePath + `/${backIMD5}`;
 
 
   let screenShootsPath = [];
@@ -43,16 +40,7 @@ const saver = (files, name) => {
         HandleError();
       })
     }
-    if (file == 'backImage') {
-
-      fs.mkdir(HomePath + `/backImage`, (err) => {
-        HandleError();;
-      });
-      
-      files[0][file].mv(HomePath + `/backImage` + `/${backIMD5}`, (err) => {
-        HandleError();
-      })
-    }
+    
     if (file == 'screenshot') {
 
       fs.mkdir(HomePath + `/screenshot`, (err) => {
@@ -69,7 +57,7 @@ const saver = (files, name) => {
     }
    }
 
-  const filesPath = {HomePath,apkPath,IconPath, backIpath,screenShootsPath}
+  const filesPath = {HomePath,apkPath,IconPath,screenShootsPath}
   return filesPath
 }
 
@@ -78,14 +66,13 @@ exports.fileUploader = async (req, res) => {
   let {name,choosen,desc,funcOne,funcTwo,funcThree,funcFour} = req.body;
   let apkFile = req.files.apk;
   let iconFile = req.files.icon;
-  let backImage = req.files.backImage;
   let screenshot = req.files.screenshots;
   
 
-  const filesaver = [{apkFile,iconFile,backImage,screenshot}]
+  const filesaver = [{apkFile,iconFile,screenshot}]
   const paths = saver(filesaver, name);
   const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath,
-     paths.screenShootsPath, paths.backIpath, res.locals.dev.id,funcOne,funcTwo,funcThree,funcFour);
+     paths.screenShootsPath, res.locals.dev.id,funcOne,funcTwo,funcThree,funcFour);
   await theApps.save().then(() => {
     res.render('developer/publish',{done:"done"})
   }).catch((err) => {
