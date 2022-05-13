@@ -157,5 +157,5 @@ exports.dev_logout = (req, res) => {
   res.cookie('devToken', '', {
     maxAge: 1
   })
-  res.redirect(302, 'developer/Auth/developer-Login');
+  res.redirect(302, 'developer-Login');
 }
