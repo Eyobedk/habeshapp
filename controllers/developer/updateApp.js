@@ -11,17 +11,11 @@ const Apps = require('../../models/App')
 const newFileSaver = async(files, name) => {
   let HomePath = `uploads/${name}`;
   let newApkPath = HomePath + `/${files[0]['newApkFILE'].name}`;
-  let newBackIpath = HomePath + `/${files[0]['newBackImage'].name}`;
   let screenShootsPath = [];
 
   for (const file in files[0]) {
     if (file == 'newApkFILE') {
       files[0][file].mv(HomePath + `/${files[0][file].name}`, (err) => {
-        HandleError();
-      })
-    }
-    if (file == 'newBackImage') {
-      files[0][file].mv(HomePath + `/backImage` + `/${files[0][file].name}`, (err) => {
         HandleError();
       })
     }
@@ -39,7 +33,6 @@ const newFileSaver = async(files, name) => {
   const filesPath = {
     HomePath,
     newApkPath,
-    newBackIpath,
     screenShootsPath
   }
   return filesPath
@@ -50,16 +43,13 @@ exports.updateApps = async (req, res) => {
   const {funcOne,funcTwo,funcThree,funcFour} = req.body;
   const description = req.body.desc;
   const newApkFILE = req.files.apk;
-  const newBackImage = req.files.backImage;
   const newScreenshots = req.files.screenshots;
   const newFilesArray = [{
     newApkFILE,
-    newBackImage,
     newScreenshots,
   }]
   let newupdatedAppPath;
   let newscreenShootsPath;
-  let newBackgroundImagesPath;
 
 
   const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id));
@@ -96,9 +86,8 @@ exports.updateApps = async (req, res) => {
         await Promise.resolve(Apps.updateApp(Paths[0].appid, theDate, ReturnedFolders[1]).catch(err =>{console.log(err)})),
         await Promise.resolve(newFileSaver(newFilesArray, Paths[0].appName)).then(newFilesPath =>{
             newupdatedAppPath = newFilesPath.newApkPath;
-            newscreenShootsPath = newFilesPath.screenShootsPath;
-            newBackgroundImagesPath = newFilesPath.newBackIpath }),
-        await Apps.UpdateTheAppTable(newupdatedAppPath, description,newscreenShootsPath,newBackgroundImagesPath, Paths[0].appid,funcOne,funcTwo,funcThree,funcFour).catch(err => {
+            newscreenShootsPath = newFilesPath.screenShootsPath}),
+        await Apps.UpdateTheAppTable(newupdatedAppPath, description,newscreenShootsPath, Paths[0].appid,funcOne,funcTwo,funcThree,funcFour).catch(err => {
             console.log(err)
           })
 
