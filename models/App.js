@@ -28,7 +28,7 @@ class Apps {
         try {
             let sql = `INSERT INTO apps(appName,catagory,description,appLocation,icon,screenshotOne,screenshotTwo,screenshotThree,publishedDate,dev_id,
                 funcOne,funcTwo,funcThree,funcFour) 
-             VALUES ('${this.appName}','${this.catagory}','${this.description}','${this.appLocation}','${this.icon}',
+             VALUES ('${this.appName.replace(/[ ]+/g, '_')}','${this.catagory}','${this.description.replace(/[']+/g, '')}','${this.appLocation}','${this.icon}',
             '${this.screenshots[0]}','${this.screenshots[1]}','${this.screenshots[2]}','${date}',${this.dev_id},'${this.funcOne}',
             '${this.funcTwo}','${this.funcThree}','${this.funcfour}');`;
             return new Promise((resolve, reject) => {
@@ -111,7 +111,7 @@ class Apps {
     static async LoadAllCommnets(appid)
     {
         const sql = `SELECT user.name, comments.commentOne,comments.commentTwo FROM user, 
-        comments WHERE user.user_id = comments.user_id AND Tappid = ${appid} ORDER BY comments.published_date ASC; `;
+        comments WHERE user.user_id = comments.user_id AND commentedappid = ${appid} ORDER BY comments.published_date ASC; `;
         const [orderedComments, _] = await db.execute(sql);
         return orderedComments;
     }
