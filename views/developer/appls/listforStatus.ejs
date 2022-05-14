@@ -104,11 +104,13 @@
 				<div class="col-md-3 col-sm-4">
 					<div class="wrimagecard wrimagecard-topimage">
 						<a href="status/<%= file[2] %> "  style="text-decoration: none;">
-						<div class="wrimagecard-topimage_header" style="background-color: rgba(22, 160, 133, 0.1)">
-							<center><img style="opacity: 50;" src=<%= file[1]%> ></img></center>
+						<div class="wrimagecard-topimage_header" style="background-color: rgb(255, 255, 255)">
+							<center><img style="opacity: 50; height: 100%;
+								width: 100%;
+								object-fit: contain;" src=<%=file[1]%> ></img></center>
 						</div>
 						<div class="wrimagecard-topimage_title">
-						 <center> <h4><b> <%= file[0] %> </b> </center>
+						 <center> <h4><b> <%= file[0].replace(/[_]+/g, ' ') %> </b> </center>
 						  <div class="pull-right badge" id="WrControls"></div></h4>
 						</div>
 					  </a>
