@@ -70,7 +70,7 @@ exports.fileUploader = async (req, res) => {
   
 
   const filesaver = [{apkFile,iconFile,screenshot}]
-  const paths = saver(filesaver, name);
+  const paths = saver(filesaver, name.replace(/[ ]+/g, '_'));
   const theApps = new Apps(name, choosen, desc, paths.apkPath, paths.IconPath,
      paths.screenShootsPath, res.locals.dev.id,funcOne,funcTwo,funcThree,funcFour);
   await theApps.save().then(() => {
