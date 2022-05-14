@@ -95,7 +95,7 @@ exports.validateApp = async (req, res, next) => {
     }
     if(IconFlag == 0)
     {
-        let theError = 'please Enter the apk icon correctly(.ico file)';
+        let theError = 'please Enter the apk icon correctly(.png or .webp file)';
         res.render('developer/publish', {
             Ierror: theError
         })
@@ -109,10 +109,6 @@ exports.validateApp = async (req, res, next) => {
         })
         return
     }
-
-
-    
-
 
     validateScreenshots(screenshots,res);
 
