@@ -148,10 +148,10 @@
   <%
   if(typeof ListApps != 'undefined') { %>
 <% ListApps.forEach((app)=>{ %>
-  <a href="info/<%= app[2] %> " style="text-decoration: none !important;">
+  <a href="info/<%= app[2] %>" style="text-decoration: none !important;">
   <div class="content">
     <img src="<%= app[1]%>">
-    <h3 style="margin-top: 11px;color: #3c3c3c; margin-bottom: 0px;"><%= app[0] %></h3>
+    <h4 style="margin-top: 11px;color: #3c3c3c; margin-bottom: 0px;font-size: 16px;"><%= app[0].replace(/[_]+/g, ' ')  %></h4>
     <div style="font-size: 18px; color: #3c3c3c;"> <%= app[4] %> views</div>
     <div style="font-size: large;color:#3c3c3c">
       <% if(app[3] == 0) { %>
@@ -209,7 +209,7 @@
 <div class="TendingApps">Trending APPS</div> 
 <div class="gallery">
 
-  <div class="content">
+  <!-- <div class="content">
     <img src="./fyn.webp">
     <h3>Fyn Geez</h3>
     Ride systems<br>
@@ -219,7 +219,7 @@
     <span class="fa fa-star checked"></span>
     <span class="fa fa-star"></span>
     <span class="fa fa-star"></span>
-  </div>
+  </div> -->
   
 </div>
 </section> 
