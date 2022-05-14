@@ -4,7 +4,7 @@ const Apps = require('../../models/App')
 
 
 async function countLimit(appId,userId){
-    const sql = `SELECT COUNT(*) FROM habeshapp.comments WHERE Tappid = ${appId} AND user_id = ${userId};`
+    const sql = `SELECT COUNT(*) FROM habeshapp.comments WHERE commentedappid = ${appId} AND user_id = ${userId};`
     const [result, _] = await db.execute(sql)
     return result[0]['COUNT(*)'];
 }
@@ -16,13 +16,13 @@ async function AddTheFirstCommnet(userId, comment1, appId){
     const month = d.getMonth() + 1;
     const date = `${year}-${month}-${day}`;
 
-    const sql = `INSERT INTO comments(user_id, commentOne, Tappid,published_date) VALUES(${userId}, '${comment1}', ${appId},'${date}')`;
+    const sql = `INSERT INTO comments(user_id, commentOne, commentedappid,published_date) VALUES(${userId}, '${comment1}', ${appId},'${date}')`;
     return new Promise((resolve, reject)=>{
         resolve(db.execute(sql));
     })
 }
 async function AddTheSecondCommnet(userId, comment2, appId){
-    const sql = `UPDATE comments SET commentTwo = '${comment2}' WHERE Tappid = ${appId} AND user_id = ${userId}`;
+    const sql = `UPDATE comments SET commentTwo = '${comment2}' WHERE commentedappid = ${appId} AND user_id = ${userId}`;
     return new Promise((resolve, reject)=>{
         resolve(db.execute(sql));
     })
