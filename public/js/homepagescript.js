@@ -6,7 +6,7 @@ let EntBtn = document.querySelector(".bx-dice-2");
 let BusBtn = document.querySelector(".bx-briefcase");
 let FoodBtn = document.querySelector(".bi-cup-straw");
 let ToolBtn = document.querySelector(".bi-hammer");
-let GameBtn = document.querySelector(".bi-controller");
+let GameBtn = document.querySelector(".bi-controller");//bi-controller
 
 closeBtn.addEventListener("click", ()=>{
   sidebar.classList.toggle("open");

@@ -79,3 +79,37 @@ a.wrimagecard:hover, .wrimagecard-topimage:hover {
   margin-top: 40px !important;
 }
 
+.text-small {
+  font-size: 0.9rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+.form-control {
+  background: #ffffff;
+  border-color: #fffce4;
+}
+
+.form-control:focus {
+  background: #fffce4;
+}
+
+footer {
+  background: #ffdf52;
+}
+
+
+/* ==========================================
+    CUSTOM UTILS CLASSES
+  ========================================== */
+  body, html {
+    height: 100%;
+  }
