@@ -337,4 +337,120 @@ padding-left: 35px;
 
 }
 
-  
+  .theheader
+  {
+    border-bottom: 1px solid #E9E9E6;
+    z-index: 1000;
+    right: 0;
+    top: 0;
+    height: 60px;
+    left: 0;
+    display: block;
+    box-sizing: border-box;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
+  }
+  .name
+  {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .sidebar{
+  position: fixed;
+    margin-top: 72px;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 78px;
+    background: #ffffff;
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+    font-family: "Poppins" , sans-serif;
+  }
+  .nav-list {
+    margin-top: 72px;
+    height: 100%;
+}
+.sidebar li {
+    position: relative;
+    margin: 8px 0;
+    list-style: none;
+    
+}
+.sidebar ul {
+    margin-bottom: 10px;
+}
+.sidebar li a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: #ffdf74;
+}
+.sidebar li i {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+.sidebar i {
+    min-width: 50px;
+    text-align: center;
+}
+.bi-phone-flip::before {
+    content: "\f77c";
+}
+
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+}
+
+.sidebar li a .links_name {
+    color: rgb(10, 10, 10);
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+
+.sidebar li .tooltip {
+    position: absolute;
+    top: -20px;
+    left: calc(100% + 15px);
+    z-index: 3;
+    background: #fff;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 30%);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    display: block;
+    visibility: visible;
+    transition: 0s;
+}
