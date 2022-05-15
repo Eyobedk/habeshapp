@@ -55,10 +55,10 @@ async function performRate(theStarts)
 }
 
 
-const ApkInfo = [];
+
 exports.AppInfo = async (req, res) => {
     const appIds = req.params.appid;
-    let sortedcomment;
+    let ApkInfo = [];
 
     await Apps.ListAppsForUsers(appIds).then((result) => {console.log(result);
         ApkInfo.push([
@@ -75,11 +75,11 @@ exports.AppInfo = async (req, res) => {
     }).catch(err => {
         console.log(err)
     }).then(()=>{
-        
+        console.log(ApkInfo);
     res.render('users/appPage', {
         AppInfos: ApkInfo,
-        comments: sortedcomment
-    })})
+         });
+    })
 }
 
 exports.AddRate = async (req, res,next) => {
