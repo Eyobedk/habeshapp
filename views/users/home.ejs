@@ -151,9 +151,9 @@
   <a href="info/<%= app[2] %>" style="text-decoration: none !important;">
   <div class="content">
     <img src="<%= app[1]%>">
-    <h4 style="color: #3c3c3c; margin-bottom: 0px;font-size: 16px;margin-top: 8px !important;"><%= app[0].replace(/[_]+/g, ' ')  %></h4>
-    <div style="font-size: 18px; color: #3c3c3c;"> <%= app[4] %> views</div>
-    <div style="font-size: large;color:#3c3c3c">
+    <h4 class="appname"><%= app[0].replace(/[_]+/g, ' ')  %></h4>
+    <div class="views"> <%= app[4] %> views</div>
+    <div class="stars">
       <% if(app[3] == 0) { %>
     <span class="fa fa-star" ></span>
     <span class="fa fa-star "></span>
@@ -224,9 +224,39 @@
 </div>
 </section> 
 
+
+ <!-- FOOTER -->
+ <footer class="w-100 py-4 flex-shrink-0">
+  <!-- <div class="container py-4"> -->
+    <!-- <div class="row gy-4 gx-5"> -->
+    <!-- <div class="col-lg-4 col-md-6"> -->
+   <center> <h5 style="color: #fff;margin-left: 72px;"  class="h1 text-white" >Habeshapp</h5></center>
+    <div class="FooterParent">
+      <div class="theFooterTexts">
+        <p class="small text-muted">We believe that it is time for Ethiopians to have their own platform where they can
+          enjoy their local apps that will encourage them to get close to the mobile app services.</p>
+        <p class="small text-muted mb-0">&copy; Copyrights. All rights reserved. <a class="text-primary"
+            href="#">Habeshapp</a></p>
+      </div>
+      <div class="feedbackFooter">
+        <h5 class="text-white mb-3" style="color: white;"></h5>
+        <form action="/feedback" method="post">
+          <div class="input-group mb-3">
+            <input class="form-control" type="text" name="feedbacks" style="background-color: white;color: black;"
+              placeholder="Recipient's username">
+            <button class="btn btn-primary" type="submit"><i class="bi bi-envelope"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  <!-- </div> -->
+      
+  <!-- </div> -->
+  <!-- <div style="float: right" class="col-lg-4 col-md-6"> -->
+              
+          <!-- </div> -->
+</footer>
+
   <script src="js/homepagescript.js"></script>
-
-
-
 </body>
 </html>
