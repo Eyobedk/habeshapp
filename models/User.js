@@ -75,9 +75,20 @@ class User {
       console.log(err.sql);
       console.log(err.sqlMessage);
     })
-    
-    
   }
+  static async addFeedback(message, id)
+  {
+    const d = new Date();
+    const year = d.getFullYear();
+    const day = d.getDate();
+    const month = d.getMonth() + 1;
+    const date = `${year}-${month}-${day}`;
+    const sql = `INSERT INTO feedbacks(message, commenterId, commentedate) VALUES(${message}, ${id}, ${date});`
+    return new Promise((resolve, reject) => {
+      resolve(db.execute(sql));
+    })
+  }
+
 }
 
 
