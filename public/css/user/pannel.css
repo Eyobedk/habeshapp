@@ -25,7 +25,7 @@
     margin-bottom: 1.5rem;
     text-align: left;
     position: relative;
-    background: #fff;
+    background: #00143E;
     box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
     border-radius: 4px;
     transition: all 0.3s ease;
@@ -94,16 +94,16 @@ a:hover, a:focus {
 }
 
 .form-control {
-  background: #ffffff;
-  border-color: #fffce4;
+  background: #00143E;
+  border-color: #00143E;
 }
 
 .form-control:focus {
-  background: #fffce4;
+  background: rgb(5, 5, 5);
 }
 
 footer {
-  background: #ffdf52;
+  background: #00143E;
 }
 
 

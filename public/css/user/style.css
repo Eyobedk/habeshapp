@@ -418,14 +418,15 @@ background-color: #0b0b0b;
 }
 @media(max-width: 1000px){
 .content{
-  width: 20%;
+  width: 87%;
+  
+}
+.col-md-6
+{
+  width: 50%;
 }
 }
-@media(max-width: 750px){
-.content{
-width: 100%;
-}
-}
+
 
 .newApps
 {
@@ -601,3 +602,148 @@ body {
 		background: #000000;
 	}
 }
+
+
+
+/* ======================== */
+/*            resposiving home */
+/* ========================== */
+.FooterParent
+{
+display: flex;
+flex-wrap: wrap;
+width: 100%;
+}
+.theFooterTexts
+{
+  width: 47%;
+    margin-top: 30px;
+    margin-left: 83px;
+}
+.feedbackFooter
+{
+  width: 44;
+}
+.appname{
+  color: #3c3c3c; margin-bottom: 0px;font-size: 16px;margin-top: 8px !important;
+}
+.views
+{
+  font-size: 18px; color: #3c3c3c;
+}
+.stars
+{
+  font-size: large;color:#3c3c3c
+}
+
+@media only screen and (max-width: 941px) {
+  .feedbackFooter
+{
+  width: 42;
+}
+}
+@media(max-width: 781px){
+  .content{
+  width: 88%;
+  height: 228px;
+  margin-right: 0px !important;
+  }
+  .stars
+{
+  font-size: inherit;
+}
+.views
+{
+  font-size: 13px; 
+}
+.appname{
+  font-size: 14px;
+}
+img
+{
+  width: 110px;
+  height: 139px;
+}
+  }
+
+  @media(max-width:640px)
+  {
+    
+    img
+    {
+      height: 130px;
+    }
+    .appname
+    {
+      margin-top: 0px !important;
+    }.content{
+      height: 207px !important;
+    }
+    .theFooterTexts {
+      width: 100%;
+      margin-left: 83px;
+      margin-top: 0px;
+    }
+    form {
+      margin-left: 190px;
+     }
+     .feedbackFooter
+     {
+      margin-left: 159px;
+     }
+  }
+
+  @media(max-width:500px)
+  {
+    .content{
+      margin-right: 31px !important;
+    }
+  }
+  @media(max-width:430px)
+  {
+    .gallery a
+    {
+      width: 146px;
+    }
+    .feedbackFooter
+     {
+      margin-left: 114px !important;
+     }
+  }
+  @media(max-width:375px)
+  {
+    .gallery a
+    {
+      width: 124px;
+    }
+    .content {
+      margin-right: 1px !important;
+    }
+    img {
+      height: 115px;
+      width: 98px;
+    }
+    .feedbackFooter
+     {
+      margin-left: 79px !important;
+     }
+     .gallery
+     {
+      padding-left: 35px;
+     }
+  }
+
+  @media(max-width:300px)
+  {
+    .content{
+      width: 100%;
+      height: 186px !important;
+    }
+    .gallery a {
+      width: 166px !important;
+  }
+  img{
+    width: 112px !important;
+  }
+
+  }
