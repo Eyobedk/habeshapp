@@ -454,3 +454,106 @@ padding-left: 35px;
     visibility: visible;
     transition: 0s;
 }
+
+
+
+.AppRoot
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 89px;
+    margin-left: 98px;
+}
+
+.InfoBet
+{
+    background-color: white;
+    margin-right: 30px;
+    width: 65%;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* border: 2px solid #73AD21; */
+}
+.TheIcon
+{
+    width: 35%;
+    margin-right: 7px;
+    margin-left: 25px;
+    height: 300px;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.infocolOne
+{
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.firstInfo
+{
+    list-style: none;
+    /* padding-left: 15px; */
+}
+
+.ImgaeAndList
+{
+    width: 100% !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.fixColor
+{
+    font-size: 15px;
+    color: #000 !important;
+}
+
+.starsandDown
+{
+    /* width: 25%; */
+    /* display: contents; */
+    margin-top: 10px;
+    /* margin-left: auto; */
+}
+.fa {
+    font-size: large !important;
+}
+
+.screenshotsPare
+{
+    /* margin-left: 98px; */
+    width: 220px !important;
+    min-height: 120px;
+    max-height: auto;
+    margin-left: 58px;
+    /* float: left; */
+    margin-top: 55px;
+    padding: 3px;
+    display: inline-flex;
+}
+
+
+.desc
+{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 55px !important;
+    line-height: 25px;
+    color: rgb(10, 10, 10);
+    white-space: 12px;
+}
+
+.reviewstitle
+{
+    margin-top: 25px !important;
+    margin-left: 15px;
+}
+
+.commnets
+{
+    margin-left: 30px;
+}

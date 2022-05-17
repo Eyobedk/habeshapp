@@ -636,6 +636,30 @@ width: 100%;
   font-size: large;color:#3c3c3c
 }
 
+.parentofAppPage
+{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.catagoryList
+{
+  width: 35%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 941px) {
   .feedbackFooter
 {
@@ -664,7 +688,7 @@ img
   width: 110px;
   height: 139px;
 }
-  }
+}
 
   @media(max-width:640px)
   {
@@ -747,3 +771,15 @@ img
   }
 
   }
+
+
+
+
+
+
+
+
+
+
+
+  /* ================================scss==================================== */
