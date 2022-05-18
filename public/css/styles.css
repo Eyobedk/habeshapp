@@ -441,10 +441,11 @@ label {
   background: #ffdf74;
 }
 .sidebar li a:hover{
-  background: #FFF;
+  /* background: #FFF; */
 }
 .sidebar li a .links_name{
   color: rgb(10, 10, 10);
+  background-color:#ffdf74;
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
