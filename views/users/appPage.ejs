@@ -297,6 +297,7 @@
       <section>
         <h4 class="desc"> <%= AppInfos[0][12]['descriptions'] %></h4>
       </section>
+      <% } %>
 
       <section>
         <h2 class="reviewstitle">Ratings & Reviews</h2>
@@ -317,63 +318,97 @@
       </div>
 
       <center>
-      <form method="post" action="">
-        <div class="form-group">
-          <textarea type="text" style="background-color: rgb(232, 232, 232);" name="comment" class="form-control"
-            id="exampleInputtextarea" placeholder="write your own reviews" rows="3"></textarea>
-        </div>
+        <form method="post" action="">
+          <div class="form-group">
+            <textarea type="text" style="background-color: rgb(232, 232, 232);" name="comment" class="form-control"
+              id="exampleInputtextarea" placeholder="write your own reviews" rows="3"></textarea>
+          </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </center>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </center>
 
       </div>
     </section>
 
-    <!-- HERE IS THE SCREENSHOTS SECTIONS -->
+    <!-- HERE IS THE SIMILAR APPS SECTIONS -->
 
 
+    <section class="similarApps">
+      <div>
+        <h2 style="margin-left: 5px">Similar Apps</h2>
+        <ul style="list-style: none">
+          <% if(similarApks.length != 0)
+          { for(let i=0; i< similarApks.length; i++){
+            if(similarApks[i][0]['name'] == AppInfos[0][0].appname.replace(/[_]+/g, ' ')){continue;}
+            %>
+          <li>
+            <a href="info/<%= similarApks[i][2]['id']  %>" style="text-decoration: none !important;">
+              <div style="margin-top: 30px;margin-left: 10px !important;" class="listsimilarApps">
 
+                <img style="border-radius:50%; width: 60px;height: 60px;    margin-left: -25px;"
+                  src="/<%= similarApks[i][1]['icon'] %>">
+                <div style="display: inline;">
+                  <p style="margin-bottom:0px !important"><%= similarApks[i][0]['name'] %></p>
+                  <div style="margin-left: 10px" class="stars">
+                    <% if(similarApks[i][2]['rate'] == 0) { %>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <% } %>
+                    <% if(similarApks[i][2]['rate'] == 1) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <% } %>
+                    <% if(similarApks[i][2]['rate'] == 2) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <% } %>
+                    <% if(similarApks[i][2]['rate'] == 3) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <% } %>
+                    <% if(similarApks[i][2]['rate'] == 4) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <% } %>
+                    <% if(similarApks[i][2]['rate'] == 5) { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <% } %>
+
+
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+          <% } %>
+          <% } %>
+
+        </ul>
+      </div>
+    </section>
 
 
   </section>
-
-  <% } %>
-
-
-
-
-
-
-  <!-- <div class="container mt-5 mb-5">
-	<div class="row">
-	  	<h2>Ratings & Reviews</h2>
-	  </div>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <div class="spinner-border" 
-         role="status" id="loading">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div> -->
-  <!-- <div id="commenets"></div>
-
-	
-	<div class="row mb-5" style="margin-bottom: 1rem!important;">
-		<h2> Add commnets</h2>
-	</div> -->
-
-
-  <!-- <form method="post" action="">
-  <div class="form-group">
-    <textarea type="text" name="comment" class="form-control" id="exampleInputtextarea" placeholder="write your own reviews" rows="3"></textarea>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form> -->
-
-  <!-- </div> -->
 
 
 
@@ -388,15 +423,6 @@
       document.getElementById("myForm").submit();
     }
   </script>
-
-
-
-  <script type="text/javascript">
-
-  </script>
-
-
-
 
 
 
