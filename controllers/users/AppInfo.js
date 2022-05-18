@@ -56,7 +56,7 @@ async function performRate(theStarts)
 
 
 
-exports.AppInfo = async (req, res) => {
+exports.chaAppInfo = async (req, res) => {
     const appIds = req.params.appid;
     let ApkInfo = [];
 
