@@ -56,9 +56,11 @@ async function performRate(theStarts)
 
 
 
-exports.chaAppInfo = async (req, res) => {
+exports.AppInfo = async (req, res) => {
     const appIds = req.params.appid;
     let ApkInfo = [];
+    let similarAppsList = [];
+    let catagory;
 
     await Apps.ListAppsForUsers(appIds).then((result) => {console.log(result);
         ApkInfo.push([
@@ -73,12 +75,27 @@ exports.chaAppInfo = async (req, res) => {
             {descriptions: result[0].description},
             {downloads: result[0].downloads}
         ])
+        catagory = result[0].catagory;
     }).catch(err => {
         console.log(err)
-    }).then(()=>{
-        console.log(ApkInfo);
+    }).then(async ()=>{
+        const SimilarApps = await Apps.SimilarApps(catagory);
+        console.log(SimilarApps)
+        for(let i = 0; i< SimilarApps.length; i++)
+        {
+            similarAppsList.push([
+                
+                {name: SimilarApps[i].appName.replace(/[_]+/g, ' ')},
+                {icon: SimilarApps[i].icon},
+                {rate: SimilarApps[i].appRate},
+                {id: SimilarApps[i].appid}
+            ])
+        }
+        console.log("here")
+        console.log(similarAppsList)
     res.render('users/appPage', {
         AppInfos: ApkInfo,
+        similarApks: similarAppsList
          });
     })
 }
