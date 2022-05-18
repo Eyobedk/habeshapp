@@ -12,6 +12,7 @@ const {HandleLoadAllCommnets } = require("../../controllers/users/comment")
 const {ReportApp } = require("../../controllers/users/Reports")
 const {feedback } = require("../../controllers/users/feedback")
 const {LoadDevApps } = require("../../controllers/users/LoadDevApps")
+const {ListbyCatagory } = require("../../controllers/users/catagory")
 const {contViews } = require("../../controllers/developer/contViews")
 
 
@@ -40,5 +41,6 @@ router.get('/download/:id', requireAuth, DownloadApp)
 router.post('/feedback', requireAuth, feedback)
 router.get('/info/rate/:appkid/:rateAmount', requireAuth, AddRate)
 router.get('/info/developer_page/:devId', requireAuth, LoadDevApps)
+router.post('/catagories', requireAuth, ListbyCatagory)
 
 module.exports = router;
