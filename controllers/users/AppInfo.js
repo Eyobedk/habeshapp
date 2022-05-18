@@ -18,21 +18,21 @@ var total = 0;
 
 
 
-async function handleRating(req) {
-    if (req.body.rating1 == 1) {
-        await Rate1star(req.params.appid)
+async function handleRating(appId, amount) {
+    if (amount == 1) {
+        await Rate1star(appId)
     }
-    if (req.body.rating1 == 2) {
-        await Rate2star(req.params.appid)
+    if (amount == 2) {
+        await Rate2star(appId)
     }
-    if (req.body.rating1 == 3) {
-        await Rate3star(req.params.appid)
+    if (amount == 3) {
+        await Rate3star(appId)
     }
-    if (req.body.rating1 == 4) {
-        await Rate4star(req.params.appid)
+    if (amount == 4) {
+        await Rate4star(appId)
     }
-    if (req.body.rating1 == 5) {
-        await Rate5star(req.params.appid)
+    if (amount == 5) {
+        await Rate5star(appId)
     }
 }
 
@@ -70,7 +70,8 @@ exports.AppInfo = async (req, res) => {
             { screenshot2: '/' + result[0].screenshotTwo },
             {  screenshot3: '/' + result[0].screenshotThree},
             { app_id: result[0].appid},
-            {descriptions: result[0].description}
+            {descriptions: result[0].description},
+            {downloads: result[0].downloads}
         ])
     }).catch(err => {
         console.log(err)
@@ -82,32 +83,39 @@ exports.AppInfo = async (req, res) => {
     })
 }
 
-exports.AddRate = async (req, res,next) => {
-    const checkRated = req.body.rating1;
+exports.AddRate = async (req, res) => {
+    
+    const apkId = req.params.appkid;
+    const RateAmount = req.params.rateAmount;
+    if(RateAmount > 5)
+    {
+        res.redirect('back')
+    }
+    
      if(typeof checkRated != 'undefined'){
-    await checkAppRated(req.params.appid).then(async appResult => {
+    await checkAppRated(apkId).then(async appResult => {
         if (appResult.length == 0) {
-            await insertRate(req.params.appid).then(async () => {
-                Promise.resolve(await handleRating(req)).then(async () => {
-                    await addUserId(req.params.appid, res.locals.userId)
+            await insertRate(apkId).then(async () => {
+                Promise.resolve(await handleRating(apkId,RateAmount)).then(async () => {
+                    await addUserId(apkId, res.locals.userId)
                 }).then(
-                    await updateMyRate(req.params.appid).then(async theStarts => {
+                    await updateMyRate(apkId).then(async theStarts => {
                         await performRate(theStarts).then(result => {
-                            SetRate(result, req.params.appid)
+                            SetRate(result, apkId)
                         })
                     })
                 )
             })
         } else {
-            await checkRateStatus(req.params.appid, res.locals.userId).then(async StatResult => { //check user rated the app  ?
+            await checkRateStatus(apkId, res.locals.userId).then(async StatResult => { //check user rated the app  ?
                 if (StatResult.length == 0) {
-                    await insertRate(req.params.appid).then(async () => {
-                        Promise.resolve(await handleRating(req)).then(async () => {
-                            await addUserId(req.params.appid, res.locals.userId)
+                    await insertRate(apkId).then(async () => {
+                        Promise.resolve(await handleRating(apkId, RateAmount)).then(async () => {
+                            await addUserId(apkId, res.locals.userId)
                         }).then(
-                            await updateMyRate(req.params.appid).then(async theStarts => {
+                            await updateMyRate(apkId).then(async theStarts => {
                                 await performRate(theStarts).then(result => {
-                                    SetRate(result, req.params.appid)
+                                    SetRate(result, apkId)
                                 })
                             })
                            
@@ -119,7 +127,6 @@ exports.AddRate = async (req, res,next) => {
     })
 }
     
-    // }
     res.redirect('back');
-    next();
+    // next();
 }
