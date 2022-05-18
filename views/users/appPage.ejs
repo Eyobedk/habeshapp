@@ -162,38 +162,114 @@
         <div class="infocolOne">
           <div>
             <h1><%= AppInfos[0][0].appname.replace(/[_]+/g, ' ') %></h1>
-            <a
-              style="text-decoration: none; float: left; font-size: 15px; font-weight:600; color: rgb(79, 149, 255);"  href="developer_page/<%= AppInfos[0][1].dev_id %>">Owner</a><br>
+            <a style="text-decoration: none; float: left; font-size: 15px; font-weight:600; color: rgb(79, 149, 255);"
+              href="developer_page/<%= AppInfos[0][1].dev_id %>">Owner</a><br>
             <div class="starsandDown">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              15 Downloads
-              
+              <% if(AppInfos[0][2].Rate == 0) { %>
+              <a style="cursor: auto;" href="/rate/<%= AppInfos[0][11]['app_id']%>/1"><span
+                  class="fa fa-star"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/2"><span
+                  class="fa fa-star "></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/3"><span
+                  class="fa fa-star "></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/4"><span
+                  class="fa fa-star"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/5"><span
+                  class="fa fa-star"></span></a>
+              <% } %>
+              <% if(AppInfos[0][2].Rate == 1) { %>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/1"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/2"><span
+                  class="fa fa-star "></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/3"><span
+                  class="fa fa-star "></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/4"><span
+                  class="fa fa-star"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/5"><span
+                  class="fa fa-star"></span></a>
+              <% } %>
+              <% if(AppInfos[0][2].Rate == 2) { %>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/1"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/2"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/3"><span
+                  class="fa fa-star "></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/4"><span
+                  class="fa fa-star"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/5"><span
+                  class="fa fa-star"></span></a>
+              <% } %>
+              <% if(AppInfos[0][2].Rate == 3) { %>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/1"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/2"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/3"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/4"><span
+                  class="fa fa-star"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/5"><span
+                  class="fa fa-star"></span></a>
+              <% } %>
+              <% if(AppInfos[0][2].Rate == 4) { %>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/1"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/2"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/3"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/4"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/5"><span
+                  class="fa fa-star"></span></a>
+              <% } %>
+              <% if(AppInfos[0][2].Rate == 5) { %>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/1"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/2"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/3"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/4"><span
+                  class="fa fa-star checked"></span></a>
+              <a style="cursor: auto;" href="rate/<%= AppInfos[0][11]['app_id']%>/5"><span
+                  class="fa fa-star checked"></span></a>
+              <% } %>
+
+
+              <%= AppInfos[0][13].downloads %> Downloads
 
 
             </div>
-          </div><div>
-                <ol class="firstInfo" style="padding-top: 15px;display: inline-grid;">
-                  <li >
-                    <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong class="fixColor"><%=  AppInfos[0][3].func1 %></strong></p>
-                  </li>
-                  <li >
-                    <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong class="fixColor"><%=  AppInfos[0][4].func2 %></strong></p>
-                  </li>
-                  <li >
-                    <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong class="fixColor"><%=  AppInfos[0][5].func3 %></strong></p>
-                  </li>
-                  <li >
-                    <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong class="fixColor"><%=  AppInfos[0][6].func4 %></strong></p>
-                  </li>
-                </ol>
-              </div>
-          <p >
-            <a href="/download/<%= AppInfos[0][11]['app_id']%>" style="cursor: context-menu;" class="btn btn-success text-light" ><b> Download</a></b>
-          </p>
+          </div>
+          <div>
+            <ol class="firstInfo" style="padding-top: 15px;display: inline-grid;">
+              <li>
+                <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong
+                    class="fixColor"><%=  AppInfos[0][3].func1 %></strong></p>
+              </li>
+              <li>
+                <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong
+                    class="fixColor"><%=  AppInfos[0][4].func2 %></strong></p>
+              </li>
+              <li>
+                <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong
+                    class="fixColor"><%=  AppInfos[0][5].func3 %></strong></p>
+              </li>
+              <li>
+                <p style="float: left"><i class="text-success fa fa-check-square-o"></i> <strong
+                    class="fixColor"><%=  AppInfos[0][6].func4 %></strong></p>
+              </li>
+            </ol>
+          </div>
+          <div>
+            <p>
+              <a href="/download/<%= AppInfos[0][11]['app_id']%>" style="cursor: context-menu;"
+                class="btn btn-success text-light"><b> Download</a></b>
+            </p>
+          </div>
         </div>
 
 
@@ -225,32 +301,33 @@
       <section>
         <h2 class="reviewstitle">Ratings & Reviews</h2>
       </section>
-      
 
-      
-  <div class="d-flex justify-content-center">
-    <div class="spinner-border" 
-         role="status" id="loading">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
-<div class="commnets" id="commenets"></div>
 
-	
-	<div class="row mb-5" style="margin-bottom: 1rem!important;">
-		<h4 style="margin-left: 30px"> Add commnets</h4>
-	</div>
-	
-	
-	<form method="post" action="">
-  <div class="form-group">
-    <textarea type="text" style="background-color: rgb(232, 232, 232);" name="comment" class="form-control" id="exampleInputtextarea" placeholder="write your own reviews" rows="3"></textarea>
-  </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-	
-</div>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" id="loading">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="commnets" id="commenets"></div>
+
+
+      <div class="row mb-5" style="margin-bottom: 1rem!important;">
+        <h4 style="margin-left: 30px"> Add commnets</h4>
+      </div>
+
+      <center>
+      <form method="post" action="">
+        <div class="form-group">
+          <textarea type="text" style="background-color: rgb(232, 232, 232);" name="comment" class="form-control"
+            id="exampleInputtextarea" placeholder="write your own reviews" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </center>
+
+      </div>
     </section>
 
     <!-- HERE IS THE SCREENSHOTS SECTIONS -->
@@ -315,7 +392,6 @@
 
 
   <script type="text/javascript">
-
 
   </script>
 
