@@ -11,6 +11,7 @@ const {DownloadApp} = require('../../controllers/users/Downloader')
 const {HandleLoadAllCommnets } = require("../../controllers/users/comment")
 const {ReportApp } = require("../../controllers/users/Reports")
 const {feedback } = require("../../controllers/users/feedback")
+const {LoadDevApps } = require("../../controllers/users/LoadDevApps")
 const {contViews } = require("../../controllers/developer/contViews")
 
 
@@ -33,11 +34,11 @@ router.post('/reset-password',setNewPassword)
 
 router.get('/info', requireAuth,AppInfo)
 router.get('/info/:appid', requireAuth,contViews,AppInfo)//
-router.post('/info/:appid', requireAuth,ReportApp,AddComment,AddRate)
+router.post('/info/:appid', requireAuth,ReportApp,AddComment)
 router.get('/comments/:id', requireAuth, HandleLoadAllCommnets)
 router.get('/download/:id', requireAuth, DownloadApp)
 router.post('/feedback', requireAuth, feedback)
-
-
+router.get('/info/rate/:appkid/:rateAmount', requireAuth, AddRate)
+router.get('/info/developer_page/:devId', requireAuth, LoadDevApps)
 
 module.exports = router;
