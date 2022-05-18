@@ -50,6 +50,13 @@ class Apps {
         const [result, _] = await db.execute(sql);
         return result
     }
+    static async SimilarApps(catagory)
+    {
+        const sql = `SELECT * FROM apps WHERE catagory = '${catagory}'`;
+        const [result, _] = await db.execute(sql);
+        return result
+    }
+
     static async ListAppsForUsers(id)
     {
         const sql = `SELECT * FROM apps WHERE appid=${id}`;
