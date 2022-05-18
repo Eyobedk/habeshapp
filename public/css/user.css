@@ -489,8 +489,10 @@ padding-left: 35px;
 .infocolOne
 {
     width: 60%;
+    align-items: flex-start;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column
 }
 .firstInfo
 {
@@ -557,3 +559,16 @@ padding-left: 35px;
 {
     margin-left: 30px;
 }
+
+.fa
+{
+    font-size: large !important;
+}
+.fa-star
+{
+    font-size: large !important;
+}
+
+
+
+

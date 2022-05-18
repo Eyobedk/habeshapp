@@ -43,18 +43,19 @@ function show(data) {
              <div class="row mt-5 mb-5">
                  <div class="media">
                   <div class="media-body">
-                    <h5 class="mt-0">${anon}</h5>
+                    <h5 class="mt-0"><b>${anon} </b></h5>
                      ${data[key].commentOne}<hr style="width:700px; border-top: 1px solid rgb(0 0 0 / 25%) !important"> 
                   </div>
               </div>
           </div>`;
            if(data[key].commentTwo)
            {
+            let anons = 'Anonymous';
                tab += `
              <div class="row mt-5 mb-5">
                  <div class="media">
                   <div class="media-body">
-                    <h5 class="mt-0">${anon}</h5>
+                    <h5 class="mt-0"><b>${anons} </b></h5>
                      ${data[key].commentTwo} 
                      <hr style="width:700px; border-top: 1px solid rgb(0 0 0 / 25%) !important">
                   </div>
