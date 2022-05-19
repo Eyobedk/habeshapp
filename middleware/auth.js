@@ -6,6 +6,7 @@ const requireAuth =(req, res, next) => {
     const authenicatedUser = req.isAuthenticated() && req.user;
     if (authenicatedUser) {
         res.locals.userId = req.user;
+        console.log(req.user)
         next();//Google-authenticated
     }
     else if(token)
