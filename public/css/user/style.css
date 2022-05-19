@@ -775,11 +775,81 @@ img
 
 
 
+  .cata{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: #ffdf74;
+  }
+  .cata:hover{
+    background: #FFF;
+  }
+
+
+  .sidebar li .cata:hover .links_name,
+  .sidebar li .cata:hover i{
+    transition: all 0.5s ease;
+    color: #11101D;
+  }
 
 
 
+.logoutuser
+{
+  color: rgb(0, 0, 0);
+  height: 35px;
+  /* width: 35px; */
+  background: rgb(255, 255, 255);
+  
+  /* border-radius: 50%; */
+  position: relative;
+  cursor: pointer;
+  float: right;
+  /* margin-rightZ: 15px; */
+  margin-top: 3px;
+}
 
+.userIcon
+{
+  padding-left: 8px;
+  font-size: 20px;
+}
 
+.user-name {
+  /* height: 100%; */
+  /* width: 30px; */
+  font-size: 12px;
+  line-height: 0.5 em;
+  /* padding: 20px; */
+  float: left;
+}
 
+.dropper-menu ul li {
+  list-style-type: none;
+  display: block;
+  height: 100px;
+  width: 150px;
+  font-size: 30px;
+  /* line-height: 0.5em; */
+  padding: 20px;
+  color: rgb(0, 199, 20);
+  border-bottom: 2px solid #333;
+}
 
-  /* ================================scss==================================== */
+.dropper
+{
+  background-color: rgb(255, 255, 255);
+  display: none;
+}
+
+.user-name:hover .dropper {
+  display: block;
+  position: absolute;
+  top: 100%;
+  height: auto;
+  width: 100px;
+}

@@ -17,7 +17,7 @@ body, input {
 }
 body {
 	background: var(--bg);
-	display: flow-root;
+	display: grid;
 	height: 100vh;
 }
 form, input, .caret {
