@@ -62,7 +62,7 @@ exports.AppInfo = async (req, res) => {
     let similarAppsList = [];
     let catagory;
 
-    await Apps.ListAppsForUsers(appIds).then((result) => {console.log(result);
+    await Apps.ListAppsForUsers(appIds).then((result) => {
         ApkInfo.push([
             { appname: result[0].appName }, { dev_id: result[0].dev_id }, 
             { Rate: result[0].appRate }, { func1: result[0].funcOne },
@@ -80,7 +80,6 @@ exports.AppInfo = async (req, res) => {
         console.log(err)
     }).then(async ()=>{
         const SimilarApps = await Apps.SimilarApps(catagory);
-        console.log(SimilarApps)
         for(let i = 0; i< SimilarApps.length; i++)
         {
             similarAppsList.push([
@@ -91,8 +90,8 @@ exports.AppInfo = async (req, res) => {
                 {id: SimilarApps[i].appid}
             ])
         }
-        console.log("here")
-        console.log(similarAppsList)
+        console.log("res.locals.userEmail")
+        console.log(res.locals.userEmail)
     res.render('users/appPage', {
         AppInfos: ApkInfo,
         similarApks: similarAppsList
