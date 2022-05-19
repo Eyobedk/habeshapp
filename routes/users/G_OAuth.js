@@ -8,6 +8,7 @@ var useremail;
 var user_id;
 async function verifyCallBack(accToken, refoken, profile, done) {
     
+    
     await User.saveFromGoogle(profile._json.email).then(async result =>{
         await User.findEmail(profile._json.email).then(userInfo=>{
         user_id = userInfo[0].user_id;
@@ -35,7 +36,7 @@ passport.serializeUser((user,done)=>{
 passport.deserializeUser((user,done)=>{ done(null,user) });
 
 
-Router.get("/auth/google", passport.authenticate('google',{scope:['email']}))
+Router.get("/auth/google", passport.authenticate('google',{scope:['email']}),function(req, res){whatTheheck = res})
 Router.get('/google/callback', passport.authenticate('google', setwhenDone), 
     function(req, res) {
     res.redirect(`/home`);
@@ -45,4 +46,4 @@ Router.get('/failure', (req, res) => { res.send("failed to login") })
 Router.get('/auth/logout', (req, res) => { req.logOut();res.redirect(302,'/') })
 
 
-module.exports = Router,useremail;
+module.exports = Router;
