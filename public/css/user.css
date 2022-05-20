@@ -461,7 +461,7 @@ padding-left: 35px;
 {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: auto;
     margin-top: 89px;
     margin-left: 98px;
 }
