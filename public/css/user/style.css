@@ -853,3 +853,11 @@ img
   height: auto;
   width: 100px;
 }
+
+.report
+{
+  width:165px !important;
+  background-color: #428bca !important;
+  margin-left: 30px;
+  margin-top: 30px;
+}
