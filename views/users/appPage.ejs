@@ -310,6 +310,10 @@
       </section>
       <% } %>
 
+      <form action="" method="post" style="margin-top: 15px !important;margin-left: 0;">
+        <input type="submit" name="report"  class="btn btn-primary report" value="REPORT!">
+      </form>
+
       <section>
         <h2 class="reviewstitle">Ratings & Reviews</h2>
       </section>
@@ -354,7 +358,7 @@
             if(similarApks[i][0]['name'] == AppInfos[0][0].appname.replace(/[_]+/g, ' ')){continue;}
             %>
           <li>
-            <a href="info/<%= similarApks[i][2]['id']  %>" style="text-decoration: none !important;">
+            <a href="/info/<%= similarApks[i][3]['id']  %>" style="text-decoration: none !important;">
               <div style="margin-top: 30px;margin-left: 10px !important;" class="listsimilarApps">
 
                 <img style="border-radius:50%; width: 60px;height: 60px;    margin-left: -25px;"
@@ -450,4 +454,29 @@
   </script>
 </body>
 
+
+
+ <!-- FOOTER -->
+ <footer class="w-100 py-4 flex-shrink-0" style="padding-bottom: 0rem!important;margin-top: 30px;">
+   <center> <h5 style="color: #fff;margin-left: 72px;"  class="h1 text-white" >Habeshapp</h5></center>
+    <div class="FooterParent">
+      <div class="theFooterTexts">
+        <p class="small text-muted">We believe that it is time for Ethiopians to have their own platform where they can
+          enjoy their local apps that will encourage them to get close to the mobile app services.</p>
+        <p class="small text-muted mb-0">&copy; Copyrights. All rights reserved. <a class="text-primary"
+            href="#">Habeshapp</a></p>
+          </div>
+          <div class="feedbackFooter">
+            <h5 class="text-white mb-3" style="color: white;"></h5>
+            <form action="/feedback" method="post">
+              <div class="input-group mb-3">
+                <input class="form-control" type="text" name="feedbacks" style="background-color: white;color: black;"
+                  placeholder="Recipient's username">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-envelope"></i></button>
+              </div>
+            </form>
+          </div>
+      
+    </div>
+</footer>
 </html>
