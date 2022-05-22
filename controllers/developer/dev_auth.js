@@ -47,8 +47,8 @@ exports.registerDeveloper = async (req, res) => {
       "payment_method": "paypal"
     },
     "redirect_urls": {
-      "return_url": "http://localhost:3000/success",
-      "cancel_url": "http://localhost:3000/cancel"
+      "return_url": "http://localhost:4000/success",
+      "cancel_url": "http://localhost:4000/cancel"
     },
     "transactions": [{
       "item_list": {
@@ -115,7 +115,6 @@ exports.handleSuccess = (req, res) => {
           maxAge: 600000
         }).redirect(302, '/pannel')
 
-        // res.redirect(302, '/developer-Login')
       })
     }
   });
@@ -125,7 +124,7 @@ module.exports.Login_Dev = async (req, res, next) => {
   const {email,password} = req.body;
   console.log(email)
   const dev = await Developer.findEmail(email); //returns developer id
-  console.log(dev[0])
+
   if (!dev) {
     let outErrors = 'enter the correct password and email';
     res.render("developer/Auth/developer-Login", {
@@ -133,7 +132,7 @@ module.exports.Login_Dev = async (req, res, next) => {
     });
     return
   }
-  console.log("wow"+dev[0])
+  
   await bcrypt.compare(password, dev[0].dev_password).then(function (result) {
     // result == true
     console.log("the devloper result" + result)
