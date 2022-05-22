@@ -69,6 +69,12 @@ class Apps {
         const [result, _] = await db.execute(sql);
         return result
     }
+    static async getAppsPathById(appid)
+    {
+        const sql = `SELECT * FROM apps WHERE  appid=${appid}`;
+        const [result, _] = await db.execute(sql);
+        return result
+    }
     static async updateApp(appid, publishedOn,appUrl)
     {
         try{            
@@ -109,6 +115,12 @@ class Apps {
         const delResult = await db.execute(sql);
         return delResult
     }
+    static async deleteAppsByAdmin(appid, devid)
+    {
+        const sql = `DELETE FROM apps where appid = ${appid};`
+        const delResult = await db.execute(sql);
+        return delResult
+    }
     static async LoadNewApps()
     {
         const sql = `SELECT * FROM apps ORDER BY publishedDate ASC`;
@@ -137,13 +149,20 @@ class Apps {
     }
     static async GetReportandDownload(app_id)
     {
-        const sql = `SELECT downloads,appReports,dev_id FROM apps where appid = ${app_id}`;
+        const sql = `SELECT icon, appName, downloads,appReports,dev_id FROM apps where appid = ${app_id}`;
         const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
         return result;
     }
     static async ReportApp(appId)
     {
         const sql = `UPDATE apps SET appReports = appReports + 1 WHERE appid = ${appId}`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+    static async updateStatus(dev_id)
+    {
+        const sql = `UPDATE developer SET dev_ban_status = dev_ban_status + 1 WHERE dev_id = ${dev_id}`;
         return new Promise((resolve, reject) => {
             resolve(db.execute(sql));
         })
@@ -155,9 +174,10 @@ class Apps {
             resolve(db.execute(sql));
         })
     }
-    static async AddtoblackListAppsTable(appId, reported_dev_id)
+    static async AddtoblackListAppsTable(Icon, Appname, Reports, appId)
     {
-        const sql = `INSERT INTO blacklistedapps(reportedappid, thedeveloperid) VALUES(${appId}, ${reported_dev_id})`;
+        const sql = `INSERT INTO blacklistedapps(Theicon, TheAppName, ReportedAmount, TheReportedAppID)
+         VALUES('${Icon}', '${Appname}', ${Reports}, ${appId})`;
         return new Promise((resolve, reject) => {
             resolve(db.execute(sql));
         })
