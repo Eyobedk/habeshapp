@@ -18,6 +18,13 @@ module.exports.createTokenforDev = (id) =>{
         expiresIn: 600000
     })
 }
+module.exports.createTokenforAdmin = (id) =>{
+    return jwt.sign({
+        id
+    }, process.env.ADMIN_ACCESS_TOKEN_SECRET_KEY, {
+        expiresIn: 600000
+    })
+}
 module.exports.createRefToken = (id) =>{
     return jwt.sign({
         id
