@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pannel</title>
+</head>
+<body>
+    <% if(typeof user != 'undefined'){ %>
+        <table >
+            <tr>
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    Designation
+                </th>
+             <th>
+                    Status
+                </th>
+                
+            </tr>
+       <% for (i = 0; i < user.length; i++)
+        {  %>
+            <tr>
+                       <td> <%= user[i][0] %></td>
+                       <td> <%= user[i][1] %></td>
+                   <td><%= user[i][2] %></td>
+               
+              </tr>
+       <%  } %>
+       <%  } %>
+        
+        
+        </table>
+
+
+
+
+
+
+
+
+<% if(typeof developer != 'undefined'){ %>
+    <table >
+        <tr>
+            <th>
+                Employee Name
+            </th>
+            <th>
+                Designation
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                PAYMET ID
+            </th>
+            <th>
+                PUBLISHED DATE
+            </th>
+        </tr>
+    <% for (i = 0; i < developer.length; i++)
+    {  %>
+        <tr>
+                    <td> <%= developer[i][0] %></td>
+                    <td> <%= developer[i][1] %></td>
+                <td><%= developer[i][2] %></td>
+                <td><%= developer[i][3] %></td>
+                <td><%= developer[i][4] %></td>
+            
+            </tr>
+    <%  } %>
+    <%  } %>
+    
+    
+    </table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%  if(typeof ListofApps != 'undefined' ) { %>
+        <table>
+            <tr>
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    Designation
+                </th>
+             <th style="padding-left: 20px">
+                    Status
+                </th>
+             <th style="padding-right: 20px">
+                    xStatus
+                </th>
+                
+            </tr>
+        <% for (let i = 0; i < ListofApps.length; i++)
+        {  %>
+            <tr style="padding-left: 20px">
+                       <td style="padding-left: 20px"> <%= ListofApps[i]['Theicon'] %></td>
+                       <td style="padding-left: 20px"> <%= ListofApps[i]['TheAppName'] %></td>
+                   <td style="padding-left: 20px"><%= ListofApps[i]['ReportedAmount'] %></td>
+                   <td style="padding-left: 20px"><a href="removeApp/<%= ListofApps[i]['TheReportedAppID'] %>"> Delete</a></td>
+               
+              </tr>
+       <%  } %>
+    <% } %>
+
+    </table>
+</body>
+</html>
