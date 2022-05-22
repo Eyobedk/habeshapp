@@ -15,9 +15,14 @@ class Developer {
 
   save() {
     const hash = bcrypt.hashSync(this.password, 12);
+    const d = new Date();
+    const year = d.getFullYear();
+    const day = d.getDate();
+    const month = d.getMonth() + 1;
+    const date = `${year}-${month}-${day}`;
     try {
-      let sql = `INSERT INTO developer(dev_name,dev_phone,dev_email,dev_password,dev_domain,dev_ban_status,payement_ID) 
-    VALUES ('${this.name}',${this.phone},'${this.email}','${hash}','${this.domain}',0,'${this.payment_ID}');`;
+      let sql = `INSERT INTO developer(dev_name,dev_phone,dev_email,dev_password,dev_domain,dev_ban_status,payement_ID, registeredDate) 
+    VALUES ('${this.name}',${this.phone},'${this.email}','${hash}','${this.domain}',0,'${this.payment_ID}', '${date}');`;
       return new Promise((resolve, reject) => {
         resolve(db.execute(sql));
       })
