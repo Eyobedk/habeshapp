@@ -1,8 +1,9 @@
 const Apps = require('../../models/App')
-
+const Admin  = require('../../models/Admin')
 
 exports.ReportApp = async (req, res,next)=>{
     const reported = req.body.report;
+    console.log(reported);
     let avarageReport;
     if(reported){
         const ReportedList = await Apps.checkAppisReported(req.params.appid, res.locals.userId);
@@ -12,17 +13,22 @@ exports.ReportApp = async (req, res,next)=>{
             await Apps.InserttoReporteds(res.locals.userId, req.params.appid)
 
             const [RatesandDownloads, _] = await Apps.GetReportandDownload(req.params.appid);
-            avarageReport = parseFloat(RatesandDownloads.appReports / RatesandDownloads.downloads);
-
-            if(avarageReport >= RatesandDownloads.downloads)
+            avarageReport = parseFloat(RatesandDownloads.downloads / RatesandDownloads.appReports);
+            const FoundAppIdfromBlackList = await Admin.checkAppisBlackListed(req.params.appid);
+            // console.log()
+            if(RatesandDownloads.appReports >= avarageReport)
             {
-                await Apps.AddtoblackListAppsTable(req.params.appid, RatesandDownloads.dev_id).catch((err)=>{
+                if(!FoundAppIdfromBlackList.length)
+                {
+                    await Apps.AddtoblackListAppsTable(RatesandDownloads.icon, RatesandDownloads.appName, RatesandDownloads.appReports, req.params.appid).catch((err)=>{
                     console.log(err);
-                });
+                    });
+                    await Apps.updateStatus(RatesandDownloads.dev_id).catch((err)=>{console.log(err)})
+                }
             }
             
         }else{}
-    
+    res.redirect('back')
 }
     next();
 }
