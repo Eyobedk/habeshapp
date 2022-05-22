@@ -12,7 +12,7 @@ exports.varifydevEmail = async (req,res)=>{
    // console.log("dev"+Dev[0]);
     if (typeof Dev[0] ==="undefined"){
         let TheError = "You must be registered inorder to reset password";
-        res.render('developer/Auth/developer-reset',{Ierror:TheError});
+        res.render('developer/Auth/developer-forgot',{Ierror:TheError});
         return
     }
     const id = Dev[0].dev_id;
@@ -21,7 +21,7 @@ exports.varifydevEmail = async (req,res)=>{
 
     const link = `http://localhost:3000/developer-reset/${id}/${token}`;
     Mailer(email,link);
-    res.render('developer/Auth/developer-reset',{Iok:"We have sent reset password link to your Email"});
+    res.render('developer/Auth/developer-forgot',{Iok:"We have sent reset password link to your Email"});
 }
 
 exports.validateResetTokes = (req, res)=>{
