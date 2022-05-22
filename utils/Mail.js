@@ -20,5 +20,9 @@ exports.Mailer = async(email, resetpassLink)=>{
 
   await transporter.sendMail(mailOptions)
   .then(()=>{
-  }).catch((err)=>{ console.log("The send email error:" + err)})
+  }).catch((err)=>{ 
+    console.log("The send email error:" + err)
+    console.log("The send email error:" + err.code)
+  }
+    )
 }
