@@ -4,6 +4,7 @@ const {
   createTokenforDev
 } = require('../../utils/TokenHandler');
 const bcrypt = require('bcrypt');
+const Admin = require('../../models/Admin');
 
 require('dotenv').config();
 paypal.configure({
@@ -121,35 +122,51 @@ exports.handleSuccess = (req, res) => {
 }
 
 module.exports.Login_Dev = async (req, res, next) => {
-  const {email,password} = req.body;
+  const {
+    email,
+    password
+  } = req.body;
   console.log(email)
-  const dev = await Developer.findEmail(email); //returns developer id
 
-  if (!dev) {
-    let outErrors = 'enter the correct password and email';
-    res.render("developer/Auth/developer-Login", {
-      outErrors
-    });
-    return
-  }
-  
-  await bcrypt.compare(password, dev[0].dev_password).then(function (result) {
-    // result == true
-    console.log("the devloper result" + result)
-    if (!result) {
-      const Ierror = "Enter the correct email and password";
-      res.render('developer/Auth/developer-Login', {
-        Ierror
+  const dev = await Developer.findEmail(email);
+  const isBadDeveloper = await Admin.checkDeveloperIsBlackListed(dev[0].dev_id);
+  console.log("isBadDeveloper")
+  console.log(isBadDeveloper.length)
+  if (isBadDeveloper.length == 0) {
+    if (!dev) {
+      let outErrors = 'enter the correct password and email';
+      res.render("developer/Auth/developer-Login", {
+        outErrors
       });
       return
     }
-  });
 
-  const token = createTokenforDev(JSON.stringify(dev[0].dev_id));
-  res.cookie('devToken', token, {
-    httpOnly: true,
-    maxAge: 6000000
-  }).redirect(302, '/pannel');
+    const flag = await bcrypt.compare(password, dev[0].dev_password).then(function (result) {
+      // result == true
+      console.log("the devloper result" + result)
+      if (!result) {
+        const Ierror = "Enter the correct email and password";
+        res.render('developer/Auth/developer-Login', {
+          Ierror
+        });
+        return 1;
+      }
+    });
+    if(flag ==1)
+    {
+      return;
+    }
+
+    const token = createTokenforDev(JSON.stringify(dev[0].dev_id));
+    res.cookie('devToken', token, {
+      httpOnly: true,
+      maxAge: 6000000
+    }).redirect(302, '/pannel');
+  } else {
+    res.render('developer/Auth/developer-Login', {
+      banMessage: "Due to Your recent malicious Activies you have Been baned from the platform"
+    })
+  }
 }
 
 exports.dev_logout = (req, res) => {
