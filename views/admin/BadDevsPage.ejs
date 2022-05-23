@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%  if(typeof ListofDevs != 'undefined' ) { %>
+        <table>
+            <tr>
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    Designation
+                </th>
+             <th style="padding-left: 20px">
+                    Status
+                </th>
+             <th style="padding-right: 20px">
+                    xStatus
+                </th>
+             <th style="padding-right: 20px">
+                    waga
+                </th>
+                
+            </tr>
+        <% for (let i = 0; i < ListofDevs.length; i++)
+        {  %>
+            <tr style="padding-left: 20px">
+                       <td style="padding-left: 20px"> <%= ListofDevs[i]['dev_name'] %></td>
+                       <td style="padding-left: 20px"> <%= ListofDevs[i]['dev_phone'] %></td>
+                   <td style="padding-left: 20px"><%= ListofDevs[i]['dev_email'] %></td>
+                   <td style="padding-left: 20px"><%= ListofDevs[i]['payement_ID'] %></td>
+                   <td style="padding-left: 20px; "><a href="/banDev/<%= ListofDevs[i]['dev_id'] %>" style="color: red;text-decoration: none;"> Ban</a></td>
+               
+              </tr>
+       <%  } %>
+    <% } %>
+
+    </table>
+</body>
+</html>
