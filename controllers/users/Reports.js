@@ -27,8 +27,9 @@ exports.ReportApp = async (req, res,next)=>{
                 }
             }
             
-        }else{}
+        }
+        else{}
     res.redirect('back')
 }
-    next();
+    // next();
 }

@@ -30,6 +30,7 @@ async function AddTheSecondCommnet(userId, comment2, appId){
 
 exports.AddComment = async (req, res, next)=>{
     const comment = req.body.comment;
+    console.log(comment);
     if( typeof comment != 'undefined')
     {
         const amountOfRates = await countLimit(req.params.appid,  res.locals.userId);
@@ -42,5 +43,6 @@ exports.AddComment = async (req, res, next)=>{
             await AddTheSecondCommnet(res.locals.userId, comment, req.params.appid);
         }
     }
- next();
+    res.redirect('back');
+//  next();
 }

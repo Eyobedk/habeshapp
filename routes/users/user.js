@@ -35,7 +35,8 @@ router.post('/reset-password',setNewPassword)
 
 router.get('/info', requireAuth,AppInfo)
 router.get('/info/:appid', requireAuth,contViews,AppInfo)//
-router.post('/info/:appid', requireAuth,ReportApp,AddComment)
+router.post('/report/:appid', requireAuth,ReportApp)
+router.post('/comment/:appid',requireAuth, AddComment)
 router.get('/comments/:id', requireAuth, HandleLoadAllCommnets)
 router.get('/download/:id', requireAuth, DownloadApp)
 router.post('/feedback', requireAuth, feedback)

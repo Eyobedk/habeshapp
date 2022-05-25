@@ -309,7 +309,7 @@
       </section>
       <% } %>
 
-      <form action="" method="post" style="margin-top: 15px !important;margin-left: 0;">
+      <form action="/report/<%= AppInfos[0][11]['app_id'] %>" method="post" style="margin-top: 15px !important;margin-left: 0;">
         <input type="submit" name="report"  class="btn btn-primary report" value="REPORT!">
       </form>
 
@@ -332,7 +332,7 @@
       </div>
 
       <center>
-        <form method="post" action="">
+        <form method="post" action="/comment/<%= AppInfos[0][11]['app_id'] %>">
           <div class="form-group">
             <textarea type="text" style="background-color: rgb(232, 232, 232);" name="comment" class="form-control"
               id="exampleInputtextarea" placeholder="write your own reviews" rows="3"></textarea>
