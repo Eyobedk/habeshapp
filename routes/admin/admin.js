@@ -1,5 +1,6 @@
 const {Router} = require('express');
 const {logMeIn, register} = require('../../controllers/admin/Login')
+const {Logout_Admin}= require('../../controllers/admin/Logout_Admin')
 const {sendEmail} = require('../../controllers/admin/sendEmail')
 const {resetAdminPassword} = require('../../controllers/admin/resetAdminPassword')
 const {LoadUsersAndDevelopers} = require('../../controllers/admin/loadUsersandDevs')
@@ -28,19 +29,14 @@ router.get('/admin200/removeApp/:id', deleteReportedApp)
 router.get('/admin200/badDevelopers', ListBadDevelopers)
 router.get('/banDev/:devID', BlackListDeveloper)
 
-router.get('/admin200/alertUser', (req, res)=>{res.render('admin/alertUser')})
+router.get('/admin200/alertUser', (req, res)=>{res.render('admin/Alert_User')})
 router.post('/admin200/alertUser', AlertUser)
 router.post('/admin200/deleteAlert', DeleteAlert)
 
-router.get('/admin200/alertDev', (req, res)=>{res.render('admin/alertDev')})
+router.get('/admin200/alertDev', (req, res)=>{res.render('admin/Alert_Developer')})
 router.post('/admin200/alertDev', AlertDeveloper)
 router.post('/admin200/deleteDevAlert', DeleteAlertofDev)
-
-
-
-
-
-
+router.get('/logout-Admin', Logout_Admin)
 
 // Home panel
 

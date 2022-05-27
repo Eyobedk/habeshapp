@@ -12,13 +12,13 @@ exports.AlertDeveloper = async (req, res)=>
     if( checkAlreadyPosted.length == 0)
     {
         await Admin.AlertDev(message).then(()=>{
-        res.render('admin/alertDev',{response:"message is published to developers to be seen"})
+        res.render('admin/Alert_Developer',{response:"message is published to developers to be seen"})
          });
     }else
     {
         console.log("else")
         await Admin.AlertDevByUpdate(message).then(()=>{
-            res.render('admin/alertDev',{response:"message is published to developers to be seen"})
+            res.render('admin/Alert_Developer',{response:"message is published to developers to be seen"})
         });
     }
     
@@ -32,7 +32,7 @@ exports.DeleteAlertofDev = async (req, res)=>
     if(!(checkAlreadyPosted.length == 0))
     {
         await Admin.DeleteTheMessagefDev().then(()=>{
-        res.render('admin/alertDev',{response:"message is removed from the users page"})
+        res.render('admin/Alert_Developer',{response:"message is removed from the users page"})
          });
     }
     

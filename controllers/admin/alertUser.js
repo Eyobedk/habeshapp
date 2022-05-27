@@ -12,13 +12,13 @@ exports.AlertUser = async (req, res)=>
     if( typeof checkAlreadyPosted[0] != undefined)
     {
         await Admin.AlertUser(message).then(()=>{
-        res.render('admin/alertUser',{response:"message is published to users to be seen"})
+        res.render('admin/Alert_User',{response:"message is published to users to be seen"})
          });
     }else
     {
         console.log("else")
         await Admin.AlertUserByUpdate(message).then(()=>{
-            res.render('admin/alertUser',{response:"message is published to users to be seen"})
+            res.render('admin/Alert_User',{response:"message is published to users to be seen"})
         });
     }
     
@@ -32,7 +32,7 @@ exports.DeleteAlert = async (req, res)=>
     if(!(checkAlreadyPosted.length == 0))
     {
         await Admin.DeleteTheMessage().then(()=>{
-        res.render('admin/alertUser',{response:"message is removed from the users page"})
+        res.render('admin/Alert_User',{response:"message is removed from the users page"})
          });
     }
     

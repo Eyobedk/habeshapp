@@ -11,7 +11,7 @@ exports.logMeIn = async (req, res)=>
     const {email,password} = req.body;
     const adm = await Admin.findEmail(email);
   
-    if (!adm) {
+    if (!adm[0]) {
       let outErrors = 'enter the correct password and email';
       res.render("admin/Login", {
         outErrors
