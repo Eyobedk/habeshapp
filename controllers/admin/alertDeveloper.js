@@ -8,19 +8,18 @@ exports.AlertDeveloper = async (req, res)=>
 {
     const {message} = req.body;
     const checkAlreadyPosted = await Admin.checkThereIsaMessageforDev();
-    console.log(checkAlreadyPosted[0].length)
-    if( checkAlreadyPosted.length == 0)
+    if( !checkAlreadyPosted)
     {
         await Admin.AlertDev(message).then(()=>{
         res.render('admin/Alert_Developer',{response:"message is published to developers to be seen"})
          });
-    }else
-    {
-        console.log("else")
-        await Admin.AlertDevByUpdate(message).then(()=>{
-            res.render('admin/Alert_Developer',{response:"message is published to developers to be seen"})
-        });
+        return
     }
+    
+    await Admin.AlertDevByUpdate(message).then(()=>{
+        res.render('admin/Alert_Developer',{response:"message is published to developers to be seen"})
+    });
+    
     
 }
 exports.DeleteAlertofDev = async (req, res)=>
