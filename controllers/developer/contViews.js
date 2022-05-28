@@ -9,6 +9,10 @@ exports.contViews = async (req, res, next)=>{
         await Apps.updateViewCount(req.params.appid).then(async()=>{
             await Apps.UpdateAlreadyVistedId(userId, req.params.appid).catch((err)=>{
                 console.log(err)
+                if(err.errno == 1452)
+                {
+                    res.redirect(302,'/home');
+                }
             })
         }).catch((err)=>{
             console.log(err)
