@@ -36,13 +36,13 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.html" >
+          <a href="/admin200" >
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="Alert Developer.html" class="active">
+          <a href="/admin200/alertDev" class="active">
             <i class='bx bx-message' ></i>
             <span class="links_name"> Alert Developer </span>
           </a>
@@ -55,14 +55,14 @@
         </li>
         
         <li>
-          <a href="Reported apps.html">
+          <a href="/admin200/badApps">
             <i class='bx bx-list-ul ' ></i>
             <span class="links_name"> Reported apps </span>
           </a>
         </li>
     
         <li>
-          <a href="#">
+          <a href="/admin200/badDevelopers">
             <i class='bx bx-cog' ></i>
             <span class="links_name"> Actions </span>
           </a>
@@ -86,7 +86,9 @@
     </nav>
 
     <div class="home-content">
-        
+      <form action="deleteDevAlert" method="post">
+        <button type="submit"  name="delete" style="background-color:#ff3f38;color: white; padding: 8px 4px;border-color: white;float:right; margin-right: 40px;margin-bottom: 60px;">Delete Recent Messages</button>
+    </form>
       <link rel="stylesheet" href="../boot/bootstrap.min.css">
       <style>
           .sidebar .nav-links {
@@ -102,18 +104,18 @@
           }
           
       </style>
-   
+
+
           <div class="yool">
-          
+           <% if(typeof response != 'undefined'){ %>
+         <P style="color: blue;"> <%= response %></P>
+          <% } %>
 
           <form action="" method="post">
               <div class="form-group">
-              <label for="alertTitle">Issue Title:</label>
-              <input type="text" class="form-control" placeholder="Title" id="alertTitle">
-              <br>
-              <label for="alert">Message:</label>
-              <textarea  type="text" class="form-control" placeholder="Text" id="alert"></textarea> </div><br>
-              <center><button type="button" class="btn btn-outline-warning">Submit</button> </center>
+              <!-- <label for="">Message:</label> -->
+              <textarea  type="text" class="form-control" name="message" placeholder="Text" id="alert"></textarea> </div><br>
+              <center><button type="submit" style="color: white;background-color: blue;border-color: black;" class="btn btn-outline-warning">POST</button> </center>
           </form>
         </div>
     </div>
