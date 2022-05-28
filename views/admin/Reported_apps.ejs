@@ -4,10 +4,12 @@
   <head>
     <meta charset="UTF-8">
     <title> Reported Apps</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap" rel="stylesheet">
+
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link href='boxicons.css' rel='stylesheet'>
+    <link href='css/boxicons.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
@@ -35,33 +37,33 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="index.html" >
+          <a href="/admin200" >
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="Alert Developer.html" >
+          <a href="/admin200/alertDev" >
             <i class='bx bx-message' ></i>
             <span class="links_name"> Alert Developer </span>
           </a>
         </li>
         <li>
-          <a href="Alert User.html" >
+          <a href="/admin200/alertUser" >
             <i class='bx bx-message' ></i>
             <span class="links_name"> Alert user</span>
           </a>
         </li>
         
         <li>
-          <a href="Reported apps.html" class="active">
+          <a href="/admin200/badApps" class="active">
             <i class='bx bx-list-ul ' ></i>
             <span class="links_name"> Reported apps </span>
           </a>
         </li>
     
         <li>
-          <a href="#">
+          <a href='/admin200/badDevelopers'>
             <i class='bx bx-cog' ></i>
             <span class="links_name"> Actions </span>
           </a>
@@ -81,11 +83,7 @@
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Reported Apps</span>
       </div>
-      
-      <div class="profile-details">
-        <img src="images/addidas.jpg" alt="">
-        <span class="admin_name">name</span>
-      </div>
+    
     </nav>
 
     <div class="home-content">
@@ -102,8 +100,6 @@
 
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
   <style>
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
@@ -112,160 +108,41 @@
 
 
 
-
+<%  if(typeof ListofApps != 'undefined' ) { %>
 
    <div class="container">
 
     <div class="jobs" id="jobs">
+      <% for (let i = 0; i < ListofApps.length; i++)
+      {  %>
+      <div class="jobs__item">
+        <div class="jobs__column jobs__column--left">
+            <img src="/<%= ListofApps[i]['Theicon'] %>" class="jobs__img" />
+            <div class="jobs__info">
+                <span class="jobs__company"><%= ListofApps[i]['TheAppName'].replace(/[_]+/g, ' ')  %></span>
+               
+            </div>
+        </div>
+        <div class="jobs__column jobs__column--right">
+          <span class="tag"> 
+              <a style="text-decoration: none;color: white;" href="removeApp/<%= ListofApps[i]['TheReportedAppID'] %>">
+                 Delete
+              </a>
+          </span>
+        </div>
+    </div>
+    <%  } %>
+    <% } %>
     </div>
   </div>
 
-  <script>
-    
-const TAG_CLASS = 'tag';
-
-const jobsListings = [
-  {
-    "id": 1,
-    "company": "Photosnap",
-    "logo": "./images/photosnap.svg",
-    "Action": ["Remove"]
-  },
-  {
-    "id": 2,
-    "company": "Manage",
-    "logo": "./images/manage.svg",
-    "Action": ["Remove"],
-  },
-  {
-    "id": 3,
-    "company": "Account",
-    "logo": "./images/account.svg",
-    "Action": ["Remove"]
-  },
-  {
-    "id": 4,
-    "company": "MyHome",
-    "logo": "./images/myhome.svg",
-    "Action": [ "Remove"]
-  },
-  {
-    "id": 5,
-    "company": "Loop Studios",
-    "logo": "./images/loop-studios.svg",
-    "Action": ["Remove"]
-  },
-  {
-    "id": 6,
-    "company": "FaceIt",
-    "logo": "./images/faceit.svg",
-    "Action": ["Remove"]
-  },
-  {
-    "id": 7,
-    "company": "Shortly",
-    "logo": "./images/shortly.svg",
-    "Action": ["Remove"]
-  },
-  {
-    "id": 8,
-    "company": "Insure",
-    "logo": "./images/insure.svg",
-    "Action": ["Remove"]
-  },
-  {
-    "id": 9,
-    "company": "Eyecam Co.",
-    "logo": "./images/eyecam-co.svg",
-    "Action": ["Remove"]
-  },
-  {
-    "id": 10,
-    "company": "The Air Filter Company",
-    "logo": "./images/the-air-filter-company.svg",
-    "Action": ["Remove"]
-  }
-];
-
-function getTagHTML(tag, tagClasses) {
-    return `<span class="${tagClasses}">
-                ${tag}
-            </span>`;
-}
-
-function getJobListingHTML(jobData, filterTags = []) {
-    const JOB_TAGS_PLACEHOLDER = '###JOB_TAGS###';
-    let jobListingHTML = `
-        <div class="jobs__item">
-            <div class="jobs__column jobs__column--left">
-                <img src="${jobData.logo}" alt="${jobData.company}" class="jobs__img" />
-                <div class="jobs__info">
-                    <span class="jobs__company">${jobData.company}</span>
-                   
-                </div>
-            </div>
-            <div class="jobs__column jobs__column--right">
-                ${JOB_TAGS_PLACEHOLDER}
-            </div>
-        </div>
-    `;
-
-    const tagsList = [
-      
-        ...(jobData.Action || [])
-    ];
-    const tagsListLowercase = tagsList.map(t => t && t.toLowerCase());
-    const passesFilter = !filterTags.length || filterTags.every(tag => (
-        tagsListLowercase.includes(tag && tag.toLowerCase())
-    ));
-    
-    if (!passesFilter) {
-        return '';
-    }
-
-    const tagsString = tagsList.reduce((acc, currentTag) => {
-        const activeClass = (filterTags.includes(currentTag) && TAG_ACTIVE_CLASS) || '';
-
-        return acc + getTagHTML(currentTag, `${TAG_CLASS} ${activeClass}`);
-    }, '');
-
-    return jobListingHTML.replace(JOB_TAGS_PLACEHOLDER, tagsString);
-};
-
-function toggleClass(el, className) {
-    if (el.classList.contains(className)) {
-        el.classList.remove(className);
-
-        return;
-    }
-    
-    el.classList.add(className);
-}
-
-function getSearchBarTags(tagValue, searchContentEl) {
-    let searchBarTags = Array.from(searchContentEl.children)
-        .map(node => node.innerHTML && node.innerHTML.trim())
-        .filter(tag => !!tag);
-
-    if (searchBarTags.includes(tagValue)) {
-        searchBarTags = searchBarTags.filter(tag => tag !== tagValue);
-    } else {
-        searchBarTags = [...searchBarTags, tagValue];
-    }
-
-    return searchBarTags;
-}
-
-function setJobsListings(filterTags) {
-    const jobsListingsHTML = jobsListings.reduce((acc, currentListing) => {
-        return acc + getJobListingHTML(currentListing, filterTags);
-    }, '');
-    
-    document.getElementById('jobs').innerHTML = jobsListingsHTML;
-}
-
-setJobsListings();
-  </script>
+  <center>
+  <div>
+    <h1 style="font-family: system-ui;color: #ABABAB;">
+      No Reported Apps
+    </h1>
+  </div>
+</center>
 
   <style>
     :root {
@@ -378,7 +255,7 @@ html, body {
     height: auto;
     padding: 10px 15px;
     border-radius: 5px;
-    background-color: hsla(51, 100%, 51%, 0.295);
+    background-color: hsla(0, 100%, 59%, 0.927);
     font-weight: 700;
     font-size: 14px;
     color: var(--highlight-color);
@@ -410,12 +287,12 @@ html, body {
 }
 
 .tag:hover, .tag--active {
-    background-color: var(--highlight-color);
+    background-color: hsla(0, 100%, 59%, 0.927);
     color: #fff;
 }
 
 .close-tag:hover::after {
-    background-color: var(--very-dark-color);
+    background-color:  hsla(0, 100%, 59%, 0.927);
 }
 
 @media (max-width: 1120px) {
