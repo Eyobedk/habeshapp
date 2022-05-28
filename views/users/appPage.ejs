@@ -162,8 +162,8 @@
 
   </div>
 
-  <% if(typeof AppInfos != 'undefined'){ %>
-  <% var id = AppInfos[0][11]['app_id'] %>
+  <% if(typeof AppInfos[0] != 'undefined'){ var id = AppInfos[0][11]['app_id']%>
+
 
   <section class="AppRoot">
     <section class="InfoBet">
@@ -307,7 +307,7 @@
       <section>
         <h4 class="desc"> <%= AppInfos[0][12]['descriptions'] %></h4>
       </section>
-      <% } %>
+     
 
       <form action="/report/<%= AppInfos[0][11]['app_id'] %>" method="post" style="margin-top: 15px !important;margin-left: 0;">
         <input type="submit" name="report"  class="btn btn-primary report" value="REPORT!">
@@ -421,7 +421,7 @@
       </div>
     </section>
 
-
+    <% } %>
   </section>
 
 
