@@ -25,7 +25,7 @@ exports.checkAppRated = async (appId)=>
 }
 
 exports.insertRate = async (appId)=>{
-    console.log("insertRates")
+    console.log("insertRates");
     let sql = `INSERT INTO rate(Tappid,oneStar, twoStar, threeStar, fourStar, fiveStar) VALUES(${appId},'${0}','${0}','${0}','${0}','${0}')`;
     return new Promise((resolve, reject)=>{
         resolve(db.execute(sql));
