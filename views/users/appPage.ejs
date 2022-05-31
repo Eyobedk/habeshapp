@@ -171,8 +171,8 @@
         <img class="TheIcon" src="<%= AppInfos[0][7].Icon%>">
         <div class="infocolOne">
           <div>
-            <h1><%= AppInfos[0][0].appname.replace(/[_]+/g, ' ') %></h1>
-            <a style="text-decoration: none; float: left; font-size: 15px; font-weight:600; color: rgb(79, 149, 255);"
+            <div style="display: inline-flex;"><h1><%= AppInfos[0][0].appname.replace(/[_]+/g, ' ') %></h1> <h5 class="downloads"> <%= AppInfos[0][13].downloads %> Downloads </h5></div>
+            <a style="text-decoration: none; font-size: 15px; font-weight:600; color: rgb(79, 149, 255);"
               href="developer_page/<%= AppInfos[0][1].dev_id %>">Owner</a><br>
             <div class="starsandDown">
               <% if(AppInfos[0][2].Rate == 0) { %>
@@ -249,7 +249,7 @@
               <% } %>
 
 
-              <%= AppInfos[0][13].downloads %> Downloads
+             
 
 
             </div>
