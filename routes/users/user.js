@@ -7,13 +7,13 @@ const {AppInfo,AddRate,Referesh} = require('../../controllers/users/AppInfo')
 const {AddComment} = require('../../middleware/users/comment')
 const {forgot_password,validateAndSendLink,setNewPassword} = require('../../controllers/users/User-forgot-password');
 const {requireAuth} = require('../../middleware/auth');
-const {DownloadApp} = require('../../controllers/users/Downloader')
-const {HandleLoadAllCommnets } = require("../../controllers/users/comment")
-const {ReportApp } = require("../../controllers/users/Reports")
-const {feedback } = require("../../controllers/users/feedback")
-const {LoadDevApps } = require("../../controllers/users/LoadDevApps")
-const {ListbyCatagory } = require("../../controllers/users/catagory")
-const {contViews } = require("../../controllers/developer/contViews")
+const {DownloadApp} = require('../../controllers/users/Downloader');
+const {HandleLoadAllCommnets } = require("../../controllers/users/comment");
+const {ReportApp } = require("../../controllers/users/Reports");
+const {feedback } = require("../../controllers/users/feedback");
+const {LoadDevApps } = require("../../controllers/users/LoadDevApps");
+const {ListbyCatagory } = require("../../controllers/users/catagory");
+const {contViews } = require("../../controllers/developer/contViews");
 
 
 
