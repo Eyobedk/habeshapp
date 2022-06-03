@@ -1,21 +1,21 @@
 const nodeMailer = require('nodemailer');
 require('dotenv').config()
 let transporter = nodeMailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-          user: process.env.EMAIL, 
-          pass: process.env.EMAIL_PASS, 
-      },
-  });
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASS
+  }
+});
 exports.Mailer = async(email, resetpassLink)=>{
   let mailOptions = {
-    from: process.env.EMAIL,
+    from: `HABESHAPP <${process.env.EMAIL}>`,
     to:  email,
-    subject: 'Sending Email using Node.js',
-    text: resetpassLink
+    subject: 'Forgot password reset link',
+    generateTextFromHTML: true,
+    html: `<b> ${resetpassLink} </b>`
   };
 
   await transporter.sendMail(mailOptions)
