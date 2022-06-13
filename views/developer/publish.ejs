@@ -100,7 +100,7 @@
                     <h2><a href="/pannel" style="text-decoration: none;color: white;">Dashboard</a></h2>
 
                 </header>
-
+                
                 <form action='/publish' encType="multipart/form-data"
                     style="margin-left: 60px;margin-right: 60px;font-size: 17px !important;margin-top: 30px;"
                     method="post"">
@@ -240,15 +240,23 @@
     </div>
 
     <script type="text/javascript">
+         
+    window.onload = function () {
+    if (localStorage.getItem("hasCodeRunBefore") === null) {
         document.querySelector(".popup").style.display = "block";
-    
-        document.querySelector("#disAgree").addEventListener("click", function(){
-        document.querySelector(".popup").style.display = "none";
-        window.history.go(-1); return false;
-    });
-    document.querySelector("#acccept").addEventListener("click", function(){
-        document.querySelector(".popup").style.display = "none";
-    });
+
+            document.querySelector("#disAgree").addEventListener("click", function(){
+            document.querySelector(".popup").style.display = "none";
+            window.history.go(-1); return false;
+            });
+            document.querySelector("#acccept").addEventListener("click", function(){
+            document.querySelector(".popup").style.display = "none";
+            });
+        localStorage.setItem("hasCodeRunBefore", true);
+      }
+    }
+            
+         
     </script>
     <!-- Vendor -->
     <script src="js/jquery.js"></script>
