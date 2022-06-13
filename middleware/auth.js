@@ -40,4 +40,20 @@ const requireAuthforDev =(req, res, next) => {
         res.redirect('/developer-Login')
     }
 }
-module.exports ={ requireAuth, requireAuthforDev};
+const requireAuthforAdmin =(req, res, next) => {
+    const token = req.cookies.whwhwyasadador;
+    if(token){
+         jwt.verify(token, process.env.ADMIN_ACCESS_TOKEN_SECRET_KEY,(err,decodedToken)=>{
+                if (err) {
+                    console.log("dev token error: "+err.message);
+                    res.redirect('/admin200/login')
+                } else {                
+                next();
+            }
+        })
+            
+    }else {
+        res.redirect('/admin200/login')
+    }
+}
+module.exports ={ requireAuth, requireAuthforDev, requireAuthforAdmin};

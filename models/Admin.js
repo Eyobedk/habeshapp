@@ -28,6 +28,11 @@ class Admin {
       return result;
     }
   }
+  static async findByID(id) {
+    const sql = `SELECT * FROM admin WHERE admin_id='${id}';`;
+    const [result, _] = await db.execute(sql);
+    return result[0];
+  }
 
   static async blackListDeveloper(theBadDevId) {
     const sql = `INSERT INTO baneddevelopers(developer_id) VALUES('${theBadDevId}');`;// 
@@ -126,13 +131,49 @@ class Admin {
       console.log(err);
     }
   }
-  static async updatePassword(id,passowrd)
+  static async updatePassword(id=1010,passowrd)
   {
     const sql = `UPDATE habeshapp.admin SET admin_password ='${passowrd}' WHERE admin_id = ${id};`;
     await db.execute(sql).then((result)=>{
       console.log("admin result"+JSON.stringify(result))
     }).catch((err)=>{console.log(err)});
   }
+  static async LoadAllReactions()
+    {
+        const sql = `SELECT user.name, feedbacks.message,feedbacks.commentedate FROM user, 
+        feedbacks WHERE user.user_id = feedbacks.commenterId ORDER BY feedbacks.commentedate ASC; `;
+        const [orderedComments, _] = await db.execute(sql);
+        return orderedComments;
+    }
+  static async AppsInThismonth()
+    {
+      const d = new Date();
+      const Thismonth = d.toLocaleString('default', { month: 'long' });
+      console.log(Thismonth);
+        const sql = `select * from apps where monthname(publishedDate)='${Thismonth}';`;
+        const [AppsfromThismonth, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        console.log(JSON.stringify(AppsfromThismonth))
+        return AppsfromThismonth;
+    }
+  static async UsersInThismonth()
+    {
+      const d = new Date();
+      const Thismonth = d.toLocaleString('default', { month: 'long' });
+      console.log(Thismonth);
+        const sql = `select * from user where monthname(currentdate)='${Thismonth}';`;
+        const [AppsfromThismonth, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        console.log(JSON.stringify(AppsfromThismonth))
+        return AppsfromThismonth;
+    }
+  static async DevsInThismonth()
+    {
+      const d = new Date();
+      const Thismonth = d.toLocaleString('default', { month: 'long' });
+      const sql = `select * from developer where monthname(registeredDate)='${Thismonth}';`;
+      const [devsfromThismonth, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+      console.log(JSON.stringify(devsfromThismonth))
+      return devsfromThismonth;
+    }
 
 }
 

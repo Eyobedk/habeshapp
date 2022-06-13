@@ -8,7 +8,6 @@ module.exports.forgot_password = async (req, res, next) => {
     const {
         email
     } = req.body;
-    console.log(email);
     const user = await User.findEmail(email);
     console.log("me"+JSON.stringify(user[0]))
     if(!(user[0].password))
@@ -48,22 +47,16 @@ module.exports.validateAndSendLink = async (req, res, next) => {
         token
     } = req.params;
 
-    const user = await User.findByID(id);
-    console.log("the user"+user.password)
-    console.log("the url:"+req.url)
     
     const secret = process.env.FORGOT_PASSWORD_SECRET_KEY;
-    console.log('id and token'+id, token);
+    // console.log('id and token'+id, token);
     jwt.verify(token, secret, (err, verified) => {
         if (err) {
             console.log(err);
             res.render('users/forgot-password',{alert:"please send varification link again"})
         }
+        else{res.render('users/reset-password');}
     });
-    //userId = id;
-    
-    res.render('users/reset-password');
-    next();
 }
 
 module.exports.setNewPassword =async (req,res)=>{
