@@ -48,6 +48,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-google-oidc": "^0.1.0",
     "paypal-rest-sdk": "^1.8.1",
+    "pdfkit": "^0.13.0",
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
     "to": "^0.2.9",
