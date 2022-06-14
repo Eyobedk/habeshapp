@@ -85,7 +85,7 @@ class User {
     const date = `${year}-${month}-${day}`;
     const sql = `INSERT INTO feedbacks(message, commenterId, commentedate) VALUES('${message}', ${id}, '${date}');`
     return new Promise((resolve, reject) => {
-      resolve(db.execute(sql));
+      resolve(db.execute(sql))
     })
   }
 
