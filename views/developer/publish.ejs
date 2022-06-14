@@ -242,6 +242,8 @@
     <script type="text/javascript">
          
     window.onload = function () {
+        const here = document.referrer;
+        console.log(here)
     if (localStorage.getItem("hasCodeRunBefore") === null) {
         document.querySelector(".popup").style.display = "block";
 

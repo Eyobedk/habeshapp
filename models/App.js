@@ -44,6 +44,12 @@ class Apps {
         const [result, _] = await db.execute(sql);
         return result[0];
     }
+    static async oldversion(id)
+    {
+        const sql = `SELECT * FROM habeshapp.previousversions WHERE appid=${id};`;
+        const [result, _] = await db.execute(sql);
+        return result;
+    }
     static async ListApps(id)
     {
         const sql = `SELECT * FROM apps WHERE dev_id=${id}`;
@@ -140,6 +146,13 @@ class Apps {
         const sql = `SELECT appLocation FROM apps where appid = ${app_id}`;
         const result = await db.execute(sql);
         return result[0][0].appLocation
+    }
+    static async DownloadVersion(app_id,date)
+    {
+        console.log(date, app_id)
+        const sql = `SELECT file_location FROM previousversions where published_on like '%${date}%' AND appid = ${app_id};`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
     }
     static async checkAppisReported(app_id, user_id)
     {

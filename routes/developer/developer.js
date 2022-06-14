@@ -1,5 +1,6 @@
 "use strict";
 const {Router} = require("express");
+const {LoadNews} = require('../../controllers/developer/LoadNews')
 const {fileUploader,ListPublishedApp,ListPublishedAppTobeDeleted} = require('../../controllers/developer/PublishApp');
 const {registerDeveloper,handleSuccess,dev_logout} = require('../../controllers/developer/dev_auth.js')
 const {validateApp} = require('../../middleware/developer/validateApps');
@@ -37,7 +38,7 @@ router.post('/developer-reset', setDeveloperPassword)
 
 
 //normal dev routes
-router.get('/pannel',protect,(req, res) => { res.render("developer/pannel",{email:res.locals.email})});
+router.get('/pannel',protect,LoadNews);//(req, res) => { res.render("developer/pannel",{email:res.locals.email})}
 
 //publish
 router.get('/publish',protect,(req, res) => { res.render("developer/publish")});

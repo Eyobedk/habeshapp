@@ -96,68 +96,73 @@
         <div class="logo_name">Catagories</div>
         <i class='bx bx-menu' id="btn" ></i> 
     </div> -->
-    <form action="/catagories" id="myForm" method="post" >
+    <form action="/catagories" id="myForm" method="post">
       <ul class="nav-list">
         <li>
           <a class="cata">
             <i class="bi bi-arrow-clockwise" style="color: black"></i>
-            <button type="" name="Catagories" style="background-color:#ffdf74; cursor: revert;"class="links_name">List of Catagories</button>
+            <button type="" name="Catagories" style="background-color:#ffdf74; cursor: revert;" class="links_name">List
+              of Catagories</button>
           </a>
-           <span  type="submit" class="tooltip">Catagories</span>
+          <span type="submit" class="tooltip">Catagories</span>
         </li>
         <li>
-          <a >
+          <a>
             <i class='bi-phone-flip' style="color: black"></i>
-            <button type="submit" name="Life Style" style="background-color:#ffdf74"class="links_name">Life Style</button>
+            <button type="submit" name="Life Style" style="background-color:#ffdf74" class="links_name">Life
+              Style</button>
           </a>
-           <span  type="submit" class="tooltip">Life Style</span>
+          <span type="submit" class="tooltip">Life Style</span>
         </li>
         <li>
           <a>
             <i class='bx bx-book' style="color: black"></i>
-            <button type="submit" name="Education" style="background-color:#ffdf74" class="links_name">Education</button>
+            <button type="submit" name="Education" style="background-color:#ffdf74"
+              class="links_name">Education</button>
           </a>
-           <span  type="submit" class="tooltip">Education</span>
+          <span type="submit" class="tooltip">Education</span>
         </li>
         <li>
-         <a >
-           <i class='bx bx-dice-2' style="color: black"></i>
-           <button type="submit" name="Entertainment" style="background-color:#ffdf74" class="links_name">Entertainment</button>
-         </a>
-         <span type="submit" class="tooltip">Entertainment</span>
-       </li>
-       <li>
-         <a >
-           <i class='bx bx-briefcase'   style="color: black"></i>
-           <button type="submit" name="Business" style="background-color:#ffdf74" class="links_name">Business</button>
-         </a>
-         <span type="submit" class="tooltip">Business</span>
-       </li>
-       <li>
-         <a >
-           <i class='bi bi-cup-straw'  style="color: black"></i>
-           <button type="submit" name="Foods and Drinks" style="background-color:#ffdf74" class="links_name">Foods and Drinks</button>
-         </a>
-         <span type="submit" class="tooltip">Foods and Drinks</span>
-       </li>
-       <li>
-         <a >
-           <i class='bi bi-hammer'   style="color: black"></i>
-           <button type="submit" name="Tools" style="background-color:#ffdf74" class="links_name">Tools</button>
-         </a>
-         <span type="submit" class="tooltip">Tools</span>
-       </li>
-       <li>
-         <a >
-           <i class='bi bi-controller' id="btn"  style="color: black"></i>
-           <button type="submit" name="Games" style="background-color:#ffdf74" class="links_name">Games</button>
-         </a>
-         <span type="submit" class="tooltip">Games</span>
-       </li>
-       
-   
-       </ul>
-      </form>
+          <a>
+            <i class='bx bx-dice-2' style="color: black"></i>
+            <button type="submit" name="Entertainment" style="background-color:#ffdf74"
+              class="links_name">Entertainment</button>
+          </a>
+          <span type="submit" class="tooltip">Entertainment</span>
+        </li>
+        <li>
+          <a>
+            <i class='bx bx-briefcase' style="color: black"></i>
+            <button type="submit" name="Business" style="background-color:#ffdf74" class="links_name">Business</button>
+          </a>
+          <span type="submit" class="tooltip">Business</span>
+        </li>
+        <li>
+          <a>
+            <i class='bi bi-cup-straw' style="color: black"></i>
+            <button type="submit" name="Foods and Drinks" style="background-color:#ffdf74" class="links_name">Foods and
+              Drinks</button>
+          </a>
+          <span type="submit" class="tooltip">Foods and Drinks</span>
+        </li>
+        <li>
+          <a>
+            <i class='bi bi-hammer' style="color: black"></i>
+            <button type="submit" name="Tools" style="background-color:#ffdf74" class="links_name">Tools</button>
+          </a>
+          <span type="submit" class="tooltip">Tools</span>
+        </li>
+        <li>
+          <a>
+            <i class='bi bi-controller' id="btn" style="color: black"></i>
+            <button type="submit" name="Games" style="background-color:#ffdf74" class="links_name">Games</button>
+          </a>
+          <span type="submit" class="tooltip">Games</span>
+        </li>
+
+
+      </ul>
+    </form>
   </div>
 
   </div>
@@ -171,7 +176,10 @@
         <img class="TheIcon" src="<%= AppInfos[0][7].Icon%>">
         <div class="infocolOne">
           <div>
-            <div style="display: inline-flex;"><h1><%= AppInfos[0][0].appname.replace(/[_]+/g, ' ') %></h1> <h5 class="downloads"> <%= AppInfos[0][13].downloads %> Downloads </h5></div>
+            <div style="display: inline-flex;">
+              <h1><%= AppInfos[0][0].appname.replace(/[_]+/g, ' ') %></h1>
+              <h5 class="downloads"> <%= AppInfos[0][13].downloads %> Downloads </h5>
+            </div>
             <a style="text-decoration: none; font-size: 15px; font-weight:600; color: rgb(79, 149, 255);"
               href="developer_page/<%= AppInfos[0][1].dev_id %>">Owner</a><br>
             <div class="starsandDown">
@@ -249,7 +257,7 @@
               <% } %>
 
 
-             
+
 
 
             </div>
@@ -280,11 +288,13 @@
                 class="btn btn-success text-light"><b> Download</a></b>
             </p>
           </div>
+
         </div>
 
 
-        
-          <section class="screenshotsPare"><center>
+
+        <section class="screenshotsPare">
+          <center>
             <div class="screenshotsPare">
               <img
                 style="width: 100%;
@@ -300,18 +310,45 @@
           height: auto; margin-right: 20px; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;"
                 src="<%= AppInfos[0][10].screenshot3%>">
             </div>
-        </center>   </section>
-       
+          </center>
+        </section>
+
 
       </section>
       <section>
         <h4 class="desc"> <%= AppInfos[0][12]['descriptions'] %></h4>
       </section>
-     
 
-      <form action="/report/<%= AppInfos[0][11]['app_id'] %>" method="post" style="margin-top: 15px !important;margin-left: 0;">
-        <input type="submit" name="report"  class="btn btn-primary report" value="REPORT!">
-      </form>
+      <div style="display:inline">
+        <form action="/report/<%= AppInfos[0][11]['app_id'] %>" method="post"
+          style="margin-top: 15px !important;margin-left: 0;">
+          <input type="submit" name="report" class="btn btn-primary report" value="REPORT!">
+        </form>
+
+        <div class="btn-group" style="float:right;padding-right: 20px;">
+          <button type="button"
+            style="background-color: #428bca;box-shadow: 0 0 0 0.2rem rgba(53, 53, 220, 0.5);border-color: #428bca;"
+            class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Old Versions
+          </button>
+          <div class="dropdown-menu">
+            <% if(typeof oldates != 'undefined'){  
+             for(let i=0; i< oldates.length; i++){ 
+              if(oldates.length == 0){   %>
+            <a class="dropdown-item" href="#">No Old versions</a>
+            <% } else { %>
+              
+            <a class="dropdown-item" href="/downloadVersion/<%= id%>/<%= oldates[i].date %>"><%= oldates[i].date %></a>
+            <div class="dropdown-divider" style="margin: 0 !important"></div>
+            <% } %>
+          <% } %>
+        <% } %>
+
+
+          </div>
+        </div>
+      </div>
+
 
       <section>
         <h2 class="reviewstitle">Ratings & Reviews</h2>
@@ -363,7 +400,8 @@
                 <img style="border-radius:50%; width: 60px;height: 60px;    margin-left: -25px;"
                   src="/<%= similarApks[i][1]['icon'] %>">
                 <div style="display: inline;">
-                  <p style="margin-bottom:0px !important"><b style="color: rgb(96, 96, 96)"><%= similarApks[i][0]['name'] %></b></p>
+                  <p style="margin-bottom:0px !important"><b
+                      style="color: rgb(96, 96, 96)"><%= similarApks[i][0]['name'] %></b></p>
                   <div style="margin-left: 10px" class="stars">
                     <% if(similarApks[i][2]['rate'] == 0) { %>
                     <span class="fa fa-star"></span>
@@ -455,27 +493,30 @@
 
 
 
- <!-- FOOTER -->
- <footer class="w-100 py-4 flex-shrink-0" style="padding-bottom: 0rem!important;margin-top: 30px;">
-   <center> <h5 style="color: #fff;margin-left: 72px;"  class="h1 text-white" >Habeshapp</h5></center>
-    <div class="FooterParent">
-      <div class="theFooterTexts">
-        <p class="small text-muted">We believe that it is time for Ethiopians to have their own platform where they can
-          enjoy their local apps that will encourage them to get close to the mobile app services.</p>
-        <p class="small text-muted mb-0">&copy; Copyrights. All rights reserved. <a class="text-primary"
-            href="#">Habeshapp</a></p>
-          </div>
-          <div class="feedbackFooter">
-            <h5 class="text-white mb-3" style="color: white;"></h5>
-            <form action="/feedback" method="post">
-              <div class="input-group mb-3">
-                <input class="form-control" type="text" name="feedbacks" style="background-color: white;color: black;"
-                  placeholder="Recipient's username">
-                <button class="btn btn-primary" type="submit"><i class="bi bi-envelope"></i></button>
-              </div>
-            </form>
-          </div>
-      
+<!-- FOOTER -->
+<footer class="w-100 py-4 flex-shrink-0" style="padding-bottom: 0rem!important;margin-top: 30px;">
+  <center>
+    <h5 style="color: #fff;margin-left: 72px;" class="h1 text-white">Habeshapp</h5>
+  </center>
+  <div class="FooterParent">
+    <div class="theFooterTexts">
+      <p class="small text-muted">We believe that it is time for Ethiopians to have their own platform where they can
+        enjoy their local apps that will encourage them to get close to the mobile app services.</p>
+      <p class="small text-muted mb-0">&copy; Copyrights. All rights reserved. <a class="text-primary"
+          href="#">Habeshapp</a></p>
     </div>
+    <div class="feedbackFooter">
+      <h5 class="text-white mb-3" style="color: white;"></h5>
+      <form action="/feedback" method="post">
+        <div class="input-group mb-3">
+          <input class="form-control" type="text" name="feedbacks" style="background-color: white;color: black;"
+            placeholder="Recipient's username">
+          <button class="btn btn-primary" type="submit"><i class="bi bi-envelope"></i></button>
+        </div>
+      </form>
+    </div>
+
+  </div>
 </footer>
+
 </html>

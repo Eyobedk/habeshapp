@@ -7,7 +7,7 @@ const {AppInfo,AddRate,Referesh} = require('../../controllers/users/AppInfo')
 const {AddComment} = require('../../middleware/users/comment')
 const {forgot_password,validateAndSendLink,setNewPassword} = require('../../controllers/users/User-forgot-password');
 const {requireAuth} = require('../../middleware/auth');
-const {DownloadApp} = require('../../controllers/users/Downloader');
+const {DownloadApp,DownloadVersion} = require('../../controllers/users/Downloader');
 const {HandleLoadAllCommnets } = require("../../controllers/users/comment");
 const {ReportApp } = require("../../controllers/users/Reports");
 const {feedback } = require("../../controllers/users/feedback");
@@ -37,9 +37,12 @@ router.get('/info', requireAuth,AppInfo)
 router.get('/info/:appid', requireAuth,contViews,AppInfo)//
 router.post('/report/:appid', requireAuth,ReportApp)
 router.post('/comment/:appid',requireAuth, AddComment)
+
 router.get('/comments/:id', requireAuth, HandleLoadAllCommnets)
 router.get('/download/:id', requireAuth, DownloadApp)
+router.get('/downloadVersion/:id/:date', requireAuth, DownloadVersion)
 router.post('/feedback', requireAuth, feedback)
+
 router.get('/info/rate/:appkid/:rateAmount', requireAuth, AddRate)
 router.get('/info/developer_page/:devId', requireAuth, LoadDevApps)
 router.post('/catagories', requireAuth, ListbyCatagory)

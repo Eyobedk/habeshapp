@@ -1,6 +1,6 @@
 const db = require('../../db/database')
 const Apps = require('../../models/App')
-
+const {preventSqlInjection} = require('../../helpers/Error_handler')
 
 
 async function countLimit(appId,userId){
@@ -36,11 +36,15 @@ exports.AddComment = async (req, res, next)=>{
         const amountOfRates = await countLimit(req.params.appid,  res.locals.userId);
         if( amountOfRates == 0)
         {
-            await AddTheFirstCommnet(res.locals.userId, comment, req.params.appid);
+            await AddTheFirstCommnet(res.locals.userId, comment, req.params.appid).catch((err)=>{
+                preventSqlInjection(res, err)
+              });;
         }
         else if(amountOfRates == 1)
         {
-            await AddTheSecondCommnet(res.locals.userId, comment, req.params.appid);
+            await AddTheSecondCommnet(res.locals.userId, comment, req.params.appid).catch((err)=>{
+                preventSqlInjection(res, err)
+            });
         }
     }
     res.redirect('back');

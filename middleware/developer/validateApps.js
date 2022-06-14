@@ -1,8 +1,9 @@
 var path = require('path')
 
+const {testArrayofTexts} = require('../../helpers/Error_handler')
 const Apps = require('../../models/App')
 var IconFlag=0;
-
+const re = /^(([^<>(),;:\s@"]))/;
 
 function validateScreenshots(images,res) {
     let theError = 'please Enter valid 3 screenshots';
@@ -53,9 +54,18 @@ exports.validateApp = async (req, res, next) => {
     const theApk = req.files.apk;
     const theIcon = req.files.icon;
     const screenshots = req.files.screenshots;
-    
+    const textinputs =[funcOne,funcTwo,funcThree,funcFour];
     const appExtension = path.extname(theApk.name);
     const IconExtension = path.extname(theIcon.name);
+
+    
+
+    if(testArrayofTexts(textinputs))
+    {
+        res.render('developer/Auth/developer-register',{prevent:"fill the approprate data"});
+        return
+    }
+    
 
     if(funcOne.length == 0 || funcTwo.length == 0 || funcThree.length == 0 || funcFour.length == 0)
     {
