@@ -1,55 +1,36 @@
 const Apps = require('../../models/App')
 const path = require('path')
 const fs = require('fs');
+const {testArrayofTexts} = require('../../helpers/Error_handler')
 
-function validateScreenshots(images,res) {
-    let theError = 'please Enter 3 screenshots file with a .png or .webp extention';
-    let flag=0;
-    if(images.length != 3){
-        res.render('developer/update', {
-            Ierror: theError
-        })
-    }
-    for (let i = 0;i <= images.length - 1; i++) {
-        var screenExtension = path.extname(images[i].name);
-        if (screenExtension == '.png') {
-            flag = 1;
-        }
-        else if (screenExtension == '.webp') {
-            flag = 2
-        }
-        if(flag == 1 ){
-            continue;
-        }
-        if(flag == 2 ){
-            continue;
-        }
-        if(flag == 0){
-            res.render('developer/publish', {
-                Ierror: theError
-            })
-        }
-    }
-}
 // function validateScreenshots(images,res) {
-//     let theError = 'please Enter 3 screenshots file with a png extention';
-//     let theError2 = 'please Enter 3 screenshots file with a png extention';
+//     let theError = 'please Enter 3 screenshots file with a .png or .webp extention';
+//     let flag=0;
 //     if(images.length != 3){
 //         res.render('developer/update', {
-//             Ierror: theError2
+//             Ierror: theError
 //         })
-//         return
 //     }
 //     for (let i = 0;i <= images.length - 1; i++) {
 //         var screenExtension = path.extname(images[i].name);
-//         if (screenExtension != '.png') {
-//             res.render('developer/update', {
+//         if (screenExtension == '.png') {
+//             flag = 1;
+//         }
+//         else if (screenExtension == '.webp') {
+//             flag = 2
+//         }
+//         if(flag == 1 ){
+//             continue;
+//         }
+//         if(flag == 2 ){
+//             continue;
+//         }
+//         if(flag == 0){
+//             res.render('developer/publish', {
 //                 Ierror: theError
 //             })
-//             return
 //         }
 //     }
-//     return
 // }
 
 
@@ -57,7 +38,14 @@ exports.validatestatus = async (req, res,next)=>{
     const {funcOne,funcTwo,funcThree,funcFour} = req.body;
     const theApk = req.files.apk;
     const screenshots = req.files.screenshots;
+    const textinputs =[funcOne,funcTwo,funcThree,funcFour];
 
+
+    if(testArrayofTexts(textinputs))
+    {
+        res.render('developer/update',{Ierror:"fill the approprate data"});
+        return
+    }
     const appExtension = path.extname(theApk.name);
     let theScreenError = 'please Enter 3 screenshots file with a .png or .webp extention';
     let flag=0;
