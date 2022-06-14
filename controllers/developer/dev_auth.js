@@ -27,6 +27,14 @@ exports.registerDeveloper = async (req, res) => {
     password
   } = req.body;
 
+  const re = /^(([^<>(),;:\s@"]))/;
+
+
+  if(re.test(String(domain).toLowerCase()) == false){
+    res.render('developer/Auth/developer-register',{prevent:"fill the approprate data"});
+    return
+  }
+
   theName = name;
   thePhone = phone;
   theDomain = domain;

@@ -9,7 +9,7 @@ var DevID;
 exports.varifydevEmail = async (req,res)=>{
     const {email} = req.body;
     const Dev = await findEmail(email);
-   // console.log("dev"+Dev[0]);
+    
     if (typeof Dev[0] ==="undefined"){
         let TheError = "You must be registered inorder to reset password";
         res.render('developer/Auth/developer-forgot',{Ierror:TheError});

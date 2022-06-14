@@ -14,6 +14,11 @@ EventEmitterClass.on('startDownload', async (app_id, res)=>{
     res.download(result);
 });
 
+EventEmitterClass.on('startDownloadVersion', async (app_id, version, res)=>{
+    const result =await Apps.DownloadVersion(app_id, version);
+     res.download(result[0].file_location);
+});
+
 
 exports.DownloadApp = async (req, res)=>
 {
@@ -35,4 +40,8 @@ exports.DownloadApp = async (req, res)=>
             })
         }
     })
+}
+exports.DownloadVersion = async (req, res)=>
+{
+    EventEmitterClass.emit('startDownloadVersion', req.params.id,req.params.date, res);
 }

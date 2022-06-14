@@ -51,6 +51,8 @@ exports.updateApps = async (req, res) => {
   let newupdatedAppPath;
   let newscreenShootsPath;
 
+  
+
 
   const Paths = await Promise.resolve(Apps.getAppsPath(req.params.id, res.locals.dev.id));
   console.log("aha")

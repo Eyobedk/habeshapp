@@ -61,6 +61,7 @@ exports.AppInfo = async (req, res) => {
     const appIds = req.params.appid;
     let ApkInfo = [];
     let similarAppsList = [];
+    let oldversionsDates = [];
     let catagory;
 
     await Apps.ListAppsForUsers(appIds).then((result) => {
@@ -125,11 +126,41 @@ exports.AppInfo = async (req, res) => {
                 }
             ])
         }
-        console.log("res.locals.userEmail")
-        console.log(res.locals.userEmail)
+
+        const HasOldVersion= await Apps.oldversion(appIds);
+
+        for(let j=0; j < HasOldVersion.length; j++)
+        {
+            let theDate = HasOldVersion[j].published_on
+            let month = theDate.getUTCMonth() +1;
+             let day = theDate.getUTCDate() + 1;
+             console.log(day)
+             console.log(month)
+
+            if(parseInt(day) < 10){
+                day = '0' + day;
+            }
+            if(parseInt(month) < 10){
+                month ='0' + month;
+            }
+
+            console.log(day)
+            console.log(month)
+
+            let year = theDate.getUTCFullYear();
+            let newdate = `${year}-${month}-${day}`;
+            console.log(`here ${newdate}`)
+
+            oldversionsDates.push({
+                date: newdate
+            })
+        }
+        console.log(oldversionsDates)
+        
         res.render('users/appPage', {
             AppInfos: ApkInfo,
-            similarApks: similarAppsList
+            similarApks: similarAppsList,
+            oldates : oldversionsDates
         });
     })
 }
