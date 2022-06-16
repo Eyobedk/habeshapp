@@ -34,51 +34,6 @@ class Admin {
     return result[0];
   }
 
-  static async blackListDeveloper(theBadDevId) {
-    const sql = `INSERT INTO baneddevelopers(developer_id) VALUES('${theBadDevId}');`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async AlertUser(messgae) {
-    const sql = `INSERT INTO alertuser(alertuserid, message) VALUES(200, '${messgae}');`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async AlertDev(messgae) {
-    const sql = `INSERT INTO aletdeveloper(messageId, message) VALUES(200, '${messgae}');`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async DeleteTheMessage() {
-    const sql = `DELETE FROM alertuser WHERE alertuserid = 200;`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async DeleteTheMessagefDev() {
-    const sql = `DELETE FROM aletdeveloper WHERE messageId = 200;`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async AlertUserByUpdate(messgae) {
-    const sql = `UPDATE alertuser SET message = '${messgae}' WHERE alertuserid = 200;`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async AlertDevByUpdate(messgae) {
-    const sql = `UPDATE aletdeveloper SET message = '${messgae}' WHERE messageId = 200;`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async checkThereIsaMessage() {
-    const sql = `SELECT * FROM alertuser WHERE alertuserid = 200;`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async checkThereIsaMessageforDev() {
-    const sql = `SELECT * FROM aletdeveloper WHERE messageId = 200;`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
   static async ListUsers() {
     const sql = `SELECT * FROM habeshapp.user ORDER BY currentdate ASC;`;// 
     const [result, _] = await db.execute(sql);
@@ -89,21 +44,7 @@ class Admin {
     const [result, _] = await db.execute(sql);
     return result;
   }
-  static async checkAppisBlackListed(id) {
-    const sql = `SELECT * FROM blacklistedapps WHERE TheReportedAppID = ${id};`;// 
-    const [result, _] = await db.execute(sql);
-    return result;
-  }
-  static async checkDeveloperIsBlackListed(id) {
-    const sql = `SELECT * FROM baneddevelopers WHERE developer_id = ${id};`;// 
-    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-    return result;
-  }
-  static async ListofReportedApps() {
-    const sql = `SELECT * FROM blacklistedapps;`;// 
-    const [result, _] = await db.execute(sql);
-    return result;
-  }
+
   static async ListofBadDevelopers() {
     const sql = `SELECT * FROM developer WHERE dev_ban_status >= 2;`;
     const [result, _] = await db.execute(sql);
@@ -165,7 +106,35 @@ class Admin {
         console.log(JSON.stringify(AppsfromThismonth))
         return AppsfromThismonth;
     }
-  static async DevsInThismonth()
+
+}
+
+class BlackList extends Admin{
+  constructor(developer){
+    super(developer)
+    this.devId = developer;
+  }
+   async blackListDeveloper() {
+    const sql = `INSERT INTO baneddevelopers(developer_id) VALUES('${this.devId}');`;// 
+    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+    return result;
+  }
+  static async checkAppisBlackListed(Appid) {
+    const sql = `SELECT * FROM blacklistedapps WHERE TheReportedAppID = ${Appid};`;// 
+    const [result, _] = await db.execute(sql);
+    return result;
+  }
+   async checkDeveloperIsBlackListed() {
+    const sql = `SELECT * FROM baneddevelopers WHERE developer_id = ${this.devId};`;// 
+    const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+    return result;
+  }
+  static async ListofReportedApps() {
+    const sql = `SELECT * FROM blacklistedapps;`;// 
+    const [result, _] = await db.execute(sql);
+    return result;
+  }
+  static async UsersInThismonth()
     {
       const d = new Date();
       const Thismonth = d.toLocaleString('default', { month: 'long' });
@@ -174,8 +143,14 @@ class Admin {
       console.log(JSON.stringify(devsfromThismonth))
       return devsfromThismonth;
     }
-
+   async updateBanStatus()
+    {
+      const sql = `UPDATE habeshapp.developer SET dev_ban_status =${0} WHERE dev_id = ${this.devId};`;
+      await db.execute(sql).then((result)=>{
+        console.log("admin result"+JSON.stringify(result))
+      }).catch((err)=>{console.log(err)});
+    }
 }
 
 
-module.exports = Admin;
+module.exports = {BlackList, Admin};

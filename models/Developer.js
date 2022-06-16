@@ -1,9 +1,12 @@
 const db = require('../db/database')
+const User =require('../models/User')
 const bcrypt = require('bcrypt');
 
 
-class Developer {
+class Developer extends User{
   constructor(name, phone, domain, email, password, payment_ID) {
+    super(email, password);
+
     this.name = name;
     this.phone = phone,
       this.domain = domain,

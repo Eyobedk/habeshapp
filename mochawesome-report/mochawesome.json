@@ -1,0 +1,256 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-06-16T05:28:11.271Z",
+    "end": "2022-06-16T05:28:14.724Z",
+    "duration": 3453,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1702d172-414a-4a5e-ae2b-e79aa877d290",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c5403997-6fac-4925-965b-b91aaae520cb",
+          "title": "Suite 1",
+          "fullFile": "C:\\Users\\eyobed\\Desktop\\habehapp\\habseshapp\\test\\projectTest.spec.js",
+          "file": "\\test\\projectTest.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Published App Accesser should return App Name as a result",
+              "fullTitle": "Suite 1 Published App Accesser should return App Name as a result",
+              "timedOut": false,
+              "duration": 70,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(await ListStatApps(4020)).to.be.equal('Ride')",
+              "err": {},
+              "uuid": "9a90da04-00f8-41ef-b894-77649d7bbd71",
+              "parentUUID": "c5403997-6fac-4925-965b-b91aaae520cb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9a90da04-00f8-41ef-b894-77649d7bbd71"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 70,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "39c5ad9d-2e40-404b-aea2-adf994c5915f",
+          "title": "Suite 2",
+          "fullFile": "C:\\Users\\eyobed\\Desktop\\habehapp\\habseshapp\\test\\projectTest.spec.js",
+          "file": "\\test\\projectTest.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Get the filtered information about the app should return App properties as a result",
+              "fullTitle": "Suite 2 Get the filtered information about the app should return App properties as a result",
+              "timedOut": false,
+              "duration": 6,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(await AppInfo(116)).to.be.equal(116)",
+              "err": {},
+              "uuid": "7153006f-c7b3-4d57-abe7-8c143f48f043",
+              "parentUUID": "39c5ad9d-2e40-404b-aea2-adf994c5915f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7153006f-c7b3-4d57-abe7-8c143f48f043"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "709e16f1-7719-435d-9fff-7ee59ab01f46",
+          "title": "Suite 3",
+          "fullFile": "C:\\Users\\eyobed\\Desktop\\habehapp\\habseshapp\\test\\projectTest.spec.js",
+          "file": "\\test\\projectTest.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "SMTP Supported emailer should return sent account address as a result",
+              "fullTitle": "Suite 3 SMTP Supported emailer should return sent account address as a result",
+              "timedOut": false,
+              "duration": 2557,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(await Mailer('Eyobedkebede05@gmail.com', 'The sent Link')).to.be.equal('Eyobedkebede05@gmail.com')",
+              "err": {},
+              "uuid": "465a5b2b-cd5a-4a4b-85d6-9df675a9f9cf",
+              "parentUUID": "709e16f1-7719-435d-9fff-7ee59ab01f46",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "465a5b2b-cd5a-4a4b-85d6-9df675a9f9cf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2557,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "a6b790ce-200d-483f-9b5b-45fc0637f6a7",
+          "title": "Suite 4",
+          "fullFile": "C:\\Users\\eyobed\\Desktop\\habehapp\\habseshapp\\test\\projectTest.spec.js",
+          "file": "\\test\\projectTest.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Download the Android APP should return The file address as a result",
+              "fullTitle": "Suite 4 Download the Android APP should return The file address as a result",
+              "timedOut": false,
+              "duration": 3,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(await StartDownload(116)).to.be.equal('uploads/mount/e5017770791117aa4af6095144051bf9.apk')",
+              "err": {},
+              "uuid": "928c7036-e227-4a79-b4e3-d068a431afb8",
+              "parentUUID": "a6b790ce-200d-483f-9b5b-45fc0637f6a7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "928c7036-e227-4a79-b4e3-d068a431afb8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "949cf591-99b6-4550-9a69-30223cc63ff6",
+          "title": "Suite 5",
+          "fullFile": "C:\\Users\\eyobed\\Desktop\\habehapp\\habseshapp\\test\\projectTest.spec.js",
+          "file": "\\test\\projectTest.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "delete app of developer should return app row affected as a result",
+              "fullTitle": "Suite 5 delete app of developer should return app row affected as a result",
+              "timedOut": false,
+              "duration": 796,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(await deleteAppsRoute(116, 4020)).to.be.equal('app row Affected')",
+              "err": {},
+              "uuid": "f43f3259-5019-47c6-a743-3d0752edef3d",
+              "parentUUID": "949cf591-99b6-4550-9a69-30223cc63ff6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f43f3259-5019-47c6-a743-3d0752edef3d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 796,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.0.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}

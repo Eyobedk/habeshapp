@@ -154,6 +154,12 @@ class Apps {
         const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
         return result;
     }
+    static async SearchApp(appName)
+    {
+        const sql = `SELECT * FROM apps where appName like '%${appName}%';`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
+    }
     static async checkAppisReported(app_id, user_id)
     {
         const sql = `SELECT * FROM alreadyreported where reported_appid = ${app_id} AND reporter_id = ${user_id}`;

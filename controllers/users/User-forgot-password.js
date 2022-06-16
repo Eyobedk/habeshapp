@@ -75,3 +75,25 @@ module.exports.setNewPassword =async (req,res)=>{
     });
 }
 
+// async function TestSendingEmail(email)
+// {
+//     const user = await User.findEmail(email);
+//     console.log("me"+JSON.stringify(user[0]))
+//     if(!(user[0]))
+//     {
+//         return "user Not Found"
+//     }
+
+//     const secret = process.env.FORGOT_PASSWORD_SECRET_KEY;
+//     let id = user[0].user_id;
+//     const token = jwt.sign({id}, secret, {
+//         expiresIn: '15m'
+//     });
+//     userId = id
+//     const link = `http://localhost:3000/reset-password/${id}/${token}`;
+//     const TheResultfroMail =  Promise.resolve(await Mailer(email, link));       
+
+//     return TheResultfroMail.accepted;
+// }
+
+// module.exports = {TestSendingEmail}

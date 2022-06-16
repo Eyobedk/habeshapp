@@ -1,14 +1,15 @@
-const Admin = require('../../models/Admin')
+const {BlackList} = require('../../models/Admin')
 
 
 exports.BlackListDeveloper = async (req, res)=>
 {
     const dev_ID = req.params.devID;
-    const TheDev = await Admin.checkDeveloperIsBlackListed(dev_ID);
+    const DevInst = new BlackList(dev_ID)
+    const TheDev = await DevInst.checkDeveloperIsBlackListed();
     if(TheDev.length == 0)
     {
-        await Admin.blackListDeveloper(dev_ID);
-        await Admin.updateBanStatus(dev_ID);
+        await DevInst.blackListDeveloper();
+        await DevInst.updateBanStatus();
     }
     res.redirect('/admin200/badDevelopers')
 }  

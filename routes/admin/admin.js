@@ -30,6 +30,7 @@ router.get('/admin200/removeApp/:id',requireAuthforAdmin, deleteReportedApp)
 router.get('/admin200/badDevelopers', requireAuthforAdmin, ListBadDevelopers)
 router.get('/banDev/:devID', requireAuthforAdmin, BlackListDeveloper)
 
+//Routes to handle alerting, deleteing and rendering news for users
 router.get('/admin200/alertUser',requireAuthforAdmin,  (req, res)=>{res.render('admin/Alert_User')})
 router.post('/admin200/alertUser',requireAuthforAdmin, AlertUser)
 router.post('/admin200/deleteAlert', requireAuthforAdmin, DeleteAlert)

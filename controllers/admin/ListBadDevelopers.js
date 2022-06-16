@@ -1,4 +1,4 @@
-const Admin = require('../../models/Admin');
+const {Admin} = require('../../models/Admin');
 
 
 exports.ListBadDevelopers = async (req, res)=>

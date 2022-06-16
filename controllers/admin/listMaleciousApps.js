@@ -1,10 +1,10 @@
-const Admin = require('../../models/Admin')
+const {BlackList} = require('../../models/Admin')
 
 
 
 exports.ListofBadApps = async (req, res)=>
 {
-    const Listed = await Admin.ListofReportedApps();
+    const Listed = await BlackList.ListofReportedApps();
     console.log(Listed)
     res.render('admin/Reported_apps',
     {

@@ -4,7 +4,7 @@ const {
   createTokenforDev
 } = require('../../utils/TokenHandler');
 const bcrypt = require('bcrypt');
-const Admin = require('../../models/Admin');
+const {BlackList} = require('../../models/Admin');
 
 require('dotenv').config();
 paypal.configure({
@@ -134,10 +134,11 @@ module.exports.Login_Dev = async (req, res, next) => {
     email,
     password
   } = req.body;
-  console.log(email)
+ 
 
   const dev = await Developer.findEmail(email);
-  const isBadDeveloper = await Admin.checkDeveloperIsBlackListed(dev[0].dev_id);
+  const TheDev = new BlackList(dev[0].dev_id);
+  const isBadDeveloper = await TheDev.checkDeveloperIsBlackListed();
   console.log("isBadDeveloper")
   console.log(isBadDeveloper.length)
   if (isBadDeveloper.length == 0) {

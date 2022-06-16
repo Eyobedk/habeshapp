@@ -1,5 +1,5 @@
 const Apps = require('../../models/App')
-const Admin  = require('../../models/Admin')
+const {BlackList}  = require('../../models/Admin')
 
 exports.ReportApp = async (req, res,next)=>{
     const reported = req.body.report;
@@ -14,7 +14,7 @@ exports.ReportApp = async (req, res,next)=>{
 
             const [RatesandDownloads, _] = await Apps.GetReportandDownload(req.params.appid);
             avarageReport = parseFloat(RatesandDownloads.downloads / RatesandDownloads.appReports);
-            const FoundAppIdfromBlackList = await Admin.checkAppisBlackListed(req.params.appid);
+            const FoundAppIdfromBlackList = await BlackList.checkAppisBlackListed(req.params.appid);
             // console.log()
             if(RatesandDownloads.appReports >= avarageReport)
             {

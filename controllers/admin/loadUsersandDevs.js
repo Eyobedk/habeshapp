@@ -1,4 +1,5 @@
-const Admin = require('../../models/Admin')
+const {Admin} = require('../../models/Admin')
+const {BlackList} = require('../../models/Admin')
 
 
 
@@ -107,7 +108,7 @@ exports.ThismonthPublished = async(req, res)=>
 exports.ThisMonthNewUsers = async(req, res)=>
 {
     const usersList = [];
-    const ListofUsersfromThismonth = await Admin.UsersInThismonth();
+    const ListofUsersfromThismonth = await BlackList.UsersInThismonth();
 
     ListofUsersfromThismonth.forEach((userssList)=>
     {

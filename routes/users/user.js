@@ -14,6 +14,7 @@ const {feedback } = require("../../controllers/users/feedback");
 const {LoadDevApps } = require("../../controllers/users/LoadDevApps");
 const {ListbyCatagory } = require("../../controllers/users/catagory");
 const {contViews } = require("../../controllers/developer/contViews");
+const {searchThis} = require('../../controllers/users/SearchApp')
 
 
 
@@ -47,4 +48,5 @@ router.get('/info/rate/:appkid/:rateAmount', requireAuth, AddRate)
 router.get('/info/developer_page/:devId', requireAuth, LoadDevApps)
 router.post('/catagories', requireAuth, ListbyCatagory)
 
+router.post('/search', requireAuth, searchThis)
 module.exports = router;

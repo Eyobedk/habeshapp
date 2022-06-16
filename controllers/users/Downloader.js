@@ -9,39 +9,51 @@ const {
 const EventEmitter = require('events');
 const EventEmitterClass = new EventEmitter();
 
-EventEmitterClass.on('startDownload', async (app_id, res)=>{
-    const result =await Apps.Download(app_id);
-    res.download(result);
-});
+// EventEmitterClass.on('startDownload', async (app_id, res)=>{
+//     const result =await Apps.Download(app_id);
+//     res.download(result);
+// });
 
-EventEmitterClass.on('startDownloadVersion', async (app_id, version, res)=>{
-    const result =await Apps.DownloadVersion(app_id, version);
-     res.download(result[0].file_location);
-});
+// EventEmitterClass.on('startDownloadVersion', async (app_id, version, res)=>{
+//     const result =await Apps.DownloadVersion(app_id, version);
+//      res.download(result[0].file_location);
+// });
 
 
-exports.DownloadApp = async (req, res)=>
+// exports.DownloadApp = async (req, res)=>
+// {
+
+//     EventEmitterClass.emit('startDownload', req.params.id, res);
+//     await checkAppDownloaded(req.params.id).then(async appResult => {
+
+//         if (appResult.length == 0) {
+//           await addUserId(req.params.id, res.locals.userId)
+//                 .then( await updateDownloads(req.params.id))
+//         } else {
+//             EventEmitterClass.emit('startDownload', req.params.id, res)
+//             await checkDownloadStatus(req.params.id, res.locals.userId).then(async StatResult => { //check user rated the app  ?
+//                 if (StatResult.length == 0)
+//                  {
+//                     await addUserId(req.params.id, res.locals.userId)
+//                         .then(await updateDownloads(req.params.id))
+//                 }
+//             })
+//         }
+//     })
+// }
+// exports.DownloadVersion = async (req, res)=>
+// {
+//     EventEmitterClass.emit('startDownloadVersion', req.params.id,req.params.date, res);
+// }
+
+async function StartDownload(appid)
 {
-
-    EventEmitterClass.emit('startDownload', req.params.id, res);
-    await checkAppDownloaded(req.params.id).then(async appResult => {
-
-        if (appResult.length == 0) {
-          await addUserId(req.params.id, res.locals.userId)
-                .then( await updateDownloads(req.params.id))
-        } else {
-            EventEmitterClass.emit('startDownload', req.params.id, res)
-            await checkDownloadStatus(req.params.id, res.locals.userId).then(async StatResult => { //check user rated the app  ?
-                if (StatResult.length == 0)
-                 {
-                    await addUserId(req.params.id, res.locals.userId)
-                        .then(await updateDownloads(req.params.id))
-                }
-            })
-        }
-    })
+    const File = []
+    await Apps.Download(appid).then((theAppresult)=>{
+            File.push(theAppresult);
+        });
+        // res.download(result);
+    return File[0]
 }
-exports.DownloadVersion = async (req, res)=>
-{
-    EventEmitterClass.emit('startDownloadVersion', req.params.id,req.params.date, res);
-}
+
+module.exports = {StartDownload}

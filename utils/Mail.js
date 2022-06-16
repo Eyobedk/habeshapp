@@ -1,5 +1,6 @@
 const nodeMailer = require('nodemailer');
-require('dotenv').config()
+require('dotenv').config();
+
 let transporter = nodeMailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
@@ -9,7 +10,25 @@ let transporter = nodeMailer.createTransport({
       pass: process.env.EMAIL_PASS
   }
 });
-exports.Mailer = async(email, resetpassLink)=>{
+// exports.Mailer = async(email, resetpassLink)=>{
+//   let mailOptions = {
+//     from: `HABESHAPP <${process.env.EMAIL}>`,
+//     to:  email,
+//     subject: 'Forgot password reset link',
+//     generateTextFromHTML: true,
+//     html: `<b> ${resetpassLink} </b>`
+//   };
+
+//   await transporter.sendMail(mailOptions)
+//   .then(()=>{
+//   }).catch((err)=>{ 
+//     console.log("The send email error:" + err)
+//     console.log("The send email error:" + err.code)
+//   }
+//     )
+// }
+
+async function Mailer(email, resetpassLink) {
   let mailOptions = {
     from: `HABESHAPP <${process.env.EMAIL}>`,
     to:  email,
@@ -18,11 +37,17 @@ exports.Mailer = async(email, resetpassLink)=>{
     html: `<b> ${resetpassLink} </b>`
   };
 
-  await transporter.sendMail(mailOptions)
-  .then(()=>{
-  }).catch((err)=>{ 
+  try
+  {
+    await transporter.sendMail(mailOptions).then(async function(theresult){
+      global.Mailresult = theresult.accepted[0];
+    });
+    return Mailresult;
+  }
+  catch(err){
     console.log("The send email error:" + err)
     console.log("The send email error:" + err.code)
   }
-    )
 }
+
+module.exports = {Mailer}
