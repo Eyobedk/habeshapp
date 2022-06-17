@@ -27,13 +27,13 @@ exports.registerDeveloper = async (req, res) => {
     password
   } = req.body;
 
-  const re = /^(([^<>(),;:\s@"]))/;
+  // const re = /^(([^<>(),;:\s@"]))/;
 
 
-  if(re.test(String(domain).toLowerCase()) == false){
-    res.render('developer/Auth/developer-register',{prevent:"fill the approprate data"});
-    return
-  }
+  // if(re.test(String(domain).toLowerCase()) == false){
+  //   res.render('developer/Auth/developer-register',{prevent:"fill the approprate data"});
+  //   return
+  // }
 
   theName = name;
   thePhone = phone;
@@ -108,11 +108,11 @@ exports.handleSuccess = (req, res) => {
   paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
     if (error) {
       console.log("error form payment.execute: " + error.response);
+      res.send('<h2> There is a problem with your payment proceess </h2><br><h5>Hint: please try again <h5/>');
       throw error;
     } else {
-      console.log(JSON.stringify(payment));
 
-      const dev = new Developer(theName, thePhone, theDomain, theEmail, thePass, payerId);
+      const dev = new Developer(theName, thePhone, theEmail, thePass, payerId);
       dev.save().then(async () => {
 
         const getID = await Developer.findEmail(theEmail);

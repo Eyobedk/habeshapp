@@ -1,5 +1,5 @@
 const db = require('../../db/database')
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 const {preventSqlInjection} = require('../../helpers/Error_handler')
 
 

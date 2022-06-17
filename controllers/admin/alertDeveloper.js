@@ -36,8 +36,8 @@ exports.DeleteAlertofDev = async (req, res)=>
     if(checkAlreadyPosted.length  != 0)
     {
         await AlertDevelopers.DeleteTheMessage().then(()=>{
-        res.redirect('/admin200/alertDev')});
+        res.redirect(302, '/admin200/alertDev')});
          return
     }
-    res.render('admin/Alert_Developer',{response:"message is removed from the users page"})
+    res.redirect(302, '/admin200/alertDev');
 }

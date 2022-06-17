@@ -1,6 +1,6 @@
 "use strict";
 const fs = require('fs');
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 const { HandleError} = require('../../helpers/handleUploadExceptions')
 const path = require('path')
 
@@ -82,6 +82,7 @@ exports.fileUploader = async (req, res) => {
 }
 
 exports.ListPublishedApp = async(req,res)=>{
+  const TheAppClass = new Apps(res.locals.dev.id)
   const ListofApps = await Apps.ListApps(res.locals.dev.id).catch((err)=>{console.log(err)});
   if(ListofApps)
   {
@@ -99,6 +100,7 @@ exports.ListPublishedApp = async(req,res)=>{
 
 
 exports.ListPublishedAppTobeDeleted = async(req,res)=>{
+  // const TheAppClass = new Apps(res.locals.dev.id)
   const ListofApps = await Apps.ListApps(res.locals.dev.id).catch((err)=>{console.log(err)});
   if(ListofApps)
   {

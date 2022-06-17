@@ -10,25 +10,7 @@ let transporter = nodeMailer.createTransport({
       pass: process.env.EMAIL_PASS
   }
 });
-// exports.Mailer = async(email, resetpassLink)=>{
-//   let mailOptions = {
-//     from: `HABESHAPP <${process.env.EMAIL}>`,
-//     to:  email,
-//     subject: 'Forgot password reset link',
-//     generateTextFromHTML: true,
-//     html: `<b> ${resetpassLink} </b>`
-//   };
-
-//   await transporter.sendMail(mailOptions)
-//   .then(()=>{
-//   }).catch((err)=>{ 
-//     console.log("The send email error:" + err)
-//     console.log("The send email error:" + err.code)
-//   }
-//     )
-// }
-
-async function Mailer(email, resetpassLink) {
+exports.Mailer = async(email, resetpassLink)=>{
   let mailOptions = {
     from: `HABESHAPP <${process.env.EMAIL}>`,
     to:  email,
@@ -37,17 +19,35 @@ async function Mailer(email, resetpassLink) {
     html: `<b> ${resetpassLink} </b>`
   };
 
-  try
-  {
-    await transporter.sendMail(mailOptions).then(async function(theresult){
-      global.Mailresult = theresult.accepted[0];
-    });
-    return Mailresult;
-  }
-  catch(err){
+  await transporter.sendMail(mailOptions)
+  .then(()=>{
+  }).catch((err)=>{ 
     console.log("The send email error:" + err)
     console.log("The send email error:" + err.code)
   }
+    )
 }
 
-module.exports = {Mailer}
+// async function Mailer(email, resetpassLink) {
+//   let mailOptions = {
+//     from: `HABESHAPP <${process.env.EMAIL}>`,
+//     to:  email,
+//     subject: 'Forgot password reset link',
+//     generateTextFromHTML: true,
+//     html: `<b> ${resetpassLink} </b>`
+//   };
+
+//   try
+//   {
+//     await transporter.sendMail(mailOptions).then(async function(theresult){
+//       global.Mailresult = theresult.accepted[0];
+//     });
+//     return Mailresult;
+//   }
+//   catch(err){
+//     console.log("The send email error:" + err)
+//     console.log("The send email error:" + err.code)
+//   }
+// }
+
+// module.exports = {Mailer}

@@ -108,7 +108,8 @@ exports.ThismonthPublished = async(req, res)=>
 exports.ThisMonthNewUsers = async(req, res)=>
 {
     const usersList = [];
-    const ListofUsersfromThismonth = await BlackList.UsersInThismonth();
+    const ListofUsersfromThismonth = await Admin.UsersInThismonth();
+    console.log(ListofUsersfromThismonth)
 
     ListofUsersfromThismonth.forEach((userssList)=>
     {
@@ -130,7 +131,7 @@ exports.ThisMonthNewUsers = async(req, res)=>
 exports.ThisMonthNewDevs = async(req, res)=>
 {
     const devList = [];
-    const ListofDevsfromThismonths = await Admin.DevsInThismonth();
+    const ListofDevsfromThismonths = await BlackList.UsersInThismonth();
 
     ListofDevsfromThismonths.forEach((DevsList)=>
     {

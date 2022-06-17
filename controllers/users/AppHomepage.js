@@ -1,4 +1,4 @@
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 const {AlertUser} = require('../../models/Alert')
 
 

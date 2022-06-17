@@ -1,7 +1,7 @@
 var path = require('path')
 
 const {testArrayofTexts} = require('../../helpers/Error_handler')
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 var IconFlag=0;
 const re = /^(([^<>(),;:\s@"]))/;
 
@@ -86,7 +86,7 @@ exports.validateApp = async (req, res, next) => {
         return
     }
 
-    ValidURL(domain);
+    // ValidURL(domain);
     if(choosen =='Choose...'){
         let theError = 'please a the app catagory type';
         res.render('developer/publish', {

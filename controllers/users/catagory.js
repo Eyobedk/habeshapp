@@ -1,15 +1,16 @@
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 
 
 exports.ListbyCatagory =  async (req, res)=>
 {
     const catagory = Object.keys(req.body)
     let ListApps = [];
+    console.log(catagory);
     await Apps.SimilarApps(catagory[0]).then((results)=>{
         if(results.length == 0){
             res.render('users/home', {
                 // ListApps: ListApps,
-                Type:`${catagory} Apps`
+                Type:`No ${catagory} Apps`
             })
             return
         }

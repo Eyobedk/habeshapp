@@ -42,7 +42,7 @@ exports.validDevInput = (req, res,next) => {
         return
     }
 
-    ValidURL(domain)
+    // ValidURL(domain)
 
     if (!validateEmail(email)) {
         let inputError = "please enter a valid Email Address";

@@ -5,7 +5,7 @@ const {
   MoveApk,
   deleteImages
 } = require('../../helpers/fileUpdater')
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 
 
 const newFileSaver = async(files, name) => {

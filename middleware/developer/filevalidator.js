@@ -1,4 +1,4 @@
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 const path = require('path')
 const fs = require('fs');
 const {testArrayofTexts} = require('../../helpers/Error_handler')

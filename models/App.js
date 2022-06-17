@@ -44,15 +44,15 @@ class Apps {
         const [result, _] = await db.execute(sql);
         return result[0];
     }
-    static async oldversion(id)
+     static async oldversion(TheAppId)
     {
-        const sql = `SELECT * FROM habeshapp.previousversions WHERE appid=${id};`;
+        const sql = `SELECT * FROM habeshapp.previousversions WHERE appid=${TheAppId};`;
         const [result, _] = await db.execute(sql);
         return result;
     }
-    static async ListApps(id)
+     static async ListApps(TheAppId)
     {
-        const sql = `SELECT * FROM apps WHERE dev_id=${id}`;
+        const sql = `SELECT * FROM apps WHERE dev_id=${TheAppId}`;
         const [result, _] = await db.execute(sql);
         return result
     }
@@ -63,21 +63,15 @@ class Apps {
         return result
     }
 
-    static async ListAppsForUsers(id)
-    {
-        const sql = `SELECT * FROM apps WHERE appid=${id}`;
-        const [result, _] = await db.execute(sql);
-        return result
-    }
     static async getAppsPath(appid,id)
     {
         const sql = `SELECT * FROM apps WHERE dev_id=${id} AND appid=${appid}`;
         const [result, _] = await db.execute(sql);
         return result
     }
-    static async getAppsPathById(appid)
+    static async getAppsPathById(TheAppId)
     {
-        const sql = `SELECT * FROM apps WHERE  appid=${appid}`;
+        const sql = `SELECT * FROM apps WHERE  appid=${TheAppId}`;
         const [result, _] = await db.execute(sql);
         return result
     }
@@ -115,35 +109,23 @@ class Apps {
         }
     }
     
-    static async deleteApps(appid, devid)
-    {
-        const sql = `DELETE FROM apps where appid = ${appid} AND dev_id =${devid};`
-        const delResult = await db.execute(sql);
-        return delResult
-    }
-    static async deleteAppsByAdmin(appid, devid)
-    {
-        const sql = `DELETE FROM apps where appid = ${appid};`
-        const delResult = await db.execute(sql);
-        return delResult
-    }
     static async LoadNewApps()
     {
         const sql = `SELECT * FROM apps ORDER BY publishedDate ASC`;
         const [orderedResult, _] = await db.execute(sql);
         return orderedResult;
     }
-    static async LoadAllCommnets(appid)
+    static async LoadAllCommnets(TheAppId)
     {
         const sql = `SELECT user.name, comments.commentOne,comments.commentTwo FROM user, 
-        comments WHERE user.user_id = comments.user_id AND commentedappid = ${appid} ORDER BY comments.published_date ASC; `;
+        comments WHERE user.user_id = comments.user_id AND commentedappid = ${TheAppId} ORDER BY comments.published_date ASC; `;
         const [orderedComments, _] = await db.execute(sql);
         return orderedComments;
     }
 
-    static async Download(app_id)
+    static async Download(TheAppId)
     {
-        const sql = `SELECT appLocation FROM apps where appid = ${app_id}`;
+        const sql = `SELECT appLocation FROM apps where appid = ${TheAppId}`;
         const result = await db.execute(sql);
         return result[0][0].appLocation
     }
@@ -160,47 +142,7 @@ class Apps {
         const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
         return result;
     }
-    static async checkAppisReported(app_id, user_id)
-    {
-        const sql = `SELECT * FROM alreadyreported where reported_appid = ${app_id} AND reporter_id = ${user_id}`;
-        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-        return result;
-    }
-    static async GetReportandDownload(app_id)
-    {
-        const sql = `SELECT icon, appName, downloads,appReports,dev_id FROM apps where appid = ${app_id}`;
-        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-        return result;
-    }
-    static async ReportApp(appId)
-    {
-        const sql = `UPDATE apps SET appReports = appReports + 1 WHERE appid = ${appId}`;
-        return new Promise((resolve, reject) => {
-            resolve(db.execute(sql));
-        })
-    }
-    static async updateStatus(dev_id)
-    {
-        const sql = `UPDATE developer SET dev_ban_status = dev_ban_status + 1 WHERE dev_id = ${dev_id}`;
-        return new Promise((resolve, reject) => {
-            resolve(db.execute(sql));
-        })
-    }
-    static async InserttoReporteds(reporter_id, appId)
-    {
-        const sql = `INSERT INTO alreadyreported(reporter_id, reported_appid) VALUES(${reporter_id}, ${appId})`;
-        return new Promise((resolve, reject) => {
-            resolve(db.execute(sql));
-        })
-    }
-    static async AddtoblackListAppsTable(Icon, Appname, Reports, appId)
-    {
-        const sql = `INSERT INTO blacklistedapps(Theicon, TheAppName, ReportedAmount, TheReportedAppID)
-         VALUES('${Icon}', '${Appname}', ${Reports}, ${appId})`;
-        return new Promise((resolve, reject) => {
-            resolve(db.execute(sql));
-        })
-    }
+
     static async GetAlreadyVistedId(viewer_id, viewedapp_id)
     {
         const sql = `SELECT * FROM viewerstable WHERE theviwer_id = ${viewer_id} AND theviwed_app_id = ${viewedapp_id}`;
@@ -213,16 +155,86 @@ class Apps {
         const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
         return result;
     }
-    static async updateViewCount(appId)
+    static async updateViewCount(TheAppId)
     {
-        const sql = `UPDATE apps SET views = views + 1 WHERE appid = ${appId}`;
+        const sql = `UPDATE apps SET views = views + 1 WHERE appid = ${TheAppId}`;
         return new Promise((resolve, reject) => {
             resolve(db.execute(sql));
         })
     }
-
-
 }
 
+class AppExplictActions extends Apps
+{
+    constructor(sysUser_Id, app_id)
+    {
+        super(sysUser_Id, app_id)
+        this.sysUser_Id = sysUser_Id,
+        this.app_Id = app_id
+    }
 
-module.exports = Apps;
+     async checkAppisReported()
+    {
+        const sql = `SELECT * FROM alreadyreported where reported_appid = ${this.app_Id} AND reporter_id = ${this.sysUser_Id}`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
+    }
+    static async GetReportandDownload(TheAppId)
+    {
+        const sql = `SELECT icon, appName, downloads,appReports,dev_id FROM apps where appid = ${TheAppId}`;
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        return result;
+    }
+    static async ReportApp(TheAppId)
+    {
+        const sql = `UPDATE apps SET appReports = appReports + 1 WHERE appid = ${TheAppId}`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+    static async updateStatus(dev_id)
+    {
+        const sql = `UPDATE developer SET dev_ban_status = dev_ban_status + 1 WHERE dev_id = ${dev_id}`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+     async InserttoReporteds()
+    {
+        const sql = `INSERT INTO alreadyreported(reporter_id, reported_appid) VALUES(${this.sysUser_Id}, ${this.app_Id})`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+    static async AddtoblackListAppsTable(Icon, Appname, Reports, appId)
+    {
+        const sql = `INSERT INTO blacklistedapps(Theicon, TheAppName, ReportedAmount, TheReportedAppID)
+         VALUES('${Icon}', '${Appname}', ${Reports}, ${appId})`;
+        return new Promise((resolve, reject) => {
+            resolve(db.execute(sql));
+        })
+    }
+     async deleteApps()
+    {
+        const sql = `DELETE FROM apps where appid = ${this.app_Id} AND dev_id =${this.sysUser_Id};`
+        const delResult = await db.execute(sql);
+        return delResult
+    }
+    static async deleteAppsByAdmin(TheAppId)
+    {
+        const sql = `DELETE FROM apps where appid = ${TheAppId};`
+        const delResult = await db.execute(sql);
+        return delResult
+    }
+    //Listapps method is overriding from apps to execute the save operation for different Actor
+   static async ListApps(TheAppId)
+    {
+        const sql = `SELECT * FROM apps WHERE appid=${TheAppId}`;
+        const [result, _] = await db.execute(sql);
+        return result
+    }
+}
+
+module.exports = {Apps,AppExplictActions};
+
+// module.exports = Apps;

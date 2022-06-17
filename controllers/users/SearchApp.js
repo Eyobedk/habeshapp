@@ -1,4 +1,4 @@
-const Apps = require('../../models/App')
+const {Apps} = require('../../models/App')
 
 
 exports.searchThis = async (req, res)=>
