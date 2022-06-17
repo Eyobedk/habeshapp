@@ -8,18 +8,6 @@ function validateEmail(email) {
 exports.validDevInput = (req, res,next) => {
     const {name,phone,domain,email,password} = req.body;
 
-    function ValidURL(str) {
-        var regex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-        if (!regex.test(str)) {
-            let inputError = "please enter a proper domain name with https protcol";
-            res.render('developer/Auth/developer-register', {
-                Ierror: inputError
-            })
-            return
-        }
-        return
-    }
-
     if (name.length < 3) {
         let inputError = "please enter a valid name";
         res.render('developer/Auth/developer-register', {

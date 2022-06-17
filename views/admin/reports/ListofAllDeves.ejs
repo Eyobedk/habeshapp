@@ -152,9 +152,9 @@
               </td>
 
               <td>
-                Acme Corp.<br />
-                John Doe<br />
-                john@example.com
+                Habeshapp Corp.<br />
+                App Platfomr<br />
+                Habeshapp@gmail.com
               </td>
             </tr>
           </table>
@@ -180,7 +180,7 @@
       </tr>
 
 
-      <% if(typeof developer != 'undefined'){ %>
+      <% if(typeof developer != 'undefined'){ var NofAmount = developer.length; %>
       <% for (i = 0; i < developer.length; i++)
           {  %>
       <tr>
@@ -195,6 +195,8 @@
       <% } %>
 
     </table>
+    <center style="padding-top: 20px !important;"><b style="font-weight: bold;"> <%=NofAmount * 400 %> birr in Total</b></center>
+
   </div>
   <center>
     <button style="margin-top:20px; width:300px;background-color: rgb(54, 54, 255);padding: 10px;color: white;font-size: 15px;border-radius: 9px;border-color: white;"

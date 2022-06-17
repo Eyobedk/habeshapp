@@ -22,7 +22,7 @@ module.exports.signup_Post = async (req, res) => {
         const token = createToken(JSON.stringify(getID[0]["user_id"]));
         res.cookie('jwt', token, {
                 httpOnly: true,
-                maxAge: 40000
+                maxAge: 400000
         }).redirect(302, '/Login')
     });
 }

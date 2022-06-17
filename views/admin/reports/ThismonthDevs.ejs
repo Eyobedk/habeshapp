@@ -18,6 +18,7 @@
       max-width: 800px;
       margin: auto;
       padding: 30px;
+      padding-bottom: 10px!important;
       padding-top: 12px;
       border: 1px solid #eee;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
@@ -111,7 +112,7 @@
 
 <body>
 
-  <center><h1 class="theTitile">List of all developers on the platform</h1></center>
+  <center><h1 class="theTitile">This month new developers</h1></center>
   <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
       <tr class="top">
@@ -152,9 +153,9 @@
               </td>
 
               <td>
-                Acme Corp.<br />
-                John Doe<br />
-                john@example.com
+                Habeshapp Corp.<br />
+                App Platfomr<br />
+                Habeshapp@gmail.com
               </td>
             </tr>
           </table>
@@ -180,7 +181,7 @@
       </tr>
 
 
-      <% if(typeof devsList != 'undefined'){ %>
+      <% if(typeof devsList != 'undefined'){ var NofAmount = devsList.length; %>
       <% for (i = 0; i < devsList.length; i++)
           {  %>
       <tr>
@@ -192,9 +193,9 @@
 
       </tr>
       <% } %>
-      <% } %>
-
+       <% } %>
     </table>
+    <center style="padding-top: 20px !important;"><b style="font-weight: bold;"> <%=NofAmount * 400 %> birr in Total</b></center>
   </div>
   <center>
     <button style="margin-top:20px; width:300px;background-color: rgb(54, 54, 255);padding: 10px;color: white;font-size: 15px;border-radius: 9px;border-color: white;"
