@@ -6321,3 +6321,49 @@ button.close {
     display: none !important;
   }
 }
+
+@media (max-width: 940px) {
+  .theFooterTexts
+  {
+    width: 40%;
+    margin-left: 122px;
+  }
+}
+@media (max-width: 781px) {
+  .theFooterTexts
+  {
+    width: 40%;
+    margin-left: 95px;
+    margin-top: 8px !important;
+  }
+}
+@media (max-width: 640px) {
+  .theFooterTexts
+  {
+    width: 67%;
+    margin-left: 127px;
+  }
+  .feedbackFooter{
+    margin-left:214px;
+  }
+}
+@media (max-width: 500px) {
+  .theFooterTexts
+  {
+    width: 67%;
+    margin-left: 101px;
+  }
+  .feedbackFooter{
+    margin-left:176px;
+  }
+}
+@media (max-width: 330px) {
+  .theFooterTexts
+  {
+    width: 88%;
+    margin-left: 101px;
+  }
+  .feedbackFooter{
+    margin-left:176px;
+  }
+}

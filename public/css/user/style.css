@@ -749,7 +749,9 @@ img
     }
     .feedbackFooter
      {
-      margin-left: 79px !important;
+      margin-left: 106px !important;
+      width: 60%;
+
      }
      .gallery
      {
@@ -861,3 +863,8 @@ img
   margin-left: 30px;
   margin-top: 30px;
 }
+
+
+/* APP PAGE */
+
+

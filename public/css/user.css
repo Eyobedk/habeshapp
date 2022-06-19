@@ -527,12 +527,10 @@ padding-left: 35px;
 
 .screenshotsPare
 {
-    /* margin-left: 98px; */
     width: 220px !important;
     min-height: 120px;
     max-height: auto;
     margin-left: 58px;
-    /* float: left; */
     margin-top: 55px;
     padding: 3px;
     display: inline-flex;
@@ -577,6 +575,8 @@ padding-left: 35px;
 	width: 30%;
     background-color: white;
     margin-left: 10px;
+    height: fit-content;
+    padding-bottom: 33px;
     overflow: hidden;
     display: block;
     margin: 0 auto;
@@ -608,4 +608,226 @@ padding-left: 35px;
     margin-left: 20px;
     color: #82828b;
     font-weight: 700;
+}
+
+@media(max-width:1238.89px)
+{
+    .InfoBet{
+        width: 59%;
+    }
+  .screenshotsPare{
+    margin-left: 12px;
+  }
+  .gallery a {
+    width: 166px !important;
+}
+
+}
+@media(max-width:1235px)
+{
+    .InfoBet{
+        margin-right: 0px;
+        width: 67%;
+    }
+  .screenshotsPare{
+    margin-left: 12px;
+  }
+  .gallery a {
+    width: 166px !important;
+}
+
+}
+@media(max-width:1052px)
+{
+    .infocolOne{
+        width: 57%;
+    }
+}
+@media(max-width:1235px)
+{
+  .screenshotsPare{
+    margin-left: 12px;
+    width: 153px;
+  }
+  .gallery a {
+    width: 166px !important;
+}
+
+}
+@media(max-width:1124px)
+{
+    .screenshotsPare img{
+        margin-left: 12px;
+        width: 176px !important;
+    }
+    .gallery a {
+        width: 166px !important;
+    }
+}
+@media(max-width:1011px)
+{
+    .TheIcon
+    {
+        margin-top: -80px;
+        width: 34%;
+    }
+    .screenshotsPare img{
+        margin-left: 12px;
+        width: 176px !important;
+    }
+    .gallery a {
+        width: 166px !important;
+    }
+}
+@media(max-width:965px)
+{
+    .TheIcon
+    {
+        margin-top: -80px;
+        width: 34%;
+    }
+    .screenshotsPare img{
+        margin-left: 5px;
+        width: 160px !important;
+    }
+    .gallery a {
+        width: 166px !important;
+    }
+}
+@media(max-width:899px)
+{
+    .similarApps ul
+    {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .similarApps ul li
+    {
+        margin-left: 10px;
+    }
+    .InfoBet {
+        margin-right: 0px;
+        width: 100%;
+    }
+    .similarApps
+    {
+        width: 0%;
+        display: contents;
+    }
+    .TheIcon {
+        margin-top: -28px;
+        width: 31%;
+    }
+    .screenshotsPare img{
+        margin-left: 5px;
+        width: 160px !important;
+    }
+    .gallery a {
+        width: 166px !important;
+    }
+}
+@media(max-width:797px)
+{
+    .similarApps ul
+    {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .similarApps ul li
+    {
+        margin-left: 10px;
+    }
+    .InfoBet {
+        margin-right: 0px;
+        width: 100%;
+    }
+    .similarApps
+    {
+        width: 0%;
+        display: contents;
+    }
+    .TheIcon {
+        margin-top: -28px;
+        width: 31%;
+    }
+    .screenshotsPare img{
+        margin-left: 5px;
+        width: 160px !important;
+    }
+    .gallery a {
+        width: 166px !important;
+    }
+    .infocolOne h2{
+        font-size: 27px;
+    }
+}
+@media(max-width:301px)
+{
+    .similarApps ul
+    {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .similarApps ul li
+    {
+        margin-left: 10px;
+    }
+    .InfoBet {
+        margin-right: 0px;
+        width: 100%;
+    }
+    .similarApps
+    {
+        width: 0%;
+        display: contents;
+    }
+    .TheIcon {
+        margin-top: -28px;
+        width: 31% !important;
+    }
+    .screenshotsPare img{
+        margin-left: 5px;
+        width: 160px !important;
+    }
+    .gallery a {
+        width: 166px !important;
+    }
+    .infocolOne h2{
+        font-size: 27px;
+    }
+}
+/* .similarApps
+width: 30%;
+display: contents; */
+
+
+
+/* @media(max-width:1235px)
+{
+    .AppRoot
+    {
+        width: 100%;
+
+    }
+    .InfoBet {
+        width: 100%;
+    }
+  .similarApps{
+    width: 42%;
+    margin-left: 10px !important;
+  }
+  .gallery a {
+    width: 166px !important;
+}
+
+} */
+
+
+@media only screen and (min-width: 1239px) and (max-width: 1342px) {
+	.screenshotsPare{
+        margin-left: 6px;
+    }
+    body{
+        background-color: red;
+    }
 }

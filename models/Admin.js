@@ -82,7 +82,7 @@ class Admin {
   static async LoadAllReactions()
     {
         const sql = `SELECT user.name, feedbacks.message,feedbacks.commentedate FROM user, 
-        feedbacks WHERE user.user_id = feedbacks.commenterId ORDER BY feedbacks.commentedate ASC; `;
+        feedbacks WHERE user.user_id = feedbacks.commenterId ORDER BY feedbacks.commentedate DESC; `;
         const [orderedComments, _] = await db.execute(sql);
         return orderedComments;
     }

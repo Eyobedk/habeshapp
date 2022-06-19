@@ -1,3 +1,4 @@
+"use strict";
 const passport = require('passport');
 const Router = require('express').Router();
 const User = require("../../models/User");
