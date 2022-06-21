@@ -16,7 +16,7 @@ exports.preventSqlInjection = (res, err) => {
 
 
 exports.testArrayofTexts = (listofInputs) =>{
-    const injectionDetected = false;
+    let injectionDetected = false;
     for (let i = 0; i < listofInputs.length; i++) {
         if (re.test(String(listofInputs[i]).toLowerCase()) == false) {
             return injectionDetected = true;

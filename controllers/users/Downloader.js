@@ -16,7 +16,7 @@ EventEmitterClass.on('startDownload', async (TheAppid, res)=>{
 
 EventEmitterClass.on('startDownloadVersion', async (app_id, version, res)=>{
     const result =await Apps.DownloadVersion(app_id, version);
-     res.download(result[0].file_location);
+     res.download(result);
 });
 
 

@@ -127,14 +127,15 @@ class Apps {
     {
         const sql = `SELECT appLocation FROM apps where appid = ${TheAppId}`;
         const result = await db.execute(sql);
-        return result[0][0].appLocation
+        return result[0][0].appLocation;
     }
     static async DownloadVersion(app_id,date)
     {
         console.log(date, app_id)
         const sql = `SELECT file_location FROM previousversions where published_on like '%${date}%' AND appid = ${app_id};`;
         const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
-        return result;
+        console.log(result);
+        return result[0].file_location;
     }
     static async SearchApp(appName)
     {

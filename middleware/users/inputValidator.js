@@ -20,7 +20,7 @@ exports.validateSignupInput = (req, res, next)=>{
         let theError = 'please Enter a valid name';
         res.render('login&signup/signup', {
             pass: theError
-        })
+        });
         return
     }
     if(!validateEmail(email))
