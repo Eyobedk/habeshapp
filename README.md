@@ -1,2 +1,2 @@
-# shegerapp
-Android app distribution platform
+# habeshapp
+<b>Android app distribution platform</b>
