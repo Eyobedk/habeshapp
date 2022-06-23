@@ -79,7 +79,8 @@ exports.registerDeveloper = async (req, res) => {
 
   paypal.payment.create(create_payment_json, function (error, payment) {
     if (error) {
-      throw error;
+      console.log(error);
+      process.exit(1);
     } else {
       for (let i = 0; i < payment.links.length; i++) {
         if (payment.links[i].rel === 'approval_url') {
@@ -121,7 +122,7 @@ exports.handleSuccess = (req, res) => {
         console.log("here dev " + token)
         res.cookie('devToken', token, {
           httpOnly: true,
-          maxAge: 600000
+          maxAge: 6000000
         }).redirect(302, '/pannel')
 
       })
