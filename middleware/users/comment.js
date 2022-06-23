@@ -34,6 +34,8 @@ exports.AddComment = async (req, res, next)=>{
     if( typeof comment != 'undefined')
     {
         const amountOfRates = await countLimit(req.params.appid,  res.locals.userId);
+        console.log("amountOfRates")
+        console.log(amountOfRates)
         if( amountOfRates == 0)
         {
             await AddTheFirstCommnet(res.locals.userId, comment, req.params.appid).catch((err)=>{

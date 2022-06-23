@@ -41,11 +41,11 @@ exports.validatestatus = async (req, res,next)=>{
     const textinputs =[funcOne,funcTwo,funcThree,funcFour];
 
 
-    if(testArrayofTexts(textinputs))
-    {
-        res.render('developer/update',{Ierror:"fill the approprate data"});
-        return
-    }
+    // if(testArrayofTexts(textinputs))
+    // {
+    //     res.render('developer/update',{Ierror:"fill the approprate data"});
+    //     return
+    // }
     const appExtension = path.extname(theApk.name);
     let theScreenError = 'please Enter 3 screenshots file with a .png or .webp extention';
     let flag=0;
