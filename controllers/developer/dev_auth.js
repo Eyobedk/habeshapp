@@ -135,16 +135,23 @@ module.exports.Login_Dev = async (req, res, next) => {
     email,
     password
   } = req.body;
- 
+  let outErrors = 'enter the correct password and email';
+
 
   const dev = await Developer.findEmail(email);
+  if (!dev[0]) {
+    let outErrors = 'enter the correct password and email';
+    res.render("developer/Auth/developer-Login", {
+      outErrors
+    });
+    return
+  }
   const TheDev = new BlackList(dev[0].dev_id);
   const isBadDeveloper = await TheDev.checkDeveloperIsBlackListed();
   console.log("isBadDeveloper")
   console.log(isBadDeveloper.length)
   if (isBadDeveloper.length == 0) {
     if (!dev) {
-      let outErrors = 'enter the correct password and email';
       res.render("developer/Auth/developer-Login", {
         outErrors
       });
