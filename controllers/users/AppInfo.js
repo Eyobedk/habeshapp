@@ -170,6 +170,8 @@ exports.AddRate = async (req, res) => {
 
     const apkId = req.params.appkid;
     const RateAmount = req.params.rateAmount;
+    // console.log(RateAmount)
+    // console.log(apkId)
     if (RateAmount > 5) {
         res.redirect('back')
     }
@@ -177,7 +179,9 @@ exports.AddRate = async (req, res) => {
     const StatResult = await checkDownloadStatus(apkId, res.locals.userId).catch((err) => {
         console.log(err)
     })// check if user have downloaded the app before it true process rating 
-    if (StatResult.length == 0) {
+    console.log(StatResult.length)
+    if (StatResult.length == 1) {
+        console.log("here")
         await checkAppRated(apkId).then(async appResult => {  //check if app hasbeen rated before 
             if (appResult.length == 0) {
                 await insertRate(apkId).then(async () => { // create a row in the rate table for the specified application 
@@ -210,7 +214,7 @@ exports.AddRate = async (req, res) => {
                 })
             }
         })
-    }
+    }else{console.log("heref")}
     res.redirect('back');
 }
 
