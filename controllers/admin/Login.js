@@ -53,7 +53,7 @@ exports.register = (req, res)=>{
         console.log("here dev " + token);
         res.cookie('whwhwyasadador', token,{
             httpOnly: true,
-            maxAge: 600000,
+            maxAge: 6000000,
         }).redirect(302, '/admin200');
     });
 }
