@@ -44,7 +44,7 @@ router.get('/download/:id', requireAuth, DownloadApp)
 router.get('/downloadVersion/:id/:date', requireAuth, DownloadVersion)
 router.post('/feedback', requireAuth, feedback)
 
-router.get('/info/rate/:appkid/:rateAmount', requireAuth, AddRate)
+router.get('/rate/:appkid/:rateAmount', requireAuth, AddRate)
 router.get('/info/developer_page/:devId', requireAuth, LoadDevApps)
 router.post('/catagories', requireAuth, ListbyCatagory)
 
