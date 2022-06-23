@@ -144,17 +144,27 @@ class Apps {
         return result;
     }
 
-    static async GetAlreadyVistedId(viewer_id, viewedapp_id)
+    static async GetAlreadyVistedId(viewer_id, viewedapp_id,res)
     {
         const sql = `SELECT * FROM viewerstable WHERE theviwer_id = ${viewer_id} AND theviwed_app_id = ${viewedapp_id}`;
-        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err);
+            if(err.errno == 1054)
+            {
+                res.redirect(302,'/logout');
+            }});
         return result;
     }
-    static async UpdateAlreadyVistedId(viewer_id, viewedapp_id)
+    static async UpdateAlreadyVistedId(viewer_id, viewedapp_id,res)
     {
+       
         const sql = `INSERT INTO viewerstable(theviwer_id, theviwed_app_id) VALUES(${viewer_id}, ${viewedapp_id})`;
-        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err)});
+        const [result, _] = await db.execute(sql).catch((err)=>{console.log(err);
+            if(err.errno == 1452)
+            {
+                res.redirect(302,'/home');
+            }});
         return result;
+        
     }
     static async updateViewCount(TheAppId)
     {
