@@ -21,7 +21,7 @@ GOOGLE_CLIENT_SECRET= Your own client secret like this-> GOCdad-TPmsdAmwFByy6dad
 
 
 EMAIL_PASS = najksdsdsdxdssqdssgzai   //Google apps registered password
-EMAIL = leinternet0@gmail.com
+EMAIL = uremailAdress@gmail.com
 
 SESSION_SECRET_KEY_ONE=5errererevw773773b98dd593e527bce70d7548de3be2883862b3382074e5ce
 SESSION_SECRET_KEY_TWO=fdec6c52a97434343439400b7684361c6c8c17859253b385f9feff3b
