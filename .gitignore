@@ -106,3 +106,5 @@ dist
 
 .gitignore
 uploads/
+updates/
+.gitattributes

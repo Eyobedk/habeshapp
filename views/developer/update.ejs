@@ -20,19 +20,19 @@
         rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="/bootstrap/bootstrap.css" />
     <!-- My css -->
-    <link rel="stylesheet" href="css/pannel.css">
+    <link rel="stylesheet" href="/css/pannel.css">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="bootstrap/theme.css" />
+    <link rel="stylesheet" href="/bootstrap/theme.css" />
 
     <!-- Skin CSS -->
-    <link rel="stylesheet" href="bootstrap/default.css" />
+    <link rel="stylesheet" href="/bootstrap/default.css" />
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/my-login.css">
+    <link rel="stylesheet" type="text/css" href="/css/my-login.css">
 </head>
 
 
@@ -47,8 +47,8 @@
         <header class="header">
             <div class="logo-container">
                 <a class="logo" style="text-decoration: none;">
-                    <img src="images/Logo.png" height="35" alt="JSOFT Admin" />
-                    <strong style="margin-left:20px;padding-top:100px !important;font-size: medium;">HABESHAPP</strong>
+                    <img src="/images/Logo.png" height="35" alt="JSOFT Admin" />
+                    <strong class="hider" class="hider" style="margin-left:20px;padding-top:100px !important;font-size: medium;">HABESHAPP</strong>
 
                 </a>
                 <div class="header-right">
@@ -91,24 +91,37 @@
 
             <section role="main" class="content-body">
                 <header class="page-header">
-                    <h2>Dashboard</h2>
+                    <h2><a href="/pannel" style="text-decoration: none;color: white;">Dashboard</a></h2>
 
                  </header>
-                    <form action="/register" class="login g-3" style="margin-left: 60px;margin-right: 60px;font-size: 17px !important;margin-top: 50px;"
+                    <form  encType="multipart/form-data"
+                    action="" class="login g-3" style="margin-left: 60px;margin-right: 60px;font-size: 17px !important;margin-top: 50px;"
                         method="post">
                         <section class="row"
                             style="color: rgb(39, 39, 39);font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
                             
                             <center style="margin-bottom: 40px;">Enter the Information you want your users to know<br>About the new Update</center>
 
+                            <% if(typeof Ierror !='undefined' ) { %>
+                                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                        <use xlink:href="#exclamation-triangle-fill" />
+                                    </svg>
+                                    <div>
+                                        <%= Ierror %>
+                                    </div>
+                                </div>
+                                <% } %>
+
+                               <% if(typeof done !='undefined'){ %>
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>Succefully updated!</strong> You can now find your updated app at our platform
+                                    </div>
+                                <% } %>
+
                             <div class=" col-md-6 mb-3">
                                 <label for="formFileSm" class="form-label" style="margin-top: 19px; font-size: 15px !important;">Upload the new version Apk</label>
                                 <input name="apk"class="form-control" style="width: 100% !important;font-size: medium;" id="formFileSm" type="file">
-                              </div>
-
-                              <div class=" col-md-6 mb-3">
-                                <label for="formFileSm" class="form-label" style="margin-top: 19px; font-size: medium;">Upload image for background image for the app</label>
-                                <input name="backImage"class="form-control" style="width: 100% !important;font-size: medium;" id="formFileSm" type="file">
                               </div>
 
                             <div class="col-md-6 mb-3" style="margin-top: 19px;">
@@ -122,6 +135,29 @@
                                 <textarea class="" style="height: 100%;width: 100%;color: black;" name="desc" placeholder="ADD DESCRIPTION ABOUT THE NEW UPDATE"
                                     id="floatingTextarea2" style="height: 100px"></textarea>
                             </div>
+                            <fieldset class="function">
+                                <legend><h4>Enter the Updated App best functionalities </h4></legend>
+                                <div class="col-md-6">
+                                    <label style="margin-top: 19px;display: flex;" class="form-label">Feature One</label>
+                                    <input type="text" style="font-size: medium;" class="form-control"
+                                        name="funcOne" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label  style="margin-top: 19px;display: flex;" class="form-label">Feature Two</label>
+                                    <input type="text" style="font-size: medium;" class="form-control"
+                                        name="funcTwo" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label  style="margin-top: 19px;display: flex;" class="form-label">Feature Three</label>
+                                    <input type="text" style="font-size: medium;" class="form-control" 
+                                        name="funcThree" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="margin-top: 19px;display: flex;" class="form-label">Feature Four</label>
+                                    <input type="text" style="font-size: medium;" class="form-control" 
+                                        name="funcFour" required />
+                                </div>
+                            </fieldset>
 
                         </section>
                         <center>
@@ -139,12 +175,12 @@
     </section>
 
     <!-- Vendor -->
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.browser.mobile.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.browser.mobile.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/theme.js"></script>
 
-    <script src="js/theme.init.js"></script>
+    <script src="/js/theme.init.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="HABESHAPP">
+  <title>Signin page</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="css/signin.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+  <main class="form-signin">
+    <form action="" method="post">
+      <img class="mb-4" style="margin-bottom: 0rem!important;"src="images/Logo.png" alt="" width="100">
+      <h1 class="text-center">Habeshapp</h1><br>
+      <h1 class="h3 mb-3 fw-normal">sign in</h1>
+
+      <% if(typeof Ierror === 'string') { %>
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+            <use xlink:href="#exclamation-triangle-fill" />
+          </svg>
+          <div>
+            <%= Ierror %>
+          </div>
+        </div>
+          <% } %>
+
+          <% if(typeof Ierrors === 'string') { %>
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                <use xlink:href="#exclamation-triangle-fill" />
+              </svg>
+              <div>
+                <%= Ierrors %>
+              </div>
+            </div>
+              <% } %>
+
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Enter your email" required/>
+        <label for="floatingInput">Email </label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required/>
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit" style="Background-color: #ffce19;  text-decoration: none;margin-bottom: 19px !important;">Sign in </button><br>
+      
+      <a href="/forgot-password" style="color: #072bfa; text-decoration: none; padding-left: 180px !important;">Forgot Password ?</a>
+      <div id="nbsp"></div>
+      <a href="/signup" style="color: #001c99; padding-left: 250px !important; text-decoration: none; "> sign up</a>
+      <a href="http://localhost:4000/developer-Login" style="color: #001c99; padding-left: 250px !important; text-decoration: none; "> I am a Developer</a>
+    
+      <br><button type="button" class="login-with-google-btn" style="margin-top: 20px !important;text-decoration: none !important; "><a  href="/auth/google">
+        Sign in with Google</a>
+      </button>
+
+    </form>
+
+
+  </main>
+
+
+
+</body>
+
+</html>

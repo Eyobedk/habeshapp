@@ -25,12 +25,9 @@ class User {
   static async findEmail(email) {
     const sql = `SELECT * FROM user WHERE email='${email}';`;
     const [result, _] = await db.execute(sql);
-    console.log("me result"+result)
-    if((result) === undefined) return undefined;
-   // console.log("from find email " + result[0]["user_id"]);
-   else{
     return result;
-  }}
+  }
+//}
   
   static async findByID(id) {
     const sql = `SELECT * FROM user WHERE user_id='${id}';`;
@@ -54,7 +51,7 @@ class User {
 
   static async saveFromGoogle(email) {
     const result = await this.findEmail(email);
-    if(result) {return;};
+    if(result.length > 0) {return;};
 
     const d = new Date();
     const year = d.getFullYear();
@@ -71,19 +68,27 @@ class User {
   static async updatePassword(id, password)
   {
     const hash = bcrypt.hashSync(password, 10);
-    console.log("the id "+ id +"the password"+password)
     const sql = `UPDATE habeshapp.user SET password = '${hash}' WHERE user_id = ${id};`;
-    await db.execute(sql).then((result)=>{
-      console.log("password result"+JSON.stringify(result));
-    }).catch((err)=>{
+    await db.execute(sql).catch((err)=>{
       console.log("The Error");
       console.log(err.code);
       console.log(err.sql);
       console.log(err.sqlMessage);
     })
-    
-    
   }
+  static async addFeedback(message, id)
+  {
+    const d = new Date();
+    const year = d.getFullYear();
+    const day = d.getDate();
+    const month = d.getMonth() + 1;
+    const date = `${year}-${month}-${day}`;
+    const sql = `INSERT INTO feedbacks(message, commenterId, commentedate) VALUES('${message}', ${id}, '${date}');`
+    return new Promise((resolve, reject) => {
+      resolve(db.execute(sql))
+    })
+  }
+
 }
 
 

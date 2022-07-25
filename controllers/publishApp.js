@@ -1,5 +1,0 @@
-
-
-exports.publishApp = (req, res)=>{
-    
-}

@@ -11,6 +11,7 @@
     <meta name="description" content="JSOFT Admin - Responsive HTML5 Template">
     <meta name="author" content="JSOFT.net">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Mobile Metas -->
@@ -21,16 +22,16 @@
         rel="stylesheet" type="text/css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="/bootstrap/bootstrap.css" />
     <!-- My css -->
-    <link rel="stylesheet" href="css/pannel.css">
+    <link rel="stylesheet" href="/css/pannel.css">
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="bootstrap/theme.css" />
+    <link rel="stylesheet" href="/bootstrap/theme.css" />
 
 
 
     <!-- Skin CSS -->
-    <link rel="stylesheet" href="bootstrap/default.css" />
+    <link rel="stylesheet" href="/bootstrap/default.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -44,8 +45,8 @@
         <header class="header">
             <div class="logo-container">
                 <a class="logo" style="text-decoration: none;">
-                    <img src="images/Logo.png" height="35" alt="JSOFT Admin" />
-                    <strong style="margin-left:20px;padding-top:100px !important;font-size: medium;">HABESHAPP</strong>
+                    <img src="/images/Logo.png" height="35" alt="JSOFT Admin" />
+                    <strong class="hider" style="margin-left:20px;padding-top:100px !important;font-size: medium;">HABESHAPP</strong>
 
                 </a>
                 <div class="header-right">
@@ -67,7 +68,7 @@
                             <ul class="list-unstyled">
                                 <li class="divider"></li>
                                 <li>
-                                    <a role="menuitem" tabindex="-1" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                    <a role="menuitem" tabindex="-1" href="/dev-logout"><i class="fa fa-power-off"></i> Logout</a>
                                 </li>
                             </ul>
                         </div>
@@ -81,82 +82,81 @@
         </header>
         <!-- end: header -->
 
+       
         <div class="inner-wrapper">
-            <!-- start: sidebar -->
-            <!--  -->
-            <!-- end: sidebar -->
 
             <section role="main" class="content-body">
                 <header class="page-header">
-                    <h2>Dashboard</h2>
+                    <h2><a href="/pannel" style="text-decoration: none;color: white;">Dashboard</a></h2>
 
                 </header>
+                
+                <% if(typeof deleteMessage != 'undefined'){ %>
+                <div class="alert alert-success" role="alert">
+                   <%= deleteMessage %>
+                  </div>
+                  <% } %>
 
+                  <div class="popup">
+                    <!-- <button id="close">&times;</button> -->
+                    <h2 style="color: red;">1 WEEK NOT REACHED</h2>
+                    <p>
+                        You can not delete a published app that has not been on the platform for atleast one week.
+                    </p>
+                  <center> <div id="clothok" class="okButton">Ok</div></center> 
+                </div>
 
-
-
-                <center>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-4">
-                                <div class="wrimagecard wrimagecard-topimage">
-                                    <a href="status" style="text-decoration: none;">
-                                        <div class="wrimagecard-topimage_header"
-                                            style="background-color:rgba(187, 120, 36, 0.1) ">
-                                            <center><i class="fa fa-area-chart" style="color:#BB7824"></i></center>
-                                        </div>
-                                        <div class="wrimagecard-topimage_title">
-                                            <h4>Ride
-                                                <div class="pull-right badge">Delete</div></h4>
-                                        </div>
-                                    </a>
+				
+                    <center>
+                        <div class="container-fluid">
+                            <div class="row">
+                        <%
+                        if(typeof ToSend != 'undefined') { console.log(ToSend)%>
+                        <% ToSend.forEach((file)=>{ %>
+                        <div class="col-md-3 col-sm-4">
+                            <div class="wrimagecard wrimagecard-topimage" style="background:rgb(255, 74, 74) !important;border-radius:27px;">
+                                <a href="delete/<%= file[2] %>"  style="text-decoration: none;">
+                                <div class="wrimagecard-topimage_header" style="background-color: rgb(255, 155, 155)">
+                                    <center><img style="opacity: 50; height: 100%;
+                                        width: 100%;
+                                        object-fit: contain;" src=<%=file[1]%> ></img></center>
                                 </div>
-                            </div>
-                            <div class="col-md-3 col-sm-4">
-                                <div class="wrimagecard wrimagecard-topimage">
-                                    <a href="status" style="text-decoration: none;">
-                                        <div class="wrimagecard-topimage_header"
-                                            style="background-color: rgba(22, 160, 133, 0.1)">
-                                            <center><i class="fa fa-cubes" style="color:#16A085"></i></center>
-                                        </div>
-                                        <div class="wrimagecard-topimage_title">
-                                            <h4>Ride Familiy
-                                                <div class="pull-right badge" id="WrControls">Delete</div>
-                                            </h4>
-                                        </div>
-                                    </a>
+                                <div class="wrimagecard-topimage_title">
+                                 <center> <h4><b style="color: white"> <%= file[0].replace(/[_]+/g, ' ') %> </b> </center>
+                                  <div class="pull-right badge" id="WrControls"></div></h4>
                                 </div>
+                              </a>
                             </div>
-                            <div class="col-md-3 col-sm-4">
-                                <div class="wrimagecard wrimagecard-topimage">
-                                    <a href="status" style="text-decoration: none;">
-                                        <div class="wrimagecard-topimage_header"
-                                            style="background-color:  rgba(213, 15, 37, 0.1)">
-                                            <center><i class="fa fa-pencil-square-o" style="color:#d50f25"> </i>
-                                            </center>
-                                        </div>
-                                        <div class="wrimagecard-topimage_title">
-                                            <h4>Ride Trucks
-                                                <div class="pull-right badge" id="WrForms">Delete</div>
-                                            </h4>
-                                        </div>
-
-                                    </a>
-                                </div>
-                            </div>
+                      </div>
+                      <% }) %>
+                      <% } %>
+        
+                        </center>
+                    <% if(typeof oneWeeklimit != 'undefined') {%>
+                        <script type="text/javascript">
+                            document.querySelector(".popup").style.display = "block";
+                        
+                        
+                        document.querySelector("#clothok").addEventListener("click", function(){
+                            document.querySelector(".popup").style.display = "none";
+                            window.history.go(-1); return false;
+                        });
+                        </script>
+                        <% } %>
 
             </section>
         </div>
 
     </section>
 
-    <!-- Vendor -->
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.browser.mobile.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/theme.js"></script>
 
-    <script src="js/theme.init.js"></script>
+    <!-- Vendor -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.browser.mobile.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/theme.js"></script>
+
+    <script src="/js/theme.init.js"></script>
 </body>
 
 </html>

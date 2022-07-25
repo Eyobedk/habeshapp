@@ -910,3 +910,12 @@ html.dark .wizard-progress .wizard-steps li.active a span {
 .liquid-meter-wrapper .liquid-meter-selector a.active {
 	color: #0088cc;
 }
+danger.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(97, 107, 249, 0.5)!important;
+}
+
+toggle {
+    color: #fff;
+    background-color: #428bca !important;
+    border-color: #428bca !important;
+}

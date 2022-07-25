@@ -1,12 +1,14 @@
 const db = require('../db/database')
+const User =require('../models/User')
 const bcrypt = require('bcrypt');
 
 
-class Developer {
-  constructor(name, phone, domain, email, password, payment_ID) {
+class Developer extends User{
+  constructor(name, phone, email, password, payment_ID) {
+    super(email, password);
+
     this.name = name;
     this.phone = phone,
-      this.domain = domain,
       this.email = email,
       this.password = password;
     this.payment_ID = payment_ID;
@@ -15,9 +17,14 @@ class Developer {
 
   save() {
     const hash = bcrypt.hashSync(this.password, 12);
+    const d = new Date();
+    const year = d.getFullYear();
+    const day = d.getDate();
+    const month = d.getMonth() + 1;
+    const date = `${year}-${month}-${day}`;
     try {
-      let sql = `INSERT INTO developer(dev_name,dev_phone,dev_email,dev_password,dev_domain,dev_ban_status,payement_ID) 
-    VALUES ('${this.name}',${this.phone},'${this.email}','${hash}','${this.domain}',0,'${this.payment_ID}');`;
+      let sql = `INSERT INTO developer(dev_name,dev_phone,dev_email,dev_password,dev_ban_status,payement_ID, registeredDate) 
+    VALUES ('${this.name}',${this.phone},'${this.email}','${hash}',0,'${this.payment_ID}', '${date}');`;
       return new Promise((resolve, reject) => {
         resolve(db.execute(sql));
       })
@@ -27,7 +34,6 @@ class Developer {
   static async findEmail(email) {
     const sql = `SELECT * FROM developer WHERE dev_email='${email}';`;
     const [result, _] = await db.execute(sql);
-    console.log("me result" + result[0])
     if ((result) === undefined) return undefined;
     else {
       return result;

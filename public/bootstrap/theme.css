@@ -16894,3 +16894,13 @@ html.dark .thumbnail {
 	background-color: #21262d;
 	border-color: #282d36;
 }
+@media (max-width:404px)
+{
+	.userbox .profile-info {
+		margin: 0 4px 0 10px;
+	}
+	.hider
+	{
+		display: none;
+	}
+}

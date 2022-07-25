@@ -6,7 +6,7 @@ module.exports.createToken = (id) =>{
     return jwt.sign({
         id
     }, process.env.ACCESS_TOKEN_SECRET_KEY, {
-        expiresIn: 600000
+        expiresIn: 6000000
     })
 }
 
@@ -15,7 +15,14 @@ module.exports.createTokenforDev = (id) =>{
     return jwt.sign({
         id
     }, process.env.DEVELOPER_ACCESS_TOKEN_SECRET_KEY, {
-        expiresIn: 600000
+        expiresIn: 6000000
+    })
+}
+module.exports.createTokenforAdmin = (id) =>{
+    return jwt.sign({
+        id
+    }, process.env.ADMIN_ACCESS_TOKEN_SECRET_KEY, {
+        expiresIn: 6000000
     })
 }
 module.exports.createRefToken = (id) =>{
