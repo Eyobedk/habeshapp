@@ -7,9 +7,9 @@ and also a place for android app lovers to get access to their local apps withou
 <b> App Downloaders Page</b>
 ![alt text](https://github.com/Eyobedk/habseshapp/blob/main/screenshots/Habesha%20App%20-%20Brave%206_23_2022%204_45_29%20AM.png)
 ![alt text](https://github.com/Eyobedk/habseshapp/blob/main/screenshots/Habesha%20App%20-%20Brave%206_23_2022%204_54_33%20AM.png))
-![alt text](https://github.com/Eyobedk/habeshapp/blob/main/screenshots/Signin%20page%20-%20Brave%206_16_2022%204_07_04%20AM.png))
 
-zhttps://github.com/Eyobedk/habeshapp/blob/main/screenshots/Signin%20page%20-%20Brave%206_16_2022%204_07_04%20AM.png?
+<img src="https://github.com/Eyobedk/habeshapp/blob/main/screenshots/Signin%20page%20-%20Brave%206_16_2022%204_07_04%20AM.png" data-canonical-src="https://github.com/Eyobedk/habeshapp/blob/main/screenshots/Signin%20page%20-%20Brave%206_16_2022%204_07_04%20AM.png" width="300" height="400" />
+
 
 <i>The configuration(.env) content</i>
 
