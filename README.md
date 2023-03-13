@@ -1,4 +1,4 @@
-# habeshapp
+# Habeshapp
 <b>Android app distribution platform</b>
 
 Habeshapp is a platform where ethiopian developers are capable of publishing their products(Android apps) to be accessble by their local users(Target users)
